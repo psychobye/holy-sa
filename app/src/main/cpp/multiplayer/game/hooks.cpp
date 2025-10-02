@@ -544,7 +544,7 @@ void InjectHooks()
 	CAdjustableHUD::InjectHooks();
 
 	// new
-	CClouds::InjectHooks();
+	// CClouds::InjectHooks();
 	CWeather::InjectHooks();
 	RenderBuffer::InjectHooks();
     CTimeCycle::InjectHooks();
@@ -565,8 +565,9 @@ void InjectHooks()
 	TextureDatabaseRuntime::InjectHooks();
     CCustomBuildingDNPipeline::InjectHooks();
     CWidgetRadar::InjectHooks();
+    CRadar::InjectHooks();
 
-    CRealTimeShadowManager::InjectHooks();
+    // CRealTimeShadowManager::InjectHooks();
 }
 
 void (*NvUtilInit)();
@@ -576,7 +577,19 @@ void NvUtilInit_hook()
 
     NvUtilInit();
 
-    g_pszStorage = (char*)(g_libGTASA + (VER_x32 ? 0x6D687C : 0x8B46A8)); // StorageRootBuffer
+    static char sStoragePath[] = "/storage/emulated/0/TESTLIT/";
+    uintptr_t addrs[] = {
+            g_libGTASA + (VER_x32 ? 0x679698 : 0x850D50),
+            g_libGTASA + (VER_x32 ? 0x679984 : 0x851328)
+    };
+
+    for (auto addr : addrs) {
+        CHook::UnFuck(addr);
+        *(const char**)addr = sStoragePath;
+    }
+
+    g_pszStorage = sStoragePath;
+    // g_pszStorage = (char*)(g_libGTASA + (VER_x32 ? 0x6D687C : 0x8B46A8)); // StorageRootBuffer
 
     CLoader::loadSetting();
 
@@ -1511,12 +1524,6 @@ bool CEventKnockOffBike__AffectsPed_hook(uintptr_t *thiz, CPed *a2)
 	return false;
 }
 
-bool (*CWeapon__Fire)();
-bool CWeapon__Fire_hook() {
-	CHUD::updateAmmo();
-	return CWeapon__Fire();
-}
-
 void (*CPed__SetCurrentWeapon)(CPed* thiz, eWeaponType weaponType);
 void CPed__SetCurrentWeapon_hook(CPed* thiz, eWeaponType weaponType) {
 	CPed__SetCurrentWeapon(thiz, weaponType);
@@ -1596,14 +1603,12 @@ void InstallHooks()
 
 	CHook::Redirect("_Z13RenderEffectsv", &RenderEffects);
 
-	CHook::InlineHook("_ZN7CWeapon4FireEP7CEntityP7CVectorS3_S1_S3_S3_", &CWeapon__Fire_hook, &CWeapon__Fire);
-
-    CHook::InlineHook("_ZN6CRadar12SetCoordBlipE9eBlipType7CVectorj12eBlipDisplayPc", &CRadar__SetCoordBlip_hook, &CRadar__SetCoordBlip);
+    // CHook::InlineHook("_ZN6CRadar12SetCoordBlipE9eBlipType7CVectorj12eBlipDisplayPc", &CRadar__SetCoordBlip_hook, &CRadar__SetCoordBlip);
 
     // WTFBUG lol
     CHook::InlineHook("_ZN4CPed16SetCurrentWeaponE11eWeaponType", &CPed__SetCurrentWeapon_hook, &CPed__SetCurrentWeapon);
 
-	CHook::Redirect("_Z19PlayerIsEnteringCarv", &PlayerIsEnteringCar); // crash
+	// CHook::Redirect("_Z19PlayerIsEnteringCarv", &PlayerIsEnteringCar); // crash
 
 	// no fall bike
 	CHook::InlineHook("_ZNK18CEventKnockOffBike10AffectsPedEP4CPed", &CEventKnockOffBike__AffectsPed_hook, &CEventKnockOffBike__AffectsPed);

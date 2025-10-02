@@ -62,7 +62,7 @@ void CNetGame::packetTechInspect(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_TechIspect_sendClick(JNIEnv *env, jobject thiz)
+Java_com_lit_game_gui_TechIspect_sendClick(JNIEnv *env, jobject thiz)
 {
     uint8_t packet = ID_CUSTOM_RPC;
     uint8_t RPC = RPC_TECH_INSPECT;
@@ -75,6 +75,6 @@ Java_com_russia_game_gui_TechIspect_sendClick(JNIEnv *env, jobject thiz)
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_TechIspect_exit(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_TechIspect_exit(JNIEnv *env, jobject thiz) {
     CTechInspect::DeleteCppObject();
 }

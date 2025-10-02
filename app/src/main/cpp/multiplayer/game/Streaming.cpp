@@ -224,7 +224,7 @@ void CStreaming::InjectHooks() {
     CHook::Write(g_libGTASA + (VER_x32 ? 0x00677E00 : 0x84DC30), &ms_vehiclesLoaded);
 
     CHook::Redirect("_ZN10CStreaming13InitImageListEv", &InitImageList);
-    CHook::Redirect("_ZN10CStreaming12MakeSpaceForEi", &MakeSpaceFor);
+    // CHook::Redirect("_ZN10CStreaming12MakeSpaceForEi", &MakeSpaceFor);
 }
 
 int CStreaming::AddImageToList(char const* pFileName, bool bNotPlayerImg) {

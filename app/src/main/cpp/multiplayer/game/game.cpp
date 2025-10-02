@@ -25,6 +25,20 @@
 #include "GrassRenderer.h"
 #include "Weather.h"
 #include "Clock.h"
+#include "CPlayerInfoGta.h"
+#include "WaterLevel.h"
+#include "Draw.h"
+#include "Radar.h"
+#include "Coronas.h"
+#include "Shadows.h"
+#include "WeaponEffects.h"
+#include "Skidmarks.h"
+#include "Glass.h"
+#include "MovingThings.h"
+#include "SpecialFX.h"
+#include "WaterCannons.h"
+#include "Animation/AnimManager.h"
+#include "World.h"
 
 void ApplyPatches();
 void ApplyInGamePatches();
@@ -440,10 +454,41 @@ void CGame::InitialiseOnceBeforeRW() {
     CPad::Initialise();
 }
 
+int CGame::Init2()
+{
+    // CWaterLevel::WaterLevelInitialise();
+    CDraw::SetFOV(120.0f, false);
+    // CDraw::ms_fLODDistance = 1140457472;
+    // CHook::CallFunction<bool>("_ZN18CCustomCarPlateMgr10InitialiseEv");
+    //CStreaming::LoadInitialPeds(v6);
+    // AllRequestedModels = CStreaming::LoadAllRequestedModels(0);
+    // AnimFiles = (CStreaming *)CAnimManager::LoadAnimFiles(AllRequestedModels);
+    // CStreaming::LoadInitialWeapons(AnimFiles);
+    CStreaming::LoadAllRequestedModels(0);
+    /*CPed::Initialise(v12);
+    CRadar::Initialise(v13);
+    CRadar::LoadTextures(v14);
+    CWeapon::InitialiseWeapons(Textures);*/
+    // CWorld::PlayerInFocus = 0;
+    // CCoronas::Init();
+    // CShadows::Init();
+    // CWeaponEffects::Init();
+    // CSkidmarks::Init();
+    // CGlass::Init();
+    CHook::CallFunction<void>("_ZN11CTheScripts4InitEv");
+    // CClock::Initialise((CClock *)(unsigned int)&stru_3E8);
+    // CMovingThings::Init();
+    CHook::CallFunction<void>("_ZN6CStats4InitEv");
+    // CClouds::Init();
+    // CSpecialFX::Init();
+    // CWaterCannons::Init();
+}
+
 void CGame::InjectHooks() {
     CHook::Redirect("_ZN5CGame27InitialiseEssentialsAfterRWEv", &CGame::InitialiseEssentialsAfterRW);
     CHook::Redirect("_ZN5CGame22InitialiseOnceBeforeRWEv", &CGame::InitialiseOnceBeforeRW);
 	CHook::Redirect("_ZN5CGame7ProcessEv", &CGame::Process);
+    // CHook::Redirect("_ZN5CGame5Init2EPKc", &CGame::Init2);
 
 	CHook::Write(g_libGTASA + (VER_x32 ? 0x00678C38 : 0x84F8A0), &CGame::currArea);
 

@@ -42,6 +42,7 @@ public:
 	static void InitInGame();
 
 	static void Process();
+    static int Init2();
 
     static void HandleChangedHUDStatus();
     static bool IsToggledHUDElement(int iID);

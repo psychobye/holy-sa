@@ -279,7 +279,7 @@ CJavaWrapper *g_pJavaWrapper = nullptr;
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_core_Samp_00024Companion_playUrlSound(JNIEnv *env, jobject clazz, jstring jurl) {
+Java_com_lit_game_core_Samp_00024Companion_playUrlSound(JNIEnv *env, jobject clazz, jstring jurl) {
     auto url = env->GetStringUTFChars(jurl, nullptr);
 
     char temp[888];
@@ -295,7 +295,7 @@ Java_com_russia_game_core_Samp_00024Companion_playUrlSound(JNIEnv *env, jobject 
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Menu_nativeSendMenuButt(JNIEnv *env, jobject thiz, jint butt_id) {
+Java_com_lit_game_gui_Menu_nativeSendMenuButt(JNIEnv *env, jobject thiz, jint butt_id) {
 
     switch (butt_id) {
         case 1:

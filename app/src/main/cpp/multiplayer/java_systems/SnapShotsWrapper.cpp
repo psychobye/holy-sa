@@ -70,7 +70,7 @@ void SnapShotsWrapper::Process() {
 void cropImage(uint8_t* image, int& width, int& height) {
     int left = 0, right = width - 1, top = 0, bottom = height - 1;
 
-    // Находим левую границу
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     while (left < width) {
         bool columnTransparent = true;
         for (int y = 0; y < height; ++y) {
@@ -87,7 +87,7 @@ void cropImage(uint8_t* image, int& width, int& height) {
         ++left;
     }
 
-    // Находим правую границу
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     while (right >= 0) {
         bool columnTransparent = true;
         for (int y = 0; y < height; ++y) {
@@ -104,7 +104,7 @@ void cropImage(uint8_t* image, int& width, int& height) {
         --right;
     }
 
-    // Находим верхнюю границу
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     while (top < height) {
         bool rowTransparent = true;
         for (int x = left; x <= right; ++x) {
@@ -121,7 +121,7 @@ void cropImage(uint8_t* image, int& width, int& height) {
         ++top;
     }
 
-    // Находим нижнюю границу
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     while (bottom >= 0) {
         bool rowTransparent = true;
         for (int x = left; x <= right; ++x) {
@@ -138,25 +138,25 @@ void cropImage(uint8_t* image, int& width, int& height) {
         --bottom;
     }
 
-    // Обновляем размеры изображения
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     int newWidth = right - left + 1;
     int newHeight = bottom - top + 1;
 
-    // Проверка на полностью прозрачное изображение
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     if (newWidth <= 0 || newHeight <= 0) {
         width = 0;
         height = 0;
         return;
     }
 
-    // Обновляем изображение, обрезая его
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
     for (int y = 0; y < newHeight; ++y) {
         int srcRowIndex = (top + y) * width + left;
         int dstRowIndex = y * newWidth;
         std::copy(image + srcRowIndex * 4, image + (srcRowIndex + newWidth) * 4, image + dstRowIndex * 4);
     }
 
-    // Обновляем размеры изображения
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     width = newWidth;
     height = newHeight;
 }
@@ -190,7 +190,7 @@ jbyteArray SnapShotsWrapper::ConvertTexToBitMapBytes(RwTexture* tex, bool needCr
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_EntitySnaps_nativeEntitySnapAddToQueue(JNIEnv *env, jobject thiz, jobject imageview, jint type, jint model_id, jfloat rot_x, jfloat rot_y, jfloat rot_z, jfloat x_offset, jfloat y_offset, jfloat z_offset, jlong color) {
+Java_com_lit_game_EntitySnaps_nativeEntitySnapAddToQueue(JNIEnv *env, jobject thiz, jobject imageview, jint type, jint model_id, jfloat rot_x, jfloat rot_y, jfloat rot_z, jfloat x_offset, jfloat y_offset, jfloat z_offset, jlong color) {
     std::lock_guard<std::mutex> lock(SnapShotsWrapper::queueMutex);
 
     SnapShotsWrapper::queue.push({
@@ -213,7 +213,7 @@ void SnapShotsWrapper::SetToImageView(jbyteArray bytes, int width, int height, j
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_EntitySnaps_nativePlateSnapAddToQueue(JNIEnv *env, jobject thiz, jobject image_view, jint type, jstring jnumber, jstring jregion) {
+Java_com_lit_game_EntitySnaps_nativePlateSnapAddToQueue(JNIEnv *env, jobject thiz, jobject image_view, jint type, jstring jnumber, jstring jregion) {
 
     auto item = SnapShotsWrapper::QueueItem(env->NewGlobalRef(image_view), SnapShotsWrapper::Types::PLATE, static_cast<ePlateType>(type));
 

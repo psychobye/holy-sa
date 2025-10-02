@@ -18,7 +18,7 @@ void CSamwill::Show() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Samwill_nativeSendExit(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_Samwill_nativeSendExit(JNIEnv *env, jobject thiz,
                                                          jint samwillpacket) {
     pNetGame->SendCustomPacket(251, 20, samwillpacket);
 

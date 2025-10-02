@@ -8,13 +8,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chat_box"
-        android:layout_width="@dimen/_380sdp"
+        android:layout_width="@dimen/_300sdp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_180sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.russia.game.gui.util.FadingEdgeLayout
+        <com.lit.game.gui.util.FadingEdgeLayout
             android:id="@+id/chat_fade_box"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_80sdp"
@@ -40,7 +40,7 @@
                 app:stackFromEnd="true">
 
             </com.factor.bouncy.BouncyRecyclerView>
-        </com.russia.game.gui.util.FadingEdgeLayout>
+        </com.lit.game.gui.util.FadingEdgeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/chat_input_layout"
@@ -51,72 +51,6 @@
             app:layout_constraintStart_toStartOf="@+id/chat_fade_box"
             app:layout_constraintTop_toBottomOf="@+id/chat_fade_box">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@id/chat_up_butt"
-                android:layout_width="45dp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_marginStart="8dp"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                android:background="@drawable/chat_input"
-                app:layout_constraintStart_toEndOf="@+id/chat_binder_butt"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:rotation="90"
-                    android:src="@drawable/arrow_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@id/chat_binder_butt"
-                android:layout_width="45dp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_marginStart="8dp"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                android:background="@drawable/chat_input"
-                app:layout_constraintStart_toEndOf="@+id/chat_input"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:tint="@color/white"
-                    android:src="@drawable/binder_icon"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chat_down_butt"
-                android:layout_width="45dp"
-                android:layout_height="@dimen/_25sdp"
-                android:foreground="?android:attr/selectableItemBackgroundBorderless"
-                android:layout_marginStart="8dp"
-                android:background="@drawable/chat_input"
-                app:layout_constraintStart_toEndOf="@+id/chat_up_butt"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="match_parent"
-                    android:rotation="-90"
-                    android:src="@drawable/arrow_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <EditText
                 android:id="@+id/chat_input"
                 android:layout_width="match_parent"
@@ -126,9 +60,9 @@
                 android:background="@drawable/chat_input"
                 android:completionThreshold="2"
                 android:textSize="@dimen/_11sdp"
-                android:hint="Ваше сообщение..."
+                android:hint="сообщение..."
                 android:textColorHint="#43FFFFFF"
-                android:fontFamily="@font/visby_round_cf_extra_bold"
+                android:fontFamily="@font/montserrat_bold"
                 android:imeOptions="flagNoExtractUi|actionSend"
                 android:importantForAutofill="no"
                 android:inputType="text"
@@ -136,69 +70,9 @@
                 android:singleLine="true"
                 android:textColor="@color/white"
                 android:textCursorDrawable="@drawable/text_cursor"
-
                 android:textIsSelectable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/me_button"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:background="@drawable/chat_input"
-                android:clickable="true"
-                android:fontFamily="@font/visby_round_cf_extra_bold"
-                android:gravity="center"
-                android:text="/me"
-                android:textColor="#DDDDDB"
-                android:textSize="@dimen/_6sdp"
-                app:layout_constraintStart_toStartOf="@+id/chat_input"
-                app:layout_constraintTop_toBottomOf="@+id/chat_input" />
-
-            <TextView
-                android:id="@+id/try_button"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:background="@drawable/chat_input"
-                android:clickable="true"
-                android:fontFamily="@font/visby_round_cf_extra_bold"
-                android:gravity="center"
-                android:text="/try"
-                android:textColor="#DDDDDB"
-                android:textSize="@dimen/_6sdp"
-                app:layout_constraintStart_toEndOf="@+id/me_button"
-                app:layout_constraintTop_toBottomOf="@+id/chat_input" />
-
-            <TextView
-                android:id="@+id/do_button"
-                android:layout_width="@dimen/_22sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_marginStart="@dimen/_3sdp"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:background="@drawable/chat_input"
-                android:clickable="true"
-                android:fontFamily="@font/visby_round_cf_extra_bold"
-                android:gravity="center"
-                android:text="/do"
-                android:textColor="#DDDDDB"
-                android:textSize="@dimen/_6sdp"
-                app:layout_constraintStart_toEndOf="@+id/try_button"
-                app:layout_constraintTop_toBottomOf="@+id/chat_input" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <ImageView
-        android:id="@+id/hide_chat"
-        android:layout_width="@dimen/_15sdp"
-        android:layout_height="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_7sdp"
-        android:layout_marginEnd="@dimen/_125sdp"
-        android:src="@drawable/chat_hide"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="TouchTargetSizeCheck" />
 </merge>

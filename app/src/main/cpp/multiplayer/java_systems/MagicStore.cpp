@@ -8,7 +8,7 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_magicStore_MagicStore_nativeOnClose(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_magicStore_MagicStore_nativeOnClose(JNIEnv *env, jobject thiz) {
     CMagicStore::DeleteCppObject();
 }
 
@@ -48,7 +48,7 @@ void CMagicStore::ReceivePacket(Packet *p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_magicStore_MagicStore_nativeSendClick(JNIEnv *env, jobject thiz, jint click_type, jint index, jint category) {
+Java_com_lit_game_gui_magicStore_MagicStore_nativeSendClick(JNIEnv *env, jobject thiz, jint click_type, jint index, jint category) {
     RakNet::BitStream bs;
     bs.Write((uint8)  ID_CUSTOM_RPC);
     bs.Write((uint8)  RPC_MAGIC_STORE);

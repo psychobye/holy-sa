@@ -52,11 +52,10 @@ import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.russia.game.R;
-import com.russia.game.core.DialogClientSettings;
-import com.russia.game.gui.DuelsHud;
-import com.russia.game.gui.Notification;
-import com.russia.game.gui.dialogs.Dialog;
+import com.lit.game.R;
+import com.lit.game.gui.DuelsHud;
+import com.lit.game.gui.Notification;
+import com.lit.game.gui.dialogs.Dialog;
 
 import java.io.FileInputStream;
 import java.io.IOException;

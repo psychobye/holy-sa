@@ -18,7 +18,7 @@ CR:MP cache:
 - [Google Drive](https://drive.google.com/file/d/1W1f1Xs3utA3sRppwCeXqU1KBFENTNqAn/view?usp=sharing)
 
 **Note:** The cache must be unpacked into the application package directory:
-`/Android/data/com.russia.game/files/`
+`/Android/data/com.lit.game/files/`
 
 ### SCREENSHOTS
 <p align="center">

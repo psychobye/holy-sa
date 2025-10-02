@@ -15,7 +15,7 @@ RwTexture* splashTexture = nullptr;
 void LoadSplashTexture()
 {
 	Log("Loading hud bg texture..");
-	splashTexture = CUtil::LoadTextureFromDB("txd", "hud_bg");
+	splashTexture = CUtil::LoadTextureFromDB("samp", "hud_bg"); // fixme: move
 
 	CVehicleNeon::pNeonTex = CUtil::LoadTextureFromDB("samp", "neonaper3");
 
@@ -48,7 +48,7 @@ void RenderSpriteCoords()
 	static RwTexture* temp =  CSnapShots::CreateObjectSnapShot(tmp_obj.id, &tmp_obj.rotation, &tmp_obj.position);
 
         ImGuiStyle& style = ImGui::GetStyle();
-        style.GrabMinSize = 80.0f; // Установка высоты ползунка
+        style.GrabMinSize = 80.0f; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 	auto size = ImVec2(600, 500);
 	ImGui::SetNextWindowPos( CGUI::GetPercent(40.f, 70.f, size) );
@@ -75,7 +75,7 @@ void RenderSpriteCoords()
 				CGUI::GetCenterScreen(ImVec2(500, 500)) + ImVec2(500, 500)
 	);
 
-	// Проверка изменений и вызов функции обновления объекта
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	if (memcmp(&previousProps, &tmp_obj, sizeof(ObjectProperties)) != 0) {
 		go_new_sprite(tmp_obj, temp);
 		previousProps = tmp_obj;
@@ -91,9 +91,8 @@ void RenderBackgroundHud()
 
 	if (CHUD::bIsShow)
 	{
-
 		if (splashTexture)
-		{//183 55.. 399..33
+		{
 			ImGui::GetBackgroundDrawList()->AddImage((ImTextureID)splashTexture->raster,
 													 ImVec2(CHUD::radarBgPos1.x, CHUD::radarBgPos1.y),
 													 ImVec2(CHUD::radarBgPos2.x, CHUD::radarBgPos2.y));

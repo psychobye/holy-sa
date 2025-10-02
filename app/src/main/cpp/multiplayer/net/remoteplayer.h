@@ -100,7 +100,7 @@ public:
 
 	void Process();
 	uint32_t GetPlayerColorAsARGB();
-	bool Spawn(uint8_t byteTeam, uint32 iSkin, CVector *vecPos, float fRotation, uint32_t dwColor, uint8_t byteFightingStyle, eTags tag);
+	bool Spawn(uint8_t byteTeam, unsigned int iSkin, CVector *vecPos, float fRotation, uint32_t dwColor, uint8_t byteFightingStyle, eTags tag);
 	void Remove();
 
 	CPedSamp* GetPlayerPed() { return m_pPlayerPed; }

@@ -77,7 +77,7 @@ void CObjectEditor::showGui() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_AttachEdit_Exit(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_AttachEdit_Exit(JNIEnv *env, jobject thiz) {
     CGame::PostToMainThread([=] {
         CPedSamp *pPlayer = CLocalPlayer::GetPlayerPed();
 
@@ -152,7 +152,7 @@ void CObjectEditor::SendOnEditAttach(int response, int index, int modelid, int b
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_AttachEdit_AttachClick(JNIEnv *env, jobject thiz, jint button_type,
+Java_com_lit_game_gui_AttachEdit_AttachClick(JNIEnv *env, jobject thiz, jint button_type,
                                                   jboolean button_id) {
     CGame::PostToMainThread([=] {
 
@@ -170,7 +170,7 @@ Java_com_russia_game_gui_AttachEdit_AttachClick(JNIEnv *env, jobject thiz, jint 
                 pObject->bNeedReAttach = true;
             }
         }
-        if (button_type == 0) { // право/лево
+        if (button_type == 0) { // пїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅпїЅ
             float value = (button_id) ? (0.006f) : (-0.006f);
 
             if (CObjectEditor::editType == CObjectEditor::TYPE_PLAYER_ATTACH) {
@@ -187,7 +187,7 @@ Java_com_russia_game_gui_AttachEdit_AttachClick(JNIEnv *env, jobject thiz, jint 
             }
         }
 
-        if (button_type == 1) { // вверх/низ
+        if (button_type == 1) { // пїЅпїЅпїЅпїЅпїЅ/пїЅпїЅпїЅ
             float value = (button_id) ? (0.006f) : (-0.006f);
 
             if (CObjectEditor::editType == CObjectEditor::TYPE_PLAYER_ATTACH) {
@@ -289,7 +289,7 @@ Java_com_russia_game_gui_AttachEdit_AttachClick(JNIEnv *env, jobject thiz, jint 
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_AttachEdit_Save(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_AttachEdit_Save(JNIEnv *env, jobject thiz) {
     CPedSamp* pPlayer = CLocalPlayer::GetPlayerPed();
     int slot = CObjectEditor::iEditedId;
 

@@ -26,7 +26,7 @@
 			custom:layout_constraintStart_toStartOf="parent"
 			custom:layout_constraintTop_toTopOf="parent" />
 
-		<com.russia.game.gui.util.SeekArc
+		<com.lit.game.gui.util.SeekArc
 			android:id="@+id/speedLine"
 			android:layout_width="0dp"
 			android:layout_height="@dimen/_80sdp"

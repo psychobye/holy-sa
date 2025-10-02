@@ -636,7 +636,7 @@ void ScrVehicleParamsEx(RPCParameters* rpcParams)
 
 void ScrHaveSomeMoney(RPCParameters *rpcParams)
 {
-    LOGRPC("RPC: ScrHaveSomeMoney");
+    // LOGRPC("RPC: ScrHaveSomeMoney");
 //
 //	unsigned char* Data = reinterpret_cast<unsigned char *>(rpcParams->input);
 //	int iBitLength = rpcParams->numberOfBitsOfData;
@@ -651,7 +651,7 @@ void ScrHaveSomeMoney(RPCParameters *rpcParams)
 
 void ScrResetMoney(RPCParameters *rpcParams)
 {
-    LOGRPC("RPC: ScrResetMoney");
+    // LOGRPC("RPC: ScrResetMoney");
 
 	//CGame::ResetLocalMoney();
 }
@@ -808,6 +808,21 @@ void ScrInterpolateCamera(RPCParameters *rpcParams)
 		else
 			CCamera::InterpolateCameraLookAt(&vecFrom, &vecDest, time, mode);
 	}
+}
+
+void ScrSetSpawnInfo(RPCParameters *rpcParams)
+{
+    LOGRPC("ScrSetSpawnInfo");
+    unsigned char * Data = reinterpret_cast<unsigned char *>(rpcParams->input);
+    int iBitLength = rpcParams->numberOfBitsOfData;
+
+    PLAYER_SPAWN_INFO spawnInfo;
+    RakNet::BitStream bsData(Data, (iBitLength / 8) + 1, false);
+    bsData.Read((char*)&spawnInfo, sizeof(PLAYER_SPAWN_INFO));
+
+    CLocalPlayer::SetSpawnInfo(&spawnInfo);
+
+    return;
 }
 
 void ScrAddGangZone(RPCParameters *rpcParams) {
@@ -1712,6 +1727,7 @@ void RegisterScriptRPCs(RakClientInterface* pRakClient)
     LOGRPC("Registering ScriptRPC's..");
 
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_ScrSetPlayerTeam, ScrSetPlayerTeam);
+    pRakClient->RegisterAsRemoteProcedureCall(&RPC_ScrSetSpawnInfo, ScrSetSpawnInfo);
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_ScrDisplayGameText, ScrDisplayGameText);
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_ScrSetGravity, ScrSetGravity);
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_ScrSetPlayerPos, ScrSetPlayerPos);
@@ -1813,6 +1829,7 @@ void UnRegisterScriptRPCs(RakClientInterface* pRakClient)
 	pRakClient->UnregisterAsRemoteProcedureCall(&RPC_ScrDisplayGameText);
 	pRakClient->UnregisterAsRemoteProcedureCall(&RPC_ScrSetGravity);
 	pRakClient->UnregisterAsRemoteProcedureCall(&RPC_ScrForceSpawnSelection);
+    pRakClient->UnregisterAsRemoteProcedureCall(&RPC_ScrSetSpawnInfo);
 	pRakClient->UnregisterAsRemoteProcedureCall(&RPC_ScrSetPlayerPos);
 	pRakClient->UnregisterAsRemoteProcedureCall(&RPC_ScrSetCameraPos);
 	pRakClient->UnregisterAsRemoteProcedureCall(&RPC_ScrSetCameraLookAt);

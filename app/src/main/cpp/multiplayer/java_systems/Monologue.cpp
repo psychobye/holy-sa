@@ -65,7 +65,7 @@ void CMonologue::Show(int skinId, const char* text, const char* author, const ch
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Monologue_nativeSendClick(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_Monologue_nativeSendClick(JNIEnv *env, jobject thiz) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)  RPC_MONOLOGY);

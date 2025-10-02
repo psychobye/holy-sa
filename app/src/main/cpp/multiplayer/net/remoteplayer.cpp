@@ -272,7 +272,7 @@ void CRemotePlayer::UpdateVehicleRotation() {
 
 }
 
-bool CRemotePlayer::Spawn(uint8_t byteTeam, uint32 iSkin, CVector *vecPos, float fRotation,
+bool CRemotePlayer::Spawn(uint8_t byteTeam, unsigned int iSkin, CVector *vecPos, float fRotation,
 	uint32_t dwColor, uint8_t byteFightingStyle, eTags tag)
 {
 	if(m_pPlayerPed)
@@ -281,6 +281,7 @@ bool CRemotePlayer::Spawn(uint8_t byteTeam, uint32 iSkin, CVector *vecPos, float
 		m_pPlayerPed = nullptr;
 	}
 
+    Log("CRemotePlayer::Spawn skin: %d", iSkin);
 	m_pPlayerPed = CGame::NewPlayer(iSkin, vecPos->x, vecPos->y, vecPos->z, fRotation);
 
 	if(m_pPlayerPed && m_pPlayerPed->m_pPed)

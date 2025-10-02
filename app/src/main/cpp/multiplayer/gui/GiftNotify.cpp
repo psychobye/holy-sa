@@ -110,13 +110,13 @@ void CNetGame::packetGiftNotify(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_GiftNotify_nativeHide(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_GiftNotify_nativeHide(JNIEnv *env, jobject thiz) {
     env->DeleteGlobalRef(CGiftNotify::thiz);
     CGiftNotify::thiz = nullptr;
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_treasure_Treasure_nativeShowGiftNotify(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_treasure_Treasure_nativeShowGiftNotify(JNIEnv *env, jobject thiz,
                                                                   jstring name, jint rare) {
     const char *name_cpp = env->GetStringUTFChars(name, nullptr);
 

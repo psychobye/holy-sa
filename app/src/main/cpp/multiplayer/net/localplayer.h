@@ -38,6 +38,20 @@
 #define SPECIAL_ACTION_CARRY			25
 
 #pragma pack(push, 1)
+struct PLAYER_SPAWN_INFO
+{
+    uint8_t byteTeam;
+    int iSkin;
+    uint8_t unk;
+    CVector vecPos;
+    float fRotation;
+    int iSpawnWeapons[3];
+    int iSpawnWeaponsAmmo[3];
+};
+#pragma pack(pop)
+VALIDATE_SIZE(PLAYER_SPAWN_INFO, 46);
+
+#pragma pack(push, 1)
 struct ONFOOT_SYNC_DATA
 {
 	uint16_t lrAnalog;				// +0
@@ -169,7 +183,7 @@ public:
     static void UpdateSurfing();
     static void SendEnterVehicleNotification(VEHICLEID VehicleID, bool bPassenger);
     static void UpdateRemoteInterior(uint8_t byteInterior);
-    static bool Spawn(const CVector pos, float rot);
+    static bool Spawn();
     static int GetOptimumOnFootSendRate();
     static int GetOptimumInCarSendRate();
     static void ProcessSpectating();
@@ -178,6 +192,14 @@ public:
     static void SpectateVehicle(VEHICLEID VehicleID);
     static bool IsSpectating() { return m_bIsSpectating; }
     static CPedSamp* GetPlayerPed() { return m_pPlayerPed; };
+
+    static void SendSpawn();
+    static void RequestClass(int iClass);
+    static void RequestSpawn();
+    static void ProcessClassSelection();
+    static void SetSpawnInfo(PLAYER_SPAWN_INFO *pSpawnInfo);
+    static void HandleClassSelection();
+    static void HandleClassSelectionOutcome(bool bOutcome);
 
     static void SendOnFootFullSyncData();
     static void SendInCarFullSyncData();
@@ -197,6 +219,8 @@ public:
     static inline CPedSamp*             m_pPlayerPed;
     static inline int 	                m_nPlayersInRange{};
 
+    static inline bool m_bWaitingForSpawnRequestReply;
+
     static inline bool		            m_bIsSpectating;
     static inline uint8_t	            m_byteSpectateMode;
     static inline uint8_t	            m_byteSpectateType;
@@ -206,11 +230,17 @@ public:
     static inline PLAYERID 	            lastDamageId;
     static inline eWeaponType 	        lastDamageWeap;
     static inline bool			        ammoUpdated{};
+    static inline int	m_iSelectedClass;
 
 private:
     static inline bool				    m_bDeathSended;
     static inline uint8_t				m_byteCurInterior;
     static inline bool				    m_bInRCMode;
+    static inline bool				m_bClearedToSpawn;
+    static inline bool				m_bHasSpawnInfo;
+    static inline bool				m_bSpawnDialogShowed;
+
+    static inline PLAYER_SPAWN_INFO	m_SpawnInfo;
 
     static inline uint32_t			    m_dwPassengerEnterExit;
 

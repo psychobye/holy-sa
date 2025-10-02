@@ -93,6 +93,7 @@ extern int RPC_ScrSetPlayerFacingAngle;
 extern int RPC_ScrResetMoney;
 extern int RPC_ScrResetPlayerWeapons;
 extern int RPC_ScrSetPlayerAttachedObject;
+extern int RPC_ScrSetSpawnInfo;
 extern int RPC_ScrGivePlayerWeapon;
 extern int RPC_ScrRespawnVehicle;
 extern int RPC_ScrLinkVehicle;

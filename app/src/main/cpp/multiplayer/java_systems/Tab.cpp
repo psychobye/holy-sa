@@ -75,6 +75,6 @@ void CTab::setStat(int id, char name[], int score, int ping) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_tab_Tab_nativeDeleteCppObj(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_tab_Tab_nativeDeleteCppObj(JNIEnv *env, jobject thiz) {
     CTab::DeleteCppObject();
 }

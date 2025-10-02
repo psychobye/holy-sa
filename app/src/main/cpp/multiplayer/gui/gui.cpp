@@ -186,13 +186,12 @@ void CGUI::Render()
 	ImGuiIO& io = ImGui::GetIO();
 	io.DeltaTime   = CTimer::GetTimeStepInSeconds();
 
-
 	DebugModules::PreRenderUpdate();
 
 	ImGui_ImplRenderWare_NewFrame();
 	ImGui::NewFrame();
 
-	if(g_bIsTestMode)
+	if(CSettings::Get().szDebug == 1)
 		DebugModules::Render2D();
 
 	Voice::SpeakerList::Show();
@@ -216,7 +215,8 @@ void CGUI::Render()
 	CPlayerTags::Render();
 	CText3DLabelsPool::Draw();
 
-	if(CGame::FindPlayerPed()->m_pPed->IsInVehicle() && !CGame::FindPlayerPed()->m_pPed->IsAPassenger()
+    // TODO: Speedometer
+	/*if(CGame::FindPlayerPed()->m_pPed->IsInVehicle() && !CGame::FindPlayerPed()->m_pPed->IsAPassenger()
 	&& !CKeyBoard::IsOpen() && !CDialog::bIsShow && CHUD::bIsShow && !CTimer::m_UserPause)
 	{
 		if(CSpeedometr::thiz == nullptr)
@@ -230,7 +230,7 @@ void CGUI::Render()
 		{
 			CSpeedometr::Destroy();
 		}
-	}
+	}*/
 
 	CKeyBoard::Render();
 	CActionsPed::drawProgress();

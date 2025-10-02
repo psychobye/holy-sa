@@ -46,11 +46,23 @@ void CLocalPlayer::Init() {
     m_bIsSpectating = false;
     m_byteSpectateType = SPECTATE_TYPE_NONE;
     m_SpectateID = 0xFFFFFFFF;
+    m_bSpawnDialogShowed = false;
+}
+
+void CLocalPlayer::ProcessClassSelection()
+{
+    if (!m_bSpawnDialogShowed)
+    {
+        RequestClass(m_iSelectedClass);
+        m_bSpawnDialogShowed = true;
+    }
 }
 
 void CLocalPlayer::ResetAllSyncAttributes()
 {
+    m_bWaitingForSpawnRequestReply = false;
 	m_byteCurInterior = 0;
+    m_iSelectedClass = 0;
 	m_bInRCMode = false;
 }
 
@@ -198,7 +210,13 @@ bool CLocalPlayer::Process()
 
 		// SPECTATING
 		if (m_bIsSpectating) {
+            if (m_bSpawnDialogShowed)
+            {
+                m_bSpawnDialogShowed = false;
+            }
+
 			ProcessSpectating();
+            return true;
 		}
 
             // INCAR
@@ -279,6 +297,14 @@ bool CLocalPlayer::Process()
 	}
 
 	CHUD::toggleAll(needDrawableHud, needDrawableChat);
+
+    if (m_pPlayerPed->GetActionTrigger() != ACTION_WASTED &&
+        m_pPlayerPed->GetActionTrigger() != ACTION_DEATH &&
+        pNetGame->GetGameState() == eNetworkState::CONNECTED &&
+        !m_bIsSpectating)
+    {
+        CLocalPlayer::ProcessClassSelection();
+    }
 
     return true;
 }
@@ -372,13 +398,21 @@ void CLocalPlayer::UpdateRemoteInterior(uint8_t byteInterior)
 	pNetGame->GetRakClient()->RPC(&RPC_SetInteriorId, &bsUpdateInterior, HIGH_PRIORITY, RELIABLE, 0, false, UNASSIGNED_NETWORK_ID, NULL);
 }
 
-bool CLocalPlayer::Spawn(const CVector pos, float rot)
+bool CLocalPlayer::Spawn()
 {
+    if (!m_bHasSpawnInfo) {
+        return false;
+    }
 	Log("CLocalPlayer::Spawn");
 
 	Voice::Playback::SetSoundEnable(true);
 	Voice::Record::SetMicroEnable(true);
 	Voice::SpeakerList::Show();
+
+    if (m_bSpawnDialogShowed)
+    {
+        m_bSpawnDialogShowed = false;
+    }
 
     CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
 
@@ -393,29 +427,38 @@ bool CLocalPlayer::Spawn(const CVector pos, float rot)
 
 	m_pPlayerPed->m_bIsSpawned = true;
 
-	CGame::RefreshStreamingAt(pos.x,pos.y);
+    CGame::RefreshStreamingAt(m_SpawnInfo.vecPos.x, m_SpawnInfo.vecPos.y);
 
-	//m_pPlayerPed->RestartIfWastedAt(pos, rot);
-	//m_pPlayerPed->SetModelIndex(skin);
-	//m_pPlayerPed->ClearAllWeapons();
+    m_pPlayerPed->RestartIfWastedAt(&m_SpawnInfo.vecPos, m_SpawnInfo.fRotation);
+    m_pPlayerPed->SetModelIndex(m_SpawnInfo.iSkin);
+	m_pPlayerPed->ClearAllWeapons();
 	m_pPlayerPed->ResetDamageEntity();
 
 	//CGame::DisableTrainTraffic();
 
-	if(m_pPlayerPed->m_pPed->IsInVehicle())
-		m_pPlayerPed->m_pPed->RemoveFromVehicleAndPutAt(pos);
-	else
-		m_pPlayerPed->m_pPed->Teleport(pos, false);
+    m_pPlayerPed->m_pPed->SetPosn(m_SpawnInfo.vecPos.x,
+                                  m_SpawnInfo.vecPos.y, m_SpawnInfo.vecPos.z + 0.5f);
 
-	m_pPlayerPed->ForceTargetRotation(rot);
+	m_pPlayerPed->ForceTargetRotation(m_SpawnInfo.fRotation);
 
 	m_bDeathSended = false;
+    m_bWaitingForSpawnRequestReply = false;
 
 	RakNet::BitStream bsSendSpawn;
 	pNetGame->GetRakClient()->RPC(&RPC_Spawn, &bsSendSpawn, SYSTEM_PRIORITY,
 		RELIABLE_SEQUENCED, 0, false, UNASSIGNED_NETWORK_ID, nullptr);
 
 	return true;
+}
+
+void CLocalPlayer::HandleClassSelection()
+{
+    m_bClearedToSpawn = false;
+    if (m_pPlayerPed) {
+        m_pPlayerPed->SetInitialState();
+        m_pPlayerPed->SetHealth(100.0f);
+        m_pPlayerPed->TogglePlayerControllable(false);
+    }
 }
 
 uint32_t CLocalPlayer::GetPlayerColor()
@@ -436,6 +479,48 @@ int CLocalPlayer::GetOptimumOnFootSendRate() {
 int CLocalPlayer::GetOptimumInCarSendRate() {
     if (!m_pPlayerPed) return 1000;
     return (iNetModeNormalInCarSendRate + m_nPlayersInRange * 2);
+}
+
+// 0.3.7
+void CLocalPlayer::SendSpawn()
+{
+    if (!m_bSpawnDialogShowed) return;
+
+    RequestSpawn();
+    m_bWaitingForSpawnRequestReply = true;
+}
+// 0.3.7
+void CLocalPlayer::RequestClass(int iClass)
+{
+    RakNet::BitStream bsClassRequest;
+    bsClassRequest.Write(iClass);
+    pNetGame->GetRakClient()->RPC(&RPC_RequestClass, &bsClassRequest, HIGH_PRIORITY, RELIABLE, 0, false, UNASSIGNED_NETWORK_ID, nullptr);
+}
+// 0.3.7
+void CLocalPlayer::RequestSpawn()
+{
+    RakNet::BitStream bsSpawnRequest;
+    pNetGame->GetRakClient()->RPC(&RPC_RequestSpawn, &bsSpawnRequest, HIGH_PRIORITY, RELIABLE, 0, false, UNASSIGNED_NETWORK_ID, nullptr);
+}
+// 0.3.7
+void CLocalPlayer::SetSpawnInfo(PLAYER_SPAWN_INFO* pSpawnInfo)
+{
+    memcpy(&m_SpawnInfo, pSpawnInfo, sizeof(PLAYER_SPAWN_INFO));
+    m_bHasSpawnInfo = true;
+}
+// 0.3.7
+void CLocalPlayer::HandleClassSelectionOutcome(bool bOutcome)
+{
+    if (bOutcome)
+    {
+        if (m_pPlayerPed)
+        {
+            m_pPlayerPed->ClearAllWeapons();
+            m_pPlayerPed->SetModelIndex(m_SpawnInfo.iSkin);
+        }
+
+        m_bClearedToSpawn = true;
+    }
 }
 
 uint8_t CLocalPlayer::GetSpecialAction()

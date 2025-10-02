@@ -966,9 +966,9 @@ void HookCPad()
     CHook::InstallPLT(g_libGTASA + (VER_x32 ? 0x66CF4C : 0x83ACF8), &CPad__TaskProcess);
 
 	// sprint/jump stuff
-	CHook::InlineHook("_ZN4CPad14SprintJustDownEv", &CPad__SprintJustDown_hook, &CPad__SprintJustDown);// ускоренныйбег
+	CHook::InlineHook("_ZN4CPad14SprintJustDownEv", &CPad__SprintJustDown_hook, &CPad__SprintJustDown);// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-	// Стрельба из пшки на авто / пожарка
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ / пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 	CHook::InlineHook("_ZN4CPad14GetCarGunFiredEbb", &CPad__GetCarGunFired_hook, &CPad__GetCarGunFired);
 	//CHook::InstallPLT(g_libGTASA + (VER_x32 ? 0x6703F4 : 0xFF), &CAutomobile__FireTruckControl_hook, &CAutomobile__FireTruckControl);
 
@@ -992,7 +992,7 @@ void HookCPad()
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_hud_HudManager_changeWeapon(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_hud_HudManager_changeWeapon(JNIEnv *env, jobject thiz) {
 	if(!CGame::FindPlayerPed()) return;
 
 	if(!bWeaponClicked) {

@@ -54,7 +54,7 @@ void CChip::hide() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_casino_BuySellChip_native_1sendClick(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_casino_BuySellChip_native_1sendClick(JNIEnv *env, jobject thiz,
                                                                 jint button_id, jlong input,
                                                                 jboolean isSell) {
     CChip::hide();

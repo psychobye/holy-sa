@@ -17,4 +17,5 @@
     <item type="id" name="wifiSettingsButton" />
     <item type="id" name="imageView1" />
     <item type="id" name="progressBar1" />
+    <item name="hudNick" type="id" />
 </resources>

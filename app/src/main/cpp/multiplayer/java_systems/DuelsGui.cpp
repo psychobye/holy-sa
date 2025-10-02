@@ -156,6 +156,6 @@ void CNetGame::packetKillList(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_DuelsHud_init(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_DuelsHud_init(JNIEnv *env, jobject thiz) {
     CDuelsGui::thiz = env->NewGlobalRef(thiz);
 }

@@ -179,7 +179,7 @@
                 android:text="Пополнить счёт через Qiwi"
                 android:fontFamily="@font/pt_root_ui_medium" />
 
-            <com.russia.launcher.ui.domain.ExpandableHeightGridView
+            <com.lit.launcher.ui.domain.ExpandableHeightGridView
                 android:id="@+id/donate_services_view"
                 android:layout_width="@dimen/_280sdp"
                 android:layout_height="wrap_content"

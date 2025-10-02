@@ -39,14 +39,14 @@ void CAuthorization::SendLoginPacket(const char* password) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Authorization_nativeToggleAutoLogin(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_Authorization_nativeToggleAutoLogin(JNIEnv *env, jobject thiz,
                                                                jboolean toggle) {
     CSettings::m_Settings.szAutoLogin = toggle;
     CSettings::save();
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Authorization_nativeClickRecoveryPass(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_Authorization_nativeClickRecoveryPass(JNIEnv *env, jobject thiz) {
     uint8_t packet = ID_CUSTOM_RPC;
     uint8_t RPC = RPC_RESTORE_PASS;
 
@@ -58,7 +58,7 @@ Java_com_russia_game_gui_Authorization_nativeClickRecoveryPass(JNIEnv *env, jobj
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Authorization_nativeClickLogin(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_Authorization_nativeClickLogin(JNIEnv *env, jobject thiz,
                                                           jstring password) {
     const char *inputPassword = env->GetStringUTFChars(password, nullptr);
 

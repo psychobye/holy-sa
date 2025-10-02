@@ -1,5 +1,5 @@
 //
-// Created by Лихватов Иван on 20.03.2023.
+// Created by пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ on 20.03.2023.
 //
 #include "TireShop.h"
 
@@ -51,7 +51,7 @@ float CTireShop::GetCurrentValue(int valueType) {
     auto pVehicle = pPed->GetCurrentVehicle();
 
     switch(valueType) {
-        // подвеска
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         case 2: {
             for (auto & i : pVehicle->m_msLastSyncHandling) {
                 if (i.flag == E_HANDLING_PARAMS::hpSuspensionLowerLimit)
@@ -60,17 +60,17 @@ float CTireShop::GetCurrentValue(int valueType) {
             return 0;
         }
 
-            // проставки
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         case 3: {
             return pVehicle->m_fWheelOffsetX;
         }
 
-            // ширина резины
+            // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         case 4: {
             return pVehicle->m_fWheelWidth * 100.f;
         }
 
-            // Радиус диска
+            // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         case 5: {
             return pVehicle->m_fWheelSize;
         }
@@ -78,12 +78,12 @@ float CTireShop::GetCurrentValue(int valueType) {
         case 6: {
             return pVehicle->m_dwCurrentWheelModel;
         }
-            // сход-развал перед
+            // пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         case 11: {
             return RADTODEG(pVehicle->m_fWheelAngleFront);
         }
 
-            // сход-развал зад
+            // пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
         case 12: {
             return RADTODEG(pVehicle->m_fWheelAngleBack);
         }
@@ -94,13 +94,13 @@ float CTireShop::GetCurrentValue(int valueType) {
 
 extern "C"
 JNIEXPORT jfloat JNICALL
-Java_com_russia_game_gui_tire_1shop_TireShop_native_1getCurrentValue(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_tire_1shop_TireShop_native_1getCurrentValue(JNIEnv *env, jobject thiz,
                                                                        jint type) {
     return CTireShop::GetCurrentValue(type);
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobject thiz,
                                                                 jint type, jfloat value) {
 
     auto pPed = CGame::FindPlayerPed();
@@ -111,7 +111,7 @@ Java_com_russia_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobje
  //   auto pGtaVehicle = pVehicle->m_pVehicle;
 
     switch(type) {
-        // подвеска
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         case 2: {
             auto& handling = pVehicle->m_msLastSyncHandling;
 
@@ -131,7 +131,7 @@ Java_com_russia_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobje
             break;
         }
 
-        // проставки
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         case 3: {
             pVehicle->SetWheelOffset(true, value);
             pVehicle->SetWheelOffset(false, value);
@@ -139,13 +139,13 @@ Java_com_russia_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobje
             break;
         }
 
-        // Ширина резины
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         case 4: {
             pVehicle->SetWheelWidth(value);
             break;
         }
 
-        // радиус диска
+        // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         case 5: {
             auto& handling = pVehicle->m_msLastSyncHandling;
 
@@ -170,13 +170,13 @@ Java_com_russia_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobje
             break;
         }
 
-        // сход-развал перед
+        // пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
         case 11: {
             pVehicle->SetWheelAngle(true, value);
             break;
         }
 
-        // сход-развал зад
+        // пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ
         case 12: {
             pVehicle->SetWheelAngle(false, value);
             break;
@@ -185,7 +185,7 @@ Java_com_russia_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobje
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_tire_1shop_TireShop_nativeSendClick(JNIEnv *env, jobject thiz, jint type) {
+Java_com_lit_game_gui_tire_1shop_TireShop_nativeSendClick(JNIEnv *env, jobject thiz, jint type) {
 
     if(type == 7) {// exit
         CTireShop::DeleteCppObject();

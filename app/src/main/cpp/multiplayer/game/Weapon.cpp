@@ -10,12 +10,14 @@
 #include "Stats.h"
 #include "game.h"
 #include "net/netgame.h"
+#include "HUD.h"
 
 void CWeapon__Update(CWeapon* thiz, CPed* owner) {
     thiz->Update(owner);
 }
 
 bool CWeapon__Fire(CWeapon *thiz, CEntity *pEntity, CVector *pStartPosn, CVector *pBarrelPosn, CEntity *pTargetEnt, CVector *pTargetPosn, CVector *pAltPosn) {
+    CHUD::updateAmmo();
     return thiz->Fire(pEntity, pStartPosn, pBarrelPosn, pTargetEnt, pTargetPosn, pAltPosn);
 }
 

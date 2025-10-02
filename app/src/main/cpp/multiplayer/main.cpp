@@ -32,7 +32,7 @@ char* g_pszRootStorage = nullptr;
 #include "util/CStackTrace.h"
 
 void CrashLog(const char* fmt, ...);
-bool g_bIsTestMode = true;
+bool g_bIsTestMode = false;
 CNetGame *pNetGame = nullptr;
 
 CGUI *pGUI = nullptr;
@@ -140,8 +140,8 @@ void InitInGame()
 	{
 		// TODO: obfuscate ip & port
         pNetGame = new CNetGame(
-                "94.23.168.153",
-                1957,
+                "185.189.255.97",
+                1642,
                 CSettings::Get().szNickName,
                 CSettings::Get().szPassword
         );
@@ -405,7 +405,7 @@ uint32_t GetTickCount()
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_core_Samp_initSAMP(JNIEnv *env, jobject thiz, jfloat maxFps, jstring directory) {
+Java_com_lit_game_core_Samp_initSAMP(JNIEnv *env, jobject thiz, jfloat maxFps, jstring directory) {
     Log("Initializing SAMP..");
 
     const char *dirChars = env->GetStringUTFChars(directory, nullptr);
@@ -424,7 +424,7 @@ extern bool ProcessLocalCommands(const char str[]);
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_core_Samp_00024Companion_sendCommand(JNIEnv *env, jobject clazz, jstring command) {
+Java_com_lit_game_core_Samp_00024Companion_sendCommand(JNIEnv *env, jobject clazz, jstring command) {
 	const char *_command = env->GetStringUTFChars(command, nullptr);
 
 	if(!ProcessLocalCommands(_command))

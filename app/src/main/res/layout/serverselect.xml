@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
         android:indeterminate="true"
-        app:indicatorColor="#66BB6A"
+        app:indicatorColor="#3FD7D0"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

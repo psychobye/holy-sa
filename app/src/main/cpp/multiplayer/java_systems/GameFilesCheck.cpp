@@ -17,7 +17,7 @@ void CGameFilesCheck::RequestChecked() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_core_Samp_00024Companion_gameFilesChecked(JNIEnv *env, jobject clazz, jboolean ok) {
+Java_com_lit_game_core_Samp_00024Companion_gameFilesChecked(JNIEnv *env, jobject clazz, jboolean ok) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)  RPC_REQUEST_CHECK_FILES);

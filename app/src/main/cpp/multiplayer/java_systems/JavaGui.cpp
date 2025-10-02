@@ -54,7 +54,7 @@ void CJavaGui::TempToggle(int uiId, bool toggle)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_NativeGui_00024Companion_nativeSendPacket(JNIEnv *env, jobject thiz, jint ui_id, jint action_id, jstring json) {
+Java_com_lit_game_gui_NativeGui_00024Companion_nativeSendPacket(JNIEnv *env, jobject thiz, jint ui_id, jint action_id, jstring json) {
 
     const char* data = env->GetStringUTFChars(json, nullptr);
     std::string sendData;

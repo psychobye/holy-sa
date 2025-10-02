@@ -100,10 +100,10 @@ void ApplyPatches_level0()
 
 void ApplyShadowPatch()
 {
-//	CHook::RET("_ZN22CRealTimeShadowManager20ReturnRealTimeShadowEP15CRealTimeShadow"); // CRealTimeShadowManager::ReturnRealTimeShadow from ~CPhysical
-//	CHook::RET("_ZN22CRealTimeShadowManager6UpdateEv"); //shadow CRealTimeShadowManager::Update
-//	//CHook::RET(g_libGTASA + 0x543B04); // CShadows::RenderStaticShadows
-//	CHook::RET("_ZN8CMirrors16BeforeMainRenderEv"); // CMirrors::BeforeMainRender(void)
+	CHook::RET("_ZN22CRealTimeShadowManager20ReturnRealTimeShadowEP15CRealTimeShadow"); // CRealTimeShadowManager::ReturnRealTimeShadow from ~CPhysical
+	CHook::RET("_ZN22CRealTimeShadowManager6UpdateEv"); //shadow CRealTimeShadowManager::Update
+    // CHook::RET(g_libGTASA + 0x543B04); // CShadows::RenderStaticShadows
+    // CHook::RET("_ZN8CMirrors16BeforeMainRenderEv"); // CMirrors::BeforeMainRender(void)
 }
 
 void ApplyPatches()
@@ -139,6 +139,8 @@ void ApplyPatches()
 	CHook::WriteMemory(g_libGTASA + 0x524F58, (uintptr_t)"\xCC\xFF\xFF\x17", 4); // B 0x524E88
 	CHook::WriteMemory(g_libGTASA + 0x524E88, (uintptr_t)"\xE1\x03\x16\x2A", 4); // mov w1, W22
 	//CHook::WriteMemory(g_libGTASA + 0x002AB5C6, (uintptr_t)"\x00\x21", 2);
+
+    CHook::NOP(g_libGTASA + 0x5240C4, 2); // CRadar::DrawRadarSprite(4, ..); (North Icon)
 
     // crash legend
     CHook::NOP(g_libGTASA + 0x36A690, 1);
@@ -208,7 +210,7 @@ void ApplyPatches()
 	CHook::RET("_ZN7CDarkel27FindTotalPedsKilledByPlayerEi"); // CDarkel__FindTotalPedsKilledByPlayer_hook
 	CHook::RET("_ZN7CDarkel20RegisterKillByPlayerEPK4CPed11eWeaponTypebi"); // CDarkel__RegisterKillByPlayer_hook
 
-    CHook::NOP(g_libGTASA + (VER_x32 ? 0x0046BE88 : 0x55774C), 1);	// CStreaming::ms_memoryAvailable = (int)v24
+    // CHook::NOP(g_libGTASA + (VER_x32 ? 0x0046BE88 : 0x55774C), 1);	// CStreaming::ms_memoryAvailable = (int)v24 // DANGEROUS
 #if VER_x32
 	CHook::NOP(g_libGTASA + (VER_2_1 ? 0x0040BF26 : 0x3AC8B2), 2); 	// CMessages::AddBigMessage from CPlayerInfo::KillPlayer
 

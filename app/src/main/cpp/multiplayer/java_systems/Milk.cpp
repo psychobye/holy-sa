@@ -20,7 +20,7 @@ void CMilk::ReceivePacket(Packet *p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_fillingGames_Milk_nativeOnClosed(JNIEnv *env, jobject thiz, jboolean completed) {
+Java_com_lit_game_gui_fillingGames_Milk_nativeOnClosed(JNIEnv *env, jobject thiz, jboolean completed) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8)  ID_CUSTOM_RPC);
     bsSend.Write((uint8)  PACKET_MILK);

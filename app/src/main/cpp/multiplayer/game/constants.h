@@ -15,7 +15,7 @@ constexpr uint32_t TOTAL_RRR_MODEL_IDS = 475;
 constexpr uint32_t TOTAL_SCM_MODEL_IDS = 82;
 constexpr uint32_t TOTAL_INTERNAL_MODEL_IDS = 4; // internal use?
 
-constexpr uint32_t TOTAL_IMG_ARCHIVES = 8;
+constexpr uint32_t TOTAL_IMG_ARCHIVES = 15;
 constexpr uint32_t TOTAL_LOADED_PEDS = 8;
 
 constexpr uint32_t TOTAL_SCRIPTED_TASKS = 128;

@@ -94,6 +94,6 @@ void CActionsPed::showActions() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_ActionsPed_nativeDelCppObject(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_ActionsPed_nativeDelCppObject(JNIEnv *env, jobject thiz) {
     CActionsPed::DeleteCppObject();
 }

@@ -23,7 +23,7 @@
 #include "SkyBox.h"
 
 void CClouds::InjectHooks() {
-    CHook::RET("_ZN7CClouds22RenderBottomFromHeightEv"); // черные облака над башкой
+    CHook::RET("_ZN7CClouds22RenderBottomFromHeightEv"); // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
     CHook::Write(g_libGTASA + (VER_x32 ? 0x00679880 : 0x851120), &m_fVolumetricCloudDensity);
     CHook::Write(g_libGTASA + (VER_x32 ? 0x0067913C : 0x8502A8), &m_bVolumetricCloudHeightSwitch);
@@ -116,7 +116,7 @@ void CClouds::Render() {
         return;
     }
 
-    CSkyBox::Process();
+    // CSkyBox::Process();
 
     CCoronas::SunBlockedByClouds = false;
 

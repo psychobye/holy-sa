@@ -1,11 +1,11 @@
-package com.russia.launcher;
+package com.lit.launcher;
 
-import static com.russia.launcher.config.Config.FILE_INFO_URL;
+import static com.lit.launcher.config.Config.FILE_INFO_URL;
 
-import com.russia.launcher.async.dto.response.GameFileInfoDto;
-import com.russia.launcher.async.dto.response.LatestVersionInfoDto;
-import com.russia.launcher.async.dto.response.LoaderSliderInfoResponseDto;
-import com.russia.launcher.async.dto.response.MonitoringData;
+import com.lit.launcher.async.dto.response.GameFileInfoDto;
+import com.lit.launcher.async.dto.response.LatestVersionInfoDto;
+import com.lit.launcher.async.dto.response.LoaderSliderInfoResponseDto;
+import com.lit.launcher.async.dto.response.MonitoringData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

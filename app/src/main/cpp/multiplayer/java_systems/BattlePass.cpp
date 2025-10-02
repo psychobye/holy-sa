@@ -193,13 +193,13 @@ void CBattlePass::ReceivePacket(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_battle_1pass_BattlePass_nativeOnClose(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_battle_1pass_BattlePass_nativeOnClose(JNIEnv *env, jobject thiz) {
     CBattlePass::DeleteCppObject();
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_battle_1pass_BattlePassBuy_nativeOnClick(JNIEnv *env, jobject thiz, jint click_type) {
+Java_com_lit_game_gui_battle_1pass_BattlePassBuy_nativeOnClick(JNIEnv *env, jobject thiz, jint click_type) {
     RakNet::BitStream bs;
     bs.Write((uint8)  ID_CUSTOM_RPC);
     bs.Write((uint8)  PACKET_BATTLEPASS);
@@ -210,7 +210,7 @@ Java_com_russia_game_gui_battle_1pass_BattlePassBuy_nativeOnClick(JNIEnv *env, j
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_battle_1pass_BattlePass_nativeOnClick(JNIEnv *env, jobject thiz, jint click_type, jint index) {
+Java_com_lit_game_gui_battle_1pass_BattlePass_nativeOnClick(JNIEnv *env, jobject thiz, jint click_type, jint index) {
     RakNet::BitStream bs;
     bs.Write((uint8)  ID_CUSTOM_RPC);
     bs.Write((uint8)  PACKET_BATTLEPASS);

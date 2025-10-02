@@ -20,7 +20,7 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Registration_nativeChooseSkinClick(JNIEnv *env, jobject thiz, jint choosesex) {
+Java_com_lit_game_gui_Registration_nativeChooseSkinClick(JNIEnv *env, jobject thiz, jint choosesex) {
     g_pJavaWrapper->RegisterSexMale = choosesex;
     CGame::ToggleHUDElement(0, false);
     CPedSamp *pPlayer = CGame::FindPlayerPed();
@@ -43,7 +43,7 @@ Java_com_russia_game_gui_Registration_nativeChooseSkinClick(JNIEnv *env, jobject
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Registration_nativeSkinBackClick(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_Registration_nativeSkinBackClick(JNIEnv *env, jobject thiz) {
     g_pJavaWrapper->RegisterSkinValue--;
     if (g_pJavaWrapper->RegisterSexMale == 1) // man
     {
@@ -62,7 +62,7 @@ Java_com_russia_game_gui_Registration_nativeSkinBackClick(JNIEnv *env, jobject t
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Registration_nativeSkinNextClick(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_Registration_nativeSkinNextClick(JNIEnv *env, jobject thiz) {
     g_pJavaWrapper->RegisterSkinValue++;
     if (g_pJavaWrapper->RegisterSexMale == 1) // man
     {
@@ -81,7 +81,7 @@ Java_com_russia_game_gui_Registration_nativeSkinNextClick(JNIEnv *env, jobject t
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_Registration_nativeClick(JNIEnv *pEnv, jobject thiz, jstring password, jstring mail, jint sex) {
+Java_com_lit_game_gui_Registration_nativeClick(JNIEnv *pEnv, jobject thiz, jstring password, jstring mail, jint sex) {
     const char *inputPassword = pEnv->GetStringUTFChars(password, nullptr);
     const char *inputMail = pEnv->GetStringUTFChars(mail, nullptr);
 

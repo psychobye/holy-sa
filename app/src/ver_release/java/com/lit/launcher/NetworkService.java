@@ -1,0 +1,32 @@
+package com.lit.launcher;
+
+import static com.lit.launcher.config.Config.FILE_INFO_URL;
+
+import com.lit.launcher.async.dto.response.GameFileInfoDto;
+import com.lit.launcher.async.dto.response.LatestVersionInfoDto;
+import com.lit.launcher.async.dto.response.LoaderSliderInfoResponseDto;
+import com.lit.launcher.async.dto.response.MonitoringData;
+
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+public interface NetworkService {
+    String FILES_BASE_ADR = "https://files.liverussia.online/gamecache/";
+    String APK_URL = "https://files.liverussia.online/apk/release/app-ver_release-release.apk";
+
+    @Headers("Content-Type: application/json")
+    @GET("https://api.liverussia.online/old_data.php")
+    Call<MonitoringData> getMonitoringData();
+
+    @Headers("Content-Type: application/json")
+    @GET(FILE_INFO_URL)
+    Call<GameFileInfoDto> getFilesList();
+
+    @Headers("Content-Type: application/json")
+    @GET("https://files.liverussia.online/loader_slider/texts.json")
+    Call<LoaderSliderInfoResponseDto> getLoaderSliderInfo();
+
+    @Headers("Content-Type: application/json")
+    @GET("https://files.liverussia.online/apk/release/apk_info.php")
+    Call<LatestVersionInfoDto> getLatestVersionInfoDto();
+}

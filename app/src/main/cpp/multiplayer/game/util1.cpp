@@ -2040,9 +2040,9 @@ RwTexture* CUtil::GetTexture(const char* name)
     if (!tex)
     {
 #if VER_SAMP
-        tex = LoadTextureFromDB("gta3", "ahoodfence2");
+        tex = LoadTextureFromDB("samp", "fixme");
 #else
-        tex = CUtil::LoadTextureFromDB("gta3" , "RepairLR");
+        tex = CUtil::LoadTextureFromDB("gta3" , "fixme");
 #endif
         Log("WARNING! No tex = %s", name);
     }

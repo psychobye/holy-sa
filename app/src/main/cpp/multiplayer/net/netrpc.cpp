@@ -231,28 +231,45 @@ void Weather(RPCParameters *rpcParams)
 	CGame::SetWorldWeather(byteWeather);
 }
 
+void RequestClass(RPCParameters *rpcParams)
+{
+    unsigned char * Data = reinterpret_cast<unsigned char *>(rpcParams->input);
+    int iBitLength = rpcParams->numberOfBitsOfData;
+
+    RakNet::BitStream bsData(Data, (iBitLength / 8) + 1, false);
+    uint8_t byteRequestOutcome = 0;
+    PLAYER_SPAWN_INFO SpawnInfo;
+
+    bsData.Read(byteRequestOutcome);
+    bsData.Read((char*)&SpawnInfo, sizeof(PLAYER_SPAWN_INFO));
+
+    if (byteRequestOutcome) {
+        CLocalPlayer::SetSpawnInfo(&SpawnInfo);
+        CLocalPlayer::HandleClassSelectionOutcome(true);
+    }
+    else {
+        CLocalPlayer::HandleClassSelectionOutcome(false);
+    }
+}
+
 // TODO: RequestClass
 // TODO: CLocalPlayer::m_bWaitingForSpawnRequestReply
 void RequestSpawn(RPCParameters *rpcParams)
 {
-    LOGRPC("RequestSpawn");
-
-    unsigned char* Data = reinterpret_cast<unsigned char *>(rpcParams->input);
+    unsigned char * Data = reinterpret_cast<unsigned char *>(rpcParams->input);
     int iBitLength = rpcParams->numberOfBitsOfData;
 
-    if (pNetGame->GetGameState() != eNetworkState::CONNECTED) return;
+    RakNet::BitStream bsData(Data, (iBitLength / 8) + 1, false);
+    uint8_t byteRequestOutcome = false;
 
-    RakNet::BitStream bsData((unsigned char*)Data, (iBitLength/8) + 1, false);
+    bsData.Read(byteRequestOutcome);
 
-    CVector pos;
-    float fRotation = 0.0f;
-
-    bsData.Read(pos.x);
-    bsData.Read(pos.y);
-    bsData.Read(pos.z);
-    bsData.Read(fRotation);
-
-    CLocalPlayer::Spawn(pos, fRotation);
+    if (byteRequestOutcome == 2 || (byteRequestOutcome && CLocalPlayer::m_bWaitingForSpawnRequestReply)) {
+        CLocalPlayer::Spawn();
+    }
+    else {
+        CLocalPlayer::m_bWaitingForSpawnRequestReply = false;
+    }
 }
 
 void WorldTime(RPCParameters *rpcParams)
@@ -294,7 +311,7 @@ void WorldPlayerAdd(RPCParameters *rpcParams)
 	PLAYERID playerId;
 	uint8_t byteFightingStyle=4;
 	uint8_t byteTeam=0;
-	uint32 iSkin = 0;
+    uint8_t iSkin = 0;
 	CVector vecPos;
 	float fRotation=0;
 	uint32_t dwColor=0;
@@ -987,6 +1004,7 @@ void RegisterRPCs(RakClientInterface* pRakClient)
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_ServerQuit, ServerQuit);
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_ClientMessage, ClientMessage);
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_Chat, Chat);
+    pRakClient->RegisterAsRemoteProcedureCall(&RPC_RequestClass, RequestClass);
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_RequestSpawn, RequestSpawn);
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_Weather, Weather);
 	pRakClient->RegisterAsRemoteProcedureCall(&RPC_WorldTime, WorldTime);

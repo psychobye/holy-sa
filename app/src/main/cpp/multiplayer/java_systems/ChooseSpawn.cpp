@@ -45,6 +45,6 @@ void CChooseSpawn::packetToggle(Packet *p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_ChooseSpawn_nativeSendClick(JNIEnv *env, jobject thiz, jint spawn_id) {
+Java_com_lit_game_gui_ChooseSpawn_nativeSendClick(JNIEnv *env, jobject thiz, jint spawn_id) {
     pNetGame->SendCustomPacket(253, RPC_TOGGLE_CHOOSE_SPAWN, spawn_id);
 }

@@ -59,7 +59,7 @@ void CNetGame::packetAdminRecon(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_AdminRecon_clickButton(JNIEnv *env, jobject thiz, jint button_id) {
+Java_com_lit_game_gui_AdminRecon_clickButton(JNIEnv *env, jobject thiz, jint button_id) {
     switch (button_id) {
         case CAdminRecon::eButtons::EXIT_BUTTON:{
             pNetGame->SendChatCommand("/reoff");

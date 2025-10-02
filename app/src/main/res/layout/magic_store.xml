@@ -115,7 +115,7 @@
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.russia.game.gui.util.FadingEdgeLayout
+    <com.lit.game.gui.util.FadingEdgeLayout
         android:id="@+id/fadingRecycle"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_180sdp"
@@ -134,7 +134,7 @@
             android:scrollbars="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-    </com.russia.game.gui.util.FadingEdgeLayout>
+    </com.lit.game.gui.util.FadingEdgeLayout>
 
 
 

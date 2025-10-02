@@ -1,0 +1,22 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="132dp"
+    android:height="80dp"
+    android:viewportWidth="132"
+    android:viewportHeight="80">
+
+    <!-- группа: масштаб + сдвиг, чтобы картинка заняла больше места внутри тех же границ -->
+    <group
+        android:scaleX="1.12"
+        android:scaleY="1.12"
+        android:translateX="-6"
+        android:translateY="-4">
+
+        <path
+            android:fillColor="#BF000000"
+            android:pathData="M14.35 30.9C9.47 19.07 19.17 6.37 31.87 7.97l72.14 9.1c11.87 1.5 18.35 14.63 12.34 24.96l-13.18 22.64c-3.51 6.04-10.41 9.25-17.3 8.05L36.46 64.1C30.82 63.1 26.08 59.3 23.9 54.02L14.35 30.9Z"/>
+
+        <path
+            android:fillColor="#FFFFFFFF"
+            android:pathData="M49.66 51.45H82.2c1.12 0 2.03-0.92 2.03-2.04s-0.91-2.03-2.03-2.03H49.66c-1.11 0-2.03 0.91-2.03 2.03 0 1.12 0.92 2.04 2.03 2.04Zm0-10.17H82.2c1.12 0 2.03-0.91 2.03-2.03 0-1.12-0.91-2.03-2.03-2.03H49.66c-1.11 0-2.03 0.91-2.03 2.03 0 1.12 0.92 2.03 2.03 2.03Zm-2.03-12.2c0 1.12 0.92 2.04 2.03 2.04H82.2c1.12 0 2.03-0.92 2.03-2.03 0-1.12-0.91-2.04-2.03-2.04H49.66c-1.11 0-2.03 0.92-2.03 2.04Z"/>
+    </group>
+</vector>

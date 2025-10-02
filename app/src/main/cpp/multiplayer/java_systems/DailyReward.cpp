@@ -37,7 +37,7 @@ void CDailyReward::ReceivePacket(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_DailyReward_nativeClick(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_DailyReward_nativeClick(JNIEnv *env, jobject thiz) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)  RPC_DAILY_REWARDS);
@@ -47,6 +47,6 @@ Java_com_russia_game_gui_DailyReward_nativeClick(JNIEnv *env, jobject thiz) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_DailyReward_nativeOnDestroy(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_DailyReward_nativeOnDestroy(JNIEnv *env, jobject thiz) {
     CDailyReward::DeleteCppObject();
 }

@@ -42,7 +42,7 @@ void CNetGame::packetTreasure(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_treasure_Treasure_nativeSendOpenTreasure(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_treasure_Treasure_nativeSendOpenTreasure(JNIEnv *env, jobject thiz,
                                                                     jint treasure_id) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
@@ -54,12 +54,12 @@ Java_com_russia_game_gui_treasure_Treasure_nativeSendOpenTreasure(JNIEnv *env, j
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_donate_Donate_nativeShowTreasurePreview(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_donate_Donate_nativeShowTreasurePreview(JNIEnv *env, jobject thiz,
                                                                    jint treasure_id) {
     CTreasure::Show(treasure_id, false);
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_treasure_Treasure_nativeDestructor(JNIEnv *env, jobject thiz) {
+Java_com_lit_game_gui_treasure_Treasure_nativeDestructor(JNIEnv *env, jobject thiz) {
     CTreasure::DeleteCppObject();
 }

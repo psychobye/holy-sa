@@ -55,7 +55,7 @@ void CNetGame::Packet_FurnitureFactory(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_FurnitureFactory_nativeSendAction(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_FurnitureFactory_nativeSendAction(JNIEnv *env, jobject thiz,
                                                              jint button_id) {
 
     CFurnitureFactory::Destroy();

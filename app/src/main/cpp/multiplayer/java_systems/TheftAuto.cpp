@@ -1,5 +1,5 @@
 //
-// Created by Лихватов Иван on 26.04.2023.
+// Created by пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ on 26.04.2023.
 //
 #include "TheftAuto.h"
 
@@ -37,7 +37,7 @@ void CNetGame::packetTheftAuto(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_theft_1auto_TheftAuto_finishRendering(JNIEnv *env, jobject thiz,
+Java_com_lit_game_gui_theft_1auto_TheftAuto_finishRendering(JNIEnv *env, jobject thiz,
                                                                  jint status) {
     if (status == 1) {
         uint8_t packet = ID_CUSTOM_RPC;
@@ -51,7 +51,7 @@ Java_com_russia_game_gui_theft_1auto_TheftAuto_finishRendering(JNIEnv *env, jobj
 
 //        CNotification::show(type, (char *) utf_str, time, actionId);
     } else {
-        char str[256] = "Отмычка сломалась! Попробуйте еще";
+        char str[256] = "пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ! пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ";
         CNotification::show(0, (char *) str, 5, -1, "-", "-");
     }
 

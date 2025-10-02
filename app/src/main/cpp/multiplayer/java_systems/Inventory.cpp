@@ -188,7 +188,7 @@ void CInventory::ReceivePacket(Packet *p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_inventory_Inventory_sendSelectItem(JNIEnv *env, jobject thiz, jint matrixId,
+Java_com_lit_game_gui_inventory_Inventory_sendSelectItem(JNIEnv *env, jobject thiz, jint matrixId,
                                                     jint pos) {
 
     RakNet::BitStream bs;
@@ -203,7 +203,7 @@ Java_com_russia_game_gui_inventory_Inventory_sendSelectItem(JNIEnv *env, jobject
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_russia_game_gui_inventory_Inventory_sendClickButton(JNIEnv *env, jobject thiz, jint buttonid) {
+Java_com_lit_game_gui_inventory_Inventory_sendClickButton(JNIEnv *env, jobject thiz, jint buttonid) {
     RakNet::BitStream bs;
     bs.Write((uint8_t)  ID_CUSTOM_RPC);
     bs.Write((uint8_t)  RPC_INVENTORY);
