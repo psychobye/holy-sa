@@ -528,46 +528,46 @@ void ExitVehicle(RPCParameters *rpcParams)
 void GameModeRestart(RPCParameters *rpcParams)
 {
     LOGRPC("GameModeRestart");
-	CChatWindow::AddMessage("{ff0000}пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ...");
-	pNetGame->SetGameState(eNetworkState::RESTARTING);
+    CChatWindow::AddMessage("{ff0000}Идёт перезагрузка сервера...");
+    pNetGame->SetGameState(eNetworkState::RESTARTING);
 }
 
 #define REJECT_REASON_BAD_VERSION   1
 #define REJECT_REASON_BAD_NICKNAME  2
-#define REJECT_REASON_BAD_MOD		3
-#define REJECT_REASON_BAD_PLAYERID	4
+#define REJECT_REASON_BAD_MOD       3
+#define REJECT_REASON_BAD_PLAYERID  4
+
 void ConnectionRejected(RPCParameters *rpcParams)
 {
     LOGRPC("ConnectionRejected");
-	unsigned char * Data = reinterpret_cast<unsigned char *>(rpcParams->input);
-	int iBitLength = rpcParams->numberOfBitsOfData;
+    unsigned char * Data = reinterpret_cast<unsigned char *>(rpcParams->input);
+    int iBitLength = rpcParams->numberOfBitsOfData;
 
-	RakNet::BitStream bsData((unsigned char*)Data,(iBitLength/8)+1,false);
-	uint8_t byteRejectReason;
+    RakNet::BitStream bsData((unsigned char*)Data,(iBitLength/8)+1,false);
+    uint8_t byteRejectReason;
 
-	bsData.Read(byteRejectReason);
+    bsData.Read(byteRejectReason);
 
-	if(byteRejectReason == REJECT_REASON_BAD_VERSION)
-		CChatWindow::AddMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
-	else if(byteRejectReason == REJECT_REASON_BAD_NICKNAME)
-	{
-		CChatWindow::AddMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!");
-		CChatWindow::AddMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ 5-20 пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
-		CChatWindow::AddMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ A-Z a-z 0-9 [] пїЅпїЅпїЅ _");
-		CChatWindow::AddMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ /quit пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ ESC пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ");
-	}
-	else if(byteRejectReason == REJECT_REASON_BAD_MOD)
-	{
-		CChatWindow::AddMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ");
-		CChatWindow::AddMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ!");
-	}
-	else if(byteRejectReason == REJECT_REASON_BAD_PLAYERID)
-	{
-		CChatWindow::AddMessage("пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
-		CChatWindow::AddMessage("пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ.");
-	}
+    if(byteRejectReason == REJECT_REASON_BAD_VERSION)
+        CChatWindow::AddMessage("{D35D5D}Отказ: неверная версия клиента. Обновите клиент до последней версии.");
+    else if(byteRejectReason == REJECT_REASON_BAD_NICKNAME)
+    {
+        CChatWindow::AddMessage("{D35D5D}Отказ: недопустимый никнейм!");
+        CChatWindow::AddMessage("{D35D5D}Ник должен быть длиной 5-20 символов.");
+        CChatWindow::AddMessage("{D35D5D}Допустимые символы: A-Z a-z 0-9 [ ] и _");
+    }
+    else if(byteRejectReason == REJECT_REASON_BAD_MOD)
+    {
+        CChatWindow::AddMessage("{D35D5D}Отказ: обнаружены неподдерживаемые модификации.");
+        CChatWindow::AddMessage("{D35D5D}Отключите сторонние моды и попробуйте снова.");
+    }
+    else if(byteRejectReason == REJECT_REASON_BAD_PLAYERID)
+    {
+        CChatWindow::AddMessage("{D35D5D}Отказ: неверный или занятый PlayerID.");
+        CChatWindow::AddMessage("{D35D5D}Возможно, этот ID уже используется — попробуйте подключиться позже.");
+    }
 
-	pNetGame->GetRakClient()->Disconnect(500);
+    pNetGame->GetRakClient()->Disconnect(500);
 }
 
 void Pickup(RPCParameters *rpcParams)
