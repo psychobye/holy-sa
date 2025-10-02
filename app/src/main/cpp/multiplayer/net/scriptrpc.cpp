@@ -636,23 +636,24 @@ void ScrVehicleParamsEx(RPCParameters* rpcParams)
 
 void ScrHaveSomeMoney(RPCParameters *rpcParams)
 {
-    // LOGRPC("RPC: ScrHaveSomeMoney");
-//
-//	unsigned char* Data = reinterpret_cast<unsigned char *>(rpcParams->input);
-//	int iBitLength = rpcParams->numberOfBitsOfData;
-//
-//	int iAmmount;
-//	RakNet::BitStream bsData((unsigned char*)Data,(iBitLength/8)+1,false);
-//	bsData.Read(iAmmount);
-//
-//
-//	CGame::AddToLocalMoney(iAmmount);
+    LOGRPC("RPC: ScrHaveSomeMoney");
+
+	unsigned char* Data = reinterpret_cast<unsigned char *>(rpcParams->input);
+	int iBitLength = rpcParams->numberOfBitsOfData;
+
+	int iAmmount;
+	RakNet::BitStream bsData((unsigned char*)Data,(iBitLength/8)+1,false);
+	bsData.Read(iAmmount);
+
+
+	CGame::AddToLocalMoney(iAmmount);
 }
 
 void ScrResetMoney(RPCParameters *rpcParams)
 {
-    // LOGRPC("RPC: ScrResetMoney");
+    LOGRPC("RPC: ScrResetMoney");
 
+    // TODO: ScrResetMoney
 	//CGame::ResetLocalMoney();
 }
 

@@ -286,7 +286,6 @@ class HudManager : Chat() {
         hud_serverlogo.visibility = View.GONE
         levelinfo = activity.findViewById(R.id.levelinfo)
         hud_ammo = activity.findViewById(R.id.hud_ammo)
-        hud_ammo.visibility = View.GONE
         hud_weapon = activity.findViewById(R.id.hud_weapon)
         hud_wanted = ArrayList()
         hud_wanted.add(activity.findViewById(R.id.hud_star_1))
