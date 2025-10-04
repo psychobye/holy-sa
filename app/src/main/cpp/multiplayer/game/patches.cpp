@@ -144,6 +144,82 @@ void ApplyPatches()
 
     // crash legend
     CHook::NOP(g_libGTASA + 0x36A690, 1);
+
+    // TODO: X32
+    // ---------- JPATCH ----------
+    // AliAssassiN: Camera does not go crazy with mouse connected
+    CHook::WriteMemory(g_libGTASA + 0x4DB614, (uintptr_t)"\xAB\x1B\x00\xD0", 4);
+    CHook::WriteMemory(g_libGTASA + 0x4DB618, (uintptr_t)"\x6B\x99\x47\xF9", 4);
+
+    // AliAssassiN: Fixes "ghosting" when looking underground
+    CHook::WriteMemory(g_libGTASA + 0x4D7DB4, (uintptr_t)"\x1E\x00\x00\x14", 4);
+
+    // Fix red marker that cannot be placed in a menu on ultrawide screens
+    // Kinda trashy fix...
+    // This glitch is annoying me on v2.10!!! Time to fix it!!!
+    // its unusable with orig menu
+    /*CHook::WriteMemory(g_libGTASA + 0x368D20, (uintptr_t)"\x49\x1E\x00\xF0", 4);
+    CHook::WriteMemory(g_libGTASA + 0x368D24, (uintptr_t)"\x20\xC9\x48\xBD", 4);
+    CHook::WriteMemory(g_libGTASA + 0x368D54, (uintptr_t)"\x63\x18\x2D\x1E", 4);*/
+
+    // Can now rotate the camera inside the heli/plane?
+    // https://github.com/TheOfficialFloW/gtasa_vita/blob/6417775e182b0c8b789cc9a0c1161e6f1b43814f/loader/main.c#L736
+    CHook::WriteMemory(g_libGTASA + 0x4A02E0, (uintptr_t)"\x00\x00\x80\xD2", 4);
+    CHook::WriteMemory(g_libGTASA + 0x4A0E94, (uintptr_t)"\x00\x00\x80\xD2", 4);
+    CHook::WriteMemory(g_libGTASA + 0x4A1258, (uintptr_t)"\x00\x00\x80\xD2", 4);
+    CHook::WriteMemory(g_libGTASA + 0x4DF9F0, (uintptr_t)"\x00\x00\x80\xD2", 4);
+    CHook::WriteMemory(g_libGTASA + 0x4DFDB4, (uintptr_t)"\x00\x00\x80\xD2", 4);
+
+    // Disable GTA vehicle detachment at rotation awkwardness
+    CHook::WriteMemory(g_libGTASA + 0x4EA3B8, (uintptr_t)"\x86\x00\x00\x14", 4);
+
+    // An ability to remove FOV-effect while driving a car
+    CHook::NOP(g_libGTASA + 0x4A025C, 1);
+    CHook::NOP(g_libGTASA + 0x4A02A4, 1);
+    CHook::NOP(g_libGTASA + 0x4A02C8, 1);
+
+    // The fix "PCDirLightsCount" is not gonna work now. So lets remove an optimisation instead.
+    CHook::WriteMemory(g_libGTASA + 0x6F621C, (uintptr_t)"\x75\x00\x80\x52", 4);
+    CHook::NOP(g_libGTASA + 0x6F6220, 1);
+
+    // Fix a dumb Android 10+ RLEDecompress fix crash (that's an issue of TXD tools)
+    CHook::WriteMemory(g_libGTASA + 0x2858CC, "\x14\x81\x00\x11", 4);
+
+    // When headlights are active, the windows are no longer transparent from one side.
+    CHook::WriteMemory(g_libGTASA + 0x6B4B00, (uintptr_t)"\x21\x00\x80\x52", 4);
+
+    // SkyGFX: Water color fix. You now have a choice to use JPatch if you dont need SkyGFX
+    CHook::NOP(g_libGTASA + 0x6BD1C4, 1);
+
+    // Optimise textures searching
+    CHook::WriteMemory(g_libGTASA + 0x283D1C, (uintptr_t)"\x09\x00\x00\x14", 4);
+    CHook::WriteMemory(g_libGTASA + 0x283D40, (uintptr_t)"\xF0\x64\xFE\x97", 4);
+    CHook::WriteMemory(g_libGTASA + 0x283D44, (uintptr_t)"\xFC\x03\x00\x2A", 4);
+    CHook::WriteMemory(g_libGTASA + 0x284478, (uintptr_t)"\x22\x63\xFE\x97", 4);
+    CHook::WriteMemory(g_libGTASA + 0x28447C, (uintptr_t)"\xFB\x03\x00\x2A", 4);
+    CHook::WriteMemory(g_libGTASA + 0x284480, (uintptr_t)"\x08\x00\x00\x14", 4);
+    CHook::WriteMemory(g_libGTASA + 0x2844AC, (uintptr_t)"\x1F\x20\x03\xD5", 4);
+
+    // Disable call to FxSystem_c::GetCompositeMatrix in CAEFireAudioEntity::UpdateParameters
+    // that was causing a crash - spent ages debugging, the crash happens if you create 40 or
+    // so vehicles that catch fire (upside down) then delete them, repeating a few times.
+    // (MTA:SA)
+    CHook::NOP(g_libGTASA + 0x470EF8, 6);
+
+    // Fix sky multitude
+    CHook::UnFuck(g_libGTASA + 0x7630D8, sizeof(float));
+    *(float*)(g_libGTASA + 0x7630D8) = -10.0f;
+    CHook::NOP(g_libGTASA + 0x6C39F8, 1);
+    CHook::WriteMemory(g_libGTASA + 0x6C3A04, "\x03\x90\x24\x1E", 4);
+
+    // A fix for 2.10 crash (thanks fastman92!)
+    CHook::WriteMemory(g_libGTASA + 0x278E50, (uintptr_t)"\x08\x01\x09\x8B", 4);
+    CHook::WriteMemory(g_libGTASA + 0x278E60, (uintptr_t)"\x08\x01\x09\x8B", 4);
+    CHook::WriteMemory(g_libGTASA + 0x278E70, (uintptr_t)"\xE9\x03\x09\xAA", 4);
+    CHook::WriteMemory(g_libGTASA + 0x278B90, (uintptr_t)"\x08\x13\x44\xF9", 4);
+    CHook::WriteMemory(g_libGTASA + 0x278B94, (uintptr_t)"\x69\x1A\x40\xF9", 4);
+    CHook::WriteMemory(g_libGTASA + 0x278B9C, (uintptr_t)"\x01\x01\x09\xCB", 4);
+    // ---------- JPATCH END ----------
 #endif
 
 	ApplyShadowPatch();

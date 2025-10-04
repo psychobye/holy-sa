@@ -1594,6 +1594,25 @@ int CRadar__SetCoordBlip_hook(int r0, float X, float Y, float Z, int r4, int r5,
     return CRadar__SetCoordBlip(r0, X, Y, Z, r4, r5, name);
 }
 
+void(*FxInfoGroundCollide_c__GetValue)();
+void FxInfoGroundCollide_c__GetValue_hook()
+{
+
+}
+
+uint32_t(*HashString)(const char* s);
+uint32_t HashString_hook(const char* s)
+{
+    const char* p = &s[0];
+    uint32_t hashPart = 0;
+    while(*p != 0)
+    {
+    hashPart = 33 * hashPart + *p;
+    ++p;
+    }
+    return (hashPart + (hashPart >> 5));
+}
+
 void InstallHooks()
 {
     CHook::InstallPLT(g_libGTASA + (VER_x32 ? 0x66F91C : 0x83F8A0), &CFireManager__ExtinguishPointWithWater_hook, &CFireManager__ExtinguishPointWithWater);
@@ -1604,6 +1623,11 @@ void InstallHooks()
 	CHook::Redirect("_Z13RenderEffectsv", &RenderEffects);
 
     // CHook::InlineHook("_ZN6CRadar12SetCoordBlipE9eBlipType7CVectorj12eBlipDisplayPc", &CRadar__SetCoordBlip_hook, &CRadar__SetCoordBlip);
+
+    // ---------- JPATCH ----------
+    // CHook::InlineHook("_ZN21FxInfoGroundCollide_c8GetValueEffffhPv", &FxInfoGroundCollide_c__GetValue_hook, &FxInfoGroundCollide_c__GetValue);
+    CHook::InlineHook("_Z10HashStringPKc", &HashString_hook, &HashString);
+    // ---------- JPATCH END ----------
 
     // WTFBUG lol
     CHook::InlineHook("_ZN4CPed16SetCurrentWeaponE11eWeaponType", &CPed__SetCurrentWeapon_hook, &CPed__SetCurrentWeapon);
