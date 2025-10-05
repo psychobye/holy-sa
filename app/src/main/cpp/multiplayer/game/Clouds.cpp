@@ -116,7 +116,7 @@ void CClouds::Render() {
         return;
     }
 
-    // CSkyBox::Process();
+    CSkyBox::Process();
 
     CCoronas::SunBlockedByClouds = false;
 

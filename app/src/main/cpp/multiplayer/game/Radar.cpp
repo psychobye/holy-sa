@@ -10,12 +10,14 @@
 #include "game.h"
 #include "Mobile/MobileMenu/MobileMenu.h"
 #include "EntryExit.h"
+#include "GPS.h"
 
 tBlipHandle CRadar::SetCoordBlip(eBlipType type, CVector posn, eBlipColour color, eBlipDisplay blipDisplay, const char* scriptName) {
     if (pNetGame && !strncmp(scriptName, "CODEWAY", 7)) {
         float findZ = CWorld::FindGroundZForCoord(posn.x, posn.y);
         findZ += 1.5f;
 
+        GPS::Set(posn, true);
         RakNet::BitStream bsSend;
         bsSend.Write(posn.x);
         bsSend.Write(posn.y);

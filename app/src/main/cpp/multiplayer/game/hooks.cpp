@@ -483,6 +483,7 @@ int CTextureDatabaseRuntime__GetEntry_hook(TextureDatabaseRuntime *a1, const cha
 #include "Mobile/MobileSettings/MobileSettings.h"
 #include "EntryExitManager.h"
 #include "Occlusion.h"
+#include "Radar.h"
 
 void InjectHooks()
 {
@@ -544,7 +545,7 @@ void InjectHooks()
 	CAdjustableHUD::InjectHooks();
 
 	// new
-	// CClouds::InjectHooks();
+	CClouds::InjectHooks();
 	CWeather::InjectHooks();
 	RenderBuffer::InjectHooks();
     CTimeCycle::InjectHooks();
@@ -1613,6 +1614,13 @@ uint32_t HashString_hook(const char* s)
     return (hashPart + (hashPart >> 5));
 }
 
+// Fixes farclip glitch with wall (wardumb be like)
+void(*emu_DistanceFogSetup)(float minDistance, float maxDistance, float red, float green, float blue);
+void emu_DistanceFogSetup_hook(float minDistance, float maxDistance, float red, float green, float blue)
+{
+    emu_DistanceFogSetup(0.8f * minDistance, 0.95f * maxDistance, red, green, blue);
+}
+
 void InstallHooks()
 {
     CHook::InstallPLT(g_libGTASA + (VER_x32 ? 0x66F91C : 0x83F8A0), &CFireManager__ExtinguishPointWithWater_hook, &CFireManager__ExtinguishPointWithWater);
@@ -1627,6 +1635,7 @@ void InstallHooks()
     // ---------- JPATCH ----------
     // CHook::InlineHook("_ZN21FxInfoGroundCollide_c8GetValueEffffhPv", &FxInfoGroundCollide_c__GetValue_hook, &FxInfoGroundCollide_c__GetValue);
     CHook::InlineHook("_Z10HashStringPKc", &HashString_hook, &HashString);
+    CHook::InlineHook("_Z20emu_DistanceFogSetupfffff", &emu_DistanceFogSetup_hook, &emu_DistanceFogSetup);
     // ---------- JPATCH END ----------
 
     // WTFBUG lol

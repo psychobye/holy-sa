@@ -115,7 +115,6 @@ void ApplyPatches()
 	CHook::RET("_Z16SaveGameForPause10eSaveTypesPc"); // �� ��������� ��� ������������. ������ �����
 
 #if VER_x32
-	// ������ ������
 	CHook::WriteMemory(g_libGTASA + 0x00442120, (uintptr_t)"\x2C\xE0", 2); // B 0x44217c
 	CHook::WriteMemory(g_libGTASA + 0x0044217C, (uintptr_t)"\x30\x46", 2); // mov r0, r6
 	// CRadar::DrawEntityBlip (translate color)
@@ -126,8 +125,26 @@ void ApplyPatches()
 	CHook::WriteMemory(g_libGTASA + 0x0043FB5E, (uintptr_t)"\x12\xE0", 2); // B 0x43fb86
 	CHook::WriteMemory(g_libGTASA + 0x0043FB86, (uintptr_t)"\x48\x46", 2); // mov r0, r9
 	CHook::WriteMemory(g_libGTASA + 0x002AB5C6, (uintptr_t)"\x00\x21", 2);
+
+    // ---------- JPATCH ----------
+    // 4:3
+    // CHook::WriteMemory(g_libGTASA + 0x3F58A1, (uintptr_t)"\x0C\x00\x00\x14", 4);
+
+    // When headlights are active, the windows are no longer transparent from one side.
+    CHook::WriteMemory(g_libGTASA + 0x590AA2, (uintptr_t)"\x01", 1);
+
+    // SkyGFX: Water color fix. You now have a choice to use JPatch if you dont need SkyGFX
+    CHook::NOP(g_libGTASA + 0x5989A8, 1);
+    CHook::NOP(g_libGTASA + 0x5989B0, 1);
+
+    // Disable call to FxSystem_c::GetCompositeMatrix in CAEFireAudioEntity::UpdateParameters
+    // that was causing a crash - spent ages debugging, the crash happens if you create 40 or
+    // so vehicles that catch fire (upside down) then delete them, repeating a few times.
+    // (MTA:SA)
+    CHook::NOP(g_libGTASA + 0x395E6A, 7);
+
+    // ---------- JPATCH END ----------
 #else
-    // ������ ������
 	CHook::WriteMemory(g_libGTASA + 0x52737C, (uintptr_t)"\x1E\x00\x00\x14", 4); // B 0x5273F4
 	CHook::WriteMemory(g_libGTASA + 0x5273F4, (uintptr_t)"\xE1\x03\x14\x2A", 4); // mov w1, w20
 
@@ -145,7 +162,6 @@ void ApplyPatches()
     // crash legend
     CHook::NOP(g_libGTASA + 0x36A690, 1);
 
-    // TODO: X32
     // ---------- JPATCH ----------
     // AliAssassiN: Camera does not go crazy with mouse connected
     CHook::WriteMemory(g_libGTASA + 0x4DB614, (uintptr_t)"\xAB\x1B\x00\xD0", 4);

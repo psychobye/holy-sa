@@ -173,6 +173,7 @@ CGUI::~CGUI()
 #include "voice/SpeakerList.h"
 #include "voice/include/util/Render.h"
 #include "tools/DebugModules.h"
+#include "GPS.h"
 
 void RenderBackgroundHud();
 void RenderCloudWindow();
@@ -214,6 +215,7 @@ void CGUI::Render()
   
 	CPlayerTags::Render();
 	CText3DLabelsPool::Draw();
+    GPS::DoPathDraw();
 
     // TODO: Speedometer
 	/*if(CGame::FindPlayerPed()->m_pPed->IsInVehicle() && !CGame::FindPlayerPed()->m_pPed->IsAPassenger()

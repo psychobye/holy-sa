@@ -5,7 +5,7 @@
 #define VER_2_1 	    true
 #define VER_SAMP 	    true
 #define VER_LR		    true
-#define USE_FILE_LOG    false
+#define USE_FILE_LOG    true
 
 // vc
 #define USE_CUTSCENE_SHADOW_FOR_PED
