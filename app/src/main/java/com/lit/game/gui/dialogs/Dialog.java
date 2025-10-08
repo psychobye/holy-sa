@@ -138,6 +138,9 @@ public class Dialog {
                 this.mCustomRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
                 this.mCustomRecyclerView.setAdapter(adapter);
 
+                mCustomRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
+                mCustomRecyclerView.setHasFixedSize(true);
+
                 mMainLayout.post(() ->{
 
                     int width = mCaption.getWidth();
@@ -162,6 +165,7 @@ public class Dialog {
                 this.mRightBtn.setVisibility(View.VISIBLE);
             }
 
+            // TODO: TogglePlayerControllable
             Utils.ShowLayout(this.mMainLayout, false);
         });
 

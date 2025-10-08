@@ -299,7 +299,7 @@ Java_com_lit_game_gui_Menu_nativeSendMenuButt(JNIEnv *env, jobject thiz, jint bu
 
     switch (butt_id) {
         case 1:
-            pNetGame->SendChatCommand("/gps");
+            pNetGame->SendChatCommand("/tp");
             break;
         case 2:
             pNetGame->SendChatCommand("/mm");

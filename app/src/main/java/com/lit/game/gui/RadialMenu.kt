@@ -47,8 +47,10 @@ class RadialMenu : NativeGui<CircularCarMenuBinding>(CircularCarMenuBinding::cla
                 destroy()
             }
 
+            toggleLightCategory(false)
+
             binding.radialLightsCategoty.setOnClickListener {
-                if(binding.radialLightsCategoty.visibility == View.VISIBLE)
+                if(binding.radialLightsCategotyBg.visibility == View.VISIBLE)
                     toggleLightCategory(false)
                 else
                     toggleLightCategory(true)

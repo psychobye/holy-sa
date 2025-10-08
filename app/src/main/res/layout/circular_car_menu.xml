@@ -40,6 +40,7 @@
             android:paddingEnd="5dp"
             android:paddingBottom="10dp"
             android:src="@drawable/radial_key_icon"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/radialCellBg1"
             app:layout_constraintEnd_toEndOf="@+id/radialCellBg1"
             app:layout_constraintTop_toTopOf="@+id/radialCellBg1" />
@@ -92,6 +93,7 @@
             android:paddingEnd="5dp"
             android:paddingBottom="15dp"
             android:src="@drawable/radial_engine_icon"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/radialCellBg3"
             app:layout_constraintEnd_toEndOf="@+id/radialCellBg3"
             app:layout_constraintTop_toTopOf="@+id/radialCellBg3" />
@@ -130,6 +132,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:adjustViewBounds="true"
             android:src="@drawable/radial_trunk"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="@+id/radialCellBg2"
             app:layout_constraintTop_toTopOf="@+id/radialCellBg2" />
 
@@ -227,22 +230,19 @@
             android:layout_marginEnd="@dimen/_11sdp"
             android:adjustViewBounds="true"
             android:src="@drawable/radial_bonnet"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/radialCellBg4"
             app:layout_constraintTop_toTopOf="@+id/radialCellBg4" />
 
         <ImageView
             android:id="@+id/buttonMusic"
-            android:layout_width="@dimen/_35sdp"
+            android:layout_width="@dimen/_38sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_11sdp"
             android:adjustViewBounds="true"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
             android:src="@drawable/radial_music"
-            app:layout_constraintBottom_toBottomOf="@+id/radialCellBg4"
-            app:layout_constraintEnd_toStartOf="@+id/radialBonnet"
-            app:layout_constraintStart_toStartOf="@+id/radialCellBg4"
+            app:layout_constraintEnd_toEndOf="@+id/radialCellBg4"
             app:layout_constraintTop_toTopOf="@+id/radialCellBg4" />
 
         <ImageView
