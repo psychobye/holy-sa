@@ -3,6 +3,7 @@ package com.lit.launcher.storage;
 import static com.lit.launcher.config.Config.NATIVE_SETTINGS_FILE_PATH;
 
 import android.content.Context;
+import android.os.Environment;
 import android.widget.Toast;
 
 import org.ini4j.InvalidFileFormatException;
@@ -15,17 +16,16 @@ public class NativeStorage {
 
     private static final String CLIENT_SECTION_NAME = "client";
 
-
-
     public static void addClientProperty(String propertyName, String value, Context context) {
         try {
-            File f = new File(context.getExternalFilesDir(null) + NATIVE_SETTINGS_FILE_PATH);
+            File dir = new File(Environment.getExternalStorageDirectory(), "TESTLIT");
+            File f = new File(dir, NATIVE_SETTINGS_FILE_PATH);
 
             if (!f.exists()) {
                 return;
             }
 
-            Wini w = new Wini(new File(context.getExternalFilesDir(null) + NATIVE_SETTINGS_FILE_PATH));
+            Wini w = new Wini(new File(String.valueOf(f)));
             w.put(CLIENT_SECTION_NAME, propertyName, value);
             w.store();
         } catch (InvalidFileFormatException e) {
@@ -36,11 +36,13 @@ public class NativeStorage {
     }
 
     public static String getClientProperty(String property, Context context) {
-
         String value = null;
 
+        File dir = new File(Environment.getExternalStorageDirectory(), "TESTLIT");
+        File f = new File(dir, NATIVE_SETTINGS_FILE_PATH);
+
         try {
-            Wini w = new Wini(new File(context.getExternalFilesDir(null) + NATIVE_SETTINGS_FILE_PATH));
+            Wini w = new Wini(new File(String.valueOf(f)));
             value = w.get(CLIENT_SECTION_NAME, property);
             w.store();
         } catch (IOException ignored) {

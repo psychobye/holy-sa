@@ -1,7 +1,11 @@
 package com.lit.game.gui.dialogs;
 
+import android.os.Handler;
+import android.os.Looper;
+import android.text.Layout;
 import android.text.TextPaint;
 import android.text.TextUtils;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,133 +20,171 @@ import com.lit.game.gui.util.Utils;
 
 import java.util.ArrayList;
 
-public class DialogAdapter extends RecyclerView.Adapter {
+public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.ViewHolder> {
     private int mCurrentSelectedPosition = 0;
-    private ImageView mCurrentSelectedView;
     private final ArrayList<TextView> mFieldHeaders;
     private final ArrayList<String> mFieldTexts;
-    private final ArrayList<ArrayList<TextView>> mFields;
     private OnClickListener mOnClickListener;
     private OnDoubleClickListener mOnDoubleClickListener;
 
-    public interface OnClickListener {
-        void onClick(int i, String str);
-    }
+    private volatile int[] mColumnWidths = null;
+    private volatile boolean mComputingWidths = false;
 
-    public interface OnDoubleClickListener {
-        void onDoubleClick();
-    }
+    public interface OnClickListener { void onClick(int i, String str); }
+    public interface OnDoubleClickListener { void onDoubleClick(); }
 
     public DialogAdapter(ArrayList<String> fields, ArrayList<TextView> fieldHeaders) {
-        this.mFieldTexts = fields;
-        this.mFieldHeaders = fieldHeaders;
-        this.mFields = new ArrayList<>();
+        this.mFieldTexts = fields != null ? fields : new ArrayList<>();
+        this.mFieldHeaders = fieldHeaders != null ? fieldHeaders : new ArrayList<>();
     }
 
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.sd_dialog_item, parent, false));
+    @Override
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sd_dialog_item, parent, false);
+        return new ViewHolder(v);
     }
 
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        onBindViewHolder((ViewHolder) holder, position);
-    }
-
+    @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String[] headers = this.mFieldTexts.get(position).split("\t");
-        ArrayList<TextView> fields = new ArrayList<>();
-        for (int i = 0; i < headers.length; i++) {
-            if(i >= holder.mFields.size())continue;
+        if (position < 0 || position >= mFieldTexts.size()) return;
 
-            TextView field = holder.mFields.get(i);
-            field.setText(Utils.transfromColors(headers[i].replace("\\t", "")));
-            field.setVisibility(View.VISIBLE);
-            fields.add(field);
+        String raw = mFieldTexts.get(position);
+        String[] cols = raw.split("\t");
+
+        if (mColumnWidths == null && !mComputingWidths) {
+            startComputeWidthsAsync(holder);
         }
-        this.mFields.add(fields);
-        if (this.mCurrentSelectedPosition == position) {
-            ImageView imageView = holder.mFieldBg;
-            this.mCurrentSelectedView = imageView;
-            imageView.setVisibility(View.VISIBLE);
-            imageView.setImageResource(R.drawable.dialog_item_btn);
-            this.mOnClickListener.onClick(position, holder.mFields.get(0).getText().toString());
+
+        int fieldCount = holder.mFields.size();
+        for (int i = 0; i < fieldCount; i++) {
+            TextView tv = holder.mFields.get(i);
+            if (i < cols.length) {
+                CharSequence tx = Utils.transfromColors(cols[i].replace("\\t", ""));
+                tv.setText(tx);
+                tv.setVisibility(View.VISIBLE);
+            } else {
+                tv.setText("");
+                tv.setVisibility(View.GONE);
+            }
+
+            if (mColumnWidths != null && i < mColumnWidths.length) {
+                tv.setMinWidth(mColumnWidths[i]);
+            }
+        }
+
+        if (mColumnWidths != null) {
+            for (int i = 0; i < mFieldHeaders.size() && i < mColumnWidths.length; i++) {
+                TextView h = mFieldHeaders.get(i);
+                if (h != null) h.setMinWidth(mColumnWidths[i]);
+            }
+        }
+
+        if (mCurrentSelectedPosition == position) {
+            holder.mFieldBg.setVisibility(View.VISIBLE);
+            holder.mFieldBg.setImageResource(R.drawable.dialog_item_btn);
         } else {
             holder.mFieldBg.setVisibility(View.VISIBLE);
             holder.mFieldBg.setImageResource(R.drawable.dialog_item_btn_none);
-            // holder.mFieldBg.setVisibility(View.GONE);
         }
 
         holder.getView().setOnClickListener(view -> {
-            if (this.mCurrentSelectedPosition != holder.getAdapterPosition()) {
-                this.mCurrentSelectedView.setImageResource(R.drawable.dialog_item_btn_none);
-                this.mCurrentSelectedPosition = holder.getAdapterPosition();
-                this.mCurrentSelectedView = holder.mFieldBg;
-                holder.mFieldBg.setVisibility(View.VISIBLE);
-                holder.mFieldBg.setImageResource(R.drawable.dialog_item_btn);
-                this.mOnClickListener.onClick(holder.getAdapterPosition(), holder.mFields.get(0).getText().toString());
+            int adapterPos = holder.getAdapterPosition();
+            if (adapterPos == RecyclerView.NO_POSITION) return;
+
+            if (mCurrentSelectedPosition != adapterPos) {
+                int old = mCurrentSelectedPosition;
+                mCurrentSelectedPosition = adapterPos;
+                notifyItemChanged(old);
+                notifyItemChanged(mCurrentSelectedPosition);
+                if (mOnClickListener != null) {
+                    String first = "";
+                    if (cols != null && cols.length > 0) first = cols[0].replace("\\t", "");
+                    mOnClickListener.onClick(adapterPos, first);
+                }
                 return;
             }
-            OnDoubleClickListener onDoubleClickListener = this.mOnDoubleClickListener;
-            if (onDoubleClickListener != null) {
-                onDoubleClickListener.onDoubleClick();
-            }
+
+            if (mOnDoubleClickListener != null) mOnDoubleClickListener.onDoubleClick();
         });
     }
 
     public void updateSizes() {
-        int[] max = new int[4];
-        for (int i = 0; i < this.mFields.size(); i++) {
-            for (int j = 0; j < this.mFields.get(i).size(); j++) {
-                int width = this.mFields.get(i).get(j).getWidth();
-                if (max[j] < width) {
-                    max[j] = width;
+        mColumnWidths = null;
+        if (Looper.myLooper() == Looper.getMainLooper()) {
+            notifyDataSetChanged();
+        } else {
+            new Handler(Looper.getMainLooper()).post(this::notifyDataSetChanged);
+        }
+    }
+
+    @Override
+    public int getItemCount() { return this.mFieldTexts.size(); }
+
+    public void setOnClickListener(OnClickListener onClickListener) { this.mOnClickListener = onClickListener; }
+    public void setOnDoubleClickListener(OnDoubleClickListener onDoubleClickListener) { this.mOnDoubleClickListener = onDoubleClickListener; }
+
+    private void startComputeWidthsAsync(ViewHolder holderForPaint) {
+        if (mComputingWidths) return;
+        mComputingWidths = true;
+
+        final TextPaint samplePaint = holderForPaint.getAnyFieldPaint();
+        final int columns = Math.max(1, Math.max(getMaxColumnsFromData(), mFieldHeaders.size()));
+
+        new Thread(() -> {
+            int[] max = new int[columns];
+
+            int defaultPadding = (int) TypedValue.applyDimension(
+                    TypedValue.COMPLEX_UNIT_DIP, 8, holderForPaint.getView().getResources().getDisplayMetrics());
+            int fieldPadding = defaultPadding;
+            if (!holderForPaint.mFields.isEmpty()) {
+                TextView tv0 = holderForPaint.mFields.get(0);
+                fieldPadding = tv0.getPaddingLeft() + tv0.getPaddingRight();
+            } else if (!mFieldHeaders.isEmpty()) {
+                TextView h0 = mFieldHeaders.get(0);
+                fieldPadding = h0.getPaddingLeft() + h0.getPaddingRight();
+            }
+
+            for (String raw : mFieldTexts) {
+                if (TextUtils.isEmpty(raw)) continue;
+                String[] parts = raw.split("\t");
+                for (int i = 0; i < parts.length && i < columns; i++) {
+                    CharSequence cs = Utils.transfromColors(parts[i].replace("\\t", ""));
+                    float w = Layout.getDesiredWidth(cs, samplePaint);
+                    int wi = (int) Math.ceil(w) + fieldPadding + 4;
+                    if (max[i] < wi) max[i] = wi;
                 }
             }
-        }
-        for (int i = 0; i < this.mFieldHeaders.size(); i++) {
-            TextView textView = this.mFieldHeaders.get(i);
-            int headerWidth = measureTextWidth(textView);
 
-            if (max[i] < headerWidth) {
-                max[i] = headerWidth;
+            for (int i = 0; i < mFieldHeaders.size() && i < columns; i++) {
+                TextView h = mFieldHeaders.get(i);
+                if (h == null) continue;
+                CharSequence txt = h.getText();
+                float w = Layout.getDesiredWidth(txt, h.getPaint());
+                int wi = (int) Math.ceil(w) + h.getPaddingLeft() + h.getPaddingRight() + 4;
+                if (max[i] < wi) max[i] = wi;
             }
-        }
-        for (int i = 0; i < this.mFields.size(); i++) {
-            for (int j = 0; j < this.mFields.get(i).size(); j++) {
-                this.mFields.get(i).get(j).setWidth(max[j]);
+
+            for (int i = 0; i < columns; i++) {
+                if (max[i] < 48) max[i] = 48;
             }
+
+            final int[] computed = max;
+            new Handler(Looper.getMainLooper()).post(() -> {
+                mColumnWidths = computed;
+                mComputingWidths = false;
+                notifyDataSetChanged();
+            });
+        }).start();
+    }
+
+    private int getMaxColumnsFromData() {
+        int max = 0;
+        for (String s : mFieldTexts) {
+            if (s == null) continue;
+            int cols = s.split("\t", -1).length;
+            if (cols > max) max = cols;
         }
-        for (int i = 0; i < this.mFieldHeaders.size(); i++) {
-            this.mFieldHeaders.get(i).setWidth(max[i]);
-        }
-    }
-
-    private int measureTextWidth(TextView view) {
-
-        String text = String.valueOf(view.getText());
-
-        if (TextUtils.isEmpty(text)) {
-            return 0;
-        }/*from  w  w  w. ja  v a2 s. c o  m*/
-
-        TextPaint paint = view.getPaint();
-        int width = (int) (paint.measureText(text) );
-        return width;
-    }
-
-    public void setOnClickListener(OnClickListener onClickListener) {
-        this.mOnClickListener = onClickListener;
-    }
-
-    public void setOnDoubleClickListener(OnDoubleClickListener onDoubleClickListener) {
-        this.mOnDoubleClickListener = onDoubleClickListener;
-    }
-
-    public ArrayList<ArrayList<TextView>> getFields() {
-        return this.mFields;
-    }
-
-    public int getItemCount() {
-        return this.mFieldTexts.size();
+        return Math.max(1, max);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -153,15 +195,20 @@ public class DialogAdapter extends RecyclerView.Adapter {
         public ViewHolder(View itemView) {
             super(itemView);
             this.mView = itemView;
-            this.mFieldBg = (ImageView) itemView.findViewById(R.id.sd_dialog_item_bg);
+            this.mFieldBg = itemView.findViewById(R.id.sd_dialog_item_bg);
             ConstraintLayout field = itemView.findViewById(R.id.sd_dialog_item_main);
             for (int i = 1; i < field.getChildCount(); i++) {
-                this.mFields.add((TextView) field.getChildAt(i));
+                View child = field.getChildAt(i);
+                if (child instanceof TextView) this.mFields.add((TextView) child);
             }
         }
 
-        public View getView() {
-            return this.mView;
+        public View getView() { return this.mView; }
+
+        public TextPaint getAnyFieldPaint() {
+            if (!mFields.isEmpty()) return mFields.get(0).getPaint();
+            TextView tv = new TextView(itemView.getContext());
+            return tv.getPaint();
         }
     }
 }

@@ -17,7 +17,9 @@ tBlipHandle CRadar::SetCoordBlip(eBlipType type, CVector posn, eBlipColour color
         float findZ = CWorld::FindGroundZForCoord(posn.x, posn.y);
         findZ += 1.5f;
 
-        GPS::Set(posn, true);
+        CVector pos(posn.x, posn.y, findZ);
+        GPS::Set(pos, true);
+
         RakNet::BitStream bsSend;
         bsSend.Write(posn.x);
         bsSend.Write(posn.y);

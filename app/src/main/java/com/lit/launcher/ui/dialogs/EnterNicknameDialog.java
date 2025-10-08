@@ -43,7 +43,6 @@ public class EnterNicknameDialog extends MaterialAlertDialogBuilder implements V
     }
 
     private void initViewElements(View view) {
-
         String nickname = NativeStorage.getClientProperty("name", settingsFragment.getActivity());
 
         nicknameInput = view.findViewById(R.id.nick_input);

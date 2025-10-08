@@ -2,7 +2,7 @@
 <layer-list
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:drawable="@drawable/back_splash">
+        android:drawable="@color/black">
     </item>
 	<item
     android:width="@dimen/_140sdp"

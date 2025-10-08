@@ -295,6 +295,12 @@ class HudManager : Chat() {
         hud_wanted.add(activity.findViewById(R.id.hud_star_4))
         hud_wanted.add(activity.findViewById(R.id.hud_star_5))
         hud_wanted.add(activity.findViewById(R.id.hud_star_6))
+        binding.healthProgress.progress     = 100
+        binding.healthText.text             = String.format("%d", 100)
+        binding.armorProgress.progress      = 0
+        binding.armorText.text              = String.format("%d", 0)
+        binding.satietyProgress.progress    = 0
+        binding.satietyText.text            = String.format("%d", 0)
         for (i in hud_wanted.indices) {
             hud_wanted[i].visibility = View.GONE
         }

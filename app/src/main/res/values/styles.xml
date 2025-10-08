@@ -42,7 +42,7 @@
     </style>
 
     <style name="AppTheme.Splash">
-        <item name="android:windowBackground">@drawable/back_splash</item>
+        <item name="android:windowBackground">@color/black</item>
     </style>
 
     <style name="TextStyle" parent="@android:style/TextAppearance">

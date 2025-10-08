@@ -32,18 +32,8 @@ import java.io.File
 
 class MainActivity : AppCompatActivity() {
     private var animation: Animation? = null
-    private var donateButton: LinearLayout? = null
-    private var donateImage: ImageView? = null
-    private var donateTV: TextView? = null
-    private var monitoringButton: LinearLayout? = null
-    private var monitoringFragment: MonitoringFragment? = null
-    private var monitoringImage: ImageView? = null
-    private var monitoringTV: TextView? = null
     private var playButton: LinearLayout? = null
     private var playImage: ImageView? = null
-    private var rouletteButton: LinearLayout? = null
-    private var rouletteImage: ImageView? = null
-    private var rouletteTV: TextView? = null
     private var settingsButton: LinearLayout? = null
     private var settingsFragment: SettingsFragment? = null
     private var settingsImage: ImageView? = null
@@ -67,44 +57,22 @@ class MainActivity : AppCompatActivity() {
 
         container_layout = findViewById(R.id.container)
         animation = AnimationUtils.loadAnimation(this, R.anim.button_click)
-        monitoringTV = findViewById(R.id.monitoringTV)
         settingsTV = findViewById(R.id.settingsTV)
-        rouletteTV = findViewById(R.id.forumTV) 
-        donateTV = findViewById(R.id.donateTV)
-        monitoringImage = findViewById(R.id.monitoringImage)
         settingsImage = findViewById(R.id.settingsImage)
-        rouletteImage = findViewById(R.id.forumImage)
-        donateImage = findViewById(R.id.donateImage)
         playImage = findViewById(R.id.playImage)
-        monitoringButton = findViewById(R.id.monitoringButton)
         settingsButton = findViewById(R.id.settingsButton)
-        rouletteButton = findViewById(R.id.rouletteButton)
-        donateButton = findViewById(R.id.donateButton)
         playButton = findViewById(R.id.playButton)
-        monitoringFragment = MonitoringFragment()
         settingsFragment = SettingsFragment()
         if (savedInstanceState != null && savedInstanceState.getBoolean(IS_AFTER_LOADING_KEY)) {
             replaceFragment(settingsFragment)
         } else if (savedInstanceState == null && intent.extras != null && intent.extras!!.getBoolean(IS_AFTER_LOADING_KEY)) {
             onClickSettings()
         } else {
-            replaceFragment(monitoringFragment)
-        }
-        monitoringButton!!.setOnClickListener {
-            onClickMonitoring()
+            replaceFragment(settingsFragment)
         }
 
         settingsButton!!.setOnClickListener {
             onClickSettings()
-        }
-
-        rouletteButton!!.setOnClickListener {
-            val address = Uri.parse(FORUM_URL)
-            val openlink = Intent(Intent.ACTION_VIEW, address)
-            startActivity(openlink)
-        }
-        donateButton!!.setOnClickListener {
-            onClickDonate()
         }
 
         playButton!!.setOnClickListener {
@@ -216,23 +184,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onClickMonitoring() {
-        setTextColor(monitoringButton, monitoringTV, monitoringImage)
-        replaceFragment(monitoringFragment)
+        // setTextColor(monitoringButton, monitoringTV, monitoringImage)
+        // replaceFragment(monitoringFragment)
     }
 
     fun setTextColor(linearLayout: LinearLayout?, textView: TextView?, imageView: ImageView?) {
-        monitoringButton!!.alpha = 0.45f
         settingsButton!!.alpha = 0.45f
-        rouletteButton!!.alpha = 0.45f
-        donateButton!!.alpha = 0.45f
-        monitoringTV!!.setTextColor(resources.getColor(R.color.menuTextDisable))
         settingsTV!!.setTextColor(resources.getColor(R.color.menuTextDisable))
-        rouletteTV!!.setTextColor(resources.getColor(R.color.menuTextDisable))
-        donateTV!!.setTextColor(resources.getColor(R.color.menuTextDisable))
-        monitoringImage!!.setColorFilter(resources.getColor(R.color.menuTextDisable), PorterDuff.Mode.SRC_IN)
         settingsImage!!.setColorFilter(resources.getColor(R.color.menuTextDisable), PorterDuff.Mode.SRC_IN)
-        rouletteImage!!.setColorFilter(resources.getColor(R.color.menuTextDisable), PorterDuff.Mode.SRC_IN)
-        donateImage!!.setColorFilter(resources.getColor(R.color.menuTextDisable), PorterDuff.Mode.SRC_IN)
         linearLayout!!.alpha = 1.0f
         textView!!.setTextColor(resources.getColor(R.color.menuTextEnable))
         imageView!!.setColorFilter(resources.getColor(R.color.menuTextEnable), PorterDuff.Mode.SRC_IN)

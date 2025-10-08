@@ -29,40 +29,6 @@
                 android:layout_width="0.0dip"
                 android:layout_height="@dimen/_50sdp"
                 android:layout_weight="1.0"
-                android:background="@drawable/navigationbottom1"
-                android:gravity="bottom|center">
-
-                <LinearLayout
-                    android:id="@+id/monitoringButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/monitoringImage"
-                        android:layout_width="@dimen/_16sdp"
-                        android:layout_height="@dimen/_16sdp"
-                        android:src="@drawable/monitoring_btn"
-                        app:tint="@color/menuTextEnable" />
-
-                    <TextView
-                        android:id="@+id/monitoringTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4.0dip"
-                        android:fontFamily="@font/pt_root_ui_medium"
-                        android:text="Мониторинг"
-                        android:textColor="@color/menuTextEnable"
-                        android:textSize="@dimen/_8sdp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0.0dip"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_weight="1.0"
                 android:background="@drawable/navigationbottom2"
                 android:gravity="bottom|center">
 
@@ -134,75 +100,6 @@
                 </LinearLayout>
             </FrameLayout>
 
-            <LinearLayout
-                android:layout_width="0.0dip"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_weight="1.0"
-                android:background="@drawable/navigationbottom4"
-                android:gravity="bottom|center">
-
-                <LinearLayout
-                    android:id="@+id/rouletteButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:alpha="0.45"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/forumImage"
-                        android:layout_width="@dimen/_21sdp"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/forum_icon" />
-
-                    <TextView
-                        android:id="@+id/forumTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4.0dip"
-                        android:fontFamily="@font/pt_root_ui_medium"
-                        android:text="Форум"
-                        android:textColor="@color/menuTextDisable"
-                        android:textSize="@dimen/_8sdp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0.0dip"
-                android:layout_height="@dimen/_50sdp"
-                android:layout_weight="1.0"
-                android:background="@drawable/navigationbottom5"
-                android:gravity="bottom|center">
-
-                <LinearLayout
-                    android:id="@+id/donateButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/_10sdp"
-                    android:alpha="0.45"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/donateImage"
-                        android:layout_width="@dimen/_18sdp"
-                        android:layout_height="wrap_content"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/donate_btn" />
-
-                    <TextView
-                        android:id="@+id/donateTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4.0dip"
-                        android:fontFamily="@font/pt_root_ui_medium"
-                        android:text="Донат"
-                        android:textColor="@color/menuTextDisable"
-                        android:textSize="@dimen/_8sdp" />
-                </LinearLayout>
-            </LinearLayout>
         </LinearLayout>
     </FrameLayout>
 

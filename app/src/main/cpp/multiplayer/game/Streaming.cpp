@@ -252,11 +252,18 @@ void CStreaming::InitImageList() {
         ms_file.m_StreamHandle = 0;
     }
 
-#if VER_SAMP
     CStreaming::AddImageToList("TEXDB\\GTA3.IMG", true);
     CStreaming::AddImageToList("TEXDB\\GTA_INT.IMG", true);
-//    CStreaming::AddImageToList("TEXDB\\SAMP.IMG", true);
-//    CStreaming::AddImageToList("TEXDB\\SAMPCOL.IMG", true);
+    /*CStreaming::AddImageToList("TEXDB\\CARS.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\SKINS.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\OTHER.IMG", true);*/
+
+/*#if VER_SAMP
+    CStreaming::AddImageToList("TEXDB\\GTA3.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\GTA_INT.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\CARS.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\SKINS.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\OTHER.IMG", true);
 #else
     CStreaming::AddImageToList("TEXDB\\GTA3.IMG", true);
     CStreaming::AddImageToList("TEXDB\\GTA_INT.IMG", true);
@@ -264,7 +271,7 @@ void CStreaming::InitImageList() {
     CStreaming::AddImageToList("TEXDB\\CARS.IMG", true);
     CStreaming::AddImageToList("TEXDB\\SAMP.IMG", true);
     CStreaming::AddImageToList("TEXDB\\SAMPCOL.IMG", true);
-#endif
+#endif*/
 }
 
 // Request a given model to be loaded.

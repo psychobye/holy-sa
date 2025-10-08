@@ -126,6 +126,8 @@ void ApplyPatches()
 	CHook::WriteMemory(g_libGTASA + 0x0043FB86, (uintptr_t)"\x48\x46", 2); // mov r0, r9
 	CHook::WriteMemory(g_libGTASA + 0x002AB5C6, (uintptr_t)"\x00\x21", 2);
 
+    CHook::NOP(g_libGTASA + 0x43EBF6, 2); // CRadar::DrawRadarSprite(4, ..); (North Icon)
+
     // ---------- JPATCH ----------
     // 4:3
     // CHook::WriteMemory(g_libGTASA + 0x3F58A1, (uintptr_t)"\x0C\x00\x00\x14", 4);

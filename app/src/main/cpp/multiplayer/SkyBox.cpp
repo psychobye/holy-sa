@@ -91,21 +91,11 @@ void CSkyBox::ReTexture()
     {
         m_dwChangeTime = iHours;
 
-        if (iHours >= 0 && iHours < 6 || iHours > 18 ) {
-            SetTexture("night_sky_1");
-        } else if (iHours >= 6 && iHours < 8) {
-            SetTexture("afternoon_sky_1");
-        } else if (iHours >= 8 && iHours < 11) {
-            SetTexture("daily_sky_1");
-        } else if (iHours >= 11 && iHours <= 15) {
-            SetTexture("evening_sky_1");
-        } else if (iHours == 16) {
-            SetTexture("evening_sky_1");
-        } else if (iHours == 17) {
-            SetTexture("evening_sky_1");
-        } else if (iHours == 18) {
-            SetTexture("evening_sky_1");
-        }
+        if (iHours >= 6 && iHours <= 11) SetTexture("afternoon_sky_1");
+        if (iHours >= 12 && iHours <= 17) SetTexture("daily_sky_1");
+        if (iHours >= 18 && iHours <= 22) SetTexture("evening_sky_1");
+        if (iHours >= 0 && iHours <= 5) SetTexture("night_sky_1");
+        if (iHours >= 23 && iHours <= 24) SetTexture("night_sky_1");
     }
 
     auto pAtomic = m_pSkyObject->m_pEntity->m_pRwObject;

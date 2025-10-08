@@ -513,6 +513,17 @@ bool CGame::InitialiseRenderWare() {
     TextureDatabaseRuntime::Load("cutscene", false, TextureDatabaseFormat::DF_DXT);
     TextureDatabaseRuntime::Load("player", false, TextureDatabaseFormat::DF_DXT);
     TextureDatabaseRuntime::Load("menu", false, TextureDatabaseFormat::DF_DXT);
+
+    /*TextureDatabaseRuntime* radar = TextureDatabaseRuntime::Load("radar", false, TextureDatabaseFormat::DF_DXT);
+    TextureDatabaseRuntime::Register(radar);
+
+    //skins
+    TextureDatabaseRuntime* skins = TextureDatabaseRuntime::Load("skins", false, TextureDatabaseFormat::DF_DXT);
+    TextureDatabaseRuntime::Register(skins);
+
+    // cars
+    TextureDatabaseRuntime* cars = TextureDatabaseRuntime::Load("cars", false, TextureDatabaseFormat::DF_DXT);
+    TextureDatabaseRuntime::Register(cars);*/
 #else
 	TextureDatabaseRuntime::Load("samp", false, TextureDatabaseFormat::DF_DXT);
 	TextureDatabaseRuntime::Load("gui", false, TextureDatabaseFormat::DF_DXT);
@@ -522,15 +533,15 @@ bool CGame::InitialiseRenderWare() {
 	TextureDatabaseRuntime::Load("gta_int", false, TextureDatabaseFormat::DF_DXT);
 	TextureDatabaseRuntime::Load("menu", false, TextureDatabaseFormat::DF_DXT);
 
-	TextureDatabaseRuntime* radar = TextureDatabaseRuntime::Load("radar", false, TextureDatabaseFormat::DF_ETC);
+	TextureDatabaseRuntime* radar = TextureDatabaseRuntime::Load("radar", false, TextureDatabaseFormat::DF_DXT);
 	TextureDatabaseRuntime::Register(radar);
 
 	//skins
-	TextureDatabaseRuntime* skins = TextureDatabaseRuntime::Load("skins", false, TextureDatabaseFormat::DF_ETC);
+	TextureDatabaseRuntime* skins = TextureDatabaseRuntime::Load("skins", false, TextureDatabaseFormat::DF_DXT);
 	TextureDatabaseRuntime::Register(skins);
 
 	// cars
-	TextureDatabaseRuntime* cars = TextureDatabaseRuntime::Load("cars", false, TextureDatabaseFormat::DF_ETC);
+	TextureDatabaseRuntime* cars = TextureDatabaseRuntime::Load("cars", false, TextureDatabaseFormat::DF_DXT);
 	TextureDatabaseRuntime::Register(cars);
 #endif
 
