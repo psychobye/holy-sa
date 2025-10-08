@@ -108,6 +108,19 @@ android {
     buildFeatures {
         prefab true
     }
+
+    applicationVariants.configureEach { variant ->
+        variant.outputs.configureEach { output ->
+            def appName = variant.productFlavors[0].manifestPlaceholders.appName
+            def versionName = variant.versionName
+            def buildTypeName = variant.buildType.name
+            def date = new Date().format("yyyyMMdd_HHmm")
+
+            def newName = "${appName}_v${versionName}_${buildTypeName}_${date}.apk"
+
+            output.outputFileName = newName.replaceAll("\\s+", "_")
+        }
+    }
 }
 
 dependencies {

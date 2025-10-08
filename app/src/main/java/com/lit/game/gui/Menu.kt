@@ -29,7 +29,7 @@ class Menu : NativeGui<MenuActionDialogBinding>(MenuActionDialogBinding::class) 
                 close()
             }
             update(false)
-            binding.mainLayout.animationXFade(Fade.FADE_IN, duration = 300)
+            binding.mainLayout.visibility = View.VISIBLE
         }
     }
 
