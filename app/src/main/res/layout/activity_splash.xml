@@ -1,8 +1,73 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activitySplash"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/splash_bg">
 
-  </androidx.constraintlayout.widget.ConstraintLayout>
+  <ImageView
+      android:id="@+id/imageView"
+      android:layout_width="@dimen/_150sdp"
+      android:layout_height="@dimen/_150sdp"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_marginTop="@dimen/_10sdp"
+      app:srcCompat="@drawable/logo" />
+
+  <TextView
+      android:id="@+id/textView22"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="@string/disclaimer_ru"
+      android:textColor="@color/white"
+      android:gravity="center"
+      android:fontFamily="@font/gotham_light"
+      android:textSize="@dimen/_10sdp"
+      android:layout_marginTop="@dimen/_10sdp"
+      app:layout_constraintEnd_toEndOf="@+id/imageView"
+      app:layout_constraintStart_toStartOf="@+id/imageView"
+      app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+  <View
+      android:id="@+id/view6"
+      android:layout_width="@dimen/_250sdp"
+      android:layout_height="@dimen/_2sdp"
+      android:layout_marginTop="@dimen/_5sdp"
+      android:background="@drawable/fade_divider_horizontal"
+      app:layout_constraintEnd_toEndOf="@+id/textView22"
+      app:layout_constraintStart_toStartOf="@+id/textView22"
+      app:layout_constraintTop_toBottomOf="@+id/textView22" />
+
+  <TextView
+      android:id="@+id/textView23"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:fontFamily="@font/gotham_light"
+      android:gravity="center"
+      android:text="@string/disclaimer_en"
+      android:textColor="@color/white"
+      android:textSize="@dimen/_10sdp"
+      android:layout_marginTop="@dimen/_5sdp"
+      app:layout_constraintEnd_toEndOf="@+id/textView22"
+      app:layout_constraintStart_toStartOf="@+id/textView22"
+      app:layout_constraintTop_toBottomOf="@+id/view6" />
+
+  <com.google.android.material.progressindicator.LinearProgressIndicator
+      android:id="@+id/progressBar2"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:trackThickness="@dimen/_15sdp"
+      android:layout_marginBottom="0dp"
+      android:indeterminate="true"
+      android:progress="50"
+      android:max="100"
+      app:indicatorColor="@color/white"
+      app:trackColor="@color/black50"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
