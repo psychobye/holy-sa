@@ -105,8 +105,9 @@ void InitInGame()
 		CGame::InitInGame();
 		CGame::SetMaxStats();
 
-		Voice::CVoicePlugin::OnPluginLoad();
-		Voice::CVoicePlugin::OnSampLoad();
+        // TODO: VoiceChat
+		/*Voice::CVoicePlugin::OnPluginLoad();
+		Voice::CVoicePlugin::OnSampLoad();*/
 
 		// voice
 		Log("[dbg:samp:load] : module loading...");
@@ -119,12 +120,13 @@ void InitInGame()
 
 		Samp::loadStatus = true;
 
+        // TODO: VoiceChat
 		// voice
-		for (const auto& deviceInitCallback : CVoiceRender::deviceInitCallbacks) {
+		/*for (const auto& deviceInitCallback : CVoiceRender::deviceInitCallbacks) {
 			if (deviceInitCallback != nullptr) {
 				deviceInitCallback();
 			}
-		}
+		}*/
 
 		Log("[dbg:samp:load] : module loaded");
 

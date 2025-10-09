@@ -195,13 +195,14 @@ void CGUI::Render()
 	if(CSettings::Get().szDebug == 1)
 		DebugModules::Render2D();
 
-	Voice::SpeakerList::Show();
+    // TODO: VoiceChat
+	// Voice::SpeakerList::Show();
 
-	for (const auto& renderCallback : CVoiceRender::renderCallbacks) {
+	/*for (const auto& renderCallback : CVoiceRender::renderCallbacks) {
 		if (renderCallback != nullptr) {
 			renderCallback();
 		}
-	}
+	}*/
 	//RenderCloudWindow();
 	//ImGui::ShowDemoWindow(&sfadfklasdjflkasdjf);
 //	RenderVersion();

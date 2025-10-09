@@ -114,9 +114,8 @@ android {
             def appName = variant.productFlavors[0].manifestPlaceholders.appName
             def versionName = variant.versionName
             def buildTypeName = variant.buildType.name
-            def date = new Date().format("yyyyMMdd_HHmm")
 
-            def newName = "${appName}_v${versionName}_${buildTypeName}_${date}.apk"
+            def newName = "${appName}_v${versionName}_${buildTypeName}.apk"
 
             output.outputFileName = newName.replaceAll("\\s+", "_")
         }

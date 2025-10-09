@@ -172,7 +172,7 @@ void CNetGame::Process() {
         CChatWindow::AddMessage(CLocalisation::GetMessage(E_MSG::CONNECTING));
 
         m_pRakClient->Connect(m_szHostOrIp, m_iPort, 0, 0, 5);
-        Voice::Network::OnRaknetConnect(m_szHostOrIp, m_iPort);
+        // Voice::Network::OnRaknetConnect(m_szHostOrIp, m_iPort); // TODO: VoiceChat
         m_dwLastConnectAttempt = GetTickCount();
         SetGameState(eNetworkState::CONNECTING);
     }
@@ -252,9 +252,10 @@ void CNetGame::UpdateNetwork()
                 Packet_PassengerSync(pkt);
                 break;
 
-            case ID_VOICE:
+                // TODO: VoiceChat
+            /*case ID_VOICE:
                 Voice::Network::OnRaknetReceive(pkt);
-                break;
+                break;*/
 
             case ID_CUSTOM_RPC:
                 Packet_CustomRPC(pkt);
@@ -1307,7 +1308,7 @@ void CNetGame::Reset() {
     CActorPool::Free();
     CAudioStreamPool::Free();
     g_pJavaWrapper->ClearScreen();
-    Voice::Network::OnRaknetDisconnect();
+    // Voice::Network::OnRaknetDisconnect(); // TODO: VoiceChat
 
     CPedSamp *pPlayerPed = CLocalPlayer::GetPlayerPed();
     if (pPlayerPed) {
