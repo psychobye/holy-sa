@@ -53,7 +53,7 @@ void GPS::DoPathDraw() {
 }
 
 void GPS::Set(CVector pos, bool toggle) {
-    Log("gps %d", toggle);
+    Log("GPS::Set");
     GPS::to = pos;
     GPS::enabled = toggle;
 

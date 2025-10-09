@@ -50,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:selector_AlphaSlideBar="@drawable/tuning_colorpicker_slider" />
+            app:selector_AlphaSlideBar="@drawable/wheel" />
 
         <com.skydoves.colorpickerview.sliders.BrightnessSlideBar
             android:id="@+id/brightnessSlide"
@@ -62,5 +62,5 @@
             app:borderSize_BrightnessSlider="5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/alphaSlideBar"
-            app:selector_BrightnessSlider="@drawable/tuning_colorpicker_slider" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            app:selector_BrightnessSlider="@drawable/wheel" />
+</androidx.constraintlayout.widget.ConstraintLayout>

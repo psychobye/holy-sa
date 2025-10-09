@@ -151,6 +151,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.30'
     implementation 'androidx.viewpager2:viewpager2:1.1.0'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
-    implementation "com.github.skydoves:colorpickerview:2.3.0"
+    implementation "com.github.skydoves:colorpickerview:2.2.4"
     apply plugin: 'com.google.gms.google-services'
 }

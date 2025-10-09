@@ -8,7 +8,6 @@
             <corners android:topLeftRadius="0.1dp" android:topRightRadius="0.1dp"
                 android:bottomLeftRadius="9dp" android:bottomRightRadius="0.1dp"/>
             <solid android:color="#004768"/>
-            <stroke android:color="#004768"/>
         </shape>
     </item>
 </layer-list>

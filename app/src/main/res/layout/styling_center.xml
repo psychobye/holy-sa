@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:visibility="visible">
 
-        <ImageView
-            android:id="@+id/buyButton"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_styling_buy"
-            app:layout_constraintEnd_toEndOf="@+id/constraintLayout15"
-            app:layout_constraintStart_toStartOf="@+id/constraintLayout15"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout15" />
+    <ImageView
+        android:id="@+id/buyButton"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:adjustViewBounds="true"
+        android:src="@drawable/ic_styling_buy"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/priceText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="1dp"
-            android:fontFamily="@font/visby_round_cf_extra_bold"
-            android:includeFontPadding="false"
-            android:text="99.999.999 РУБ"
-            android:textColor="#FFFFFF"
-            android:textSize="7dp"
-            app:layout_constraintBottom_toBottomOf="@+id/buyButton"
-            app:layout_constraintEnd_toEndOf="@+id/buyButton"
-            app:layout_constraintStart_toStartOf="@+id/buyButton" />
+    <TextView
+        android:id="@+id/priceText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:fontFamily="@font/visby_round_cf_extra_bold"
+        android:includeFontPadding="false"
+        android:text="99.999.999 РУБ"
+        android:textColor="#FFFFFF"
+        android:textSize="7dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/buyButton"
+        app:layout_constraintEnd_toEndOf="@+id/buyButton"
+        app:layout_constraintStart_toStartOf="@+id/buyButton" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/exitButt"
@@ -52,54 +55,53 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout15"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout15"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_25sdp"
+        android:background="@drawable/styling_center_money_bg"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/styling_money_ic"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/_25sdp"
-            android:background="@drawable/styling_center_money_bg"
-            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_ruble" />
 
-            <ImageView
-                android:id="@+id/styling_money_ic"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_ruble" />
-
-            <TextView
-                android:id="@+id/balanceText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:fontFamily="@font/montsserat_semibold"
-                android:gravity="center"
-                android:includeFontPadding="false"
-                android:text="999 999 999"
-                android:textColor="#FFFFFF"
-                android:textSize="@dimen/_9sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/styling_money_ic"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/balanceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/montsserat_semibold"
+            android:gravity="center"
+            android:includeFontPadding="false"
+            android:text="999 999 999"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/_9sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/styling_money_ic"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle"
-        android:layout_width="@dimen/_320sdp"
-        android:layout_height="@dimen/_57sdp"
-        android:layout_marginBottom="16dp"
+        android:layout_width="@dimen/_350sdp"
+        android:layout_height="@dimen/_55sdp"
         android:background="@drawable/styling_center_bg"
         android:orientation="horizontal"
         android:padding="@dimen/_3sdp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

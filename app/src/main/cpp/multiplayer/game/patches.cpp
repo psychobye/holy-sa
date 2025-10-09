@@ -132,6 +132,10 @@ void ApplyPatches()
     // 4:3
     // CHook::WriteMemory(g_libGTASA + 0x3F58A1, (uintptr_t)"\x0C\x00\x00\x14", 4);
 
+    // 44100 Hz Audio support (without a mod OpenAL Update but works with it anyway)
+    CHook::UnFuck(g_libGTASA + 0x613E0C, sizeof(int));
+    *(int*)(g_libGTASA + 0x613E0C) = 44100;
+
     // When headlights are active, the windows are no longer transparent from one side.
     CHook::WriteMemory(g_libGTASA + 0x590AA2, (uintptr_t)"\x01", 1);
 
@@ -163,6 +167,10 @@ void ApplyPatches()
     // crash legend
     CHook::NOP(g_libGTASA + 0x36A690, 1);
     // ---------- JPATCH ----------
+    // 44100 Hz Audio support (without a mod OpenAL Update but works with it anyway)
+    CHook::UnFuck(g_libGTASA + 0x749AA4, sizeof(int));
+    *(int*)(g_libGTASA + 0x749AA4) = 44100;
+
     // AliAssassiN: Camera does not go crazy with mouse connected
     CHook::WriteMemory(g_libGTASA + 0x4DB614, (uintptr_t)"\xAB\x1B\x00\xD0", 4);
     CHook::WriteMemory(g_libGTASA + 0x4DB618, (uintptr_t)"\x6B\x99\x47\xF9", 4);

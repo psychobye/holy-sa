@@ -13,7 +13,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_3sdp"
-            android:fontFamily="@font/inter_light"
+            android:fontFamily="@font/montserrat_medium"
             android:includeFontPadding="false"
             android:text="Цвет неона"
             android:textColor="#8CFFFFFF"
@@ -38,16 +38,17 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_10sdp"
             android:background="@drawable/tuning_item_price_bg"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
                     android:id="@+id/priceText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
                     android:text="500 000 руб."
                     android:textColor="#A4FFFFFF"
                     android:textSize="@dimen/_4sdp"
-                    android:includeFontPadding="false"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
