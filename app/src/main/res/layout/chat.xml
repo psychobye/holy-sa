@@ -24,7 +24,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.factor.bouncy.BouncyRecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chat"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -39,7 +39,7 @@
                 app:recyclerview_overscroll_animation_size="0.1"
                 app:stackFromEnd="true">
 
-            </com.factor.bouncy.BouncyRecyclerView>
+            </androidx.recyclerview.widget.RecyclerView>
         </com.lit.game.gui.util.FadingEdgeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout

@@ -166,6 +166,7 @@ public class Chat {
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(activity);
 
         mLayoutManager.setStackFromEnd(true);
+        chat.setOverScrollMode(View.OVER_SCROLL_ALWAYS);
         chat.setLayoutManager(mLayoutManager);
 
 

@@ -1,2 +1,2 @@
-rootProject.name = "RUSSIA"
+rootProject.name = "LIT"
 include(":app")

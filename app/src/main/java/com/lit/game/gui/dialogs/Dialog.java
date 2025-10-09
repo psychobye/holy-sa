@@ -138,9 +138,6 @@ public class Dialog {
                 this.mCustomRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
                 this.mCustomRecyclerView.setAdapter(adapter);
 
-                mCustomRecyclerView.setLayoutManager(new LinearLayoutManager(activity));
-                mCustomRecyclerView.setHasFixedSize(true);
-
                 mMainLayout.post(() ->{
 
                     int width = mCaption.getWidth();

@@ -94,8 +94,8 @@ public class DialogAdapter extends RecyclerView.Adapter<DialogAdapter.ViewHolder
             if (mCurrentSelectedPosition != adapterPos) {
                 int old = mCurrentSelectedPosition;
                 mCurrentSelectedPosition = adapterPos;
-                notifyItemChanged(old);
-                notifyItemChanged(mCurrentSelectedPosition);
+                notifyItemChanged(old, 0);
+                notifyItemChanged(mCurrentSelectedPosition, 0);
                 if (mOnClickListener != null) {
                     String first = "";
                     if (cols != null && cols.length > 0) first = cols[0].replace("\\t", "");

@@ -5,11 +5,7 @@
         <shape>
             <corners
                 android:radius="6.0dip" />
-            <gradient
-                android:startColor="#8d004768"
-                android:endColor="#8d004768"
-                android:angle="135.0"
-                android:type="linear" />
+            <solid android:color="#80000000" />
         </shape>
     </item>
 </layer-list>
