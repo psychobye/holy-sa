@@ -191,4 +191,6 @@
 
     </FrameLayout>
 
+    <include android:id="@+id/notification_root" layout="@layout/notification" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

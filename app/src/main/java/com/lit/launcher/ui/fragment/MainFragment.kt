@@ -3,6 +3,7 @@ package com.lit.launcher.ui.fragment
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,16 +20,26 @@ import java.io.File
 
 class MainFragment : Fragment() {
     private var playBtn: ImageView? = null
+    private var storeBtn: ImageView? = null
     private var nicknameField: EditText? = null
+    private var notification: LauncherNotification? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         playBtn = view.findViewById(R.id.play_btn)
+        storeBtn = view.findViewById(R.id.store_btn)
         nicknameField = view.findViewById(R.id.nick_edit_text)
+
+        val notifRoot = view.findViewById<View>(R.id.notification_root)
+        notification = LauncherNotification(notifRoot, requireActivity())
 
         playBtn?.setOnClickListener {
             onClickPlay()
+        }
+
+        storeBtn?.setOnClickListener {
+            onClickStore()
         }
 
         initUserData()
@@ -119,5 +130,16 @@ class MainFragment : Fragment() {
                 }
             }
         }*/
+    }
+
+    private fun onClickStore() {
+        notification?.showNotification(
+            type = 4,
+            text = "СКОРО",
+            duration = 5,
+            actionId = 0,
+            butt1 = "OK",
+            butt2 = ""
+        )
     }
 }
