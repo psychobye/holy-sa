@@ -36,12 +36,59 @@
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/settings_btn" />
 
+    <ImageView
+        android:id="@+id/forum_btn"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/settings_btn"
+        app:layout_constraintEnd_toStartOf="@+id/settings_btn"
+        app:layout_constraintTop_toTopOf="@+id/settings_btn"
+        android:background="@drawable/forum_btn" />
+
+    <ImageView
+        android:id="@+id/notify_btn"
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/notify_btn"
+        android:layout_marginEnd="@dimen/_140sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/forum_btn"
+        app:layout_constraintEnd_toEndOf="@+id/forum_btn"
+        app:layout_constraintTop_toTopOf="@+id/forum_btn" />
+
+    <ImageView
+        android:id="@+id/tg_btn"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        app:layout_constraintBottom_toTopOf="@+id/server_btn"
+        app:layout_constraintEnd_toEndOf="@+id/server_btn"
+        android:background="@drawable/tg_btn" />
+
+    <ImageView
+        android:id="@+id/yt_btn"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/yt_btn"
+        android:layout_marginEnd="@dimen/_55sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tg_btn"
+        app:layout_constraintEnd_toEndOf="@+id/tg_btn" />
+
+    <ImageView
+        android:id="@+id/support_btn"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:background="@drawable/support_btn"
+        android:layout_marginEnd="@dimen/_55sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/tg_btn"
+        app:layout_constraintEnd_toEndOf="@+id/yt_btn" />
+
     <FrameLayout
         android:id="@+id/server_btn"
         android:layout_width="@dimen/_180sdp"
         android:layout_height="@dimen/_35sdp"
         android:background="@drawable/server_btn"
-        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
         app:layout_constraintBottom_toTopOf="@+id/play_btn"
         app:layout_constraintEnd_toEndOf="@+id/play_btn"
         app:layout_constraintStart_toStartOf="@+id/play_btn" >
@@ -70,34 +117,78 @@
     </FrameLayout>
 
 
-
     <FrameLayout
+        android:id="@+id/frameLayout"
         android:layout_width="@dimen/_190sdp"
         android:layout_height="@dimen/_35sdp"
-        android:layout_marginTop="@dimen/_15sdp"
         android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:background="@drawable/nickname_input"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" >
+        app:layout_constraintTop_toTopOf="parent">
 
         <EditText
-            android:id="@+id/editTextText"
+            android:id="@+id/nick_edit_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/transparent"
             android:ems="10"
             android:fontFamily="@font/jost_medium_italic"
             android:gravity="center"
-            android:inputType="text"
             android:hint="@string/nickname"
-            android:textColorHint="@color/gray"
-            android:textCursorDrawable="@drawable/text_cursor"
-            android:textColor="@color/white"
-            android:textSize="@dimen/_17sdp"
-            android:background="@color/transparent"
+            android:imeOptions="actionDone"
+            android:inputType="text"
             android:paddingStart="@dimen/_10sdp"
             android:paddingEnd="@dimen/_10sdp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textColorHint="@color/gray"
+            android:textCursorDrawable="@drawable/text_cursor"
+            android:textSize="@dimen/_17sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:background="@drawable/news_bg"
+        app:layout_constraintBottom_toTopOf="@+id/store_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_110sdp"
+            android:background="@drawable/news_mask" />
+
+        <TextView
+            android:id="@+id/header_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:gravity="left"
+            android:text="ЗАГОЛОВОК"
+            android:textColor="@color/white"
+            android:fontFamily="@font/jost_medium_italic" />
+
+        <TextView
+            android:id="@+id/dataTime_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:gravity="left"
+            android:text="12 октября 2025"
+            android:textColor="@color/gray"
+            android:fontFamily="@font/jost_medium_italic" />
+
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

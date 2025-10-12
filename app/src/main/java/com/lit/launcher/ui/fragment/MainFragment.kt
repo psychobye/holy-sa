@@ -1,10 +1,14 @@
 package com.lit.launcher.ui.fragment
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.lit.game.R
@@ -15,17 +19,62 @@ import java.io.File
 
 class MainFragment : Fragment() {
     private var playBtn: ImageView? = null
+    private var nicknameField: EditText? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         playBtn = view.findViewById(R.id.play_btn)
+        nicknameField = view.findViewById(R.id.nick_edit_text)
 
         playBtn?.setOnClickListener {
             onClickPlay()
         }
 
+        initUserData()
+        initNicknameListener()
         return view
+    }
+
+    private fun initUserData() {
+        val nickname = NativeStorage.getClientProperty("name", activity)
+        nicknameField?.setText(nickname)
+    }
+
+    private fun initNicknameListener() {
+        nicknameField?.setOnFocusChangeListener { _, hasFocus ->
+            if (!hasFocus) {
+                saveNickname()
+            }
+        }
+
+        nicknameField?.setOnEditorActionListener { v, actionId, event ->
+            val isDone = actionId == EditorInfo.IME_ACTION_DONE
+            val isEnterKey = event?.keyCode == android.view.KeyEvent.KEYCODE_ENTER && event.action == android.view.KeyEvent.ACTION_DOWN
+
+            if (isDone || isEnterKey) {
+                saveNickname()
+                nicknameField?.clearFocus()
+                hideKeyboard()
+                true
+            } else {
+                false
+            }
+        }
+    }
+
+    private fun saveNickname() {
+        val nickname = nicknameField?.text?.toString() ?: ""
+        NativeStorage.addClientProperty("name", nickname, activity)
+    }
+
+    private fun hideKeyboard() {
+        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(nicknameField?.windowToken, 0)
+    }
+
+    fun updateNicknameField(nickname: String?) {
+        nicknameField?.setText(nickname)
     }
 
     private fun startGame() {
