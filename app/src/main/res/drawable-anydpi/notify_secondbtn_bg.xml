@@ -13,7 +13,7 @@
                 android:angle="315.0" />
             <stroke
                 android:width="@dimen/_1sdp"
-                android:color="#ffFAFF0F" />
+                android:color="@color/gradient2" />
         </shape>
     </item>
 </layer-list>

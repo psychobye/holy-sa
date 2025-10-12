@@ -17,6 +17,17 @@
         app:srcCompat="@drawable/play_btn" />
 
     <ImageView
+        android:id="@+id/download_btn"
+        android:layout_width="@dimen/_300sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_marginBottom="@dimen/_28sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/download_btn" />
+
+    <ImageView
         android:id="@+id/store_btn"
         android:layout_width="@dimen/_200sdp"
         android:layout_height="@dimen/_60sdp"

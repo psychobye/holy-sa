@@ -4,11 +4,7 @@ xmlns:android="http://schemas.android.com/apk/res/android">
 <item android:id="@android:id/background"
         android:height="8.0dip">
         <shape>
-            <gradient android:startColor="#FF1B1B0D"
-                      android:endColor="#FF1B1B0D"
-                      android:angle="270.0"
-                      android:centerY="1.0"
-                      android:centerColor="#FF1B1B0D" />
+            <solid android:color="@color/black50" />
             <corners android:bottomRightRadius="@dimen/_6sdp"
                      android:bottomLeftRadius="@dimen/_6sdp"/>
         </shape>
@@ -17,8 +13,8 @@ xmlns:android="http://schemas.android.com/apk/res/android">
         android:height="8.0dip">
         <clip>
             <shape android:shape="rectangle">
-                <gradient android:startColor="#FFF9B60B"
-                          android:endColor="#FFF9E70C"
+                <gradient android:startColor="@color/gradient1"
+                          android:endColor="@color/gradient2"
                           android:angle="180.0"
                           android:type="linear" />
                 <corners android:bottomRightRadius="@dimen/_5sdp"

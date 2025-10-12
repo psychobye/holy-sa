@@ -2,8 +2,8 @@ package com.lit.launcher.ui.fragment
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +11,7 @@ import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.core.content.ContextCompat.getDrawable
 import androidx.fragment.app.Fragment
 import com.lit.game.R
 import com.lit.game.core.Samp
@@ -20,31 +21,48 @@ import java.io.File
 
 class MainFragment : Fragment() {
     private var playBtn: ImageView? = null
+    private var downloadBtn: ImageView? = null
     private var storeBtn: ImageView? = null
+    private var notifyBtn: ImageView? = null
     private var nicknameField: EditText? = null
     private var notification: LauncherNotification? = null
+
+    private var playState: Drawable? = null
+    private var canPlay: Boolean = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         playBtn = view.findViewById(R.id.play_btn)
+        downloadBtn = view.findViewById(R.id.download_btn)
         storeBtn = view.findViewById(R.id.store_btn)
+        notifyBtn = view.findViewById(R.id.notify_btn)
         nicknameField = view.findViewById(R.id.nick_edit_text)
 
         val notifRoot = view.findViewById<View>(R.id.notification_root)
         notification = LauncherNotification(notifRoot, requireActivity())
 
-        playBtn?.setOnClickListener {
-            onClickPlay()
-        }
-
-        storeBtn?.setOnClickListener {
-            onClickStore()
-        }
-
+        onClickInit()
+        // InitPlayState()
+        setPlayState(true, false)
         initUserData()
         initNicknameListener()
         return view
+    }
+
+    private fun onClickInit() {
+        playBtn?.setOnClickListener {
+            onClickPlay()
+        }
+        downloadBtn?.setOnClickListener {
+            onClickDownload()
+        }
+        storeBtn?.setOnClickListener {
+            onClickStore()
+        }
+        notifyBtn?.setOnClickListener {
+            onClickNotify()
+        }
     }
 
     private fun initUserData() {
@@ -84,8 +102,27 @@ class MainFragment : Fragment() {
         imm.hideSoftInputFromWindow(nicknameField?.windowToken, 0)
     }
 
-    fun updateNicknameField(nickname: String?) {
-        nicknameField?.setText(nickname)
+    private fun InitPlayState() {
+        playState = getDrawable(requireContext(), R.drawable.play_btn_off)
+        playBtn?.setImageDrawable(playState)
+        canPlay = false
+    }
+
+    private fun setPlayState(enable: Boolean, download: Boolean) {
+        val drawable = when {
+            enable -> R.drawable.play_btn
+            !enable && !download -> R.drawable.play_btn_off
+            else -> null
+        }?.let { getDrawable(requireContext(), it) }
+
+        playState = drawable
+        canPlay = enable
+
+        playBtn?.apply {
+            visibility = if (enable || !download) View.VISIBLE else View.INVISIBLE
+            setImageDrawable(playState)
+        }
+        downloadBtn?.visibility = if (download && !enable) View.VISIBLE else View.GONE
     }
 
     private fun startGame() {
@@ -114,6 +151,8 @@ class MainFragment : Fragment() {
     }
 
     private fun onClickPlay() {
+        if(!canPlay) return
+
         startGame()
         /*if (isCheckSkipping) {
             startGame()
@@ -132,10 +171,32 @@ class MainFragment : Fragment() {
         }*/
     }
 
+    private fun onClickDownload() {
+        notification?.showNotification(
+            type = 0,
+            text = "СЕРВЕРОВ НЕТ",
+            duration = 5,
+            actionId = 0,
+            butt1 = "",
+            butt2 = ""
+        )
+    }
+
     private fun onClickStore() {
         notification?.showNotification(
             type = 4,
             text = "СКОРО",
+            duration = 5,
+            actionId = 0,
+            butt1 = "OK",
+            butt2 = ""
+        )
+    }
+
+    private fun onClickNotify() {
+        notification?.showNotification(
+            type = 4,
+            text = "СКОРО БУДЭ",
             duration = 5,
             actionId = 0,
             butt1 = "OK",
