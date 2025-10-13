@@ -3,6 +3,7 @@ package com.lit.launcher.ui.fragment
 import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.core.content.ContextCompat.getDrawable
 import androidx.fragment.app.Fragment
 import com.lit.game.R
 import com.lit.game.core.Samp
+import com.lit.launcher.config.Config
 import com.lit.launcher.service.impl.ActivityServiceImpl
 import com.lit.launcher.storage.NativeStorage
 import java.io.File
@@ -22,8 +25,15 @@ import java.io.File
 class MainFragment : Fragment() {
     private var playBtn: ImageView? = null
     private var downloadBtn: ImageView? = null
+    private var serverBtn: FrameLayout? = null
+    private var newsBtn: FrameLayout? = null
     private var storeBtn: ImageView? = null
     private var notifyBtn: ImageView? = null
+    private var settingsBtn: ImageView? = null
+    private var tgBtn: ImageView? = null
+    private var ytBtn: ImageView? = null
+    private var supportBtn: ImageView? = null
+    private var forumBtn: ImageView? = null
     private var nicknameField: EditText? = null
     private var notification: LauncherNotification? = null
 
@@ -35,8 +45,17 @@ class MainFragment : Fragment() {
 
         playBtn = view.findViewById(R.id.play_btn)
         downloadBtn = view.findViewById(R.id.download_btn)
+        serverBtn = view.findViewById(R.id.server_btn)
+        newsBtn = view.findViewById(R.id.news)
         storeBtn = view.findViewById(R.id.store_btn)
         notifyBtn = view.findViewById(R.id.notify_btn)
+        settingsBtn = view.findViewById(R.id.settings_btn)
+
+        tgBtn = view.findViewById(R.id.tg_btn)
+        ytBtn = view.findViewById(R.id.yt_btn)
+        supportBtn = view.findViewById(R.id.support_btn)
+        forumBtn = view.findViewById(R.id.forum_btn)
+
         nicknameField = view.findViewById(R.id.nick_edit_text)
 
         val notifRoot = view.findViewById<View>(R.id.notification_root)
@@ -57,11 +76,52 @@ class MainFragment : Fragment() {
         downloadBtn?.setOnClickListener {
             onClickDownload()
         }
+        serverBtn?.setOnClickListener {
+            onClickServer()
+        }
+        newsBtn?.setOnClickListener {
+            openLink(Config.TELEGRAM_URI)
+        }
         storeBtn?.setOnClickListener {
             onClickStore()
         }
         notifyBtn?.setOnClickListener {
-            onClickNotify()
+            // replaceFragment(NotifyFragment)
+        }
+        settingsBtn?.setOnClickListener {
+            replaceFragment(SettingsFragment())
+        }
+        tgBtn?.setOnClickListener {
+            openLink(Config.TELEGRAM_URI)
+        }
+        ytBtn?.setOnClickListener {
+            openLink(Config.YOUTUBE_URI)
+        }
+        supportBtn?.setOnClickListener {
+            openLink(Config.SUPPORT_URI)
+        }
+        forumBtn?.setOnClickListener {
+            openLink(Config.FORUM_URL)
+        }
+    }
+
+    private fun openLink(url: String) {
+        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+        startActivity(intent)
+    }
+
+    private fun Fragment.replaceFragment(fragment: Fragment, addToBackStack: Boolean = true) {
+        if (!isAdded) return
+        parentFragmentManager.beginTransaction().apply {
+            setCustomAnimations(
+                android.R.anim.fade_in,
+                android.R.anim.fade_out,
+                android.R.anim.fade_in,
+                android.R.anim.fade_out
+            )
+            replace(R.id.fragment_container, fragment)
+            if (addToBackStack) addToBackStack(null)
+            commit()
         }
     }
 
@@ -171,6 +231,17 @@ class MainFragment : Fragment() {
         }*/
     }
 
+    private fun onClickServer() {
+        notification?.showNotification(
+            type = 0,
+            text = "СЕРВЕРОВ НЕТ",
+            duration = 5,
+            actionId = 0,
+            butt1 = "",
+            butt2 = ""
+        )
+    }
+
     private fun onClickDownload() {
         notification?.showNotification(
             type = 0,
@@ -186,17 +257,6 @@ class MainFragment : Fragment() {
         notification?.showNotification(
             type = 4,
             text = "СКОРО",
-            duration = 5,
-            actionId = 0,
-            butt1 = "OK",
-            butt2 = ""
-        )
-    }
-
-    private fun onClickNotify() {
-        notification?.showNotification(
-            type = 4,
-            text = "СКОРО БУДЭ",
             duration = 5,
             actionId = 0,
             butt1 = "OK",

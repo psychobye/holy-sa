@@ -161,7 +161,7 @@
     </FrameLayout>
 
     <FrameLayout
-        android:id="@+id/frameLayout2"
+        android:id="@+id/news"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_150sdp"
         android:layout_marginStart="@dimen/_15sdp"
@@ -172,33 +172,56 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/_110sdp"
-            android:background="@drawable/news_mask" />
+            android:layout_height="@dimen/_50sdp"
+            android:layout_gravity="bottom"
+            android:src="@drawable/news_mask"
+            android:adjustViewBounds="true"
+            android:contentDescription="mask" />
 
-        <TextView
-            android:id="@+id/header_text"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:gravity="left"
-            android:text="ЗАГОЛОВОК"
-            android:textColor="@color/white"
-            android:fontFamily="@font/jost_medium_italic" />
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:gravity="center_vertical|start">
 
-        <TextView
-            android:id="@+id/dataTime_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:layout_marginBottom="@dimen/_5sdp"
-            android:layout_marginStart="@dimen/_10sdp"
-            android:gravity="left"
-            android:text="12 октября 2025"
-            android:textColor="@color/gray"
-            android:fontFamily="@font/jost_medium_italic" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/header_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="ЗАГОЛОВОК"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/jost_medium_italic"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/dataTime_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12 октября 2025"
+                    android:textColor="@color/gray"
+                    android:fontFamily="@font/jost_medium_italic"
+                    android:textSize="12sp"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/ic_link"
+                android:layout_width="@dimen/_18sdp"
+                android:layout_height="@dimen/_18sdp"
+                android:src="@drawable/ic_link"
+                android:contentDescription="open link"
+                android:layout_marginStart="@dimen/_8sdp"/>
+        </LinearLayout>
 
     </FrameLayout>
 

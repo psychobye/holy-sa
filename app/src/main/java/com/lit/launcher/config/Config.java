@@ -12,13 +12,14 @@ public class Config {
     private static final String URL_DONATE = "https://russia.online/donate_v2/confirm.php?server=%s&serverName=%s&sum=%s&account=%s&mail=%s&captcha=%s";
 
     public static final String LIVE_RUSSIA_RESOURCE_SERVER_URL = "https://files.russia.online";
-    public static final String FORUM_URL = "https://forum.russia.online";
+    public static final String FORUM_URL = "https://t.me/hunteyes";
     public static final String DONATE_URL = "https://russia.online/donate/";
 
     public static final String DISCORD_URI = "https://discord.com/invite/pkT6SEEXKS";
     public static final String VK_URI = "https://vk.com/russia.online";
-    public static final String YOU_TUBE_URI = "https://www.youtube.com/@LeonidLitvinenko";
-    public static final String TELEGRAM_URI = "https://t.me/lr_dev";
+    public static final String SUPPORT_URI = "https://t.me/hunteyes";
+    public static final String YOUTUBE_URI = "https://www.youtube.com/@salagastalone";
+    public static final String TELEGRAM_URI = "https://t.me/hunteyes";
 
     public static final String NATIVE_SETTINGS_FILE_PATH = "/SAMP/settings.ini";
     public static final String SETTINGS_FILE_PATH = "/gta_sa.set";
