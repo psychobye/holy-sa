@@ -333,6 +333,13 @@ void WorldPlayerAdd(RPCParameters *rpcParams)
 	//CChatWindow::AddMessage("WorldPlayerAdd. vip lvl = %d", vipLvl);
 	//bsData.Read(bVisible);
 
+    // TODO: block check
+    /*const char* rawName = CPlayerPool::GetPlayerName(playerId);
+    if (rawName == nullptr)
+        return;
+
+    std::string nameCopy = rawName;*/
+
 	CRemotePlayer* pRemotePlayer = CPlayerPool::GetAt(playerId);
 	if(pRemotePlayer)
 		pRemotePlayer->Spawn(byteTeam,

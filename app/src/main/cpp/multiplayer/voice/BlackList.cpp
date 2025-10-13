@@ -69,27 +69,33 @@ void BlackList::Free() noexcept
     BlackList::initStatus = false;
 }
 
+// TODO: imlplement
 void BlackList::LockPlayer(const WORD playerId)
 {
-    if (playerId != SV::kNonePlayer)
+    if (playerId == SV::kNonePlayer || playerId >= MAX_PLAYERS)
+        return;
+
+    if (pNetGame == nullptr)
+        return;
+
+    const char* rawName = CPlayerPool::GetPlayerName(playerId);
+    if (rawName == nullptr)
+        return;
+
+    std::string nameCopy = rawName;
+
+    if (auto pPlayer = CPlayerPool::GetSpawnedPlayer(playerId))
+        pPlayer->Remove();
+
+    for (const auto& playerInfo : BlackList::blackList)
     {
-        if (pNetGame != nullptr)
-        {
-            if (const auto playerName = CPlayerPool::GetPlayerName(playerId);
-                    playerName != nullptr)
-                {
-                    for (const auto& playerInfo : BlackList::blackList)
-                    {
-                        if (playerInfo.playerName == playerName)
-                            return;
-                    }
-
-                    CChatWindow::AddMessage("Игрок %s(%d) добавлен в черный список", playerName, playerId);
-
-                    BlackList::blackList.emplace_front(playerName, playerId);
-                }
-            }
+        if (playerInfo.playerName == nameCopy)
+            return;
     }
+
+    // CChatWindow::AddMessage("РРіСЂРѕРє %s(%d) РґРѕР±Р°РІР»РµРЅ РІ С‡С‘СЂРЅС‹Р№ СЃРїРёСЃРѕРє", nameCopy.c_str(), playerId);
+
+    // BlackList::blackList.emplace_front(std::move(nameCopy), playerId);
 }
 
 void BlackList::UnlockPlayer(const WORD playerId)
