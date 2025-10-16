@@ -1,0 +1,36 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal">
+
+    <FrameLayout
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/btn_frame">
+
+        <TextView
+            android:id="@+id/itemText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|start"
+            android:paddingStart="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_13sdp"
+            android:fontFamily="@font/bebas_bold_italic"/>
+
+        <Switch
+            android:id="@+id/itemSwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:paddingEnd="@dimen/_10sdp"
+            android:thumb="@drawable/custom_thumb"
+            android:track="@drawable/custom_track"
+            tools:ignore="UseSwitchCompatOrMaterialXml"/>
+    </FrameLayout>
+
+</FrameLayout>

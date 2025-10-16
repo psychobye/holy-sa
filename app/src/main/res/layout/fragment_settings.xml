@@ -46,4 +46,60 @@
         app:topColor="#FFFFFF"
         app:topStop="0.52" />
 
+    <TextView
+        android:id="@+id/version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:fontFamily="@font/bebas_italic"
+        android:text="ВЕРСИЯ 2 "
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/gradStroke"
+        app:layout_constraintStart_toEndOf="@+id/gradStroke"
+        app:layout_constraintTop_toTopOf="@+id/gradStroke" />
+
+    <com.lit.game.gui.util.FadingEdgeLayout
+        android:id="@+id/chat_fade_box"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_180sdp"
+        android:minHeight="@dimen/_73sdp"
+        app:fel_edge="top"
+        app:fel_size_top="40dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view6">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/settingsRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarStyle="insideInset"
+            android:scrollbarThumbVertical="@drawable/chat_scroll_front"
+            android:scrollbarTrackVertical="@drawable/chat_scroll_back"
+            android:scrollbars="none"
+            app:recyclerview_fling_animation_size="0.1"
+            app:recyclerview_overscroll_animation_size="0.1"
+            app:stackFromEnd="true"
+            android:paddingStart="@dimen/_50sdp"
+            android:paddingTop="@dimen/_10sdp"
+            android:clipToPadding="false"/>
+
+    </com.lit.game.gui.util.FadingEdgeLayout>
+
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:background="@color/black50"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:background="@drawable/arz_btn_bg"/>
+    </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

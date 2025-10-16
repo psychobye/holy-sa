@@ -89,4 +89,5 @@
     <string name="settings">НАСТРОЙКИ</string>
     <string name="play">ИГРАТЬ</string>
     <string name="download">УСТАНОВИТЬ</string>
+    <string name="version">ВЕРСИЯ %1$s</string>
 </resources>
