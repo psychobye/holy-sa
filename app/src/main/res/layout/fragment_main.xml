@@ -5,27 +5,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/main_bg">
 
-
-    <ImageView
-        android:id="@+id/play_btn"
-        android:layout_width="@dimen/_200sdp"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_marginBottom="@dimen/_25sdp"
+    <com.lit.game.gui.util.GradientStrokeTextView
+        android:id="@+id/play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/bebas_bold_italic"
+        android:gravity="center"
+        android:includeFontPadding="true"
+        android:paddingHorizontal="@dimen/_5sdp"
+        android:paddingTop="@dimen/_2sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
         android:layout_marginEnd="@dimen/_5sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/play_btn" />
-
-    <ImageView
-        android:id="@+id/download_btn"
-        android:layout_width="@dimen/_300sdp"
-        android:layout_height="@dimen/_60sdp"
-        android:layout_marginBottom="@dimen/_28sdp"
-        android:layout_marginEnd="@dimen/_5sdp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/download_btn" />
+        android:text="@string/play"
+        android:textSize="@dimen/_60sdp"
+        app:bottomColor="#323232"
+        app:bottomStop="1.0"
+        app:letterSpacingCustom="0"
+        app:strokeColor="#FFFFFF"
+        app:strokeWidthDp="4.05"
+        app:topColor="#FFFFFF"
+        app:topStop="0.52" />
 
     <ImageView
         android:id="@+id/store_btn"
@@ -100,9 +101,9 @@
         android:layout_height="@dimen/_35sdp"
         android:background="@drawable/server_btn"
         android:layout_marginBottom="@dimen/_5sdp"
-        app:layout_constraintBottom_toTopOf="@+id/play_btn"
-        app:layout_constraintEnd_toEndOf="@+id/play_btn"
-        app:layout_constraintStart_toStartOf="@+id/play_btn" >
+        app:layout_constraintBottom_toTopOf="@+id/play"
+        app:layout_constraintEnd_toEndOf="@+id/play"
+        app:layout_constraintStart_toStartOf="@+id/play" >
 
         <TextView
             android:id="@+id/textView4"

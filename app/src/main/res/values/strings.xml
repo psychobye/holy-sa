@@ -85,4 +85,8 @@
     <string name="disclaimer_ru">мы не несем ответственности за ваши действия и не побуждаем вас к опасной\nили незаконной езде в реальной жизни.\nвсё, что представлено здесь, предназначено исключительно для развлекательных целей.</string>
     <string name="disclaimer_en">we are not responsible for your actions and do not encourage reckless\nor illegal driving in real life.\nall content provided is intended solely for entertainment purposes.</string>
     <string name="nickname">Nick_Name</string>
+    <string name="center_notification">ЦЕНТР УВЕДОМЛЕНИЙ</string>
+    <string name="settings">НАСТРОЙКИ</string>
+    <string name="play">ИГРАТЬ</string>
+    <string name="download">УСТАНОВИТЬ</string>
 </resources>

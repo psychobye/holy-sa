@@ -104,4 +104,14 @@
         <attr name="textStrokeWidth" format="float"/>
     </declare-styleable>
     <bool name="is_tablet">false</bool>
+
+    <declare-styleable name="GradientStrokeTextView">
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeWidthDp" format="float" />
+        <attr name="topColor" format="color" />
+        <attr name="bottomColor" format="color" />
+        <attr name="topStop" format="float" />
+        <attr name="bottomStop" format="float" />
+        <attr name="letterSpacingCustom" format="float" />
+    </declare-styleable>
 </resources>

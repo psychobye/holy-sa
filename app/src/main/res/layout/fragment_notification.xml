@@ -33,7 +33,7 @@
         android:includeFontPadding="true"
         android:paddingHorizontal="@dimen/_5sdp"
         android:paddingTop="@dimen/_2sdp"
-        android:text="@string/settings"
+        android:text="@string/center_notification"
         android:textSize="@dimen/_35sdp"
         app:bottomColor="#323232"
         app:bottomStop="1.0"
