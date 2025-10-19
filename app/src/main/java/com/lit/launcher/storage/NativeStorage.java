@@ -6,6 +6,8 @@ import android.content.Context;
 import android.os.Environment;
 import android.widget.Toast;
 
+import com.lit.launcher.config.Config;
+
 import org.ini4j.InvalidFileFormatException;
 import org.ini4j.Wini;
 
@@ -18,7 +20,7 @@ public class NativeStorage {
 
     public static void addClientProperty(String propertyName, String value, Context context) {
         try {
-            File dir = new File(Environment.getExternalStorageDirectory(), "TESTLIT");
+            File dir = new File(Config.GAME_PATH);
             File f = new File(dir, NATIVE_SETTINGS_FILE_PATH);
 
             if (!f.exists()) {
@@ -38,7 +40,7 @@ public class NativeStorage {
     public static String getClientProperty(String property, Context context) {
         String value = null;
 
-        File dir = new File(Environment.getExternalStorageDirectory(), "TESTLIT");
+        File dir = new File(Config.GAME_PATH);
         File f = new File(dir, NATIVE_SETTINGS_FILE_PATH);
 
         try {

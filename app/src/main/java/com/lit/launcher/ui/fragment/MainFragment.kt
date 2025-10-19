@@ -6,7 +6,6 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
@@ -45,9 +44,6 @@ class MainFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         playBtn = view.findViewById(R.id.play)
-        if (playBtn == null) {
-            Log.e("MainFragment", "playBtn is null! Проверь id в layout.")
-        }
         serverBtn = view.findViewById(R.id.server_btn)
         newsBtn = view.findViewById(R.id.news)
         storeBtn = view.findViewById(R.id.store_btn)
@@ -92,7 +88,7 @@ class MainFragment : Fragment() {
         tgBtn?.setOnClickListener { openLink(Config.TELEGRAM_URI) }
         ytBtn?.setOnClickListener { openLink(Config.YOUTUBE_URI) }
         supportBtn?.setOnClickListener { openLink(Config.SUPPORT_URI) }
-        forumBtn?.setOnClickListener { openLink(Config.FORUM_URL) }
+        forumBtn?.setOnClickListener { onClickStore() /*openLink(Config.FORUM_URL)*/ }
     }
 
     private fun openLink(url: String) {
@@ -215,13 +211,13 @@ class MainFragment : Fragment() {
     }
 
     private fun startGame() {
-        val log = File(requireContext().getExternalFilesDir(null), "log.txt")
+        val log = File(Config.GAME_PATH, Config.LOG_FILE_PATH)
         log.delete()
 
-        val cinfo = File(requireContext().getExternalFilesDir(null), "CINFO.BIN")
+        val cinfo = File(Config.GAME_PATH, "CINFO.BIN")
         cinfo.delete()
 
-        val minfo = File(File(requireContext().getExternalFilesDir(null), "models"), "MINFO.BIN")
+        val minfo = File(File(Config.GAME_PATH, "models"), "MINFO.BIN")
         minfo.delete()
 
         val nickname = NativeStorage.getClientProperty("name", requireContext())

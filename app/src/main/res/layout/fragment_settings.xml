@@ -87,7 +87,6 @@
     </com.lit.game.gui.util.FadingEdgeLayout>
 
     <FrameLayout
-        android:id="@+id/frameLayout2"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_50sdp"
         android:background="@color/black50"
@@ -95,11 +94,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="@dimen/_250sdp"
+        <FrameLayout
+            android:id="@+id/logBtn"
+            android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_50sdp"
-            android:background="@drawable/arz_btn_bg"/>
+            android:background="@drawable/arz_btn_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView4asd"
+                android:layout_width="@dimen/_10sdp"
+                android:layout_height="@dimen/_10sdp"
+                android:background="@drawable/ic_log"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_40sdp"/>
+
+            <TextView
+                android:id="@+id/textView37"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Поделиться логами"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11sdp"
+                android:fontFamily="@font/din_pro_medium"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_57sdp"
+                android:layout_marginBottom="@dimen/_1sdp"/>
+        </FrameLayout>
     </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
