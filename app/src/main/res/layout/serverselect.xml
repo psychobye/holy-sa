@@ -1,20 +1,36 @@
 <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/loadscreen_main_layout"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/loadscreen_main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mylogo">
+    android:background="@drawable/splash_bg">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_150sdp"
+        app:layout_constraintBottom_toTopOf="@+id/progressBar2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo" />
 
     <com.google.android.material.progressindicator.LinearProgressIndicator
-        android:layout_width="@dimen/_300sdp"
+        android:id="@+id/progressBar2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
+        app:trackThickness="@dimen/_15sdp"
+        android:layout_marginBottom="0dp"
         android:indeterminate="true"
-        app:indicatorColor="#3FD7D0"
+        android:progress="50"
+        android:max="100"
+        app:indicatorColor="@color/white"
+        app:trackColor="@color/black50"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

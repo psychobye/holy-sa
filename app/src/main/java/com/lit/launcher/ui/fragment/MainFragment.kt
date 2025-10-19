@@ -227,7 +227,7 @@ class MainFragment : Fragment() {
         }
 
         val intent = Intent(requireContext(), Samp::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        // intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
 
         requireActivity().overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
