@@ -148,6 +148,13 @@ void InitInGame()
                 CSettings::Get().szPassword
         );
 
+        /*pNetGame = new CNetGame(
+                "94.23.168.153",
+                1275,
+                CSettings::Get().szNickName,
+                CSettings::Get().szPassword
+        );*/
+
 		bNetworkInited = true;
 		Log("InitInGame() end");
 		return;

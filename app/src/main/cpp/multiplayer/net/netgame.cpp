@@ -1221,9 +1221,11 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
         {
             char str[255];
             uint8_t len;
+
             bs.Read(len);
             bs.Read(&str[0], len);
             str[len] = 0;
+
             CAudioStreamPool::PlayIndividualStream(&str[0], 1);
             break;
         }
@@ -1256,11 +1258,16 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
             CAudioStreamPool::AttachTo(streamId, static_cast<eSoundAttachedTo>(type), toId);
             break;
         }
+        case RPC_OPEN_LINK:
+        {
+            char str[255];
+            uint8_t len;
 
-        case RPC_OPEN_LINK: {
-            std::string url;
-            bs.Read(url);
-            g_pJavaWrapper->OpenUrl( cp1251_to_utf8(url) );
+            bs.Read(len);
+            bs.Read(&str[0], len);
+            str[len] = 0;
+
+            g_pJavaWrapper->OpenUrl(cp1251_to_utf8(str));
             break;
         }
         case RPC_TIMEOUT_CHAT: {

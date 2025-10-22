@@ -127,6 +127,17 @@ public class Dialog {
                 this.mMsgBoxLayout.setVisibility(View.GONE); // LIST, TABLIST, TABLIST_HEADER
                 this.mListLayout.setVisibility(View.VISIBLE);
                 loadTabList(content);
+
+                if (this.mCurrentDialogTypeId == DIALOG_STYLE_LIST ||
+                        this.mCurrentDialogTypeId == DIALOG_STYLE_TABLIST ||
+                        this.mCurrentDialogTypeId == DIALOG_STYLE_TABLIST_HEADER) {
+                    if (this.mRowsList.size() > 0) {
+                        this.mCurrentListItem = 0;
+                    } else {
+                        this.mCurrentListItem = -1;
+                    }
+                }
+
                 //ArrayList<String> fixFieldsForDialog = Utils.fixFieldsForDialog(this.mRowsList);
                // this.mRowsList = fixFieldsForDialog;
                 DialogAdapter adapter = new DialogAdapter(this.mRowsList, this.mHeadersList);

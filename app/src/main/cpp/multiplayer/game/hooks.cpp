@@ -509,7 +509,7 @@ void InjectHooks()
 
 #if !VER_x32 // mb all.. wtf crash x64?
     CHook::RET("_ZN11CPlayerInfo14LoadPlayerSkinEv");
-    CHook::RET("_ZN11CPopulation10InitialiseEv");
+    // CHook::RET("_ZN11CPopulation10InitialiseEv");
 #endif
 	CCamera::InjectHooks(); //
     CReferences::InjectHooks(); //
@@ -846,7 +846,7 @@ void CPedDamageResponseCalculator__ComputeDamageResponse_hook(stPedDamageRespons
 		else {
 			CNetGame::sendGiveDamage(receiverId, thiz->iWeaponType, fDamage, bodypart);
 		}
-		CHUD::addGiveDamageNotify(receiverId, thiz->iWeaponType, fDamage, thiz->iBodyPart);
+		// CHUD::addGiveDamageNotify(receiverId, thiz->iWeaponType, fDamage, thiz->iBodyPart);
 	}
 
 	// player take damage
@@ -854,7 +854,7 @@ void CPedDamageResponseCalculator__ComputeDamageResponse_hook(stPedDamageRespons
 	{
 		char nick[MAX_PLAYER_NAME];
 		strcpy(nick, CPlayerPool::GetPlayerName(senderId));
-		CHUD::addTakeDamageNotify(CPlayerPool::GetPlayerName(senderId), thiz->iWeaponType, fDamage);
+		// CHUD::addTakeDamageNotify(CPlayerPool::GetPlayerName(senderId), thiz->iWeaponType, fDamage);
 
 		CNetGame::sendTakeDamage(senderId, thiz->iWeaponType, fDamage, bodypart);
 	}

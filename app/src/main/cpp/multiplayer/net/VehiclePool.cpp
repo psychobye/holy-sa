@@ -39,7 +39,10 @@ void CVehiclePool::Process()
 	for(auto& pair : list) {
 		auto pVehicle = pair.second;
 
-		if (pVehicle->GetHealth() < 300.0f) {
+        if (!pVehicle->m_pVehicle->IsAdded())
+            continue;
+
+        if (pVehicle->GetHealth() < 300.0f) {
 			pVehicle->SetHealth(300.0f);
 		}
 		if (pVehicle->m_iTurnState == eTurnState::TURN_RIGHT) {
