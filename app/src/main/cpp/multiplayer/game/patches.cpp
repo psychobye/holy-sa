@@ -102,7 +102,7 @@ void ApplyShadowPatch()
 {
 	CHook::RET("_ZN22CRealTimeShadowManager20ReturnRealTimeShadowEP15CRealTimeShadow"); // CRealTimeShadowManager::ReturnRealTimeShadow from ~CPhysical
 	CHook::RET("_ZN22CRealTimeShadowManager6UpdateEv"); //shadow CRealTimeShadowManager::Update
-    // CHook::RET(g_libGTASA + 0x543B04); // CShadows::RenderStaticShadows
+    CHook::RET(g_libGTASA + (VER_x32 ? 0x00459A10 : 0x543B04)); // CShadows::RenderStaticShadows
     // CHook::RET("_ZN8CMirrors16BeforeMainRenderEv"); // CMirrors::BeforeMainRender(void)
 }
 
