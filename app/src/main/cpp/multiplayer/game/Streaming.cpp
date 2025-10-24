@@ -254,6 +254,9 @@ void CStreaming::InitImageList() {
 
     CStreaming::AddImageToList("TEXDB\\GTA3.IMG", true);
     CStreaming::AddImageToList("TEXDB\\GTA_INT.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\SAMP.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\SAMPCOL.IMG", true);
+    CStreaming::AddImageToList("TEXDB\\SKINS.IMG", true);
     CStreaming::AddImageToList("TEXDB\\CARS.IMG", true);
     /*CStreaming::AddImageToList("TEXDB\\CARS.IMG", true);
     CStreaming::AddImageToList("TEXDB\\SKINS.IMG", true);

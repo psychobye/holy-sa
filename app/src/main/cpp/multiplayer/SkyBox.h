@@ -21,7 +21,7 @@ private:
     static RwObject* RwFrameForAllObjectsCallback(RwObject* object, void* data);
 
 private:
-    static constexpr auto SKYBOX_OBJECT_ID = 17364;
+    static constexpr auto SKYBOX_OBJECT_ID = 18659;
 
     static inline CObjectSamp*      m_pSkyObject{};
     static inline bool          m_bNeedRender = true;

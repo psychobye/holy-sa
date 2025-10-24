@@ -514,6 +514,9 @@ bool CGame::InitialiseRenderWare() {
     TextureDatabaseRuntime::Load("player", false, TextureDatabaseFormat::DF_DXT);
     TextureDatabaseRuntime::Load("menu", false, TextureDatabaseFormat::DF_DXT);
 
+    TextureDatabaseRuntime* skins = TextureDatabaseRuntime::Load("skins", false, TextureDatabaseFormat::DF_DXT);
+    TextureDatabaseRuntime::Register(skins);
+
     TextureDatabaseRuntime* cars = TextureDatabaseRuntime::Load("cars", false, TextureDatabaseFormat::DF_DXT);
     TextureDatabaseRuntime::Register(cars);
 

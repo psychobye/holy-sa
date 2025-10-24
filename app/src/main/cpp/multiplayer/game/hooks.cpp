@@ -1634,7 +1634,7 @@ void InstallHooks()
 
     // ---------- JPATCH ----------
     // CHook::InlineHook("_ZN21FxInfoGroundCollide_c8GetValueEffffhPv", &FxInfoGroundCollide_c__GetValue_hook, &FxInfoGroundCollide_c__GetValue);
-    CHook::InlineHook("_Z10HashStringPKc", &HashString_hook, &HashString);
+    // CHook::InlineHook("_Z10HashStringPKc", &HashString_hook, &HashString);
     CHook::InlineHook("_Z20emu_DistanceFogSetupfffff", &emu_DistanceFogSetup_hook, &emu_DistanceFogSetup);
     // ---------- JPATCH END ----------
 
