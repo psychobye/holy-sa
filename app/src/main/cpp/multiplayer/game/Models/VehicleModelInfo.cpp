@@ -175,12 +175,13 @@ RpMaterial* CVehicleModelInfo::SetEditableMaterialsCB(RpMaterial* mat, void* dat
         mat->color = pVeh->mainColor;
         return mat;
     }
+
     if ( color == 0xffaf00ff ) { // second color 255, 0, 175
         AddStoredMaterial(RpMaterialGetColor(mat));
         mat->color = pVeh->secondColor;
         return mat;
     }
-    else if (color == 0xff00ffff) { // toner
+    else if ( color == 0xA0000000 ) { // toner
         AddStoredMaterial(RpMaterialGetColor(mat));
 
         mat->color = pVeh->tonerColor;

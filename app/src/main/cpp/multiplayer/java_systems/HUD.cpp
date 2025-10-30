@@ -104,7 +104,7 @@ void CHUD::toggleLockButton(bool toggle)
 }
 
 bool CHUD::NeededRenderPassengerButton() {
-    if (!CHUD::bIsShow || !bIsShowEnterExitButt)
+    if (!CHUD::bIsShow || !bIsShowEnterExitButt || CKeyBoard::IsOpen())
         return false;
 
     CPedSamp* pPed = CGame::FindPlayerPed();
