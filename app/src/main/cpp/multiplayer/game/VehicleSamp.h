@@ -7,8 +7,6 @@
 #include "DamageManager.h"
 #include "Fx/VehicleNeon.h"
 
-#define MAX_VINYLS_INDEX 81
-
 enum E_CUSTOM_COMPONENTS
 {
 	ccBumperF = 0,

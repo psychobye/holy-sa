@@ -1562,7 +1562,7 @@ void CVehicleSamp::ChangeVinylTo(int vinylIdx) {
 
 	char name[55];
 	sprintf(name, "remapbody%d", vinylIdx + 1);
-	m_pVinylTex = CUtil::LoadTextureFromDB("gta3", name);
+	m_pVinylTex = CUtil::LoadTextureFromDB("cars", name);
 }
 
 /*void CVehicleSamp::SetRGBATexture(CRGBA crgba, CRGBA crgba2) {

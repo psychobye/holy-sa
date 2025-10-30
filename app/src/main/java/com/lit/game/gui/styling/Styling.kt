@@ -165,7 +165,7 @@ class Styling : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), Co
                 showSelectMenu(ValueType.VALUE_TYPE_STROB, strobList);
             }
             ValueType.VALUE_TYPE_VINYL.ordinal -> {
-                val MAX_VINYLS_INDEX = 81
+                val MAX_VINYLS_INDEX = 65
                 val vinylsList = mutableListOf<TuningSelectMenuItem>()
 
                 vinylsList.add(
