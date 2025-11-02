@@ -159,8 +159,9 @@ void CShadows::StoreCarLightShadow(CVehicle* vehicle, int32 id, RwTexture* textu
     {
         pVeh->ProcessHeadlightsColor(red, green, blue);
 
-        if(pVeh->m_bIsLightOn == eLightsState::HIGH)
-            needTex = gpShadowHeadLightsTexLong;
+        // !TODO: tex
+//        if(pVeh->m_bIsLightOn == eLightsState::HIGH)
+//            needTex = gpShadowHeadLightsTexLong;
 
     }
 
@@ -231,6 +232,21 @@ void CShadows::StoreCarLightShadow(CVehicle* vehicle, int32 id, RwTexture* textu
                 false,
                 0.05f
         );
+    StoreStaticShadow(
+            reinterpret_cast<uintptr>(vehicle) + id,
+            SHADOW_ADDITIVE,
+            needTex,
+            posn,
+            frontX, frontY,
+            sideX, sideY,
+            128,
+            red, green, blue,
+            6.f,
+            1.f,
+            0.f,
+            false,
+            0.05f
+    );
    // }
 }
 

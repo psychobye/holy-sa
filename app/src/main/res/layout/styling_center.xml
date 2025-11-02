@@ -7,6 +7,34 @@
     android:layout_height="match_parent"
     android:visibility="visible">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:background="@drawable/bottom_gradient"
+        android:alpha="0.9"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:id="@+id/view7"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_90sdp"
+        android:background="@drawable/top_gradient"
+        android:alpha="0.7"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tuneText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tune"
+        android:textColor="@color/white"
+        android:fontFamily="@font/gilroy_bold"
+        android:textSize="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ImageView
         android:id="@+id/buyButton"
         android:layout_width="@dimen/_60sdp"
@@ -37,18 +65,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/exitButt"
             android:layout_width="@dimen/_40sdp"
-            android:layout_height="@dimen/_35sdp"
-            android:background="@drawable/styling_center_exit_bg"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/gray_dark_80"
             android:gravity="center"
             android:orientation="horizontal"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/_13sdp"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="false"
-                android:src="@drawable/ic_styling_exit"
+                android:src="@drawable/ic_close"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -95,11 +126,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle"
-        android:layout_width="@dimen/_350sdp"
-        android:layout_height="@dimen/_55sdp"
-        android:background="@drawable/styling_center_bg"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_70sdp"
         android:orientation="horizontal"
-        android:padding="@dimen/_3sdp"
         android:scrollbars="none"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

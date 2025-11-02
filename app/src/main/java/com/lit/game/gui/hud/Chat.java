@@ -186,17 +186,21 @@ public class Chat {
         });*/
     }
 
-    void hideChat() {
+    public static void hideChat() {
         activity.runOnUiThread(() -> {
-            chat_box.setVisibility(View.GONE);
-            hide_chat.setRotation(180);
+            View box = activity.findViewById(R.id.chat_box);
+            // View hideBtn = activity.findViewById(R.id.hide_chat);
+            if (box != null) box.setVisibility(View.GONE);
+            // if (hideBtn != null) hideBtn.setRotation(180f);
         });
     }
 
-    void showChat() {
+    public static void showChat() {
         activity.runOnUiThread(() -> {
-            chat_box.setVisibility(View.VISIBLE);
-            hide_chat.setRotation(0);
+            View box = activity.findViewById(R.id.chat_box);
+            // View hideBtn = activity.findViewById(R.id.hide_chat);
+            if (box != null) box.setVisibility(View.VISIBLE);
+            // if (hideBtn != null) hideBtn.setRotation(0f);
         });
     }
 

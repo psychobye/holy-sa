@@ -50,4 +50,9 @@
         <item name="android:textColor">#aacbb4</item>
     </style>
 
-    </resources>
+    <style name="ShapeAppearance.Rounded12" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/_12sdp</item>
+    </style>
+
+</resources>

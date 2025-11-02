@@ -91,4 +91,5 @@
     <string name="download">УСТАНОВИТЬ</string>
     <string name="version">ВЕРСИЯ %1$s</string>
     <string name="logShare">привет, столкнулся с ошибкой, прикрепил логи.</string>
+    <string name="tune">Мастерская</string>
 </resources>

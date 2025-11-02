@@ -53,7 +53,10 @@
     <color name="menuTextEnable">#ffFCF90C</color>
     <color name="white25">#40ffffff</color>
     <color name="blue">#ff3ea2ff</color>
-    <color name="gray">#ff666666</color>
+    <color name="gray">#FF666666</color>
+    <color name="gray_dark">#FF252525</color>
+    <color name="gray_dark_80">#CC252525</color>
+    <color name="gray80">#CC252525</color>
     <color name="colorAccent">#ffed4319</color>
     <color name="colorPrimary">#ff000000</color>
     <color name="colorPrimaryDark">#ff000000</color>

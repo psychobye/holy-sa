@@ -22,6 +22,7 @@ public:
     enum class eValueType : int {
         VALUE_TYPE_NEON_TYPE,
         VALUE_TYPE_NEON_COLOR,
+        VALUE_TYPE_LIGHT_TYPE,
         VALUE_TYPE_LIGHT_COLOR,
         VALUE_TYPE_TONER_COLOR,
         VALUE_TYPE_BODY1_COLOR,

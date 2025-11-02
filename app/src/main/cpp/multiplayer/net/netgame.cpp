@@ -1034,6 +1034,11 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
                 return;
             }
 
+            // light
+            uint8_t lightsType;
+            bs.Read(lightsType); //!TODO: REMOVE
+            pVeh->m_bIsLightOn = static_cast<eLightsState>(lightsType);
+
             bs.Read(pVeh->lightColor.r);
             bs.Read(pVeh->lightColor.g);
             bs.Read(pVeh->lightColor.b);

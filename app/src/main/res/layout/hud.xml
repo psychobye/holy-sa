@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_bold"
                     android:includeFontPadding="false"
-                    android:text="1234567890"
+                    android:text="0"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/hud_icon_ruble"

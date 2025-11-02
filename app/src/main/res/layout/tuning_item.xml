@@ -1,57 +1,89 @@
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/tuningItem"
-        android:layout_marginStart="@dimen/_2sdp"
-        android:layout_width="@dimen/_55sdp"
-        android:layout_height="@dimen/_50sdp"
-        android:background="@drawable/styling_item_bg">
-
-        <TextView
-            android:id="@+id/caption"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_3sdp"
-            android:fontFamily="@font/montserrat_medium"
-            android:includeFontPadding="false"
-            android:text="Цвет неона"
-            android:textColor="#8CFFFFFF"
-            android:textSize="@dimen/_6sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tuningItem"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_50sdp"
+    android:layout_marginStart="@dimen/_2sdp"
+    android:background="@drawable/rounded_rect_12sdp"
+    android:clipToOutline="true">
 
         <ImageView
-            android:id="@+id/icon"
-            android:layout_width="@dimen/_40sdp"
+            android:id="@+id/back"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:adjustViewBounds="true"
-            android:src="@drawable/ic_styling_neon"
-            app:layout_constraintBottom_toTopOf="@+id/priceBg"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="false"
+            android:src="@drawable/back_tune_btn"
+            android:contentDescription="@null"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/caption" />
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <View
+            android:id="@+id/leftGradient"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="0dp"
+            android:background="@drawable/left_gradient"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/content"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_10sdp"
+            android:paddingEnd="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:includeFontPadding="false"
+                    android:gravity="center_vertical"
+                    android:text="Цвет"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:fontFamily="@font/gilroy_bold" />
+
+                <ImageView
+                    android:id="@+id/icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="120dp"
+                    android:src="@drawable/ic_styling_color"
+                    android:contentDescription="@null" />
+        </LinearLayout>
+
+        <FrameLayout
             android:id="@+id/priceBg"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="@dimen/_10sdp"
+            android:layout_marginBottom="0dp"
             android:background="@drawable/tuning_item_price_bg"
             android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
                 <TextView
                     android:id="@+id/priceText"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:includeFontPadding="false"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
                     android:text="500 000 руб."
                     android:textColor="#A4FFFFFF"
                     android:textSize="@dimen/_4sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/priceBg" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:includeFontPadding="false" />
+        </FrameLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

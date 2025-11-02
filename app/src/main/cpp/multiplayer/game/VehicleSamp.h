@@ -147,15 +147,12 @@ public:
 	uint32_t        dwStrobStep{};
     uint32_t        lastStrobTime{};
 
-
-
 	int 		m_nVinylIndex 	    = -1;
 	RwTexture* 	m_pVinylTex 		= nullptr;
 
 	int         m_dwChangeWheelTo = -1;
     int         m_dwCurrentWheelModel = -1;
 	RwTexture*  pPlateTexture = nullptr;
-
 
 	CVehicle* 	m_pVehicle;
     CDamageManager* m_pDamageManager;

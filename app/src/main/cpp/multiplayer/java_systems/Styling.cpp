@@ -49,6 +49,9 @@ uint32 CStyling::GetValueFromType(eValueType type) {
         case eValueType::VALUE_TYPE_NEON_COLOR: {
             return pVehicle->neon.neonColor.ToInt();
         }
+        case eValueType::VALUE_TYPE_LIGHT_TYPE: {
+            return static_cast<uint32>(pVehicle->m_bIsLightOn);
+        }
         case eValueType::VALUE_TYPE_LIGHT_COLOR: {
             return pVehicle->lightColor.ToInt();
         }
@@ -139,9 +142,12 @@ Java_com_lit_game_gui_styling_Styling_nativeIsAvailable(JNIEnv *env, jobject thi
         }
         case CStyling::eValueType::VALUE_TYPE_NEON_COLOR: {
            if(pVehicle->neon.neonType != eNeonTypes::ON_TYPE_STATIC && pVehicle->neon.neonType != eNeonTypes::ON_TYPE_FLASH) {
-                CNotification::show(0, "Недоступно с данным типом неона", 5, 0, "", "");
+                CNotification::show(0, "���������� � ������ ����� �����", 5, 0, "", "");
                 return false;
             }
+        }
+        case CStyling::eValueType::VALUE_TYPE_LIGHT_TYPE: {
+            return true;
         }
         case CStyling::eValueType::VALUE_TYPE_LIGHT_COLOR: {
             return true;
@@ -202,6 +208,10 @@ Java_com_lit_game_gui_styling_Styling_nativeChangeValue(JNIEnv *env, jobject thi
     auto valueType = (CStyling::eValueType)(type);
 
     switch(valueType) {
+        case CStyling::eValueType::VALUE_TYPE_LIGHT_TYPE: {
+            pVehicle->m_bIsLightOn = static_cast<eLightsState>(value);
+            break;
+        }
         case CStyling::eValueType::VALUE_TYPE_LIGHT_COLOR: {
             pVehicle->lightColor.Set(value);
             break;
@@ -223,7 +233,7 @@ Java_com_lit_game_gui_styling_Styling_nativeChangeValue(JNIEnv *env, jobject thi
             break;
         }
         case CStyling::eValueType::VALUE_TYPE_NEON_COLOR: {
-            pVehicle->neon.neonColor.Set(value); // y - ������
+            pVehicle->neon.neonColor.Set(value); // y - ??????
             break;
         }
         case CStyling::eValueType::VALUE_TYPE_NEON_TYPE: {

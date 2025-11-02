@@ -7,6 +7,7 @@ import com.lit.game.core.Samp
 import com.lit.game.core.Samp.Companion.activity
 import com.lit.game.databinding.StylingCenterBinding
 import com.lit.game.gui.NativeGui
+import com.lit.game.gui.hud.Chat
 import com.lit.game.gui.tuning.TuningAdapter
 import com.lit.game.gui.tuning.TuningAdapterListener
 import com.lit.game.gui.tuning.TuningItem
@@ -20,6 +21,7 @@ class Styling : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), Co
         enum class ValueType {
             VALUE_TYPE_NEON_TYPE,
             VALUE_TYPE_NEON_COLOR,
+            VALUE_TYPE_LIGHT_TYPE,
             VALUE_TYPE_LIGHT_COLOR,
             VALUE_TYPE_TONER_COLOR,
             VALUE_TYPE_BODY1_COLOR,
@@ -33,11 +35,12 @@ class Styling : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), Co
     private val items = arrayListOf(
         TuningItem("Тип неона", R.drawable.ic_styling_neon),
         TuningItem("Цвет неона", R.drawable.ic_styling_neon),
+        TuningItem("Тип фар", R.drawable.ic_styling_lights),
         TuningItem("Цвет фар", R.drawable.ic_styling_lights),
         TuningItem("Цвет тонера", R.drawable.ic_styling_toner),
-        TuningItem("Кузов (1)", R.drawable.ic_styling_color),
-        TuningItem("Кузов (2)", R.drawable.ic_styling_color),
-        TuningItem("Цвет дисков", R.drawable.ic_styling_wheel),
+        TuningItem("Цвет", R.drawable.ic_styling_color),
+        TuningItem("Цвет (2)", R.drawable.ic_styling_color),
+        TuningItem("Цвет дисков", R.drawable.ic_styling_wheels),
         TuningItem("Винилы", R.drawable.ic_styling_vinil),
         TuningItem("Стробоскопы", R.drawable.ic_styling_strob),
     )
@@ -62,6 +65,7 @@ class Styling : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), Co
             binding.exitButt.setOnClickListener {
                 destroy()
                 nativeOnExit()
+                Chat.showChat()
             }
 
             binding.buyButton.setOnClickListener {
@@ -77,6 +81,7 @@ class Styling : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), Co
             binding.priceText.text      = Samp.formatter.format(total.toLong())
             adapter.updatePrices(prices)
         }
+        Chat.hideChat();
     }
 
     override fun onColorPickerSelected(color: Int) {
@@ -135,6 +140,13 @@ class Styling : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), Co
             }
             ValueType.VALUE_TYPE_NEON_COLOR.ordinal -> {
                 showColorPicker(ValueType.VALUE_TYPE_NEON_COLOR, false, false)
+            }
+            ValueType.VALUE_TYPE_LIGHT_TYPE.ordinal -> {
+                val beamList = listOf(
+                    TuningSelectMenuItem("Обычный", 0, 1),
+                    TuningSelectMenuItem("Дальний", 0, 2),
+                )
+                showSelectMenu(ValueType.VALUE_TYPE_LIGHT_TYPE, beamList);
             }
             ValueType.VALUE_TYPE_LIGHT_COLOR.ordinal -> {
                 showColorPicker(ValueType.VALUE_TYPE_LIGHT_COLOR, false, false)

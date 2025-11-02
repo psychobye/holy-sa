@@ -215,6 +215,9 @@ void CVehicle::DoHeadLightBeam(eVehicleDummy dummyId, CMatrix* matrix, bool isRi
     const CVector pointToCamDir = Normalized(TheCamera.GetPosition() - point);
     const auto    alpha = (uint8)((1.0f - std::fabs(DotProduct(pointToCamDir, matrix->GetForward()))) * 45.0f);
 
+    bool isHighBeam = pVehicle ? pVehicle->m_bIsLightOn == eLightsState::HIGH : false;
+    const uint8 finalAlpha = isHighBeam ? std::min(255, alpha + 80) : alpha;
+
     RwRenderStateSet(rwRENDERSTATEZWRITEENABLE,         RWRSTATE(FALSE));
     RwRenderStateSet(rwRENDERSTATEZTESTENABLE,          RWRSTATE(TRUE));
     RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE,    RWRSTATE(TRUE));
@@ -226,23 +229,27 @@ void CVehicle::DoHeadLightBeam(eVehicleDummy dummyId, CMatrix* matrix, bool isRi
     RwRenderStateSet(rwRENDERSTATEALPHATESTFUNCTION,    RWRSTATE(rwALPHATESTFUNCTIONGREATER));
     RwRenderStateSet(rwRENDERSTATEALPHATESTFUNCTIONREF, RWRSTATE(FALSE));
 
-    const float   angleMult   = 0.15f;
+    const float angleMult = isHighBeam ? 0.05f : 0.15f; // angle
+    const float lengthMult = isHighBeam ? 5.0f : 3.0f; // length
+    const float sideOffsetStart = isHighBeam ? 0.1f : 0.05; // width
+    const float sideOffsetEnd   = isHighBeam ? 1.0f : 0.5; // width
+
     const CVector lightNormal = Normalized(matrix->GetForward() - matrix->GetUp() * angleMult);
     const CVector lightRight  = Normalized(CrossProduct(lightNormal, pointToCamDir));
     const CVector lightPos    = point - matrix->GetForward() * 0.1f;
 
     const CVector posn[] = {
-            lightPos - lightRight * 0.05f,
-            lightPos + lightRight * 0.05f,
-            lightPos + lightNormal * 3.0f - lightRight * 0.5f,
-            lightPos + lightNormal * 3.0f + lightRight * 0.5f,
+            lightPos - lightRight * sideOffsetStart,
+            lightPos + lightRight * sideOffsetStart,
+            lightPos + lightNormal * lengthMult - lightRight * sideOffsetEnd,
+            lightPos + lightNormal * lengthMult + lightRight * sideOffsetEnd,
             lightPos + lightNormal * 0.2f
     };
-    const uint8 alphas[] = { alpha, alpha, 0, 0, alpha };
+    const uint8 alphas[] = { finalAlpha, finalAlpha, 0, 0, finalAlpha };
 
     RxObjSpace3DVertex vertices[5];
     for (auto i = 0u; i < std::size(vertices); i++) {
-        const RwRGBA color = { r, g, b, alphas[i] };
+        const RwRGBA color = { b, g, r, alphas[i] }; //!TODO FIX RGB
 
         RxObjSpace3DVertexSetPreLitColor(&vertices[i], &color);
         RxObjSpace3DVertexSetPos(&vertices[i], &posn[i]);

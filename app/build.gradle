@@ -49,8 +49,8 @@ android {
 
         namespace 'com.lit.game'
         applicationId 'com.lit.game'
-        versionName "3.8"
-        versionCode 3
+        versionName "4.3"
+        versionCode 4
 
         multiDexEnabled = true
 
