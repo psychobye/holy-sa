@@ -128,6 +128,18 @@ Java_com_lit_game_gui_styling_Styling_nativeSendBuy(JNIEnv *env, jobject thiz) {
 }
 
 extern "C"
+JNIEXPORT void JNICALL
+Java_com_lit_game_gui_styling_Styling_nativeToggleCam(JNIEnv *env, jobject thiz, jboolean cam) {
+    RakNet::BitStream bsSend;
+    bsSend.Write((uint8_t) ID_CUSTOM_RPC);
+    bsSend.Write((uint8_t) RPC_STYLING_CENTER);
+    bsSend.Write((uint8_t) CStyling::ePacketType::TOGGLE_CAM);
+    bsSend.Write((uint8_t)(cam ? 1 : 0));
+
+    pNetGame->GetRakClient()->Send(&bsSend, HIGH_PRIORITY, RELIABLE, 0);
+}
+
+extern "C"
 JNIEXPORT jboolean JNICALL
 Java_com_lit_game_gui_styling_Styling_nativeIsAvailable(JNIEnv *env, jobject thiz, jint type) {
     auto valueType = (CStyling::eValueType)(type);

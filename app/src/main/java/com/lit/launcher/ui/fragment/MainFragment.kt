@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment
 import com.lit.game.R
 import com.lit.game.core.Samp
 import com.lit.game.gui.util.GradientStrokeTextView
+import com.lit.game.gui.util.Utils.addPressScaleAnimation
 import com.lit.launcher.config.Config
 import com.lit.launcher.service.impl.ActivityServiceImpl
 import com.lit.launcher.storage.NativeStorage
@@ -176,36 +177,6 @@ class MainFragment : Fragment() {
                     1.0f
                 )
                 btn.setStrokeColor(Color.parseColor("#FFFFFF")) // white
-            }
-        }
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun addPressScaleAnimation(v: View, scaleDown: Float = 0.9f, duration: Long = 90L) {
-        v.isClickable = true
-        v.setOnTouchListener { view, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    view.animate().cancel()
-                    view.animate()
-                        .scaleX(scaleDown)
-                        .scaleY(scaleDown)
-                        .setDuration(duration)
-                        .setInterpolator(android.view.animation.DecelerateInterpolator())
-                        .start()
-                    false
-                }
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    view.animate().cancel()
-                    view.animate()
-                        .scaleX(1f)
-                        .scaleY(1f)
-                        .setDuration(120)
-                        .setInterpolator(android.view.animation.OvershootInterpolator(1.2f))
-                        .start()
-                    false
-                }
-                else -> false
             }
         }
     }

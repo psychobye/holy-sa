@@ -484,6 +484,7 @@ int CTextureDatabaseRuntime__GetEntry_hook(TextureDatabaseRuntime *a1, const cha
 #include "EntryExitManager.h"
 #include "Occlusion.h"
 #include "Radar.h"
+#include "CPad.h"
 
 void InjectHooks()
 {
@@ -501,6 +502,7 @@ void InjectHooks()
     CAEVehicleAudioEntity::InjectHooks();
     CMirrors::InjectHooks();
     CMobileSettings::InjectHooks();
+    // CPad::InjectHooks();
 
     CWeapon::InjectHooks();
     CWeaponInfo::InjectHooks();

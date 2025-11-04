@@ -49,7 +49,7 @@ class TireShop : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), C
             binding.recycle.adapter = adapter
 
             // buy
-            binding.buyButton.setOnClickListener {
+            binding.backButton.setOnClickListener {
                 nativeSendClick(TYPE_BUY)
             }
 

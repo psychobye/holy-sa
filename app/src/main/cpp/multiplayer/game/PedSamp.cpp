@@ -421,26 +421,21 @@ uint32_t CPedSamp::GetCurrentGTAVehicleID() {
 // 0.3.7
 void CPedSamp::TogglePlayerControllable(bool bToggle, bool isTemp)
 {
-	if(!isTemp) lToggle = bToggle;
+    if(!isTemp) lToggle = bToggle;
 
-	if (!m_pPed) return;
-	if(!m_dwGTAId)return;
-	if (!IsValidGamePed(m_pPed) || !GamePool_Ped_GetAt(m_dwGTAId)) {
-		return;
-	}
+    if (!m_pPed || !m_dwGTAId) return;
+    if (!IsValidGamePed(m_pPed) || !GamePool_Ped_GetAt(m_dwGTAId)) return;
 
-	//CHUD::bIsDisableControll = !bToggle;
-	if(!bToggle)
-	{
-		ScriptCommand(&toggle_player_controllable, m_bytePlayerNumber, 0);
-		ScriptCommand(&lock_actor, m_dwGTAId, 1);
-	}
-	else if(lToggle)
-	{
-		ScriptCommand(&toggle_player_controllable, m_bytePlayerNumber, 1);
-		ScriptCommand(&lock_actor, m_dwGTAId, 0);
-	}
-
+    if(!bToggle)
+    {
+        ScriptCommand(&toggle_player_controllable, m_bytePlayerNumber, 0);
+        ScriptCommand(&lock_actor, m_dwGTAId, 1);
+    }
+    else
+    {
+        ScriptCommand(&toggle_player_controllable, m_bytePlayerNumber, 1);
+        ScriptCommand(&lock_actor, m_dwGTAId, 0);
+    }
 }
 
 // 0.3.7

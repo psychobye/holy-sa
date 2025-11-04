@@ -8,6 +8,7 @@
     android:visibility="visible">
 
     <View
+        android:id="@+id/bottomGrad"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_90sdp"
         android:background="@drawable/bottom_gradient"
@@ -15,7 +16,6 @@
         app:layout_constraintBottom_toBottomOf="parent" />
 
     <View
-        android:id="@+id/view7"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_90sdp"
         android:background="@drawable/top_gradient"
@@ -31,21 +31,33 @@
         android:fontFamily="@font/gilroy_bold"
         android:textSize="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_20sdp"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_30sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/buyButton"
-        android:layout_width="@dimen/_60sdp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_5sdp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/backButton"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/ic_styling_buy"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:background="@drawable/circle"
+        android:backgroundTint="@color/gray_dark_80"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/tuneText"
+        app:layout_constraintTop_toBottomOf="@+id/tuneText">
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:adjustViewBounds="false"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/priceText"
@@ -58,9 +70,9 @@
         android:textColor="#FFFFFF"
         android:textSize="7dp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/buyButton"
-        app:layout_constraintEnd_toEndOf="@+id/buyButton"
-        app:layout_constraintStart_toStartOf="@+id/buyButton" />
+        app:layout_constraintBottom_toBottomOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="@+id/backButton"
+        app:layout_constraintStart_toStartOf="@+id/backButton" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/exitButt"
@@ -85,6 +97,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/camButt"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="@dimen/_40sdp"
+        android:background="@drawable/circle"
+        android:backgroundTint="@color/gray_dark_80"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_12sdp"
+        app:layout_constraintEnd_toEndOf="@+id/exitButt"
+        app:layout_constraintStart_toStartOf="@+id/exitButt"
+        app:layout_constraintTop_toBottomOf="@+id/exitButt" >
+
+        <ImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="false"
+            android:src="@drawable/ic_ar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout15"

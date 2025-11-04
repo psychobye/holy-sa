@@ -152,5 +152,6 @@ dependencies {
     implementation 'androidx.viewpager2:viewpager2:1.1.0'
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
     implementation "com.github.skydoves:colorpickerview:2.2.4"
+    implementation 'com.github.Mohammad3125:KavehColorPicker:v1.2.1'
     apply plugin: 'com.google.gms.google-services'
 }

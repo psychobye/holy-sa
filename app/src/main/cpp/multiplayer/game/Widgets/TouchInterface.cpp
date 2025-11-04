@@ -9,6 +9,7 @@
 #include "util/patch.h"
 
 CWidgetGta** CTouchInterface::m_pWidgets;
+bool CTouchInterface::hiddenWidgets[WidgetIDs::NUM_WIDGETS];
 
 void CTouchInterface::LoadDefaultConfigFile()
 {

@@ -102,6 +102,19 @@ void CWidgetButtonEnterCar__Draw_hook(uintptr_t *thiz) {
 
 void (*CWidgetButton__Enabled)(CWidgetButton* thiz, bool bEnabled);
 void CWidgetButton__Enabled_hook(CWidgetButton* thiz, bool bEnabled) {
+    int widgetId = -1;
+    for (int i = 0; i < WidgetIDs::NUM_WIDGETS; ++i) {
+        if (CTouchInterface::m_pWidgets[i] == thiz) {
+            widgetId = i;
+            break;
+        }
+    }
+
+    if (widgetId >= 0 && CTouchInterface::hiddenWidgets[widgetId]) {
+        bEnabled = false;
+        CWidgetButton__Enabled(thiz, bEnabled);
+        return;
+    }
 
     if (pNetGame) {
         const auto& pPlayerPed = CLocalPlayer::GetPlayerPed();

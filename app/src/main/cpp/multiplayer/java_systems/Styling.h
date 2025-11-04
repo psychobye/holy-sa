@@ -16,7 +16,8 @@ public:
         UPDATE_VALUE,
         RESET_VALUE,
         RESET_ALL,
-        BUY
+        BUY,
+        TOGGLE_CAM
     };
 
     enum class eValueType : int {

@@ -92,4 +92,6 @@
     <string name="version">ВЕРСИЯ %1$s</string>
     <string name="logShare">привет, столкнулся с ошибкой, прикрепил логи.</string>
     <string name="tune">Мастерская</string>
+    <string name="back">назад</string>
+    <string name="setup">установить</string>
 </resources>

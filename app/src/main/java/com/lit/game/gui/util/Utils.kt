@@ -2,12 +2,16 @@ package com.lit.game.gui.util
 
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
+import android.annotation.SuppressLint
 import android.content.Context
 import android.text.Html
 import android.text.Spanned
 import android.util.DisplayMetrics
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import com.lit.game.core.Samp
 import java.util.regex.Pattern
 
@@ -98,4 +102,43 @@ object Utils {
         return Html.fromHtml(spannableStringBuilder.toString().replace("\n", "<br>"))
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    fun addPressScaleAnimation(
+        v: View,
+        scaleDown: Float = 0.9f,
+        duration: Long = 90L,
+        onClick: (() -> Unit)? = null
+    ) {
+        v.isClickable = true
+        v.setOnTouchListener { view, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    view.animate().cancel()
+                    view.animate()
+                        .scaleX(scaleDown)
+                        .scaleY(scaleDown)
+                        .setDuration(duration)
+                        .setInterpolator(DecelerateInterpolator())
+                        .start()
+                    false
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    view.animate().cancel()
+                    view.animate()
+                        .scaleX(1f)
+                        .scaleY(1f)
+                        .setDuration(120)
+                        .setInterpolator(OvershootInterpolator(1.2f))
+                        .withEndAction {
+                            if (event.action == MotionEvent.ACTION_UP) {
+                                onClick?.invoke()
+                            }
+                        }
+                        .start()
+                    false
+                }
+                else -> false
+            }
+        }
+    }
 }

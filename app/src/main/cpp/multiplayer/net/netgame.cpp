@@ -332,6 +332,7 @@ void CNetGame::Packet_TrailerSync(Packet *p)
 #include "BattlePass.h"
 #include "game/World.h"
 #include "BusStation.h"
+#include "Widgets/TouchInterface.h"
 
 
 void CNetGame::Packet_AuthRPC(Packet *p) {
@@ -641,6 +642,24 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
         }
         case PACKET_MILK: {
             CMilk::ReceivePacket(p);
+            break;
+        }
+        case RPC_HIDE_WIDGET: {
+            uint8 widgetId;
+            bs.Read(widgetId);
+
+            if (widgetId < WidgetIDs::NUM_WIDGETS) {
+                CTouchInterface::hiddenWidgets[widgetId] = true;
+            }
+            break;
+        }
+        case RPC_SHOW_WIDGET: {
+            uint8 widgetId;
+            bs.Read(widgetId);
+
+            if (widgetId < WidgetIDs::NUM_WIDGETS) {
+                CTouchInterface::hiddenWidgets[widgetId] = false;
+            }
             break;
         }
         case RPC_SHOW_DONATE: {

@@ -129,6 +129,9 @@ enum class eNetworkState {
 #define PACKET_LINE_OF_SIGHT        102
 #define PACKET_MILK                 103
 
+#define RPC_HIDE_WIDGET 104
+#define RPC_SHOW_WIDGET 105
+
 #define RPC_PLAYER_TAG 				300
 #define RPC_ACTOR_GOTO				301
 #define RPC_ACTOR_ATTACK 			303

@@ -1,6 +1,8 @@
 package com.lit.game.gui.styling
 
+import android.util.Log
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.lit.game.R
 import com.lit.game.core.Samp
@@ -48,6 +50,8 @@ class Styling : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), Co
 
     private var valueType: ValueType = ValueType.VALUE_TYPE_NEON_TYPE
 
+    private var cameraEnabled: Boolean = false
+
     private external fun nativeOnExit()
     private external fun nativeGetCurrentValue(type: Int): Int
     private external fun nativeSendChangeValue(valueType: Int)
@@ -57,21 +61,38 @@ class Styling : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), Co
 
     private external fun nativeSendBuy()
 
+    private external fun nativeToggleCam(cam: Boolean)
+
     init {
         activity.runOnUiThread {
             binding.recycle.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
             binding.recycle.adapter = adapter
 
-            binding.exitButt.setOnClickListener {
+            val clickAnim = AnimationUtils.loadAnimation(activity, R.anim.button_click)
+
+            fun setButtonAnimClick(view: View, onClick: () -> Unit) {
+                view.setOnClickListener {
+                    it.startAnimation(clickAnim)
+                    onClick()
+                }
+            }
+
+            setButtonAnimClick(binding.exitButt) {
                 destroy()
                 nativeOnExit()
                 Chat.showChat()
             }
 
-            binding.buyButton.setOnClickListener {
-                nativeSendBuy()
+            setButtonAnimClick(binding.backButton) {
+                // nativeSendBuy()
             }
 
+            setButtonAnimClick(binding.camButt) {
+                cameraEnabled = !cameraEnabled
+                nativeToggleCam(cameraEnabled)
+                binding.recycle.visibility = if (cameraEnabled) View.GONE else View.VISIBLE
+                binding.bottomGrad.visibility = if (cameraEnabled) View.GONE else View.VISIBLE
+            }
         }
     }
 
