@@ -8,7 +8,7 @@
 #include "Entity.h"
 #include "game/Core/PtrNodeDoubleLink.h"
 #include "game/Core/EntryInfoList.h"
-#include "game/RealTimeShadow.h"
+#include "game/Shadow/RealTimeShadow.h"
 
 //#pragma pack(push, 1)
 struct CPhysical : public CEntity {

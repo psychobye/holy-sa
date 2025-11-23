@@ -57,14 +57,6 @@
 #include "JavaGui.h"
 
 // ok?
-void CLoader::loadBassLib()
-{
-   // LoadBassLibrary();
-   // BASS_Init(-1, 44100, BASS_DEVICE_MONO | BASS_DEVICE_3D);
-    //BASS_Set3DFactors(1, 0.15, 0);
-    //BASS_Apply3D();
-}
-
 void CLoader::initCrashLytics()
 {
     firebase::crashlytics::SetCustomKey("build data", __DATE__);

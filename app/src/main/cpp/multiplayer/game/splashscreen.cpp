@@ -6,7 +6,7 @@
 #include "java_systems/HUD.h"
 #include "SnapShots.h"
 #include "ObjectEditor.h"
-#include "Shadows.h"
+#include "game/Shadow/Shadows.h"
 
 extern CGUI* pGUI;
 

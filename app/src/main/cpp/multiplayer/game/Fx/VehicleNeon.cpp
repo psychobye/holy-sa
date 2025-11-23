@@ -5,7 +5,7 @@
 #include "VehicleNeon.h"
 #include "Timer.h"
 #include "Models/ModelInfo.h"
-#include "Shadows.h"
+#include "game/Shadow/Shadows.h"
 
 void CVehicleNeon::Process() {
     if( neonType <= eNeonTypes::ON_TYPE_STATIC )

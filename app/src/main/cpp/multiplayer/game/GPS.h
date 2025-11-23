@@ -10,7 +10,6 @@ public:
     static void DoPathDraw();
     static void Set(CVector pos, bool toggle);
     static bool enabled;
-
 };
 
 

@@ -12,14 +12,15 @@
 #include "game/Enums/eCarNodes.h"
 #include "DamageManager.h"
 #include "VehicleSamp.h"
-#include "Shadows.h"
+#include "game/Shadow/Shadows.h"
 #include "Entity/Vehicle/Automobile.h"
 #include "util/TextRasterizer/TextRasterizer.h"
+#include "CHandlingDataMgr.h"
+#include "Entity/Vehicle/Bike.h"
 
 CVehicleSamp::CVehicleSamp(int iType, float fPosX, float fPosY, float fPosZ, float fRotation, bool bSiren)
 {
     fPosZ += 0.25f;
-	RwMatrix mat;
 
     m_pDamageManager = nullptr;
 	m_pVehicle = nullptr;
@@ -85,10 +86,6 @@ CVehicleSamp::CVehicleSamp(int iType, float fPosX, float fPosY, float fPosZ, flo
 
 	bHasSuspensionLines = false;
 	m_pSuspensionLines = nullptr;
-	if (GetVehicleSubtype() == VEHICLE_SUBTYPE_CAR)
-	{
-		CopyGlobalSuspensionLinesToPrivate();
-	}
 
 	m_fWheelOffsetX = 0.0f;
 	m_fWheelOffsetY = 0.0f;
@@ -108,6 +105,8 @@ CVehicleSamp::CVehicleSamp(int iType, float fPosX, float fPosY, float fPosZ, flo
 		memcpy(&m_vInitialWheelMatrix[2], (const void*)&(pWheelRB->modelling), sizeof(RwMatrix));
 		memcpy(&m_vInitialWheelMatrix[3], (const void*)&(pWheelLB->modelling), sizeof(RwMatrix));
 	}
+
+    SetHandlingData();
 }
 
 void CVehicleSamp::ChangeDummyColor(const char* dummy, RwRGBA color) {
@@ -176,6 +175,11 @@ CVehicleSamp::~CVehicleSamp()
 		delete m_pCustomHandling;
 		m_pCustomHandling = nullptr;
 	}
+
+    if (m_pCustomBikeHandling) {
+        delete m_pCustomBikeHandling;
+        m_pCustomBikeHandling = nullptr;
+    }
 
 	if (bHasSuspensionLines && m_pSuspensionLines) {
 		delete[] m_pSuspensionLines;
@@ -575,38 +579,56 @@ CCollisionData* GetCollisionDataFromModel(int nModelIndex)
     return modelInfo->m_pColModel->m_pColData;
 }
 
-void CVehicleSamp::SetHandlingData()
-{
-    if (!m_pVehicle || !m_dwGTAId)
-    {
-        return;
-    }
-    if (!GamePool_Vehicle_GetAt(m_dwGTAId))
-    {
+void CVehicleSamp::SetBikeHandlingData() {
+    const auto& mi = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
+    if (!mi) {
         return;
     }
 
-    if (GetVehicleSubtype() != VEHICLE_SUBTYPE_CAR && !m_pVehicle->IsTrailer())
-    {
+    delete m_pCustomHandling;
+    m_pCustomHandling = CHandlingDefault::GetCopyDefaultHandling(mi->m_nHandlingId);
+
+    cHandlingDataMgr::ConvertDataToGameUnits(m_pCustomHandling);
+    m_pVehicle->m_pHandlingData = m_pCustomHandling;
+
+    delete m_pCustomBikeHandling;
+    m_pCustomBikeHandling = CHandlingDefault::GetCopyBikeDefaultHandling(mi->m_nHandlingId);
+
+    cHandlingDataMgr::ConvertBikeDataToGameUnits(m_pCustomBikeHandling);
+    reinterpret_cast<CBike*>(m_pVehicle)->m_BikeHandling = m_pCustomBikeHandling;
+
+    CopyGlobalSuspensionLinesToPrivate();
+
+    CHook::CallFunction<void>("_ZN5CBike20SetupSuspensionLinesEv", reinterpret_cast<CBike*>(m_pVehicle));
+}
+
+void CVehicleSamp::SetHeliHandlingData() {
+    const auto& mi = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
+    if (!mi) {
         return;
     }
 
+    delete m_pCustomHandling;
+    m_pCustomHandling = CHandlingDefault::GetCopyDefaultHandling(mi->m_nHandlingId);
 
-    if (!m_pCustomHandling)
-    {
-        m_pCustomHandling = new tHandlingData;
-    }
+    cHandlingDataMgr::ConvertDataToGameUnits(m_pCustomHandling);
+    m_pVehicle->m_pHandlingData = m_pCustomHandling;
 
-    auto pModel = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
+    m_pVehicle->pFlyingHandling = cHandlingDataMgr::GetFlyingPointer(mi->m_nHandlingId);
 
-    if (!pModel)
-    {
+    CopyGlobalSuspensionLinesToPrivate();
+
+    ((void (*)(CVehicle*))(g_libGTASA + (VER_x32 ? 0x0055F430 + 1 : 0x68036C)))(m_pVehicle);
+}
+
+void CVehicleSamp::SetVehicleHandlingData() {
+    const auto& mi = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
+    if (!mi) {
         return;
     }
 
-    CHandlingDefault::GetDefaultHandling(pModel->m_nHandlingId, m_pCustomHandling);
-
-    //bool bNeedRecalculate = false;
+    delete m_pCustomHandling;
+    m_pCustomHandling = CHandlingDefault::GetCopyDefaultHandling(mi->m_nHandlingId);
 
     for (auto& i : m_msLastSyncHandling)
     {
@@ -685,34 +707,49 @@ void CVehicleSamp::SetHandlingData()
                 break;
             }
         }
-
     }
 
-    auto fDefaultFrontWheelSize = pModel->m_fWheelSizeFront;
-    auto fDefaultRearWheelSize = pModel->m_fWheelSizeRear;
+    auto fDefaultFrontWheelSize = mi->m_fWheelSizeFront;
+    auto fDefaultRearWheelSize = mi->m_fWheelSizeRear;
 
     if(m_fWheelSize != 0.0f) {
-        pModel->m_fWheelSizeFront = m_fWheelSize;
-        pModel->m_fWheelSizeRear = m_fWheelSize;
+        mi->m_fWheelSizeFront = m_fWheelSize;
+        mi->m_fWheelSizeRear = m_fWheelSize;
     } else {
-        m_fWheelSize = pModel->m_fWheelSizeFront;
+        m_fWheelSize = mi->m_fWheelSizeFront;
     }
 
     m_fDefaultWheelSize = std::max(fDefaultFrontWheelSize, fDefaultRearWheelSize);
 
-    ((void (*)(int, tHandlingData*))(g_libGTASA + (VER_x32 ? 0x00570DC8 + 1 : 0x69343C)))(0, m_pCustomHandling);
+    cHandlingDataMgr::ConvertDataToGameUnits(m_pCustomHandling);
     m_pVehicle->m_pHandlingData = m_pCustomHandling;
 
     ((void (*)(CVehicle*))(g_libGTASA + (VER_x32 ? 0x0054EC38 + 1 : 0x66EE5C)))(m_pVehicle); // CAutomobile::SetupSuspensionLines
-
     CopyGlobalSuspensionLinesToPrivate();
 
-    pModel->m_fWheelSizeFront = fDefaultFrontWheelSize;
-    pModel->m_fWheelSizeRear = fDefaultRearWheelSize;
+    mi->m_fWheelSizeFront = fDefaultFrontWheelSize;
+    mi->m_fWheelSizeRear = fDefaultRearWheelSize;
 
-    ((void (*)(CVehicle*))(g_libGTASA + (VER_x32 ? 0x0055F430 + 1 : 0x68036C)))(m_pVehicle); // process suspension
+    ((void (*)(CVehicle*))(g_libGTASA + (VER_x32 ? 0x0055F430 + 1 : 0x68036C)))(m_pVehicle);
 }
 
+void CVehicleSamp::SetHandlingData() {
+    switch (GetVehicleSubtype()) {
+        case VEHICLE_SUBTYPE_CAR:
+            SetVehicleHandlingData();
+            break;
+
+        case VEHICLE_SUBTYPE_BIKE:
+        case VEHICLE_SUBTYPE_PUSHBIKE:
+            SetBikeHandlingData();
+            break;
+
+        case VEHICLE_SUBTYPE_HELI:
+        case VEHICLE_SUBTYPE_PLANE:
+            SetHeliHandlingData();
+            break;
+    }
+}
 
 void CVehicleSamp::setPlate(ePlateType type, std::string& szNumber, std::string& szRegion)
 {
@@ -1069,7 +1106,7 @@ bool CVehicleSamp::HasDamageModel() const
 
 void CVehicleSamp::SetPanelStatus(ePanels bPanel, ePanelDamageState bPanelStatus) const
 {
-    if (m_pVehicle && bPanel < MAX_PANELS && bPanelStatus <= 3)
+    if (m_pDamageManager->GetPanelStatus(bPanel) != bPanelStatus)
     {
         if (m_pDamageManager->GetPanelStatus(bPanel) != bPanelStatus)
         {
@@ -1083,7 +1120,8 @@ void CVehicleSamp::SetPanelStatus(ePanels bPanel, ePanelDamageState bPanelStatus
                 CHook::CallFunction<void>("_ZN11CAutomobile8FixPanelEi7ePanels", m_pVehicle, iCarNodeIndex, bPanel);
             }
             else {
-                CHook::CallFunction<void>("_ZN11CAutomobile14SetPanelDamageE7ePanelsb", m_pVehicle, bPanel, false);
+                CHook::CallFunction<void>("_ZN11CAutomobile14SetPanelDamageE7ePanelsb", m_pVehicle,
+                                          bPanel, false);
             }
         }
     }
@@ -1091,30 +1129,27 @@ void CVehicleSamp::SetPanelStatus(ePanels bPanel, ePanelDamageState bPanelStatus
 
 uint8_t CVehicleSamp::GetDoorStatus(eDoors bDoor) {
     if (m_pVehicle && bDoor < MAX_DOORS) {
-        return m_pDamageManager->m_anWheelsStatus[bDoor];
+        return m_pDamageManager->m_aDoorsStatus[bDoor];
     }
     return 0;
 }
 
 void CVehicleSamp::SetDoorStatus(eDoors bDoor, eDoorStatus bDoorStatus, bool spawnFlyingComponen)
 {
-    if (m_pVehicle && bDoor < MAX_DOORS)
+    if (GetDoorStatus(bDoor) != bDoorStatus)
     {
-        if (GetDoorStatus(bDoor) != bDoorStatus)
-        {
-            m_pDamageManager->SetDoorStatus(bDoor, bDoorStatus);
-            if (bDoorStatus == DAMSTATE_OK || bDoorStatus == DAMSTATE_OPENED) {
-                // Grab the car node index for the given door id
-                static int s_iCarNodeIndexes[6] = { 0x10, 0x11, 0x0A, 0x08, 0x0B, 0x09 };
-                int iCarNodeIndex = s_iCarNodeIndexes[bDoor];
+        m_pDamageManager->SetDoorStatus(bDoor, bDoorStatus);
+        if (bDoorStatus == DAMSTATE_OK || bDoorStatus == DAMSTATE_OPENED) {
+            // Grab the car node index for the given door id
+            static int s_iCarNodeIndexes[6] = { 0x10, 0x11, 0x0A, 0x08, 0x0B, 0x09 };
+            int iCarNodeIndex = s_iCarNodeIndexes[bDoor];
 
-                // CAutomobile::FixDoor
-                CHook::CallFunction<void>("_ZN11CAutomobile7FixDoorEi6eDoors", m_pVehicle, iCarNodeIndex, bDoor);
-            }
-            else {
-                bool bQuiet = !spawnFlyingComponen;
-                CHook::CallFunction<void>("_ZN11CAutomobile13SetDoorDamageE6eDoorsb", m_pVehicle, bDoor, bQuiet);
-            }
+            // CAutomobile::FixDoor
+            CHook::CallFunction<void>("_ZN11CAutomobile7FixDoorEi6eDoors", m_pVehicle, iCarNodeIndex, bDoor);
+        }
+        else {
+            bool bQuiet = !spawnFlyingComponen;
+            CHook::CallFunction<void>("_ZN11CAutomobile13SetDoorDamageE6eDoorsb", m_pVehicle, bDoor, bQuiet);
         }
     }
 }
@@ -1252,55 +1287,46 @@ void CVehicleSamp::GetDamageStatusEncoded(uint8_t* byteTyreFlags, uint8_t* byteL
 }
 
 void CVehicleSamp::ProcessDamage() {
-    if (pNetGame) {
-        VEHICLEID vehId = CVehiclePool::FindIDFromGtaPtr(m_pVehicle);
-        if (vehId != INVALID_VEHICLE_ID) {
-            if (HasDamageModel()) {
-                uint8_t byteTyreFlags, byteLightFlags;
-                uint32_t dwDoorFlags, dwPanelFlags;
+    VEHICLEID vehId = CVehiclePool::FindIDFromGtaPtr(m_pVehicle);
+    if (vehId != INVALID_VEHICLE_ID) {
+        if (HasDamageModel()) {
+            uint8_t byteTyreFlags, byteLightFlags;
+            uint32_t dwDoorFlags, dwPanelFlags;
 
-                // костыль, но, по хорошему, надо переделывать синхру
-                if (m_pDamageManager->m_aDoorsStatus[eDoors::DOOR_BONNET] != ePanelDamageState::DAMSTATE_OK) {
-                    m_pDamageManager->m_aDoorsStatus[eDoors::DOOR_BONNET] = ePanelDamageState::DAMSTATE_OK;
-                }
-                if (m_pDamageManager->m_aDoorsStatus[eDoors::DOOR_BOOT] != ePanelDamageState::DAMSTATE_OK) {
-                    m_pDamageManager->m_aDoorsStatus[eDoors::DOOR_BOOT] = ePanelDamageState::DAMSTATE_OK;
-                }
-                GetDamageStatusEncoded(&byteTyreFlags, &byteLightFlags, &dwDoorFlags, &dwPanelFlags);
-                bool bDamageChanged = (byteTyreFlags != m_byteTyreStatus) ||
-                                      (dwDoorFlags != m_dwDoorStatus) ||
-                                      (dwPanelFlags != m_dwPanelStatus);
-                if (bDamageChanged) {
-                    m_byteLightStatus = byteLightFlags;
-                    m_byteTyreStatus = byteTyreFlags;
-                    m_dwDoorStatus = dwDoorFlags;
-                    m_dwPanelStatus = dwPanelFlags;
+            GetDamageStatusEncoded(&byteTyreFlags, &byteLightFlags, &dwDoorFlags, &dwPanelFlags);
+            bool bDamageChanged = (byteTyreFlags != m_byteTyreStatus) ||
+                                  (dwDoorFlags != m_dwDoorStatus) ||
+                                  (dwPanelFlags != m_dwPanelStatus);
+            if (bDamageChanged) {
+                m_byteLightStatus = byteLightFlags;
+                m_byteTyreStatus = byteTyreFlags;
+                m_dwDoorStatus = dwDoorFlags;
+                m_dwPanelStatus = dwPanelFlags;
 
-                    RakNet::BitStream bsDamage;
+                RakNet::BitStream bsDamage;
 
-                    bsDamage.Write(vehId);
-                    bsDamage.Write(dwPanelFlags);
-                    bsDamage.Write(dwDoorFlags);
-                    bsDamage.Write(byteLightFlags);
-                    bsDamage.Write(byteTyreFlags);
+                bsDamage.Write(vehId);
+                bsDamage.Write(dwPanelFlags);
+                bsDamage.Write(dwDoorFlags);
+                bsDamage.Write(byteLightFlags);
+                bsDamage.Write(byteTyreFlags);
 
-                    pNetGame->GetRakClient()->RPC(&RPC_VehicleDamage, &bsDamage, HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, false, UNASSIGNED_NETWORK_ID, nullptr);
-                }
+                pNetGame->GetRakClient()->RPC(&RPC_VehicleDamage, &bsDamage, HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, false, UNASSIGNED_NETWORK_ID, nullptr);
             }
-            else if (GetVehicleSubtype() == VEHICLE_SUBTYPE_BIKE) {
-                uint8_t byteTyreFlags = GetBikeWheelStatus(1) | (GetBikeWheelStatus(0) << 1);
-                if (m_byteTyreStatus != byteTyreFlags) {
-                    m_byteTyreStatus = byteTyreFlags;
+        }
+        else if (GetVehicleSubtype() == VEHICLE_SUBTYPE_BIKE) {
+            uint8_t byteTyreFlags = GetBikeWheelStatus(1) | (GetBikeWheelStatus(0) << 1);
+            if (m_byteTyreStatus != byteTyreFlags) {
+                m_byteTyreStatus = byteTyreFlags;
 
-                    RakNet::BitStream bsDamage;
-                    bsDamage.Write(             vehId);
-                    bsDamage.Write((uint32_t)   0);
-                    bsDamage.Write((uint32_t)   0);
-                    bsDamage.Write((uint8_t)    0);
-                    bsDamage.Write(             byteTyreFlags);
+                RakNet::BitStream bsDamage;
+                bsDamage.Write(             vehId);
+                bsDamage.Write((uint32_t)   0);
+                bsDamage.Write((uint32_t)   0);
+                bsDamage.Write((uint8_t)    0);
+                bsDamage.Write(             byteTyreFlags);
 
-                    pNetGame->GetRakClient()->RPC(&RPC_VehicleDamage, &bsDamage, HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, false, UNASSIGNED_NETWORK_ID, nullptr);
-                }
+                pNetGame->GetRakClient()->RPC(&RPC_VehicleDamage, &bsDamage, HIGH_PRIORITY, RELIABLE_SEQUENCED, 0, false, UNASSIGNED_NETWORK_ID, nullptr);
             }
         }
     }

@@ -756,8 +756,8 @@ uint32_t CCamera_IsTargetingActive_hook(CCamera* thiz, CPed* pPed)
 	else
 	{
 		/* CCamera::IsTargetingActive */
-		static CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-		uint32_t bIsTargeting = CHook::CallFunction<bool>(g_libGTASA + (VER_x32 ? 0x3D9F54 + 1 : 0x4B8154), &TheCamera);
+		
+		uint32_t bIsTargeting = CHook::CallFunction<bool>(g_libGTASA + (VER_x32 ? 0x3D9F54 + 1 : 0x4B8154), &CCamera::Get());
 
 		LocalPlayerKeys.bKeys[ePadKeys::KEY_HANDBRAKE] = bIsTargeting;
 		return bIsTargeting;

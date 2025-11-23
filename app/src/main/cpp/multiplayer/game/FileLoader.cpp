@@ -10,6 +10,7 @@
 #include "util/patch.h"
 #include "game/Models/AtomicModelInfo.h"
 #include "Streaming.h"
+#include "cHandlingDataMgr.h"
 
 // Load line into static buffer (`ms_line`)
 char* CFileLoader::LoadLine(FILE* file) {
@@ -51,6 +52,57 @@ char* CFileLoader::FindFirstNonNullOrWS(char* it) {
     // Have to cast to uint8, because signed ASCII is retarded
     for (; *it && (uint8)*it <= (uint8)' '; it++);
     return it;
+}
+
+void CFileLoader::LoadVehicleObject() {
+    int32              modelId{ MODEL_INVALID };
+    char               modelName[24]{};
+    char               texName[24]{};
+    char               type[8]{};
+    char               handlingName[16]{};
+    char               gameName[32]{};
+    char               anims[16]{};
+    char               vehCls[16]{};
+    uint32             frq{}, flags{};
+    tVehicleCompsUnion vehComps{};
+    int32              misc{ -1 };
+    float              wheelSizeFront{ 0.7f }, wheelSizeRear{ 0.7f };
+    int32              wheelUpgradeCls{ -1 };
+
+    const auto pFile = CFileMgr::OpenFile("SAMP/vehicles.ide", "rb");
+    while (CFileLoader::LoadLine(pFile)) {
+        if (strlen(CFileLoader::ms_line) == 0 || CFileLoader::ms_line[0] == ';' || CFileLoader::ms_line[0] == '#' || CFileLoader::ms_line[0] == '\r') {
+            // Пропустить комментарии и пустые строки
+            continue;
+        }
+
+        std::istringstream iss(CFileLoader::ms_line);
+
+        iss >> modelId;
+        iss >> modelName;
+        iss >> texName;
+        iss >> type;
+        iss >> handlingName;
+        iss >> gameName;
+        iss >> anims;
+        iss >> vehCls;
+        iss >> frq;
+        iss >> flags;
+
+        if (iss >> std::hex >> vehComps.m_nComps) {
+            if (iss >> misc) {
+                if (iss >> wheelSizeFront) {
+                    if (iss >> wheelSizeRear) {
+                        iss >> wheelUpgradeCls;
+                    }
+                }
+            }
+        }
+
+        if (!CVehicleNames::VehicleNames.contains(handlingName)) {
+            CVehicleNames::VehicleNames[handlingName] = modelId;
+        }
+    }
 }
 
 int32 CFileLoader::LoadObject(const char* line) {

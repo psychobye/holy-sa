@@ -221,9 +221,9 @@
 //{
 //	ASSERT(pPosn != nil);
 //
-//    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+//    
 //
-//    float fDistToCamSqr = (*pPosn - TheCamera.GetPosition()).MagnitudeSqr2D();
+//    float fDistToCamSqr = (*pPosn - CCamera::Get().GetPosition()).MagnitudeSqr2D();
 //
 //	if ( SQR(fDrawDistance) > fDistToCamSqr || fDrawDistance == 0.0f )
 //	{
@@ -473,12 +473,12 @@
 //
 //	if ( CTimeCycle::GetShadowStrength() != 0 )
 //	{
-//        CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+//        
 //		CVector CarPos = pCar->GetPosition();
-//		float fDistToCamSqr = (CarPos - TheCamera.GetPosition()).MagnitudeSqr2D();
+//		float fDistToCamSqr = (CarPos - CCamera::Get().GetPosition()).MagnitudeSqr2D();
 //
 ////		if ( CCutsceneMgr::IsRunning() )
-////			fDistToCamSqr /= SQR(TheCamera.LODDistMultiplier) * 4.0f;
+////			fDistToCamSqr /= SQR(CCamera::Get().LODDistMultiplier) * 4.0f;
 //
 //		float fDrawDistance;
 //		switch ( type )
@@ -712,19 +712,19 @@
 //	ASSERT(pCar != nil);
 //	ASSERT(pPosn != nil);
 //
-//    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-//	float fDistToCamSqr = (*pPosn - TheCamera.GetPosition()).MagnitudeSqr2D();
+//    
+//	float fDistToCamSqr = (*pPosn - CCamera::Get().GetPosition()).MagnitudeSqr2D();
 //
-//	bool bSpecialCam =     TheCamera.GetActiveCamera().m_nMode == CCam::MODE_TOPDOWN
-//						|| TheCamera.GetActiveCamera().m_nMode == CCam::MODE_TOP_DOWN_PED;
+//	bool bSpecialCam =     CCamera::Get().GetActiveCamera().m_nMode == CCam::MODE_TOPDOWN
+//						|| CCamera::Get().GetActiveCamera().m_nMode == CCam::MODE_TOP_DOWN_PED;
 //						//|| CCutsceneMgr::IsRunning();
 //
 //	float fDrawDistance = 27.0f;
 //
 //	if ( fDistToCamSqr < SQR(fDrawDistance) || bSpecialCam )
 //	{
-//		if ( bSpecialCam || DotProduct2D(CVector2D(TheCamera.CamFrontXNorm, TheCamera.CamFrontYNorm),
-//											*pPosn - TheCamera.GetPosition() ) > -fMaxViewAngle )
+//		if ( bSpecialCam || DotProduct2D(CVector2D(CCamera::Get().CamFrontXNorm, CCamera::Get().CamFrontYNorm),
+//											*pPosn - CCamera::Get().GetPosition() ) > -fMaxViewAngle )
 //		{
 //			float fDistToCam = sqrt(fDistToCamSqr);
 //
@@ -770,7 +770,7 @@
 //	ASSERT(pObject != nil);
 //
 //	CCutsceneShadow *shadow = pObject->m_pRTShadow;
-//    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+//    
 //
 //	if ( shadow == nil )
 //		return;
@@ -780,13 +780,13 @@
 //
 //	CVector pos = pObject->GetPosition();
 //
-//	float fDistToCamSqr = (pos - TheCamera.GetPosition()).MagnitudeSqr2D();
+//	float fDistToCamSqr = (pos - CCamera::Get().GetPosition()).MagnitudeSqr2D();
 //
 //	float fDrawDistance = 100.0f;
 //
 //	if ( fDistToCamSqr < SQR(fDrawDistance*0.5f) )
 //	{
-//		if ( (CEntity*)pObject == FindPlayerPed() || TheCamera.IsSphereVisible(pos, 2.0f) )
+//		if ( (CEntity*)pObject == FindPlayerPed() || CCamera::Get().IsSphereVisible(pos, 2.0f) )
 //		{
 //			float fDistToCam = sqrt(fDistToCamSqr);
 //
@@ -875,16 +875,16 @@
 //{
 //	ASSERT(pPedObject != nil);
 //
-//    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+//    
 //    CVector PedPos = pPedObject->GetPosition();
 //
-//	float fDistToCamSqr = (PedPos - TheCamera.GetPosition()).MagnitudeSqr2D();
+//	float fDistToCamSqr = (PedPos - CCamera::Get().GetPosition()).MagnitudeSqr2D();
 //
 //	float fDrawDistance = 26.0f;
 //
 //	if ( fDistToCamSqr < SQR(fDrawDistance*0.5f) )
 //	{
-//		if ( pPedObject == FindPlayerPed() || TheCamera.IsSphereVisible(PedPos, 2.0f) != false )
+//		if ( pPedObject == FindPlayerPed() || CCamera::Get().IsSphereVisible(PedPos, 2.0f) != false )
 //		{
 //			float fDistToCam = sqrt(fDistToCamSqr);
 //
@@ -920,7 +920,7 @@
 //#endif
 //	ASSERT(pObject != nil);
 //
-//    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+//    
 //    CCutsceneShadow *shadow = pObject->m_pShadow;
 //
 //	if ( shadow == nil )
@@ -931,13 +931,13 @@
 //
 //	CVector pos = pObject->GetPosition();
 //
-//	float fDistToCamSqr = (pos - TheCamera.GetPosition()).MagnitudeSqr2D();
+//	float fDistToCamSqr = (pos - CCamera::Get().GetPosition()).MagnitudeSqr2D();
 //
 //	float fDrawDistance = 100.0f;
 //
 //	if ( fDistToCamSqr < SQR(fDrawDistance*0.5f) )
 //	{
-//		if ( (CEntity*)pObject == FindPlayerPed() || TheCamera.IsSphereVisible(pos, 2.0f) )
+//		if ( (CEntity*)pObject == FindPlayerPed() || CCamera::Get().IsSphereVisible(pos, 2.0f) )
 //		{
 //			float fDistToCam = sqrt(fDistToCamSqr);
 //

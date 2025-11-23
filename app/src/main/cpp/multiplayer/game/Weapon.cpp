@@ -310,7 +310,7 @@ bool CWeapon::Fire(CEntity* firedBy, CVector* startPosn, CVector* barrelPosn, CE
                             ? firedBy->AsPed()
                             : nullptr;
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+    
     const auto wi = &GetWeaponInfo(firedByPed);
 
     CVector point{ 0.f, 0.f, 0.6f };
@@ -401,7 +401,7 @@ bool CWeapon::Fire(CEntity* firedBy, CVector* startPosn, CVector* barrelPosn, CE
             case WEAPON_MINIGUN: {
                 if (   firedByPed
                        && firedByPed == GamePool_FindPlayerPed()
-                       && notsa::contains({ MODE_M16_1STPERSON, MODE_HELICANNON_1STPERSON }, (eCamMode)TheCamera.PlayerWeaponMode.m_nMode)
+                       && notsa::contains({ MODE_M16_1STPERSON, MODE_HELICANNON_1STPERSON }, (eCamMode)CCamera::Get().PlayerWeaponMode.m_nMode)
                         ) {
                     return { FireM16_1stPerson(firedByPed), true };
                 }
@@ -433,7 +433,7 @@ bool CWeapon::Fire(CEntity* firedBy, CVector* startPosn, CVector* barrelPosn, CE
                         true
                 };
             case WEAPON_SNIPERRIFLE: {
-                if (firedByPed && firedByPed == GamePool_FindPlayerPed() && TheCamera.PlayerWeaponMode.m_nMode == MODE_SNIPER) {
+                if (firedByPed && firedByPed == GamePool_FindPlayerPed() && CCamera::Get().PlayerWeaponMode.m_nMode == MODE_SNIPER) {
                     return {
                             FireSniper(firedByPed, targetEnt, targetPosn),
                             true

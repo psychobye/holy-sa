@@ -47,6 +47,7 @@ VALIDATE_SIZE(long long, 8);
 
 #include "rgba.h"
 #include "tHandlingData.h"
+#include "tBikeHandlingData.h"
 #include "SimpleTransform.h"
 #include "General.h"
 #include "MemoryMgr.h"

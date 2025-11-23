@@ -11,6 +11,7 @@
 #include "game/RideAnimData.h"
 #include "Audio/entities/AEVehicleAudioEntity.h"
 #include "Enums/eVehicleDummy.h"
+#include "tFlyingHandlingData.h"
 
 enum eVehicleCreatedBy : uint8 {
     RANDOM_VEHICLE = 1,
@@ -43,7 +44,7 @@ struct CVehicle : CPhysical
 {
     CAEVehicleAudioEntity m_VehicleAudioEntity;
     tHandlingData* m_pHandlingData;
-    uintptr_t* pFlyingHandling;
+    tFlyingHandlingData* pFlyingHandling;
     union{
         eVehicleHandlingFlags  m_nHandlingFlagsIntValue;
         struct {

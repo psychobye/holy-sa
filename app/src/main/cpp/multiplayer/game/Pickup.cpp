@@ -28,9 +28,9 @@ void CPickup::GiveUsAPickUpObject(CObject** obj, int32 slotIndex) {
 
 // Is pickup visible (checks if distance between pickup and camera is shorter than 100 units)
 bool CPickup::IsVisible() {
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+    
 
-    return DistanceBetweenPoints2D(GetPosn2D(), TheCamera.GetPosition()) < 100.0f;
+    return DistanceBetweenPoints2D(GetPosn2D(), CCamera::Get().GetPosition()) < 100.0f;
 }
 
 bool CPickup::Update() {

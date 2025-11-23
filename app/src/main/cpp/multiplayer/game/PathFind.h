@@ -1,9 +1,6 @@
-/*
-    Plugin-SDK file
-    Authors: GTA Community. See more here
-    https://github.com/DK22Pac/plugin-sdk
-    Do not delete this comment block. Respect others' work!
-*/
+//
+// Created by Traw-GG on 05.10.2025.
+//
 #pragma once
 
 #include "CompressedVector.h"
@@ -22,7 +19,7 @@ static constexpr auto NUM_PATH_MAP_AREAS{ NUM_PATH_MAP_AREA_X * NUM_PATH_MAP_ARE
 static constexpr auto NUM_PATH_INTERIOR_AREAS{ 8 };
 static constexpr auto NUM_DYNAMIC_LINKS_PER_AREA{ 16 };
 
-inline std::array<CNodeAddress, 5000> aNodesToBeCleared;
+inline std::array<CNodeAddress, 50000> aNodesToBeCleared;
 
 enum ePathType : uint8 {
     PATH_TYPE_VEH, /// Cars, boats, race tracks
@@ -89,10 +86,10 @@ VALIDATE_SIZE(CPathIntersectionInfo, 0x1);
 
 class CCarPathLink { // "Navi Nodes"
 public:
-    FixedVector2D<int16, 8>    m_posn;
+    FixedVector2D<int16, 8.f>  m_posn;
     CNodeAddress               m_attachedTo;                 ///< Identifies the target node a navi node is attached to.
-    FixedVector2D<int8, 100>   m_dir;                          ///< This is a normalized vector pointing towards the [above mentioned] target node, thus defining the general direction of the path segment.
-    FixedFloat<int8, 16>       m_nPathNodeWidth;             ///< Usually a copy of the linked node's path width (byte)
+    FixedVector2D<int8, 100.f> m_dir;                          ///< This is a normalized vector pointing towards the [above mentioned] target node, thus defining the general direction of the path segment.
+    FixedFloat<int8, 16.f>     m_nPathNodeWidth;             ///< Usually a copy of the linked node's path width (byte)
     uint8                      m_numOppositeDirLanes : 3;    ///< Number of (left) lanes that are opposite to this lane's direction, eg.: `other->dir.Dot(this->dir)` is `< 0`
     uint8                      m_numSameDirLanes : 3;        ///< Number of (right) lanes that are the going the same direction as this node's direction, eg.: `other->dir.Dot(this->dir)` is `> 0`
     uint8                      m_bTrafficLightDirection : 1; ///< `1` if the navi node has the same direction as the traffic light and `0` if the navi node points somewhere else
@@ -342,7 +339,7 @@ public:
             bool includeNodesWithoutLinks,
             bool waterPath
     );
-   // void ComputeRoute(uint8 nodeType, const CVector& vecStart, const CVector& vecEnd, const CNodeAddress& address, CNodeRoute& nodeRoute);
+    // void ComputeRoute(uint8 nodeType, const CVector& vecStart, const CVector& vecEnd, const CNodeAddress& address, CNodeRoute& nodeRoute);
     void SetLinksBridgeLights(float fXMin, float fXMax, float fYMin, float fYMax, bool bTrainCrossing);
 
     /*!
@@ -452,10 +449,10 @@ public:
 
     CPathNode* GetPathNode(CNodeAddress address);
 
-//    inline CCarPathLink& GetCarPathLink(const CLinkAddress& address) {
-//        assert(address.m_wAreaId < NUM_TOTAL_PATH_NODE_AREAS);
-//        return m_pNaviNodes[address.m_wAreaId][address.m_wCarPathLinkId];
-//    }
+    inline CCarPathLink& GetCarPathLink(const CLinkAddress& address) {
+        assert(address.m_wAreaId < NUM_TOTAL_PATH_NODE_AREAS);
+        return pLinks[address.m_wAreaId][address.m_wCarPathLinkId];
+    }
 
 
     /*!
@@ -592,29 +589,13 @@ public:
         return true;
     }
 
-    /*!
-    * @notsa
-    *
-    * @param node                   The node to get the links of
-    * @param checkLinksAreaIsLoaded Whenever linked nodes should be checked whenever this area is loaded. If not, they won't be included in the list. If this is `false` and the area isn't loaded it's UB (probably a crash)
-    *
-    * @brief Get all links of the given node as a span of `CPathNode&`. If a link's area isn't loaded it won't be present in the span either.
-    */
-//    auto GetNodeLinkedNodes(const CPathNode& node, bool checkLinksAreaIsLoaded = true) {
-//        std::vector<CPathNode*> linkedNodes;
-//
-//        for (int i = 0; i < node.m_nNumLinks; ++i) {
-//            auto addr = m_pNodeLinks[node.m_wAreaId][node.m_wBaseLinkId + i];
-//
-//            if (!checkLinksAreaIsLoaded || IsAreaNodesAvailable(addr)) {
-//                linkedNodes.push_back(GetPathNode(addr));
-//            }
-//        }
-//
-//        return linkedNodes;
-//    }
+    static CPathFind& Get() {
+        static CPathFind* ThePaths = nullptr;
+        if (!ThePaths) {
+            ThePaths = reinterpret_cast<CPathFind*>(g_libGTASA + (VER_x32 ? 0x7A61F0 : 0x9869C0));
+        }
+        return *ThePaths;
+    }
 };
 
 VALIDATE_SIZE(CPathFind, (VER_x32 ? 0x3CC0 : 0x4CA8));
-
-static inline CPathFind* ThePaths;

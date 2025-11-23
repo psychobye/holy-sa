@@ -92,5 +92,7 @@ public:
     static int32 LoadObject(const char *line);
     static CEntity* LoadObjectInstance(CFileObjectInstance* objInstance, const char* modelName);
     static CEntity* LoadObjectInstance1(const char* line);
+
+    static void LoadVehicleObject();
 };
 

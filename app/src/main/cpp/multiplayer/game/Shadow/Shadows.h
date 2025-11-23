@@ -1,9 +1,6 @@
-/*
-    Plugin-SDK file
-    Authors: GTA Community. See more here
-    https://github.com/DK22Pac/plugin-sdk
-    Do not delete this comment block. Respect others' work!
-*/
+//
+// Created by Traw-GG on 05.10.2025.
+//
 #pragma once
 
 
@@ -182,6 +179,19 @@ public:
 
     static inline RwTexture* gpShadowHeadLightsTexLong;
 
+    static inline RwTexture* gpShadowCarTex;
+    static inline RwTexture* gpShadowPedTex;
+    static inline RwTexture* gpShadowHeliTex;
+    static inline RwTexture* gpShadowBikeTex;
+    static inline RwTexture* gpShadowBaronTex;
+    static inline RwTexture* gpShadowExplosionTex;
+    static inline RwTexture* gpShadowHeadLightsTex;
+    static inline RwTexture* gpShadowHeadLightsTex2;
+    static inline RwTexture* gpBloodPoolTex;
+    static inline RwTexture* gpHandManTex;
+    static inline RwTexture* gpCrackedGlassTex;
+    static inline RwTexture* gpPostShadowTex;
+
 public:
     static void InjectHooks();
 
@@ -194,6 +204,7 @@ public:
 
     static void StoreShadowToBeRendered(uint8 type, const CVector& posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue);
     static void StoreShadowToBeRendered(uint8 type, RwTexture* texture, const CVector& posn, float topX, float topY, float rightX, float rightY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, bool drawOnWater, float scale, CRealTimeShadow* realTimeShadow, bool drawOnBuildings);
+    static void StoreShadowToBeRendered(uint8 type, RwTexture* texture, CVector* posn, float topX, float topY, float rightX, float rightY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, bool drawOnWater, float scale, CRealTimeShadow* realTimeShadow, bool drawOnBuildings);
     // NOTSA
     static void StoreShadowToBeRendered(eShadowType type, RwTexture* tex, const CVector& posn, CVector2D top, CVector2D right, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, bool drawOnWater, float scale, CRealTimeShadow* realTimeShadow, bool drawOnBuildings);
     static void SetRenderModeForShadowType(eShadowType type);
@@ -206,7 +217,6 @@ public:
                                          uint8 red, uint8 green, uint8 blue,
                                          uint8& outRed, uint8& outGreen, uint8& outBlue
     );
-    static void StoreShadowForPedObject(CPed* ped, float displacementX, float displacementY, float frontX, float frontY, float sideX, float sideY);
     static void StoreRealTimeShadow(CPhysical* physical, float displacementX, float displacementY, float frontX, float frontY, float sideX, float sideY);
     /*!
     * @addr 0x707F40
@@ -218,18 +228,19 @@ public:
     * @addr 0x708300
     * @brief Render all active static shadows
     */
-    static void RenderStaticShadows();
+    static void RenderStaticShadows(bool renderAdditive);
 
     static void CastShadowEntityXY(CEntity* entity, float conrerAX, float cornerAY, float cornerBX, float cornerBY, CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, float scale, CPolyBunch** ppPolyBunch, uint8* pDayNightIntensity, int32 shadowType);
     static void CastShadowEntityXYZ(CEntity* entity, CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, float scale, CPolyBunch** ppPolyBunch, CRealTimeShadow* realTimeShadow);
-    static void CastPlayerShadowSectorList(CPtrList& ptrList, float conrerAX, float cornerAY, float cornerBX, float cornerBY, CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, float scale, CPolyBunch** ppPolyBunch, uint8* pDayNightIntensity, int32 shadowType);
-    static void CastShadowSectorList(CPtrList& ptrList, float conrerAX, float cornerAY, float cornerBX, float cornerBY, CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, float scale, CPolyBunch** ppPolyBunch, uint8* pDayNightIntensity, int32 shadowType);
-    static void CastRealTimeShadowSectorList(CPtrList& ptrList, float conrerAX, float cornerAY, float cornerBX, float cornerBY, CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, float scale, CPolyBunch** ppPolyBunch, CRealTimeShadow* realTimeShadow, uint8* pDayNightIntensity);
+    static void CastPlayerShadowSectorList(CPtrList* ptrList, float conrerAX, float cornerAY, float cornerBX, float cornerBY, CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, float scale, CPolyBunch** ppPolyBunch, uint8* pDayNightIntensity, int32 shadowType);
+    static void CastShadowSectorList(CPtrList* ptrList, float conrerAX, float cornerAY, float cornerBX, float cornerBY, CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, float scale, CPolyBunch** ppPolyBunch, uint8* pDayNightIntensity, int32 shadowType);
+    static void CastRealTimeShadowSectorList(CPtrList* ptrList, float conrerAX, float cornerAY, float cornerBX, float cornerBY, CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, float scale, CPolyBunch** ppPolyBunch, CRealTimeShadow* realTimeShadow, uint8* pDayNightIntensity);
     static void RenderStoredShadows();
     static void GeneratePolysForStaticShadow(int16 staticShadowIndex);
     static bool StoreStaticShadow(uint32 id, eShadowType type, RwTexture* texture, const CVector* posn, float frontX, float frontY, float sideX, float sideY, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistane, float scale, float drawDistance, bool temporaryShadow, float upDistance);
     static void StoreShadowForVehicle(CVehicle* vehicle, VEH_SHD_TYPE vehShadowType);
     static void StoreCarLightShadow(CVehicle* vehicle, int32 id, RwTexture* texture, CVector* posn, float frontX, float frontY, float sideX, float sideY, uint8 red, uint8 green, uint8 blue, float maxViewAngle);
+    static void StoreShadowForPedObject(CPed* ped, float displacementX, float displacementY, float frontX, float frontY, float sideX, float sideY);
     static void StoreShadowForPole(CEntity* entity, float offsetX, float offsetY, float offsetZ, float poleHeight, float poleWidth, uint32 localId);
     static void RenderIndicatorShadow(uint32 id, eShadowType, RwTexture* texture, const CVector& posn, float frontX, float frontY, float sideX, float sideY, int16 intensity);
 };
@@ -241,17 +252,4 @@ CVector* ShadowRenderTriangleCB(CVector* normal, CVector* trianglePos, _Projecti
 constexpr float MAX_DISTANCE_PED_SHADOWS = 15.0f; // 0x8D5240 - TODO: Rename to `MAX_DISTANCE_SHADOWS`
 constexpr float MAX_DISTANCE_PED_SHADOWS_SQR = MAX_DISTANCE_PED_SHADOWS * MAX_DISTANCE_PED_SHADOWS; // 0xC4B6B0 - TODO: Rename to `MAX_DISTANCE_PED_SHADOWS_SQ`
 
-static inline RwTexture* gpShadowCarTex;
-static inline RwTexture* gpShadowPedTex;
-static inline RwTexture* gpShadowHeliTex;
-static inline RwTexture* gpShadowBikeTex;
-static inline RwTexture* gpShadowBaronTex;
-static inline RwTexture* gpShadowExplosionTex;
-static inline RwTexture* gpShadowHeadLightsTex; // near
-static inline RwTexture* gpShadowHeadLightsTex2; // single
-static inline RwTexture* gpBloodPoolTex;
-static inline RwTexture* gpHandManTex;
-static inline RwTexture* gpCrackedGlassTex;
-static inline RwTexture* gpPostShadowTex;
-
-static inline std::array<RwImVertexIndex, 24> g_ShadowVertices;
+inline std::array<RwImVertexIndex, 24> g_ShadowVertices = { 0, 2, 1, 0, 3, 2, 0, 4, 3, 0, 5, 4, 0, 6, 5, 0, 7, 6, 0, 8, 7, 0, 9, 8 };

@@ -183,6 +183,7 @@ public:
 
     static void DrawRadarGangOverlay(bool inMenu);
     static uint32 GetRadarTraceColour(uint32 color, bool bright, bool friendly);
+    static void ShowRadarTraceWithHeight(float x, float y, uint32 size, uint32 R, uint32 G, uint32 B, uint32 A, eRadarTraceHeight height);
     static void DrawLegend(int32 x, int32 y, eRadarSprite blipType);
     static float LimitRadarPoint(CVector2D* point);
     static uint8 CalculateBlipAlpha(float distance);

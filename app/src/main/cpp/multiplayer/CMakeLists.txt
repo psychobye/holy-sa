@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(multiplayer)
 
 set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 if(${ANDROID_ABI} STREQUAL "armeabi-v7a")
     add_definitions(-DVER_x32=true)
@@ -51,5 +52,17 @@ target_link_libraries(multiplayer
 )
 
 # Set compilation flags
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s -w -fstack-protector -Wall -O3 -fexceptions")
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s -w -fstack-protector -Wall -O3 -fexceptions") # old
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Og -fexceptions -pthread -g3 -gdwarf-5") # Debug
 
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -s -w -O3 -fexceptions -fstack-protector-strong -pthread")
+
+if(${ANDROID_ABI} STREQUAL "arm64-v8a")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv8-a -mtune=cortex-a78")
+elseif(${ANDROID_ABI} STREQUAL "armeabi-v7a")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=armv7-a -mfpu=neon -mfloat-abi=softfp")
+endif()
+
+if(${ANDROID_ABI} STREQUAL "arm64-v8a")
+    set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,-z,max-page-size=65536")
+endif()

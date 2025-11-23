@@ -120,6 +120,9 @@ public:
 	void RemoveComponent(uint16_t uiComponent) const;
 
 	void SetComponentVisible(uint8_t group, uint16_t components);
+    void SetBikeHandlingData();
+    void SetHeliHandlingData();
+    void SetVehicleHandlingData();
 	void SetHandlingData();
 
 	void ProcessHeadlightsColor(uint8_t& r, uint8_t& g, uint8_t& b);
@@ -178,6 +181,7 @@ public:
     eLightsState 	m_bIsLightOn = eLightsState::OFF;
 
 	tHandlingData* m_pCustomHandling = nullptr;
+    tBikeHandlingData* m_pCustomBikeHandling = nullptr;
 
     std::list<SHandlingData> m_msLastSyncHandling {};
     CColLine* m_pSuspensionLines;

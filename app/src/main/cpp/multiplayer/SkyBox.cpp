@@ -30,8 +30,7 @@ void CSkyBox::Process() {
 
     m_pSkyObject->m_pEntity->GetMatrix(&matrix);
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-    matrix.pos = TheCamera.GetPosition();
+    matrix.pos = CCamera::Get().GetPosition();
 
     CVector axis{0.0f, 0.0f, 1.0f};
     RwMatrixRotate(&matrix, &axis, m_fRotSpeed * CTimer::ms_fTimeScale);

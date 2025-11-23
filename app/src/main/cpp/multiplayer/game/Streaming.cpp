@@ -389,10 +389,10 @@ void CStreaming::Update() {
     const double clampedDeltaTime = std::min(0.1, deltaTime);
     TextureDatabaseRuntime::UpdateStreaming(clampedDeltaTime, true);
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+    
 
-    const auto& camPos = TheCamera.GetPosition();
-    const float fCamDistanceToGroundZ = camPos.z - TheCamera.CalculateGroundHeight(eGroundHeightType::ENTITY_BB_BOTTOM);
+    const auto& camPos = CCamera::Get().GetPosition();
+    const float fCamDistanceToGroundZ = camPos.z - CCamera::Get().CalculateGroundHeight(eGroundHeightType::ENTITY_BB_BOTTOM);
     if (!ms_disableStreaming && !CRenderer::m_loadingPriority) {
         if (fCamDistanceToGroundZ >= 50.0f) {
             if (CGame::CanSeeOutSideFromCurrArea()) {
@@ -913,11 +913,11 @@ void CStreaming::DeleteRwObjectsBehindCamera(size_t memoryToCleanInBytes) {
     const auto START_OFFSET_XY = 10;
     const auto END_OFFSET_XY = 2;
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-    const CVector& cameraPos = TheCamera.GetPosition();
+    
+    const CVector& cameraPos = CCamera::Get().GetPosition();
     const int32 pointSecX = CWorld::GetSectorX(cameraPos.x),
             pointSecY = CWorld::GetSectorY(cameraPos.y);
-    const CVector2D& camFwd = TheCamera.GetForward();
+    const CVector2D& camFwd = CCamera::Get().GetForward();
     if (std::fabs(camFwd.y) < std::fabs(camFwd.x)) {
         int32 sectorStartY = std::max(pointSecY - START_OFFSET_XY, 0);
         int32 sectorEndY = std::min(pointSecY + START_OFFSET_XY, MAX_SECTORS_Y - 1);
@@ -1184,8 +1184,8 @@ bool CStreaming::RemoveLeastUsedModel(int32 streamingFlags) {
         }
     }
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-    if (TheCamera.GetPosition().z - TheCamera.CalculateGroundHeight(eGroundHeightType::ENTITY_BB_BOTTOM) > 50.0f
+    
+    if (CCamera::Get().GetPosition().z - CCamera::Get().CalculateGroundHeight(eGroundHeightType::ENTITY_BB_BOTTOM) > 50.0f
         && (
                 ms_numPedsLoaded > 4
                 && RemoveLoadedZoneModel()

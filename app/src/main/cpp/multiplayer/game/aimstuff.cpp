@@ -114,13 +114,13 @@ void GameAimSyncInit()
 {
     DLOG("GameAimSyncInit");
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
     
-	pbyteCameraMode = (uint16_t *) &TheCamera.m_aCams[0].m_nMode;
+    
+	pbyteCameraMode = (uint16_t *) &CCamera::Get().m_aCams[0].m_nMode;
 	pcaInternalAim = GameGetInternalAim();
-	pfCameraExtZoom = &TheCamera.m_aCams[0].FOV;
+	pfCameraExtZoom = &CCamera::Get().m_aCams[0].FOV;
 	pfAspectRatio = (float*)(g_libGTASA + (VER_x32 ? 0x00A26A90 : 0xCC7F00));
-	wCameraMode2 = &TheCamera.PlayerWeaponMode.m_nMode;
+	wCameraMode2 = &CCamera::Get().PlayerWeaponMode.m_nMode;
 
 	memset(&caLocalPlayerAim, 0, sizeof(CAMERA_AIM));
 	memset(caRemotePlayerAim, 0, sizeof(CAMERA_AIM) * MAX_PLAYERS);

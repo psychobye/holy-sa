@@ -112,6 +112,29 @@ public:
                && pos.y > -3000.0f && pos.y < 3000.0f;
     }
 
+    template<std::predicate<int32, int32> Fn>
+    static bool IterateSectorsOverlappedByRect(CRect rect, Fn&& fn) {
+        return IterateSectors(
+                GetSectorX(rect.left),
+                GetSectorY(rect.bottom),
+                GetSectorX(rect.right),
+                GetSectorY(rect.top),
+                std::forward<Fn>(fn)
+        );
+    }
+
+    template<std::predicate<int32, int32> Fn>
+    static bool IterateSectors(int32 minX, int32 minY, int32 maxX, int32 maxY, Fn&& fn) {
+        for (auto y = minY; y <= maxY; ++y) {
+            for (auto x = minX; x <= maxX; ++x) {
+                if (!std::invoke(fn, x, y)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     static void SetToIgnoreEntity(CEntity* entity) {
         *(CEntity**)(g_libGTASA + (VER_x32 ? 0x0096B9D0 : 0xBDCAF8)) = entity;
     }
@@ -124,8 +147,9 @@ public:
 CSector* GetSector(int32 x, int32 y);
 CRepeatSector* GetRepeatSector(int32 x, int32 y);
 
-
 CPlayerInfoGta&   FindPlayerInfo(int32 playerId = -1);
-CPlayerPed*    FindPlayerPed(int32 playerId = -1);
-CVehicle*      FindPlayerVehicle(int32 playerId = -1, bool bIncludeRemote = false);
+CPlayerPed*       FindPlayerPed(int32 playerId = -1);
+CEntity*          FindPlayerEntity(int32 playerId = -1);
+CVehicle*         FindPlayerVehicle(int32 playerId = -1, bool bIncludeRemote = false);
 bool              PlayerIsEnteringCar();
+CVector           FindPlayerCentreOfWorld_NoInteriorShift(int32 playerId);

@@ -2337,6 +2337,12 @@ bool ProcessLocalCommands(const char str[])
         CTireShop::show(price);
         return true;
     }
+	if (strstr(str, "/taxitest"))
+    {
+		CTaxi::UpdateInfo(1, 5, 333);
+        CTaxi::NewOrder(1);
+        return true;
+    }
 
 	return false;
 }

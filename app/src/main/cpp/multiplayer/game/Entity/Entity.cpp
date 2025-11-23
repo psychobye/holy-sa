@@ -21,7 +21,7 @@
 #include "Pipelines/CustomBuilding/CustomBuildingDNPipeline.h"
 #include "Weather.h"
 #include "PointLights.h"
-#include "Shadows.h"
+#include "game/Shadow/Shadows.h"
 #include "World.h"
 
 void CEntity::UpdateRwFrame()
@@ -86,8 +86,8 @@ float CEntity::GetDistanceFromCamera()
     if(!this)
         return 0;
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-    return DistanceBetweenPoints(GetPosition(), TheCamera.GetPosition());
+    
+    return DistanceBetweenPoints(GetPosition(), CCamera::Get().GetPosition());
 }
 
 bool CEntity::IsScanCodeCurrent() const {
@@ -126,8 +126,8 @@ bool CEntity::GetIsOnScreen() {
     CVector thisVec;
     GetBoundCentre(thisVec);
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-    return TheCamera.IsSphereVisible(&thisVec, CModelInfo::GetModelInfo(m_nModelIndex)->GetColModel()->GetBoundRadius());
+    
+    return CCamera::Get().IsSphereVisible(&thisVec, CModelInfo::GetModelInfo(m_nModelIndex)->GetColModel()->GetBoundRadius());
 }
 
 RwMatrix* CEntity::GetModellingMatrix() {
@@ -502,7 +502,7 @@ void CEntity::ProcessLightsForEntity() {
     if (!mi->m_n2dfxCount)
         return;
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+    
     for (int32 iFxInd = 0; iFxInd < mi->m_n2dfxCount; ++iFxInd) {
         auto effect = CHook::CallFunction<C2dEffect*>("_ZN14CBaseModelInfo11Get2dEffectEi", mi, iFxInd);
         auto fIntensity = 1.0F;
@@ -514,7 +514,7 @@ void CEntity::ProcessLightsForEntity() {
             auto vecDir = vecEffPos - GetPosition();
             vecDir.Normalise();
 
-            auto vecCamDir = TheCamera.GetPosition() - vecEffPos;
+            auto vecCamDir = CCamera::Get().GetPosition() - vecEffPos;
             auto fCamDist = vecCamDir.Magnitude();
             auto fScale = 2.0F / fCamDist;
             auto vecScaledCam = (vecCamDir * fScale);
@@ -746,7 +746,7 @@ void CEntity::ProcessLightsForEntity() {
         if (!bSkipCoronaChecks && bDoColorLight) {
             auto bCanCreateLight = true;
             if (effect->light.m_bCheckDirection) {
-                const auto& camPos = TheCamera.GetPosition();
+                const auto& camPos = CCamera::Get().GetPosition();
                 CVector lightOffset{
                         static_cast<float>(effect->light.offsetX),
                         static_cast<float>(effect->light.offsetY),

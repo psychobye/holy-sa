@@ -90,8 +90,8 @@ void CMirrors::RenderReflections()
         radiusInitialized = true;
     }
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-    TheCamera.m_sphereMapRadius = reflectionRadius * reflectionRadius;
+    
+    CCamera::Get().m_sphereMapRadius = reflectionRadius * reflectionRadius;
 
     auto originalMirrorType = TypeOfMirror;
     TypeOfMirror = MIRROR_TYPE_SPHERE_MAP;
@@ -133,7 +133,7 @@ void CMirrors::RenderReflections()
     Scene.m_pRwCamera->zBuffer = originalZBuffer;
     TypeOfMirror = originalMirrorType;
 
-    TheCamera.m_sphereMapRadius = 0.0f;
+    CCamera::Get().m_sphereMapRadius = 0.0f;
     Scene.m_pRwCamera->farPlane = originalFarPlane;
     Scene.m_pRwCamera->fogPlane = originalFogPlane;
 }
@@ -148,8 +148,8 @@ void CMirrors::BeforeMainRender() {
     RwCameraSetRaster(Scene.m_pRwCamera, pBuffer);
     RwCameraSetZRaster(Scene.m_pRwCamera, pZBuffer);
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-    TheCamera.SetCameraUpForMirror();
+    
+    CCamera::Get().SetCameraUpForMirror();
 
     RwRGBA color{ 0, 0, 0, 255 };
     RwCameraClear(Scene.m_pRwCamera, &color, rwCAMERACLEARZ | rwCAMERACLEARIMAGE);
@@ -170,7 +170,7 @@ void CMirrors::BeforeMainRender() {
         RwCameraSetRaster(Scene.m_pRwCamera, prevCamRaster);
         RwCameraSetZRaster(Scene.m_pRwCamera, prevCamZRaster);
 
-        TheCamera.RestoreCameraAfterMirror();
+        CCamera::Get().RestoreCameraAfterMirror();
     }
 }
 

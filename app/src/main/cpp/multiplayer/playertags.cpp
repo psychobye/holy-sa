@@ -42,7 +42,7 @@ void CPlayerTags::Render() {
 	RenderActors();
 
 	static CVector vecPos;
-    static CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+    
 
 	for(auto &pair : CPlayerPool::spawnedPlayers) {
 		auto &pPlayer = pair.second;
@@ -71,7 +71,7 @@ void CPlayerTags::Render() {
 		if (distFromCam <= pNetGame->m_fNameTagDrawDistance) {
 			pPlayerPed->m_pPed->GetBonePosition(&vecPos, BONE_JAW, false);
 
-			if (!pNetGame->m_bNameTagLOS || CWorld::GetIsLineOfSightClear(vecPos, TheCamera.GetPosition(), true, false, false, true, false, false, false)) {
+			if (!pNetGame->m_bNameTagLOS || CWorld::GetIsLineOfSightClear(vecPos, CCamera::Get().GetPosition(), true, false, false, true, false, false, false)) {
 				static char szNickBuf[50]{};
 				memset(szNickBuf, 0, sizeof(szNickBuf));
 
@@ -85,7 +85,7 @@ void CPlayerTags::Render() {
 void CPlayerTags::RenderActors() {
 
 	static CVector vecPos;
-	static CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+	
 
 	for (auto & pair : CActorPool::list) {
 
@@ -100,7 +100,7 @@ void CPlayerTags::RenderActors() {
 		if (distFromCam <= pNetGame->m_fNameTagDrawDistance) {
 			pPed->GetBonePosition(&vecPos, BONE_JAW, false);
 
-			if (!pNetGame->m_bNameTagLOS || CWorld::GetIsLineOfSightClear(vecPos, TheCamera.GetPosition(), false, false, false, false, false, false, false)) {
+			if (!pNetGame->m_bNameTagLOS || CWorld::GetIsLineOfSightClear(vecPos, CCamera::Get().GetPosition(), false, false, false, false, false, false, false)) {
 				vecPos.z += 0.25f + (distFromCam * 0.0475f);
 
                 CVector sceenPos;

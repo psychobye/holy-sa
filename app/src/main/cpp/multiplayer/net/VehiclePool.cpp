@@ -83,7 +83,7 @@ void CVehiclePool::Process()
 		pVehicle->m_pVehicle->m_nVehicleFlags.bLightsOn = (pVehicle->m_bIsLightOn >= eLightsState::ON_NEAR);
 		pVehicle->m_pVehicle->m_nVehicleFlags.bEngineOn = pVehicle->m_bIsEngineOn;
 
-		//pVehicle->ProcessDamage();
+		pVehicle->ProcessDamage();
 		pVehicle->ProcessStrobs();
 		pVehicle->neon.Process();
 

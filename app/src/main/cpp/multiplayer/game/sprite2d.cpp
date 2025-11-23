@@ -135,6 +135,63 @@ void CSprite2d::SetTexture(Const char* name)
 	CHook::CallFunction<void>("_ZN9CSprite2d10SetTextureEPc", this, name);
 }
 
+void CSprite2d::SetVertices(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, const CRGBA& color1, const CRGBA& color2, const CRGBA& color3, const CRGBA& color4)
+{
+    RwIm2DVertexSetScreenX(&maVertices[0], x3);
+    RwIm2DVertexSetScreenY(&maVertices[0], y3);
+    RwIm2DVertexSetScreenZ(&maVertices[0], NearScreenZ);
+    RwIm2DVertexSetRecipCameraZ(&maVertices[0], RecipNearClip);
+    RwIm2DVertexSetU(&maVertices[0], 0.f, RecipNearClip);
+    RwIm2DVertexSetV(&maVertices[0], 0.f, RecipNearClip);
+    RwIm2DVertexSetIntRGBA(&maVertices[0], color3.r, color3.g, color3.b, color3.a);
+
+    RwIm2DVertexSetScreenX(&maVertices[1], x4);
+    RwIm2DVertexSetScreenY(&maVertices[1], y4);
+    RwIm2DVertexSetScreenZ(&maVertices[1], NearScreenZ);
+    RwIm2DVertexSetRecipCameraZ(&maVertices[1], RecipNearClip);
+    RwIm2DVertexSetU(&maVertices[1], 1.f, RecipNearClip);
+    RwIm2DVertexSetV(&maVertices[1], 0.f, RecipNearClip);
+    RwIm2DVertexSetIntRGBA(&maVertices[1], color4.r, color4.g, color4.b, color4.a);
+
+    RwIm2DVertexSetScreenX(&maVertices[2], x2);
+    RwIm2DVertexSetScreenY(&maVertices[2], y2);
+    RwIm2DVertexSetScreenZ(&maVertices[2], NearScreenZ);
+    RwIm2DVertexSetRecipCameraZ(&maVertices[2], RecipNearClip);
+    RwIm2DVertexSetU(&maVertices[2], 1.f, RecipNearClip);
+    RwIm2DVertexSetV(&maVertices[2], 1.f, RecipNearClip);
+    RwIm2DVertexSetIntRGBA(&maVertices[2], color2.r, color2.g, color2.b, color2.a);
+
+    RwIm2DVertexSetScreenX(&maVertices[3], x1);
+    RwIm2DVertexSetScreenY(&maVertices[3], y1);
+    RwIm2DVertexSetScreenZ(&maVertices[3], NearScreenZ);
+    RwIm2DVertexSetRecipCameraZ(&maVertices[3], RecipNearClip);
+    RwIm2DVertexSetU(&maVertices[3], 0.f, RecipNearClip);
+    RwIm2DVertexSetV(&maVertices[3], 1.f, RecipNearClip);
+    RwIm2DVertexSetIntRGBA(&maVertices[3], color1.r, color1.g, color1.b, color1.a);
+}
+
+void CSprite2d::Draw2DPolygon(float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4, const CRGBA& rgba) {
+
+    SetVertices(x1, y1, x2, y2, x3, y3, x4, y4, rgba, rgba, rgba, rgba);
+    RwRenderStateSet(rwRENDERSTATETEXTURERASTER, RWRSTATE(NULL));
+    RwRenderStateSet(rwRENDERSTATESHADEMODE,     RWRSTATE(rwSHADEMODENASHADEMODE));
+
+    if (rgba.a == 255)
+        RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, RWRSTATE(FALSE));
+    else
+        RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, RWRSTATE(TRUE));
+
+    RwIm2DRenderPrimitive(rwPRIMTYPETRIFAN, maVertices, 4);
+}
+
+void CSprite2d::DrawRect(const CRect& posn, const CRGBA& rgba) {
+    RwRenderStateSet(rwRENDERSTATETEXTURERASTER, RWRSTATE(NULL));
+    SetVertices(posn, rgba, rgba, rgba, rgba);
+    RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, RWRSTATE(rgba.a != 255));
+    RwIm2DRenderPrimitive(rwPRIMTYPETRIFAN, maVertices, 4);
+    RwRenderStateSet(rwRENDERSTATEVERTEXALPHAENABLE, RWRSTATE(FALSE));
+}
+
 void CSprite2d::InjectHooks() {
 	CHook::Write(g_libGTASA + (VER_x32 ? 0x006766AC : 0x84ADC8), &CSprite2d::RecipNearClip);
 	CHook::Write(g_libGTASA + (VER_x32 ? 0x00675F8C : 0x849FA0), &CSprite2d::NearScreenZ);

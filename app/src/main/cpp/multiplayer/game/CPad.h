@@ -5,6 +5,7 @@
 #ifndef RUSSIA_CPAD_H
 #define RUSSIA_CPAD_H
 
+#include <stdint.h>
 
 struct CControllerState {
     uint8_t data[0x60];

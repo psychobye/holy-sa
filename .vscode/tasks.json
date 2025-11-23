@@ -1,0 +1,12 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build & Install APK",
+            "type": "shell",
+            "command": "./gradlew assembleVer_release\nadb install -r app/build/outputs/apk/ver_release/release/app-ver_release-release.apk\nadb shell monkey -p com.lit.game -c android.intent.category.LAUNCHER 1",
+            "group": { "kind": "build", "isDefault": true },
+            "problemMatcher": []
+        }
+    ]
+}

@@ -80,7 +80,7 @@ void ApplyPatches_level0()
 #else
     CHook::WriteMemory(g_libGTASA + 0x23FDE0, (uintptr_t)"\x22\x00\x80\x52", 4);
 #endif
-     DisableAutoAim();
+    DisableAutoAim();
 
 	CHook::RET("_ZN6CTrain10InitTrainsEv"); // CTrain::InitTrains
 
@@ -96,6 +96,11 @@ void ApplyPatches_level0()
 
     // entryexit
     CHook::RET("_ZN17CEntryExitManager22PostEntryExitsCreationEv");
+
+    // loading crash, i really f*ck this sh*t
+    CHook::RET("_ZN19CGenericGameStorage18CheckSlotDataValidEib"); // CGenericGameStorage::CheckSlotDataValid
+    CHook::RET("_ZN19CGenericGameStorage19CheckDataNotCorruptEiPc"); // CGenericGameStorage::CheckDataNotCorrupt
+    CHook::RET("_ZN9CColAccel8endCacheEv"); // CColAccel::endCache()
 }
 
 void ApplyShadowPatch()

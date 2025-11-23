@@ -22,7 +22,7 @@ CPlayerPed* FindPlayerPed(int32 playerId) {
 
 bool PlayerIsEnteringCar()
 {
-    // FIXME: не работает. функция вызывается первый раз еще до создания педа. не критично, нужна лишь для скрытия кнопки прицела при входе в авто?
+    // FIXME: пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ. пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅ?
 //    auto pPed = pGame.FindPlayerPed()->m_pPed;
 //    if ( pPed->GetTaskManager().CTaskManager::FindActiveTaskByType(TASK_COMPLEX_ENTER_CAR_AS_DRIVER) )
 //        return true;
@@ -39,4 +39,19 @@ CVehicle* FindPlayerVehicle(int32 playerId, bool bIncludeRemote) {
         return nullptr;
 
     return player->pVehicle;
+}
+
+CEntity* FindPlayerEntity(int32 playerId) {
+    auto player = FindPlayerPed(playerId);
+    if (!player)
+        return nullptr;
+
+    if (player->IsInVehicle())
+        return player->pVehicle;
+
+    return player;
+}
+
+CVector FindPlayerCentreOfWorld_NoInteriorShift(int32 playerId) {
+    return CHook::CallFunction<CVector>("_Z29FindPlayerCentreOfWorldForMapi", playerId);
 }

@@ -414,9 +414,9 @@ bool CLocalPlayer::Spawn()
         m_bSpawnDialogShowed = false;
     }
 
-    CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+    
 
-	TheCamera.RestoreWithJumpCut();
+	CCamera::Get().RestoreWithJumpCut();
 	CCamera::SetBehindPlayer();
 
 	//CGame::DisplayWidgets(true);
@@ -787,13 +787,13 @@ void CLocalPlayer::SendAimSyncData()
 
 void CLocalPlayer::ProcessSpectating()
 {
-	CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
+	
 
 	uint16_t lrAnalog, udAnalog;
 	uint16_t wKeys = m_pPlayerPed->GetKeys(&lrAnalog, &udAnalog);
 
     SPECTATOR_SYNC_DATA packet = {
-            .vecPos = TheCamera.m_mCameraMatrix.GetPosition(),
+            .vecPos = CCamera::Get().m_mCameraMatrix.GetPosition(),
             .lrAnalog = lrAnalog,
             .udAnalog = udAnalog,
             .wKeys = wKeys
@@ -847,16 +847,15 @@ void CLocalPlayer::ProcessSpectating()
 	else if(m_byteSpectateType == SPECTATE_TYPE_PLAYER) {
 		if (CPlayerPool::GetSpawnedPlayer(m_SpectateID)) {
 			if (auto* pPlayerPed = CPlayerPool::GetAt(m_SpectateID)->GetPlayerPed()) {
-                CCamera& TheCamera = *reinterpret_cast<CCamera*>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-                TheCamera.TakeControl(pPlayerPed->m_pPed, static_cast<eCamMode>(m_byteSpectateMode), eSwitchType::JUMPCUT, 1);
+                
+                CCamera::Get().TakeControl(pPlayerPed->m_pPed, static_cast<eCamMode>(m_byteSpectateMode), eSwitchType::JUMPCUT, 1);
 				m_bSpectateProcessed = true;
 			}
 		}
 	}
 	else if(m_byteSpectateType == SPECTATE_TYPE_VEHICLE) {
         if (auto* pVehicle = CVehiclePool::GetAt((VEHICLEID) m_SpectateID)) {
-            CCamera &TheCamera = *reinterpret_cast<CCamera *>(g_libGTASA + (VER_x32 ? 0x00951FA8 : 0xBBA8D0));
-            TheCamera.TakeControl(pVehicle->m_pVehicle, static_cast<eCamMode>(m_byteSpectateMode), eSwitchType::JUMPCUT, 1);
+            CCamera::Get().TakeControl(pVehicle->m_pVehicle, static_cast<eCamMode>(m_byteSpectateMode), eSwitchType::JUMPCUT, 1);
             m_bSpectateProcessed = true;
         }
     }

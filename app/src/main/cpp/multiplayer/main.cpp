@@ -318,8 +318,6 @@ JNIEXPORT jint JNI_OnLoad(JavaVM *vm, void *reserved)
 
 	ApplyPatches_level0();
 
-	CLoader::loadBassLib();
-
 	struct sigaction act{};
 	act.sa_sigaction = handler;
 	sigemptyset(&act.sa_mask);
