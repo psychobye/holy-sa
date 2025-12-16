@@ -276,15 +276,15 @@ static_assert(sizeof(_RES_ENTRY_OBJ) == (VER_x32 ? 56 : 64)); // FIXME?
 #pragma pack(push, 1)
 struct AIM_SYNC_DATA
 {
-	uint8_t		byteCamMode;
-	CVector 	vecAimf;
-	CVector 	vecAimPos;
-	float 		fAimZ;
-	uint8_t 	byteCamExtZoom : 6;
-	uint8_t 	byteWeaponState : 2;
-	uint8_t 	aspect_ratio;
+    uint8_t	byteCamMode;
+    float	vecAimf1[3];
+    float	vecAimPos[3];
+    float	fAimZ;
+    uint8_t	byteCamExtZoom : 6;	// 0-63 normalized
+    uint8_t	byteWeaponState : 2;		// see eWeaponState
+    uint8_t	aspect_ratio;
 #if VER_LR
-	uint8 		m_bKeyboardOpened;
+    uint8 		m_bKeyboardOpened;
 #endif
 };
 #pragma pack(pop)

@@ -51,9 +51,9 @@ void CBulletTraces::Render() {
         }
 
         for (auto& vert : verts) {
-            RwIm3DVertexSetRGBA(&vert, 255, 255, 128, 0);
+            RwIm3DVertexSetRGBA(&vert, 128, 255, 255, 0);
         }
-        RwIm3DVertexSetRGBA(&verts[3], 255, 255, 128, (char)((float)trace.m_nTransparency * t)); // Only vertex 3 has non-zero alpha
+        RwIm3DVertexSetRGBA(&verts[3], 128, 255, 255, (char)((float)trace.m_nTransparency * t)); // Only vertex 3 has non-zero alpha
 
         if (RwIm3DTransform(verts, std::size(verts), nullptr, rwIM3D_VERTEXRGBA)) {
             RwImVertexIndex indices[] = {
@@ -69,8 +69,8 @@ void CBulletTraces::Render() {
     }
 
     RwRenderStateSet(rwRENDERSTATEZWRITEENABLE, RWRSTATE(TRUE));
-    RwRenderStateSet(rwRENDERSTATESRCBLEND,     RWRSTATE(rwBLENDSRCALPHA));
-    RwRenderStateSet(rwRENDERSTATEDESTBLEND,    RWRSTATE(rwBLENDINVSRCALPHA));
+    // RwRenderStateSet(rwRENDERSTATESRCBLEND,     RWRSTATE(rwBLENDSRCALPHA));
+    // RwRenderStateSet(rwRENDERSTATEDESTBLEND,    RWRSTATE(rwBLENDINVSRCALPHA));
     RwRenderStateSet(rwRENDERSTATECULLMODE,     RWRSTATE(rwCULLMODECULLBACK));
 }
 
@@ -138,7 +138,7 @@ void CBulletTraces::AddTrace(const CVector& from, const CVector& to, eWeaponType
         pTrace->m_nCreationTime = CTimer::GetTimeInMS();
         pTrace->m_nTransparency = alpha;
         pTrace->m_bExists = true;
-        pTrace->m_fRadius = radius;
+        pTrace->m_fRadius = radius * 5.0f;
 
         const auto traceIdx = GetTraceIndex(pTrace);
         if (traceIdx < 10) {

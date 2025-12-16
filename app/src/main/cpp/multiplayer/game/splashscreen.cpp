@@ -20,7 +20,7 @@ void LoadSplashTexture()
 	CVehicleNeon::pNeonTex = CUtil::LoadTextureFromDB("samp", "neonaper3");
 
 	CGUI::m_pIconTruckTex = CUtil::LoadTextureFromDB("gui", "icon_towtruck");
-	CGUI::m_pPassengerButtonTex = CUtil::LoadTextureFromDB("mobile", "hud_enterandexit");
+	CGUI::m_pPassengerButtonTex = CUtil::LoadTextureFromDB("mobile", "WidgetGetIn");
 
     // fixme: need move to cshadows::init
     CShadows::gpShadowHeadLightsTexLong = CUtil::LoadTextureFromDB("txd", "headlight_l");

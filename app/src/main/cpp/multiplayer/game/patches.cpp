@@ -155,7 +155,7 @@ void ApplyPatches()
     CHook::NOP(g_libGTASA + 0x395E6A, 7);
     // ---------- JPATCH END ----------
 #else
-	CHook::WriteMemory(g_libGTASA + 0x52737C, (uintptr_t)"\x1E\x00\x00\x14", 4); // B 0x5273F4
+    CHook::WriteMemory(g_libGTASA + 0x52737C, (uintptr_t)"\x1E\x00\x00\x14", 4); // B 0x5273F4
 	CHook::WriteMemory(g_libGTASA + 0x5273F4, (uintptr_t)"\xE1\x03\x14\x2A", 4); // mov w1, w20
 
 	// CRadar::DrawEntityBlip (translate color)

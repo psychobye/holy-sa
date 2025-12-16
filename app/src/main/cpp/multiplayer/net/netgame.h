@@ -100,6 +100,7 @@ enum class eNetworkState {
 #define RPC_TECH_INSPECT			68
 #define RPC_UPDATE_SATIETY 			69
 #define RPC_SHOW_DONATE 			70
+#define RPC_SHOW_MENU    			71
 
 #define RPC_TUNING_WHEELS    		72
 #define RPC_STYLING_CENTER    		74
@@ -276,6 +277,8 @@ public:
 	static void packetGiftNotify(Packet *p);
 	static void packetTreasure(Packet *p);
 	static void SetPlayerTag(Packet *p);
+
+    static void packetShowMenu(Packet *p);
 
 	void GiveActorWeapon(Packet *p);
 

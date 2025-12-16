@@ -29,7 +29,8 @@ public:
 	void SetFromMatrix(RwMatrix* mat);
 	void GetMatrix(RwMatrix *mat);
 	void Normalize();
-	void Slerp(CQuaternion *pQ1, CQuaternion *pQ2, float t);
+	// void Slerp(CQuaternion *pQ1, CQuaternion *pQ2, float t);
+    void Slerp(const CQuaternion *pQ1, const CQuaternion *pQ2, float t);
 
 	// Add right to the quat 0x4D12F0
 	void operator+=(const CQuaternion& right) {

@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/btn_garage"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_200sdp"
+                    android:background="@drawable/back2">
+
+                        <ImageView
+                            android:id="@+id/icon_garage"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            app:srcCompat="@drawable/ic_ruble" />
+
+                        <TextView
+                            android:id="@+id/title_garage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:shadowColor="@color/black50"
+                            android:shadowDy="3"
+                            android:shadowRadius="1"
+                            android:text="ТОВАР"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15sdp" />
+                </FrameLayout>
+        </LinearLayout>
+</LinearLayout>

@@ -45,6 +45,7 @@
 #include "java_systems/Race.h"
 #include "java_systems/BattlePass.h"
 #include "java_systems/Milk.h"
+#include "java_systems/Menu.h"
 #include "GuiWrapper.h"
 #include "MagicStore.h"
 #include "SnapShotsWrapper.h"
@@ -85,7 +86,6 @@ jclass LinkJavaClass(jclass localObj) {
     env->DeleteLocalRef(localObj);
     return globalRef;
 }
-
 
 void CLoader::initJavaClasses(JavaVM* pjvm) {
     JNIEnv* env = nullptr;
@@ -141,4 +141,5 @@ void CLoader::initJavaClasses(JavaVM* pjvm) {
     CTheftAuto::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/theft_auto/TheftAuto"));
     CBaccarat::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/CasinoBaccarat"));
     CActionsPed::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/ActionsPed"));
+    CMenu::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/menu/Menu"));
 }

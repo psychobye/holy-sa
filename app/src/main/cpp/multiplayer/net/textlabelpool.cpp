@@ -6,6 +6,7 @@
 #include "game/Render/Sprite.h"
 #include "../game/Entity/Ped/Ped.h"
 #include "World.h"
+#include "Camera.h"
 
 extern CGUI *pGUI;
 
@@ -103,7 +104,7 @@ void CText3DLabelsPool::DrawTextLabel(CText3DLabel* pLabel, const CVector* pos)
             CAMERA_AIM *pCam = GameGetInternalAim();
             if (!pCam) return;
 
-            hitEntity = CWorld::GetIsLineOfSightClear(pos, pCam->vecSource, true, false, false, false, false, false, false);
+            hitEntity = CWorld::GetIsLineOfSightClear(pos, CCamera::Get().GetPosition(), true, false, false, false, false, false, false);
         }
         if (!pLabel->useLineOfSight || hitEntity) {
             CVector Out;

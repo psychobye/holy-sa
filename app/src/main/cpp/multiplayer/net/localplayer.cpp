@@ -414,7 +414,6 @@ bool CLocalPlayer::Spawn()
         m_bSpawnDialogShowed = false;
     }
 
-    
 
 	CCamera::Get().RestoreWithJumpCut();
 	CCamera::SetBehindPlayer();
@@ -433,6 +432,8 @@ bool CLocalPlayer::Spawn()
     m_pPlayerPed->SetModelIndex(m_SpawnInfo.iSkin);
 	m_pPlayerPed->ClearAllWeapons();
 	m_pPlayerPed->ResetDamageEntity();
+
+    CHUD::updateAmmo();
 
 	//CGame::DisableTrainTraffic();
 
@@ -761,34 +762,58 @@ void CLocalPlayer::SendAimSyncData()
     const CAMERA_AIM* pCameraAim = m_pPlayerPed->GetCurrentAim();
 
     uint8_t weaponState = 0;
-    if (const CWeapon* pWeapon = m_pPlayerPed->GetCurrentWeaponSlot()) {
-        weaponState = (pWeapon->m_nState == WEAPONSTATE_RELOADING) ? 3 :
-                      ((pWeapon->dwAmmoInClip > 1) ? 2 : pWeapon->dwAmmoInClip);
+    if (const CWeapon* pWeapon = m_pPlayerPed->GetCurrentWeaponSlot())
+    {
+        weaponState =
+                (pWeapon->m_nState == WEAPONSTATE_RELOADING) ? 3 :
+                ((pWeapon->dwAmmoInClip > 1) ? 2 : pWeapon->dwAmmoInClip);
     }
 
     AIM_SYNC_DATA aimSync = {
             .byteCamMode = static_cast<uint8_t>(m_pPlayerPed->GetCameraMode()),
-            .vecAimf = pCameraAim->vecFront,
-            .vecAimPos = pCameraAim->vecSource,
+
+            .vecAimf1 = {
+                    pCameraAim->f1x,
+                    pCameraAim->f1y,
+                    pCameraAim->f1z
+            },
+
+            .vecAimPos = {
+                    pCameraAim->pos1x,
+                    pCameraAim->pos1y,
+                    pCameraAim->pos1z
+            },
+
             .fAimZ = m_pPlayerPed->GetAimZ(),
-            .aspect_ratio = 255,
-            .byteCamExtZoom = static_cast<uint8_t>(static_cast<unsigned char>(m_pPlayerPed->GetCameraExtendedZoom() * 63.0f) & 0x3F),
+
+            .byteCamExtZoom = static_cast<uint8_t>(
+                    static_cast<unsigned char>(
+                            m_pPlayerPed->GetCameraExtendedZoom() * 63.0f
+                    ) & 0x3F
+            ),
+
             .byteWeaponState = weaponState,
+            .aspect_ratio = 255,
+
 #if VER_LR
             .m_bKeyboardOpened = CKeyBoard::m_bEnable
 #endif
     };
 
     RakNet::BitStream bsAimSync;
-    bsAimSync.Write((char)ID_AIM_SYNC);
-    bsAimSync.Write((char*)&aimSync, sizeof(AIM_SYNC_DATA));
-    pNetGame->GetRakClient()->Send(&bsAimSync, HIGH_PRIORITY, UNRELIABLE_SEQUENCED, 0);
+    bsAimSync.Write((uint8_t)ID_AIM_SYNC);
+    bsAimSync.Write(reinterpret_cast<char*>(&aimSync), sizeof(AIM_SYNC_DATA));
+
+    pNetGame->GetRakClient()->Send(
+            &bsAimSync,
+            HIGH_PRIORITY,
+            UNRELIABLE_SEQUENCED,
+            0
+    );
 }
 
 void CLocalPlayer::ProcessSpectating()
 {
-	
-
 	uint16_t lrAnalog, udAnalog;
 	uint16_t wKeys = m_pPlayerPed->GetKeys(&lrAnalog, &udAnalog);
 

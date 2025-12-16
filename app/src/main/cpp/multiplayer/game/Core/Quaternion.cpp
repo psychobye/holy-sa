@@ -52,45 +52,46 @@ void CQuaternion::Normalize()
 	z /= n;
 }
 
-#define SLERP_DELTA 0.1
-void CQuaternion::Slerp(CQuaternion *pQ1, CQuaternion *pQ2, float t)
+void CQuaternion::Slerp(const CQuaternion *pQ1, const CQuaternion *pQ2, float t)
 {
+    if(!pQ1 || !pQ2) return;
+    if(t <= 0.0f) { *this = *pQ1; return; }
+    if(t >= 1.0f) { *this = *pQ2; return; }
 
-	if(!pQ1 || !pQ2) return;
-	if(t > 1) return;
+    float x2 = pQ2->x, y2 = pQ2->y, z2 = pQ2->z, w2 = pQ2->w;
+    float cosom = pQ1->x*x2 + pQ1->y*y2 + pQ1->z*z2 + pQ1->w*w2;
 
-	float p1[4];
-	double omega, cosom, sinom, scale0, scale1;
-	cosom = pQ1->x*pQ2->x + pQ1->y*pQ2->y + pQ1->z*pQ2->z + pQ1->w*pQ2->w;
+    // shortest path
+    bool negate = false;
+    if (cosom < 0.0f) { negate = true; cosom = -cosom; }
 
-	if(cosom < 0.0)
-	{
-		cosom = -cosom;
-		p1[0] = - pQ2->x;  p1[1] = - pQ2->y;
-		p1[2] = - pQ2->z;  p1[3] = - pQ2->w;
-	}	
-	else
-	{
-		p1[0] = pQ2->x;    p1[1] = pQ2->y;
-		p1[2] = pQ2->z;    p1[3] = pQ2->w;
-	}
+    // clamp to avoid NaN from acos
+    cosom = std::clamp(cosom, -1.0f, 1.0f);
 
-	if((1.0 - cosom) > SLERP_DELTA)
-	{
-		// стандартный случай (slerp)
-		omega = acos(cosom);
-		sinom = sin(omega);
-		scale0 = sin((1.0 - t) * omega) / sinom;
-		scale1 = sin(t * omega) / sinom;
-	}
-	else
-	{
-		// если маленький угол - линейная интерполяция
-		scale0 = 1.0 - t;
-		scale1 = t;
-	}
-	Set(scale0 * pQ1->x + scale1 * p1[0],
-		scale0 * pQ1->y + scale1 * p1[1],
-		scale0 * pQ1->z + scale1 * p1[2],
-		scale0 * pQ1->w + scale1 * p1[3]);
+    const float THRESH = 0.9995f;
+    if (cosom > THRESH) {
+        // use nlerp for tiny angles (faster + stable)
+        float inv = 1.0f - t;
+        float bx = inv * pQ1->x + t * (negate ? -x2 : x2);
+        float by = inv * pQ1->y + t * (negate ? -y2 : y2);
+        float bz = inv * pQ1->z + t * (negate ? -z2 : z2);
+        float bw = inv * pQ1->w + t * (negate ? -w2 : w2);
+        // normalize
+        float len = sqrtf(bx*bx + by*by + bz*bz + bw*bw);
+        Set(bx/len, by/len, bz/len, bw/len);
+        return;
+    }
+
+    double omega = acos(cosom);
+    double sinom = sin(omega);
+    double scale0 = sin((1.0 - t) * omega) / sinom;
+    double scale1 = sin(t * omega) / sinom;
+    if (negate) scale1 = -scale1;
+
+    Set(
+            (float)(scale0 * pQ1->x + scale1 * x2),
+            (float)(scale0 * pQ1->y + scale1 * y2),
+            (float)(scale0 * pQ1->z + scale1 * z2),
+            (float)(scale0 * pQ1->w + scale1 * w2)
+    );
 }

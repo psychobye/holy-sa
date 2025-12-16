@@ -54,7 +54,11 @@ void CRemotePlayer::ProcessSpecialActions(BYTE byteSpecialAction)
 		{
 			CVector LookAt;
 			CAMERA_AIM* Aim = GameGetRemotePlayerAim(m_pPlayerPed->m_bytePlayerNumber);
-			LookAt = Aim->vecSource + (Aim->vecFront * 20.0f);
+
+            LookAt.x = Aim->pos1x + (Aim->f1x * 20.0f);
+            LookAt.y = Aim->pos1y + (Aim->f1y * 20.0f);
+            LookAt.z = Aim->pos1z + (Aim->f1z * 20.0f);
+
 			ScriptCommand(&TASK_LOOK_AT_COORD, m_pPlayerPed->m_dwGTAId, LookAt.x, LookAt.y, LookAt.z, 3000);
 			m_dwLastHeadUpdate = GetTickCount();
 		}
@@ -71,7 +75,10 @@ void CRemotePlayer::Process() {
 		if ((GetTickCount() - m_dwLastHeadUpdate) > 500 /*&& pSettings->GetReadOnly().szHeadMove*/) {
 			CVector LookAt;
 			CAMERA_AIM *Aim = GameGetRemotePlayerAim(m_pPlayerPed->m_bytePlayerNumber);
-			LookAt = Aim->vecSource + (Aim->vecFront * 20.0f);
+
+            LookAt.x = Aim->pos1x + (Aim->f1x * 20.0f);
+            LookAt.y = Aim->pos1y + (Aim->f1y * 20.0f);
+            LookAt.z = Aim->pos1z + (Aim->f1z * 20.0f);
 
 			m_pPlayerPed->ApplyCommandTask("FollowPedSA", 0, 2000, -1, &LookAt, 0, 0.1f, 500, 3, 0);
 			m_dwLastHeadUpdate = GetTickCount();
@@ -257,9 +264,10 @@ void CRemotePlayer::UpdateVehicleRotation() {
 	RwMatrix matEnt;
 	CVector vec = m_pCurrentVehicle->m_pVehicle->GetTurnSpeed();
 
-	vec.x = std::clamp(vec.x, -0.02f, 0.02f);
-	vec.y = std::clamp(vec.y, -0.02f, 0.02f);
-	vec.z = std::clamp(vec.z, -0.02f, 0.02f);
+    const float maxTurn = 0.02f;
+	vec.x = std::clamp(vec.x, -maxTurn, maxTurn);
+	vec.y = std::clamp(vec.y, -maxTurn, maxTurn);
+	vec.z = std::clamp(vec.z, -maxTurn, 0.02f);
 
 	m_pCurrentVehicle->m_pVehicle->SetTurnSpeed(vec);
 
@@ -269,7 +277,6 @@ void CRemotePlayer::UpdateVehicleRotation() {
 	qresult.Normalize();
 	qresult.GetMatrix(&matEnt);
 	m_pCurrentVehicle->m_pVehicle->SetMatrix((CMatrix &) matEnt);
-
 }
 
 bool CRemotePlayer::Spawn(uint8_t byteTeam, unsigned int iSkin, CVector *vecPos, float fRotation,
@@ -482,48 +489,44 @@ void CRemotePlayer::UpdateAimFromSyncData(AIM_SYNC_DATA * pAimSync)
 {
     m_bKeyboardOpened = pAimSync->m_bKeyboardOpened;
 
-	m_pPlayerPed->SetCameraMode(pAimSync->byteCamMode);
+    if(!m_pPlayerPed) return;
+    m_pPlayerPed->SetCameraMode(pAimSync->byteCamMode);
 
-	CAMERA_AIM Aim;
+    CAMERA_AIM Aim;
 
-	Aim.vecFront = pAimSync->vecAimf;
+    Aim.f1x = pAimSync->vecAimf1[0];
+    Aim.f1y = pAimSync->vecAimf1[1];
+    Aim.f1z = pAimSync->vecAimf1[2];
 
-	Aim.vecSource = pAimSync->vecAimPos;
+    Aim.f2x = pAimSync->vecAimf1[0];
+    Aim.f2y = pAimSync->vecAimf1[1];
+    Aim.f2z = pAimSync->vecAimf1[2];
 
-	Aim.pos2x = pAimSync->vecAimPos.x;
-	Aim.pos2y = pAimSync->vecAimPos.y;
-	Aim.pos2z = pAimSync->vecAimPos.z;
+    Aim.pos1x = pAimSync->vecAimPos[0];
+    Aim.pos1y = pAimSync->vecAimPos[1];
+    Aim.pos1z = pAimSync->vecAimPos[2];
 
-	CVector vec1;
-	vec1 = Aim.vecFront;
+    Aim.pos2x = pAimSync->vecAimPos[0];
+    Aim.pos2y = pAimSync->vecAimPos[1];
+    Aim.pos2z = pAimSync->vecAimPos[2];
 
-	CVector vec2;
+    m_pPlayerPed->SetCurrentAim(&Aim);
+    m_pPlayerPed->SetAimZ(pAimSync->fAimZ);
 
-	calculateAimVector(&vec1, &vec2);
+    float fAspect = pAimSync->aspect_ratio * 0.0039215689f;
+    // float fExtZoom = (float)(paimSync->byteCamExtZoom)/63.0f;
+    // m_pPlayerPed->SetCameraExtendedZoom(fExtZoom, 0);
 
-	Aim.f2x = vec2.x;
-	Aim.f2y = vec2.y;
-	Aim.f2z = vec2.z;
+    CWeapon* pwstWeapon = m_pPlayerPed->GetCurrentWeaponSlot();
 
-	m_pPlayerPed->SetCurrentAim(&Aim);
-	m_pPlayerPed->SetAimZ(pAimSync->fAimZ);
-
-	float fAspect = pAimSync->aspect_ratio * 0.0039215689f;
-	//float fExtZoom = (pAimSync->byteCamExtZoom) * 0.015873017f;
-
-	//m_pPlayerPed->SetCameraExtendedZoom(fExtZoom, fAspect);
-
-	CWeapon* pwstWeapon = m_pPlayerPed->GetCurrentWeaponSlot();
-
-	if (pAimSync->byteWeaponState == 3)
-		pwstWeapon->m_nState = static_cast<eWeaponState>(2);		// Reloading
-	else
-		if (pAimSync->byteWeaponState != 2)
-			pwstWeapon->dwAmmoInClip = (uint32_t)pAimSync->byteWeaponState;
-		else
-			if (pwstWeapon->dwAmmoInClip < 2)
-				pwstWeapon->dwAmmoInClip = 2;
-
+    if (pAimSync->byteWeaponState == 3)
+        pwstWeapon->m_nState = static_cast<eWeaponState>(2);		// Reloading
+    else
+    if (pAimSync->byteWeaponState != 2)
+        pwstWeapon->dwAmmoInClip = (uint32_t)pAimSync->byteWeaponState;
+    else
+    if (pwstWeapon->dwAmmoInClip < 2)
+        pwstWeapon->dwAmmoInClip = 2;
 }
 
 void CRemotePlayer::StoreOnFootFullSyncData(ONFOOT_SYNC_DATA *pofSync)

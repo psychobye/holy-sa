@@ -529,7 +529,7 @@ void InjectHooks()
 	CRQ_Commands::InjectHooks();
 	CTxdStore::InjectHooks();
 	CVisibilityPlugins::InjectHooks();
-	CAdjustableHUD::InjectHooks();
+	// CAdjustableHUD::InjectHooks();
 
 	// new
 	CClouds::InjectHooks();
@@ -1529,6 +1529,8 @@ long long CAnimBlendNode__FindKeyFrame_hook(CAnimBlendNode *thiz, float fCurrent
 }
 
 #include "../SkyBox.h"
+#include "Widgets/WidgetButton.h"
+
 int g_iLastRenderedObject;
 
 void(*CEntity__Render)(CEntity*);
@@ -1604,6 +1606,12 @@ void emu_DistanceFogSetup_hook(float minDistance, float maxDistance, float red, 
     emu_DistanceFogSetup(0.8f * minDistance, 0.95f * maxDistance, red, green, blue);
 }
 
+void (*CWidgetButtonSprint_CWidgetButtonSprint)(uintptr_t *thiz, uint8_t *pszSprite, CTouchInterface::WidgetPositionIDs *WidgetPos);
+void CWidgetButtonSprint_CWidgetButtonSprint_hook(uintptr_t *thiz, uint8_t *pszSprite, CTouchInterface::WidgetPositionIDs *WidgetPos)
+{
+    CWidgetButtonSprint_CWidgetButtonSprint(thiz, (uint8_t*)"", WidgetPos);
+}
+
 void InstallHooks()
 {
     CHook::InstallPLT(g_libGTASA + (VER_x32 ? 0x66F91C : 0x83F8A0), &CFireManager__ExtinguishPointWithWater_hook, &CFireManager__ExtinguishPointWithWater);
@@ -1619,6 +1627,7 @@ void InstallHooks()
     // CHook::InlineHook("_ZN21FxInfoGroundCollide_c8GetValueEffffhPv", &FxInfoGroundCollide_c__GetValue_hook, &FxInfoGroundCollide_c__GetValue);
     // CHook::InlineHook("_Z10HashStringPKc", &HashString_hook, &HashString);
     CHook::InlineHook("_Z20emu_DistanceFogSetupfffff", &emu_DistanceFogSetup_hook, &emu_DistanceFogSetup);
+    CHook::InlineHook("_ZN19CWidgetButtonSprintC2EPKcRK14WidgetPosition", &CWidgetButtonSprint_CWidgetButtonSprint_hook, &CWidgetButtonSprint_CWidgetButtonSprint);
     // ---------- JPATCH END ----------
 
     // WTFBUG lol

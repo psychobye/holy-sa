@@ -62,7 +62,7 @@ CNetGame::CNetGame(const char *szHostOrIp, int iPort, const char *szPlayerName,
     m_iSpawnsAvailable = 0;
     m_byteWorldMinute = 0;
     m_byteWorldTime = 12;
-    m_byteWeather = 10;
+    m_byteWeather = 3;
     m_fGravity = (float) 0.008000000;
     m_bUseCJWalk = false;
     m_bDisableEnterExits = false;
@@ -660,6 +660,10 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
             if (widgetId < WidgetIDs::NUM_WIDGETS) {
                 CTouchInterface::hiddenWidgets[widgetId] = false;
             }
+            break;
+        }
+        case RPC_SHOW_MENU: {
+            packetShowMenu(p);
             break;
         }
         case RPC_SHOW_DONATE: {
@@ -1800,7 +1804,7 @@ void CNetGame::Packet_BulletSync(Packet *p) {
 void CNetGame::Packet_AimSync(Packet *p) {
     CRemotePlayer *pPlayer;
     RakNet::BitStream bsAimSync((unsigned char *) p->data, p->length, false);
-    static AIM_SYNC_DATA aimSync;
+    AIM_SYNC_DATA aimSync;
 
     uint8_t bytePacketID = 0;
     uint16_t bytePlayerID = 0;

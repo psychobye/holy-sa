@@ -11,9 +11,9 @@ import com.lit.game.R
 import com.lit.game.core.Samp
 import com.lit.game.core.Samp.Companion.activity
 import com.lit.game.databinding.HudBinding
-import com.lit.game.gui.Menu
 import com.lit.game.gui.util.ConvertViewCoordsToGta
 import com.lit.game.gui.util.Utils
+import com.lit.game.gui.util.Utils.addPressScaleAnimation
 import com.lit.launcher.domain.enums.StorageElements
 import com.lit.launcher.storage.Storage
 import com.rommansabbir.animationx.Attention
@@ -65,6 +65,7 @@ class HudManager : Chat() {
     private external fun sendTorpedo()
     private external fun changeWeapon()
     private external fun nativeClickMenu(): Boolean
+    private external fun nativeShowMenu()
     var damageSound = 0
     fun toggleTorpedoButt(toggle: Boolean) {
         activity.runOnUiThread {
@@ -307,7 +308,8 @@ class HudManager : Chat() {
 
         binding.menuButton.setOnClickListener {
             if (!nativeClickMenu()) {
-                Menu()
+                addPressScaleAnimation(it)
+                nativeShowMenu()
             }
         }
 

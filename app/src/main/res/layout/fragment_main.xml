@@ -165,12 +165,11 @@
         android:id="@+id/news"
         android:layout_width="@dimen/_150sdp"
         android:layout_height="@dimen/_150sdp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="@dimen/_15sdp"
         android:background="@drawable/news_bg"
         app:layout_constraintBottom_toTopOf="@+id/store_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
-        app:layout_constraintVertical_bias="0.547">
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout" >
 
         <ImageView
             android:layout_width="match_parent"
@@ -203,7 +202,7 @@
                     android:fontFamily="@font/jost_medium_italic"
                     android:text="ЗАГОЛОВОК"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/_13sdp" />
 
                 <TextView
                     android:id="@+id/dataTime_text"
@@ -212,7 +211,7 @@
                     android:fontFamily="@font/jost_medium_italic"
                     android:text="12 октября 2025"
                     android:textColor="@color/gray"
-                    android:textSize="12sp" />
+                    android:textSize="@dimen/_12sdp" />
 
             </LinearLayout>
 

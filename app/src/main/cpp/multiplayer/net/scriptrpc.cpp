@@ -569,6 +569,7 @@ void ScrPutPlayerInVehicle(RPCParameters *rpcParams)
 //		seatid = CCarEnterExit::ComputeTargetDoorToEnterAsPassenger(pVehicle->m_pVehicle, seatid);
 //		CCarEnterExit::SetPedInCarDirect(pPed->m_pPed, pVehicle->m_pVehicle, seatid);
 	}
+    CCamera::SetBehindPlayer();
 }
 
 void ScrVehicleParams(RPCParameters *rpcParams)

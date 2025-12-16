@@ -1,0 +1,430 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clickable="true"
+    android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+                <FrameLayout
+                    android:id="@+id/btn_garage"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/menu_btn">
+
+                        <ImageView
+                            android:id="@+id/icon_garage"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            app:srcCompat="@drawable/ic_garage" />
+
+                        <TextView
+                            android:id="@+id/title_garage"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:shadowColor="@color/black50"
+                            android:shadowDy="3"
+                            android:shadowRadius="1"
+                            android:text="ГАРАЖ"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15sdp" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/btn_skin"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:background="@drawable/menu_btn">
+
+                        <ImageView
+                            android:id="@+id/icon_cskin"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="@dimen/_60sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            app:srcCompat="@drawable/ic_cloth" />
+
+                        <TextView
+                            android:id="@+id/title_skin"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:shadowColor="@color/black50"
+                            android:shadowDy="3"
+                            android:shadowRadius="1"
+                            android:text="ОДЕЖДА"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15sdp" />
+                </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout3"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+                <FrameLayout
+                    android:id="@+id/btn_teleport"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/menu_btn">
+
+                        <ImageView
+                            android:id="@+id/icon_teleport"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            app:srcCompat="@drawable/ic_mark" />
+
+                        <TextView
+                            android:id="@+id/title_teleport"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:shadowColor="@color/black50"
+                            android:shadowDy="3"
+                            android:shadowRadius="1"
+                            android:text="ТЕЛЕПОРТ"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15sdp" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/btn_tab"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_90sdp"
+                    android:background="@drawable/menu_btn">
+
+                        <ImageView
+                            android:id="@+id/icon_tab"
+                            android:layout_width="@dimen/_50sdp"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            app:srcCompat="@drawable/ic_players" />
+
+                        <TextView
+                            android:id="@+id/title_tab"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="bottom|center_horizontal"
+                            android:layout_marginBottom="@dimen/_10sdp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:shadowColor="@color/black50"
+                            android:shadowDy="3"
+                            android:shadowRadius="1"
+                            android:text="ИГРОКИ"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_15sdp" />
+                </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayout4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <FrameLayout
+                    android:id="@+id/btn_settings"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/menu_round_btn">
+
+                        <TextView
+                            android:id="@+id/title_settings"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:shadowColor="@color/black50"
+                            android:shadowDy="3"
+                            android:shadowRadius="1"
+                            android:text="НАСТРОЙКИ"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/btn_report"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:background="@drawable/menu_round_btn">
+
+                        <TextView
+                            android:id="@+id/title_report"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:shadowColor="@color/black50"
+                            android:shadowDy="3"
+                            android:shadowRadius="1"
+                            android:text="ТЕХ. ПОДДЕРЖКА"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_11sdp" />
+                </FrameLayout>
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="@dimen/_300sdp"
+            android:layout_height="@dimen/_150sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/rectangle_left_round" />
+
+        <ImageView
+            android:id="@+id/ic_clock"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="@+id/imageView4"
+            app:layout_constraintTop_toTopOf="@+id/imageView4"
+            app:srcCompat="@drawable/ic_clock" />
+
+        <TextView
+            android:id="@+id/time_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/black50"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="Общее игровое время"
+            android:textColor="#C8C8CC"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_clock"
+            app:layout_constraintStart_toEndOf="@+id/ic_clock"
+            app:layout_constraintTop_toTopOf="@+id/ic_clock" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/black50"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="52 ч"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/time_title"
+            app:layout_constraintStart_toEndOf="@+id/time_title"
+            app:layout_constraintTop_toTopOf="@+id/time_title" />
+
+        <View
+            android:id="@+id/view9"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@drawable/fade_divider_horizontal"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/time_title" />
+
+        <View
+            android:id="@+id/progress_bg"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:background="@drawable/circle_background"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toStartOf="@+id/ic_clock"
+            app:layout_constraintTop_toBottomOf="@+id/view9" />
+
+        <com.mikhaellopez.circularprogressbar.CircularProgressBar
+            android:id="@+id/levelProgress"
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            app:cpb_background_progressbar_color="#FFA44A"
+            app:cpb_background_progressbar_width="@dimen/_5sdp"
+            app:cpb_progress="0"
+            app:cpb_progress_direction="to_right"
+            app:cpb_progressbar_color="#61AEE7"
+            app:cpb_round_border="false"
+            app:layout_constraintBottom_toBottomOf="@+id/progress_bg"
+            app:layout_constraintEnd_toEndOf="@+id/progress_bg"
+            app:layout_constraintStart_toStartOf="@+id/progress_bg"
+            app:layout_constraintTop_toTopOf="@+id/progress_bg" />
+
+        <TextView
+            android:id="@+id/title_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/black50"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="LVL"
+            android:textColor="#C8C8CC"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_13sdp"
+            app:layout_constraintEnd_toEndOf="@+id/level"
+            app:layout_constraintStart_toStartOf="@+id/level"
+            app:layout_constraintTop_toTopOf="@+id/progress_bg" />
+
+        <TextView
+            android:id="@+id/level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="13"
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/black50"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/progress_bg"
+            app:layout_constraintEnd_toEndOf="@+id/progress_bg"
+            app:layout_constraintStart_toStartOf="@+id/progress_bg"
+            app:layout_constraintTop_toTopOf="@+id/progress_bg" />
+
+        <View
+            android:id="@+id/fade_divider_horizontal_right"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/fade_divider_horizontal_right"
+            app:layout_constraintEnd_toEndOf="@+id/exp"
+            app:layout_constraintStart_toStartOf="@+id/ic_exp"
+            app:layout_constraintTop_toBottomOf="@+id/ic_exp" />
+
+        <ImageView
+            android:id="@+id/ic_exp"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@+id/progress_bg"
+            app:layout_constraintTop_toTopOf="@+id/progress_bg"
+            app:srcCompat="@drawable/ic_exp" />
+
+        <TextView
+            android:id="@+id/exp_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/black50"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="EXP"
+            android:textColor="#C8C8CC"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_exp"
+            app:layout_constraintStart_toEndOf="@+id/ic_exp"
+            app:layout_constraintTop_toTopOf="@+id/ic_exp" />
+
+        <TextView
+            android:id="@+id/exp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/black50"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="92/102"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_40sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/exp_title"
+            app:layout_constraintStart_toEndOf="@+id/exp_title"
+            app:layout_constraintTop_toTopOf="@+id/exp_title" />
+
+        <View
+            android:id="@+id/fade_divider_horizontal_right_1"
+            android:layout_width="@dimen/_140sdp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/fade_divider_horizontal_right"
+            app:layout_constraintEnd_toEndOf="@+id/family"
+            app:layout_constraintStart_toStartOf="@+id/ic_fam"
+            app:layout_constraintTop_toBottomOf="@+id/ic_fam" />
+
+        <ImageView
+            android:id="@+id/ic_fam"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintStart_toEndOf="@+id/progress_bg"
+            app:layout_constraintTop_toBottomOf="@+id/fade_divider_horizontal_right"
+            app:srcCompat="@drawable/ic_family" />
+
+        <TextView
+            android:id="@+id/fam_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/black50"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="СЕМЬЯ"
+            android:textColor="#C8C8CC"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_10sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/ic_fam"
+            app:layout_constraintStart_toEndOf="@+id/ic_fam"
+            app:layout_constraintTop_toTopOf="@+id/ic_fam" />
+
+        <TextView
+            android:id="@+id/family"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:fontFamily="@font/montserrat_bold"
+            android:shadowColor="@color/black50"
+            android:shadowDy="3"
+            android:shadowRadius="1"
+            android:text="ONLYFANS"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/fam_title"
+            app:layout_constraintStart_toEndOf="@+id/fam_title"
+            app:layout_constraintTop_toTopOf="@+id/fam_title" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

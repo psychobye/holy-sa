@@ -510,6 +510,8 @@ void CPedSamp::ClearAllWeapons()
 	((uint32_t(*)(uintptr_t, int, int, int))(g_libGTASA + (VER_x32 ? 0x0049F836 + 1 : 0x595604)))(dwPedPtr, 1, 1, 1); // CPed::ClearWeapons(void)
 
 	CWorld::PlayerInFocus = old;
+
+    CHUD::updateAmmo();
 }
 
 
