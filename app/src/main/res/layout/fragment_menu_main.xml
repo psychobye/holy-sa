@@ -203,7 +203,7 @@
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="@dimen/_300sdp"
-            android:layout_height="@dimen/_150sdp"
+            android:layout_height="@dimen/_140sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/rectangle_left_round" />
@@ -223,6 +223,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="@color/black50"
             android:shadowDy="3"
@@ -230,7 +231,6 @@
             android:text="Общее игровое время"
             android:textColor="#C8C8CC"
             android:textSize="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/ic_clock"
             app:layout_constraintStart_toEndOf="@+id/ic_clock"
             app:layout_constraintTop_toTopOf="@+id/ic_clock" />
@@ -240,6 +240,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="@dimen/_30sdp"
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="@color/black50"
             android:shadowDy="3"
@@ -247,7 +248,6 @@
             android:text="52 ч"
             android:textColor="@color/white"
             android:textSize="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_30sdp"
             app:layout_constraintBottom_toBottomOf="@+id/time_title"
             app:layout_constraintStart_toEndOf="@+id/time_title"
             app:layout_constraintTop_toTopOf="@+id/time_title" />
@@ -256,8 +256,8 @@
             android:id="@+id/view9"
             android:layout_width="@dimen/_250sdp"
             android:layout_height="@dimen/_1sdp"
-            android:background="@drawable/fade_divider_horizontal"
             android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/fade_divider_horizontal"
             app:layout_constraintEnd_toEndOf="@+id/imageView4"
             app:layout_constraintStart_toStartOf="@+id/imageView4"
             app:layout_constraintTop_toBottomOf="@+id/time_title" />
@@ -266,8 +266,8 @@
             android:id="@+id/progress_bg"
             android:layout_width="@dimen/_80sdp"
             android:layout_height="@dimen/_80sdp"
-            android:background="@drawable/circle_background"
             android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/circle_background"
             app:layout_constraintStart_toStartOf="@+id/ic_clock"
             app:layout_constraintTop_toBottomOf="@+id/view9" />
 
@@ -290,6 +290,7 @@
             android:id="@+id/title_level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_13sdp"
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="@color/black50"
             android:shadowDy="3"
@@ -297,7 +298,6 @@
             android:text="LVL"
             android:textColor="#C8C8CC"
             android:textSize="@dimen/_10sdp"
-            android:layout_marginTop="@dimen/_13sdp"
             app:layout_constraintEnd_toEndOf="@+id/level"
             app:layout_constraintStart_toStartOf="@+id/level"
             app:layout_constraintTop_toTopOf="@+id/progress_bg" />
@@ -306,14 +306,14 @@
             android:id="@+id/level"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="13"
+            android:layout_marginTop="@dimen/_5sdp"
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="@color/black50"
             android:shadowDy="3"
             android:shadowRadius="1"
+            android:text="13"
             android:textColor="@color/white"
             android:textSize="@dimen/_40sdp"
-            android:layout_marginTop="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="@+id/progress_bg"
             app:layout_constraintEnd_toEndOf="@+id/progress_bg"
             app:layout_constraintStart_toStartOf="@+id/progress_bg"
@@ -333,7 +333,7 @@
             android:id="@+id/ic_exp"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintStart_toEndOf="@+id/progress_bg"
             app:layout_constraintTop_toTopOf="@+id/progress_bg"
@@ -344,6 +344,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="@color/black50"
             android:shadowDy="3"
@@ -351,7 +352,6 @@
             android:text="EXP"
             android:textColor="#C8C8CC"
             android:textSize="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/ic_exp"
             app:layout_constraintStart_toEndOf="@+id/ic_exp"
             app:layout_constraintTop_toTopOf="@+id/ic_exp" />
@@ -361,6 +361,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="@dimen/_40sdp"
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="@color/black50"
             android:shadowDy="3"
@@ -368,7 +369,6 @@
             android:text="92/102"
             android:textColor="@color/white"
             android:textSize="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_40sdp"
             app:layout_constraintBottom_toBottomOf="@+id/exp_title"
             app:layout_constraintStart_toEndOf="@+id/exp_title"
             app:layout_constraintTop_toTopOf="@+id/exp_title" />
@@ -387,7 +387,7 @@
             android:id="@+id/ic_fam"
             android:layout_width="@dimen/_15sdp"
             android:layout_height="@dimen/_15sdp"
-            android:layout_marginStart="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/_20sdp"
             android:layout_marginTop="@dimen/_10sdp"
             app:layout_constraintStart_toEndOf="@+id/progress_bg"
             app:layout_constraintTop_toBottomOf="@+id/fade_divider_horizontal_right"
@@ -398,6 +398,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="@color/black50"
             android:shadowDy="3"
@@ -405,7 +406,6 @@
             android:text="СЕМЬЯ"
             android:textColor="#C8C8CC"
             android:textSize="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@+id/ic_fam"
             app:layout_constraintStart_toEndOf="@+id/ic_fam"
             app:layout_constraintTop_toTopOf="@+id/ic_fam" />
@@ -415,6 +415,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginStart="@dimen/_20sdp"
             android:fontFamily="@font/montserrat_bold"
             android:shadowColor="@color/black50"
             android:shadowDy="3"
@@ -422,9 +423,136 @@
             android:text="ONLYFANS"
             android:textColor="@color/white"
             android:textSize="@dimen/_10sdp"
-            android:layout_marginStart="@dimen/_20sdp"
             app:layout_constraintBottom_toBottomOf="@+id/fam_title"
             app:layout_constraintStart_toEndOf="@+id/fam_title"
             app:layout_constraintTop_toTopOf="@+id/fam_title" />
+
+        <FrameLayout
+            android:id="@+id/quest"
+            android:layout_width="@dimen/_145sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="@+id/imageView4"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/quest_btn" />
+
+                <ImageView
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_13sdp"
+                    android:background="@drawable/new_quest" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="ЗАДАНИЕ"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_8sdp" />
+
+                <TextView
+                    android:id="@+id/name_quest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|start"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:layout_marginStart="@dimen/_55sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:shadowColor="@color/black50"
+                    android:shadowDy="3"
+                    android:shadowRadius="1"
+                    android:text="БЕЗ ТОРМОЗОВ"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/_8sdp" />
+
+                <TextView
+                    android:id="@+id/title_quest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center_horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:shadowColor="@color/black50"
+                    android:shadowDy="3"
+                    android:shadowRadius="1"
+                    android:text="Преодолейте 1000\nкилометров на личном\nтранспорте"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_7sdp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center_horizontal"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                        <ImageView
+                            android:layout_width="@dimen/_10sdp"
+                            android:layout_height="@dimen/_12sdp"
+                            android:layout_marginEnd="@dimen/_3sdp"
+                            android:layout_marginTop="@dimen/_1sdp"
+                            android:src="@drawable/holyc" />
+
+                        <TextView
+                            android:id="@+id/reward_quest"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="10"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/orange"
+                            android:textSize="@dimen/_10sdp"
+                            android:shadowColor="@color/black50"
+                            android:shadowDy="3"
+                            android:shadowRadius="1" />
+
+                </LinearLayout>
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/btn_quest"
+            android:layout_width="@dimen/_145sdp"
+            android:layout_height="@dimen/_75sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView4">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/quest_btn_2" />
+
+                <TextView
+                    android:id="@+id/quest_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/_7sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="+17"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/_20sdp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_7sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:shadowColor="@color/black50"
+                    android:shadowDy="3"
+                    android:shadowRadius="1"
+                    android:text="Посмотреть все задания"
+                    android:textColor="@color/gray_light"
+                    android:textSize="@dimen/_7sdp" />
+        </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

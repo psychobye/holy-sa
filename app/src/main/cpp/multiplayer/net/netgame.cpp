@@ -666,6 +666,10 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
             packetShowMenu(p);
             break;
         }
+        case RPC_QUEST: {
+            packetQuest(p);
+            break;
+        }
         case RPC_SHOW_DONATE: {
             packetShowDonat(p);
             break;

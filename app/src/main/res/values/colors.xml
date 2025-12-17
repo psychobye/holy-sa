@@ -57,6 +57,8 @@
     <color name="gray_dark">#FF252525</color>
     <color name="gray_dark_80">#CC252525</color>
     <color name="gray80">#CC252525</color>
+    <color name="gray_light">#C8C8CC</color>
+    <color name="orange">#FFA44A</color>
     <color name="colorAccent">#ffed4319</color>
     <color name="colorPrimary">#ff000000</color>
     <color name="colorPrimaryDark">#ff000000</color>

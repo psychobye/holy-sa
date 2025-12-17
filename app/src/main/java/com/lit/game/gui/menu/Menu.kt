@@ -18,6 +18,7 @@ import com.lit.game.gui.NativeGui
 import com.lit.game.gui.menu.fragment.MenuMainFragment
 import com.lit.game.gui.menu.fragment.MenuShopFragment
 import com.lit.game.gui.menu.fragment.MenuQuestFragment
+import com.lit.game.gui.quest.QuestViewModel
 import com.lit.game.gui.util.Utils.addPressScaleAnimation
 
 class Menu : NativeGui<MenuActionDialogBinding>(MenuActionDialogBinding::class) {
@@ -70,13 +71,15 @@ class Menu : NativeGui<MenuActionDialogBinding>(MenuActionDialogBinding::class) 
             }
 
             binding.shopBtn.setOnClickListener {
-                showShopFragment()
-                updateTabVisuals(binding.shopBtn, binding.mainBtn, binding.questBtn)
+                // TODO: ShopAcitivity (donate)
+                // showShopFragment()
+                // updateTabVisuals(binding.shopBtn, binding.mainBtn, binding.questBtn)
             }
 
             binding.questBtn.setOnClickListener {
-                showQuestFragment()
-                updateTabVisuals(binding.questBtn, binding.mainBtn, binding.shopBtn)
+                // TODO: QuestAcitivity
+                // showQuestFragment()
+                // updateTabVisuals(binding.questBtn, binding.mainBtn, binding.shopBtn)
             }
 
             updateTabVisuals(binding.mainBtn, binding.shopBtn, binding.questBtn)
@@ -129,14 +132,6 @@ class Menu : NativeGui<MenuActionDialogBinding>(MenuActionDialogBinding::class) 
         transactFragment(fragment, TAG_MAIN)
     }
 
-    fun showShopFragment() {
-        transactFragment(MenuShopFragment(), TAG_SHOP)
-    }
-
-    fun showQuestFragment() {
-        transactFragment(MenuQuestFragment(), TAG_QUEST)
-    }
-
     fun show(donate: Int, money: Int, totalHours: Float, level: Int, exp: Int, expMax: Int, familyName: String, r: Int, g: Int, b: Int) {
         activity.runOnUiThread {
             binding.holyDonate.text = Samp.formatter.format(donate.toLong())
@@ -151,7 +146,7 @@ class Menu : NativeGui<MenuActionDialogBinding>(MenuActionDialogBinding::class) 
             vm.exp.postValue(exp)
             vm.expMax.postValue(expMax)
             vm.family.postValue(familyName)
-            vm.familyColor.postValue(Triple(r, g, b)) // сохраняем цвет
+            vm.familyColor.postValue(Triple(r, g, b))
         }
     }
 

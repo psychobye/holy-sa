@@ -1,5 +1,6 @@
 package com.lit.game.gui.menu.fragment
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -9,23 +10,30 @@ import com.lit.game.R
 import com.lit.game.databinding.FragmentMenuMainBinding
 import com.lit.game.gui.menu.MenuController
 import com.lit.game.gui.menu.MenuViewModel
+import com.lit.game.gui.quest.QuestViewModel
 import com.lit.game.gui.util.Utils.addPressScaleAnimation
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 class MenuMainFragment : Fragment(R.layout.fragment_menu_main) {
     private val vm by lazy { ViewModelProvider(requireActivity()).get(MenuViewModel::class.java) }
+    private val vmq by lazy { ViewModelProvider(requireActivity()).get(QuestViewModel::class.java) }
     var controller: MenuController? = null
     private external fun nativeSendMenuButt(buttId: Int)
 
     private lateinit var binding: FragmentMenuMainBinding
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding = FragmentMenuMainBinding.bind(view) 
+        binding = FragmentMenuMainBinding.bind(view)
 
-        vm.time.observe(viewLifecycleOwner) { binding.time.text = (it ?: "").toString() }
+        vm.time.observe(viewLifecycleOwner) { binding.time.text = "${it ?: ""} ч" }
         vm.level.observe(viewLifecycleOwner) { binding.level.text = (it ?: "").toString() }
         vm.exp.observe(viewLifecycleOwner) { updateExpUI() }
         vm.expMax.observe(viewLifecycleOwner) { updateExpUI() }
         vm.family.observe(viewLifecycleOwner) { binding.family.text = it ?: "" }
+        vmq.name.observe(viewLifecycleOwner) { binding.nameQuest.text = it ?: "" }
+        vmq.description.observe(viewLifecycleOwner) { binding.titleQuest.text = it ?: "" }
+        vmq.reward.observe(viewLifecycleOwner) { binding.rewardQuest.text = (it ?: "").toString() }
+        vmq.questid.observe(viewLifecycleOwner) { binding.questCount.text = "+${it ?: ""}" }
 
         vm.familyColor.observe(viewLifecycleOwner) { colorTriple ->
             colorTriple?.let {

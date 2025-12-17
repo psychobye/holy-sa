@@ -46,6 +46,7 @@
 #include "java_systems/BattlePass.h"
 #include "java_systems/Milk.h"
 #include "java_systems/Menu.h"
+#include "java_systems/Quest.h"
 #include "GuiWrapper.h"
 #include "MagicStore.h"
 #include "SnapShotsWrapper.h"
@@ -142,4 +143,5 @@ void CLoader::initJavaClasses(JavaVM* pjvm) {
     CBaccarat::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/CasinoBaccarat"));
     CActionsPed::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/ActionsPed"));
     CMenu::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/menu/Menu"));
+    CQuest::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/quest/Quest"));
 }

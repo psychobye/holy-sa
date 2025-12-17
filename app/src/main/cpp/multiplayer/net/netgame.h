@@ -132,6 +132,7 @@ enum class eNetworkState {
 
 #define RPC_HIDE_WIDGET 104
 #define RPC_SHOW_WIDGET 105
+#define RPC_QUEST 106
 
 #define RPC_PLAYER_TAG 				300
 #define RPC_ACTOR_GOTO				301
@@ -279,6 +280,7 @@ public:
 	static void SetPlayerTag(Packet *p);
 
     static void packetShowMenu(Packet *p);
+    static void packetQuest(Packet *p);
 
 	void GiveActorWeapon(Packet *p);
 

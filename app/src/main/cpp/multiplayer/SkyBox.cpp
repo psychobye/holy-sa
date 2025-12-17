@@ -16,7 +16,7 @@ extern CGUI *pGUI;
 void CSkyBox::Init()
 {
     if (!CModelInfo::GetModelInfo(SKYBOX_OBJECT_ID)) {
-        Log("Error CSkyBox::Init. No model %d", SKYBOX_OBJECT_ID);
+        // Log("Error CSkyBox::Init. No model %d", SKYBOX_OBJECT_ID);
         return;
     }
     m_pSkyObject = CreateObjectScaled(SKYBOX_OBJECT_ID, 0.8f);
