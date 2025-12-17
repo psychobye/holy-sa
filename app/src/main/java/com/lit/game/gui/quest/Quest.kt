@@ -5,7 +5,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.lit.game.core.Samp.Companion.activity
 
 class Quest {
-    fun show(questid: Int, name: String, description: String, reward: Int) {
+
+    fun add(
+        questid: Int,
+        name: String,
+        description: String,
+        reward: Int,
+        status: Int,
+        progress: Int,
+        reset_at: Int
+    ) {
         activity.runOnUiThread {
             val act = activity as? AppCompatActivity ?: return@runOnUiThread
             val vm = ViewModelProvider(act).get(QuestViewModel::class.java)
@@ -14,6 +23,17 @@ class Quest {
             vm.name.postValue(name)
             vm.description.postValue(description)
             vm.reward.postValue(reward)
+            vm.status.postValue(status)
+            vm.progress.postValue(progress)
+            vm.reset_at.postValue(reset_at)
+        }
+    }
+
+    fun updateActiveCount(count: Int) {
+        activity.runOnUiThread {
+            val act = activity as? AppCompatActivity ?: return@runOnUiThread
+            val vm = ViewModelProvider(act).get(QuestViewModel::class.java)
+            vm.activeQuestCount.postValue(count)
         }
     }
 }
