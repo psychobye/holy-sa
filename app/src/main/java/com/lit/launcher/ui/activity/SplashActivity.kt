@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.lit.game.databinding.ActivitySplashBinding
 
+// TODO: GoogleSign
 class SplashActivity : AppCompatActivity() {
 
     private val permissionList = arrayOf(

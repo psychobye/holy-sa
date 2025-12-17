@@ -21,6 +21,7 @@ import com.lit.game.gui.menu.fragment.MenuQuestFragment
 import com.lit.game.gui.quest.QuestViewModel
 import com.lit.game.gui.util.Utils.addPressScaleAnimation
 
+// TODO: Google Avatar
 class Menu : NativeGui<MenuActionDialogBinding>(MenuActionDialogBinding::class) {
     private external fun nativeOnExit()
 

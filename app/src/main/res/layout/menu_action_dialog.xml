@@ -172,6 +172,7 @@
             android:layout_height="@dimen/_40sdp">
 
             <ImageView
+                android:id="@+id/avatar_pic"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToOutline="true"
