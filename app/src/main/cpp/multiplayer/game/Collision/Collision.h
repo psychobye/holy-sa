@@ -23,9 +23,9 @@ public:
     static inline uint32 ms_iProcessLineNumCrossings;
     static inline uint32 ms_collisionInMemory;
 
-    static inline bool bCamCollideWithVehicles = false;         // = true
+    static inline bool bCamCollideWithVehicles = true;         // = true
     static inline bool bCamCollideWithObjects = true;          // = true
-    static inline bool bCamCollideWithPeds = false;             // = true
+    static inline bool bCamCollideWithPeds = true;             // = true
     static inline bool bCamCollideWithBuildings = true;        // = true
     static inline float relVelCamCollisionVehiclesSqr = 0.01f; // = 0.01f
 

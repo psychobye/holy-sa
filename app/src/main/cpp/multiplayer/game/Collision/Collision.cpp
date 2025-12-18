@@ -13,11 +13,11 @@ void CCollision::InjectHooks() {
     CHook::Write(g_libGTASA + (VER_x32 ? 0x006783D0 : 0x84E7C8), &ms_iProcessLineNumCrossings);
     CHook::Write(g_libGTASA + (VER_x32 ? 0x006773BC : 0x84C7C0), &ms_collisionInMemory);
 
-    CHook::Write(g_libGTASA + (VER_x32 ? 0x00678D74 : 0x84FB18), &bCamCollideWithVehicles);
+    /*CHook::Write(g_libGTASA + (VER_x32 ? 0x00678D74 : 0x84FB18), &bCamCollideWithVehicles);
     CHook::Write(g_libGTASA + (VER_x32 ? 0x0067757C : 0x84CB48), &bCamCollideWithObjects);
     CHook::Write(g_libGTASA + (VER_x32 ? 0x00678EF0 : 0x84FE10), &bCamCollideWithPeds);
     CHook::Write(g_libGTASA + (VER_x32 ? 0x0067972C : 0x850E70), &bCamCollideWithBuildings);
-    CHook::Write(g_libGTASA + (VER_x32 ? 0x00679F50 : 0x851EB0), &relVelCamCollisionVehiclesSqr);
+    CHook::Write(g_libGTASA + (VER_x32 ? 0x00679F50 : 0x851EB0), &relVelCamCollisionVehiclesSqr);*/
 
     CHook::Redirect("_ZN10CCollision4InitEv", &CCollision::Init);
 }

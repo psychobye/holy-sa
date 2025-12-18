@@ -1147,14 +1147,10 @@ void CCam__Process_hook(CCam* thiz)
 
     if (!CFirstPersonCamera::IsEnabled()) {
         CCam__Process(thiz);
-        thiz->m_nMode = MODE_AIMWEAPON_ATTACHED;
-
         return;
     }
     CVector vecSpeed;
     CVehicleSamp* veh = nullptr;
-
-
 
     float& CAR_FOV_START_SPEED = *(float*)(g_libGTASA + (VER_x32 ? 0x006A9FD0 : 0x8855D4));
     float old = CAR_FOV_START_SPEED;

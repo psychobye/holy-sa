@@ -37,6 +37,16 @@ struct CVehicleCamTweak
 };
 VALIDATE_SIZE(CVehicleCamTweak, 0x10);
 
+struct SCamColVars {
+    float camRad;
+    float maxCamRad;
+    float camMinDist;
+    float distToModClipping;
+    float clippingDistance;
+    float speedZoomOut;
+};
+VALIDATE_SIZE(SCamColVars, 0x18);
+
 class CCamera : public CPlaceable {
 public:
     bool            m_bAboveGroundTrainNodesLoaded{};
@@ -424,5 +434,18 @@ public:
         }
         return *pCamera;
     }
+
+    // сamera collision variables
+    static int gCurCamColVars;
+    static float gRadiusScalarForLengthToVehicle;
+    static float gCurDistForCam;
+    static float gLastRadiusUsedInCollisionPreventionOfCamera;
+
+    // сached camera pos
+    static CVector gCamPosCached;
+    static bool gCamPosCachedInit;
+
+    static bool ConeCastCollisionResolve(CCamera *cam, CVector *pPos, CVector *pLookAt, CVector *pDest, float rad, float minDist, float *pDist);
+    static bool CameraColDetect(CCamera *cam, CVector *camPos, CVector *targetPos);;
 };
 VALIDATE_SIZE(CCamera, (VER_x32 ? 0xD00 : 0xDB0));

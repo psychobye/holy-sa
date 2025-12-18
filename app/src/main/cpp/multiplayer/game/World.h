@@ -140,7 +140,7 @@ public:
     }
 
     static CEntity* GetToIgnoreEntity() {
-        return (CEntity*)(g_libGTASA + (VER_x32 ? 0x0096B9D0 : 0xBDCAF8));
+        return *(CEntity**)(g_libGTASA + (VER_x32 ? 0x0096B9D0 : 0xBDCAF8));
     }
 };
 
