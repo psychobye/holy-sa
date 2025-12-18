@@ -121,3 +121,7 @@ RwBool RwTextureSetReadCallBack(RwTextureCallBackRead callBack) {
 RwBool RsCameraBeginUpdate(RwCamera* camera) {
     return CHook::CallFunction<RwBool>("_Z19RsCameraBeginUpdateP8RwCamera", camera);
 }
+
+RwBool RwGrabScreen(RwCamera* camera, RwChar* filename) {
+    return CHook::CallFunction<RwBool>("_Z12RwGrabScreenP8RwCameraPc", camera, filename);
+}

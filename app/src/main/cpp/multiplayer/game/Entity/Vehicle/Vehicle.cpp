@@ -201,7 +201,7 @@ void CVehicle::DoHeadLightBeam(eVehicleDummy dummyId, CMatrix* matrix, bool isRi
     if (pVehicle)
         pVehicle->ProcessHeadlightsColor(r, g, b);
 
-    
+
 
     auto mi = CModelInfo::GetVehicleModelInfo(m_nModelIndex);
     CVector pointModelSpace = mi->GetModelDummyPosition(static_cast<eVehicleDummy>(2 * dummyId));

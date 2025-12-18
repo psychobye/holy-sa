@@ -23,11 +23,11 @@ public:
     static inline uint32 ms_iProcessLineNumCrossings;
     static inline uint32 ms_collisionInMemory;
 
-    static inline bool bCamCollideWithVehicles = true;         // = true
-//    static inline bool& bCamCollideWithObjects = *(bool*)0x8A5B15;          // = true
-//    static inline bool& bCamCollideWithPeds = *(bool*)0x8A5B17;             // = true
-//    static inline bool& bCamCollideWithBuildings = *(bool*)0x8A5B16;        // = true
-//    static inline float& relVelCamCollisionVehiclesSqr = *(float*)0x8A5B18; // = 0.01f
+    static inline bool bCamCollideWithVehicles = false;         // = true
+    static inline bool bCamCollideWithObjects = true;          // = true
+    static inline bool bCamCollideWithPeds = false;             // = true
+    static inline bool bCamCollideWithBuildings = true;        // = true
+    static inline float relVelCamCollisionVehiclesSqr = 0.01f; // = 0.01f
 
     static struct DebugSettings {
         struct ShapeShapeCollision {
@@ -57,7 +57,7 @@ public:
         } ShapeShapeCollision{};
 
         bool AllowLineOriginInsideSphere{false};
-    } s_DebugSettings; // переместили сюда
+    } s_DebugSettings; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ
 
 public:
     static void InjectHooks();

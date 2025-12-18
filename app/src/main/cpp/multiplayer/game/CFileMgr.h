@@ -22,7 +22,7 @@ public:
     static void Initialise();
     static int32_t ChangeDir(const char* path);
     static void SetDir(const char* path);
-    static int32_t SetDirMyDocuments();
+    static void SetDirMyDocuments();
     static size_t LoadFile(const char* path, uint8_t* buf, size_t size, const char* mode);
     static FILE* OpenFile(const char* path, const char* mode);
     static FILE* OpenFileForWriting(const char* path);

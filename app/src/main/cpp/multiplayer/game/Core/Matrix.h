@@ -97,6 +97,9 @@ public:
     CVector& GetPosition() { return m_pos; }
     const CVector& GetPosition() const { return m_pos; }
 
+    CVector& GetTranslation() { return m_pos; }
+    const CVector& GetTranslation() const { return m_pos; }
+
     void Attach(RwMatrix* matrix, bool bOwnsMatrix);
     void Detach();
     void CopyOnlyMatrix(const CMatrix& matrix);  // copy base RwMatrix to another matrix

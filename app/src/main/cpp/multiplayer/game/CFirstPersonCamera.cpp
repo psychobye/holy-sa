@@ -7,6 +7,7 @@
 #include "Scene.h"
 
 bool CFirstPersonCamera::m_bEnabled = false;
+float CFirstPersonCamera::g_fTonerLerp = 1.0f;
 
 void CFirstPersonCamera::MakePlayerFaceCameraDirection(CCam* pCam, CPedSamp* player) {
     CVector playerPos = player->m_pPed->GetPosition();
@@ -113,6 +114,21 @@ void CFirstPersonCamera::ProcessCameraInVeh(CCam* pCam, CPedSamp* pPed, CVehicle
             pCam->m_nMode = MODE_1STPERSON;
         }
         return;
+    }
+}
+
+void CFirstPersonCamera::Update()
+{
+    // toner alpha lerp
+    const float target = m_bEnabled ? 0.5f : 1.0f;
+    if (m_bEnabled) {
+        const float speed = 0.02f;
+        g_fTonerLerp -= speed;
+        if (g_fTonerLerp < target)
+            g_fTonerLerp = target;
+    }
+    else {
+        g_fTonerLerp = 1.0f;
     }
 }
 

@@ -14,4 +14,7 @@ public:
     static void SetEnabled(bool bEnabled);
     static void Toggle();
     static bool IsEnabled();
+
+    static void Update();
+    static float g_fTonerLerp;
 };

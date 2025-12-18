@@ -980,3 +980,4 @@ RwTexture* RwTextureSetName(RwTexture* texture, const RwChar* name);
 RwBool RwTextureSetFindCallBack(RwTextureCallBackFind callBack);
 RwBool RwTextureSetReadCallBack(RwTextureCallBackRead callBack);
 RwBool RsCameraBeginUpdate(RwCamera* camera);
+RwBool RwGrabScreen(RwCamera* camera, RwChar* filename);

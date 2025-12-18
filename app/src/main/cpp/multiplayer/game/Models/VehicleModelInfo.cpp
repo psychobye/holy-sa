@@ -8,6 +8,7 @@
 #include "ModelInfo.h"
 #include "net/VehiclePool.h"
 #include "game/VisibilityPlugins.h"
+#include "CFirstPersonCamera.h"
 
 void CVehicleModelInfo::CVehicleModelInfo__SetClump(RpClump* clump)
 {
@@ -184,7 +185,11 @@ RpMaterial* CVehicleModelInfo::SetEditableMaterialsCB(RpMaterial* mat, void* dat
     else if ( color == 0xA0000000 ) { // toner
         AddStoredMaterial(RpMaterialGetColor(mat));
 
-        mat->color = pVeh->tonerColor;
+        mat->color.red   = pVeh->tonerColor.r;
+        mat->color.green = pVeh->tonerColor.g;
+        mat->color.blue  = pVeh->tonerColor.b;
+        mat->color.alpha = static_cast<uint8_t>(static_cast<float>(pVeh->tonerColor.a) * CFirstPersonCamera::g_fTonerLerp);
+
         return mat;
     }
     if ( color == 0xff00647d ) { // wheel

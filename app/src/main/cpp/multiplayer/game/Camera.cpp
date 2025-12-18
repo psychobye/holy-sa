@@ -6,10 +6,6 @@
 #include "util/patch.h"
 #include "scripting.h"
 
-void CCamera::InjectHooks() {
-    CHook::Write(g_libGTASA + (VER_x32 ? 0x678DD8 : 0x84FBE0), &preMirrorMat);
-}
-
 CCam& CCamera::GetActiveCamera() {
     return CCamera::Get().m_aCams[CCamera::Get().m_nActiveCam];
 }
@@ -89,3 +85,13 @@ void CCamera::RestoreCameraAfterMirror() {
     CHook::CallFunction<void>("_ZN7CCamera22CalculateDerivedValuesEbb", this, false, false);
 }
 
+bool (*CCamera_CameraColDetAndReact)(CCamera* cam, CVector* pSource, CVector* pTarget);
+bool CCamera_CameraColDetAndReact_hook(CCamera* cam, CVector* source, CVector* target)
+{
+    // TODO: implement hook
+}
+
+void CCamera::InjectHooks() {
+    CHook::Write(g_libGTASA + (VER_x32 ? 0x678DD8 : 0x84FBE0), &preMirrorMat);
+    // CHook::InlineHook("_ZN7CCamera20CameraColDetAndReactEP7CVectorS1_", &CCamera_CameraColDetAndReact_hook, &CCamera_CameraColDetAndReact);
+}

@@ -1143,14 +1143,19 @@ void CTaskSimpleUseGun__RemoveStanceAnims_hook(uintptr* thiz, void* ped, float a
 void (*CCam__Process)(CCam*);
 void CCam__Process_hook(CCam* thiz)
 {
+    CFirstPersonCamera::Update();
+
     if (!CFirstPersonCamera::IsEnabled()) {
         CCam__Process(thiz);
+        thiz->m_nMode = MODE_AIMWEAPON_ATTACHED;
+
         return;
     }
     CVector vecSpeed;
     CVehicleSamp* veh = nullptr;
 
-    
+
+
     float& CAR_FOV_START_SPEED = *(float*)(g_libGTASA + (VER_x32 ? 0x006A9FD0 : 0x8855D4));
     float old = CAR_FOV_START_SPEED;
 
@@ -1580,12 +1585,6 @@ int CRadar__SetCoordBlip_hook(int r0, float X, float Y, float Z, int r4, int r5,
     return CRadar__SetCoordBlip(r0, X, Y, Z, r4, r5, name);
 }
 
-void(*FxInfoGroundCollide_c__GetValue)();
-void FxInfoGroundCollide_c__GetValue_hook()
-{
-
-}
-
 uint32_t(*HashString)(const char* s);
 uint32_t HashString_hook(const char* s)
 {
@@ -1612,6 +1611,57 @@ void CWidgetButtonSprint_CWidgetButtonSprint_hook(uintptr_t *thiz, uint8_t *pszS
     CWidgetButtonSprint_CWidgetButtonSprint(thiz, (uint8_t*)"", WidgetPos);
 }
 
+RwImage* (*RsGrabScreen)(RwCamera* camera);
+RwImage* RsGrabScreen_hook(RwCamera* camera)
+{
+    if(!camera || !camera->frameBuffer) return NULL;
+
+    RwImage* newImage = RwImageCreate(camera->frameBuffer->width, camera->frameBuffer->height, 32);
+    if(newImage)
+    {
+        RwImageAllocatePixels(newImage);
+        RwImageSetFromRaster(newImage, camera->frameBuffer);
+    }
+    return newImage;
+}
+
+void JPegCompressScreenToFile(RwCamera* pCamera, const char* pFilename){
+    return CHook::CallFunction<void>("_Z24JPegCompressScreenToFileP8RwCameraPKc", pCamera, pFilename);
+}
+
+// TODO: move to CWeapon::Fire
+RwCamera* (*CWeapon_TakePhotograph)(CWeapon *thiz, CEntity *pEntity, CVector *cameraPos);
+RwCamera* CWeapon_TakePhotograph_hook(CWeapon *thiz, CEntity *pEntity, CVector *cameraPos)
+{
+    static uint32_t nextAllowedPic = 0;
+
+    if(nextAllowedPic < CTimer::m_snTimeInMilliseconds)
+    {
+        nextAllowedPic = CTimer::m_snTimeInMilliseconds + 5000;
+
+        CFileMgr::SetDirMyDocuments();
+
+        std::string path = "screenshot_test.jpg";
+        std::vector<char> filename(path.begin(), path.end());
+        filename.push_back('\0');
+
+        JPegCompressScreenToFile(Scene.m_pRwCamera, filename.data());
+
+        CFileMgr::SetDir("");
+
+        Log("Screenshot saved!");
+    }
+
+    return CWeapon_TakePhotograph(thiz, pEntity, cameraPos);
+}
+
+void (*jcopy_sample_rows)(uint8_t **input_array, int source_row, uint8_t **output_array, int dest_row, int num_rows, uint num_cols);
+void jcopy_sample_rows_hook(uint8_t **input_array, int source_row, uint8_t **output_array, int dest_row, int num_rows, uint num_cols)
+{
+    jcopy_sample_rows(input_array, source_row, output_array, dest_row, num_rows, num_cols);
+    Log("jpeg_samplecopy: dest_row (i) = %d, num_rows (height) = %d, num_cols (width) = %d", source_row, dest_row, num_cols);
+}
+
 void InstallHooks()
 {
     CHook::InstallPLT(g_libGTASA + (VER_x32 ? 0x66F91C : 0x83F8A0), &CFireManager__ExtinguishPointWithWater_hook, &CFireManager__ExtinguishPointWithWater);
@@ -1624,10 +1674,12 @@ void InstallHooks()
     // CHook::InlineHook("_ZN6CRadar12SetCoordBlipE9eBlipType7CVectorj12eBlipDisplayPc", &CRadar__SetCoordBlip_hook, &CRadar__SetCoordBlip);
 
     // ---------- JPATCH ----------
-    // CHook::InlineHook("_ZN21FxInfoGroundCollide_c8GetValueEffffhPv", &FxInfoGroundCollide_c__GetValue_hook, &FxInfoGroundCollide_c__GetValue);
     // CHook::InlineHook("_Z10HashStringPKc", &HashString_hook, &HashString);
     CHook::InlineHook("_Z20emu_DistanceFogSetupfffff", &emu_DistanceFogSetup_hook, &emu_DistanceFogSetup);
     CHook::InlineHook("_ZN19CWidgetButtonSprintC2EPKcRK14WidgetPosition", &CWidgetButtonSprint_CWidgetButtonSprint_hook, &CWidgetButtonSprint_CWidgetButtonSprint);
+    // CHook::InlineHook("_Z12psGrabScreenP8RwCamera", &RsGrabScreen_hook, &RsGrabScreen);
+    // CHook::InlineHook("_ZN7CWeapon14TakePhotographEP7CEntityP7CVector", &CWeapon_TakePhotograph_hook, &CWeapon_TakePhotograph);
+    // CHook::InlineHook("_Z17jcopy_sample_rowsPPhiS0_iij", &jcopy_sample_rows_hook, &jcopy_sample_rows);
     // ---------- JPATCH END ----------
 
     // WTFBUG lol

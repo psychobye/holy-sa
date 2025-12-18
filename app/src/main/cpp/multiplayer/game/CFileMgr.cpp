@@ -7,7 +7,11 @@
 #include "util/patch.h"
 
 void CFileMgr::SetDir(const char *path) {
-    ( ( void(*)(const char *path) )(g_libGTASA + (VER_x32 ? 0x003F0C54 + 1 : 0x4D293C)) )(path);
+    return CHook::CallFunction<void>("_ZN8CFileMgr6SetDirEPKc", path);
+}
+
+void CFileMgr::SetDirMyDocuments() {
+    return CHook::CallFunction<void>("_ZN8CFileMgr17SetDirMyDocumentsEv");
 }
 
 FILE* CFileMgr::OpenFile(const char *path, const char *mode) {
@@ -26,5 +30,5 @@ int32_t CFileMgr::CloseFile(FILE* file) {
 }
 
 void CFileMgr::Initialise() {
-    CHook::CallFunction<void>("_ZN8CFileMgr10InitialiseEv"); // кажется юзлес хуйня
+    CHook::CallFunction<void>("_ZN8CFileMgr10InitialiseEv"); // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ
 }
