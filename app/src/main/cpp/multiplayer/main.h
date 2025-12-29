@@ -6,11 +6,12 @@
 #include <list>
 #include <unistd.h>
 #include "game/common.h"
+#include "advobfuscator/string.h"
+
+using namespace andrivet::advobfuscator;
 
 #define SAMP_VERSION	"0.3.7"
 #define PORT_VERSION	"0.69"
-
-
 
 #define RAKSAMP_CLIENT
 #define NETCODE_CONNCOOKIELULZ 0x6969

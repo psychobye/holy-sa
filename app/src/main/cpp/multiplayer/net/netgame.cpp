@@ -37,7 +37,7 @@ unsigned char GetPacketID(Packet *p) {
 
 CNetGame::CNetGame(const char *szHostOrIp, int iPort, const char *szPlayerName,
                    const char *szPass) {
-    strcpy(m_szHostName, "San Andreas Multiplayer");
+    strcpy(m_szHostName, "San Andreas Multiplayer"_obf);
     strncpy(m_szHostOrIp, szHostOrIp, sizeof(m_szHostOrIp));
     m_iPort = iPort;
 
@@ -78,8 +78,6 @@ CNetGame::CNetGame(const char *szHostOrIp, int iPort, const char *szPlayerName,
     CGame::EnableClock(false);
     CGame::EnableZoneNames(false);
     CGame::DisableRaceCheckpoint();
-
-    Log(__FUNCTION__);
 }
 
 #include "../voice/Network.h"
@@ -105,7 +103,6 @@ CNetGame::~CNetGame() {
     }
 
     if (!CGame::bIsGameExiting) g_pJavaWrapper->ClearScreen();
-
 }
 
 #include "java_systems/Speedometr.h"
@@ -1940,7 +1937,6 @@ void CNetGame::SetPlayerTag(Packet *p) {
 }
 
 void CNetGame::SetGameState(eNetworkState newState) {
-    Log("SetGameState, old = %d, new = %d", m_iGameState, newState);
     if(m_iGameState == eNetworkState::CONNECTED && newState != eNetworkState::CONNECTED)
         Reset();
 

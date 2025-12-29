@@ -1,4 +1,3 @@
-
 #include <jni.h>
 #include <android/log.h>
 #include <ucontext.h>
@@ -141,10 +140,8 @@ void InitInGame()
 
 	if (!bNetworkInited)
 	{
-		// TODO: obfuscate ip & port
-        pNetGame = new CNetGame(
-                "185.189.255.97",
-                2630,
+        pNetGame = new CNetGame("185.189.255.97"_obf,
+                                std::atoi("2630"_obf),
                 CSettings::Get().szNickName,
                 CSettings::Get().szPassword
         );
@@ -157,7 +154,7 @@ void InitInGame()
         );*/
 
 		bNetworkInited = true;
-		Log("InitInGame() end");
+		Log("InitInGame() end"_obf);
 		return;
 	}
 }
