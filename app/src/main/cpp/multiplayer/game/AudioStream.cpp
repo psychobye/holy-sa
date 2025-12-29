@@ -55,7 +55,6 @@ void CAudioStream::PlayStream()
     double lengthSeconds = BASS_ChannelBytes2Seconds(m_hStream, lengthBytes);
 
     if(dif < 5) {
-        // если создали недавно, то запустим сразу. Похуй на 5 секунд синхры, зато не надо ждать фулл буфферизацию
         BASS_ChannelPlay(m_hStream, false);
         return;
     }

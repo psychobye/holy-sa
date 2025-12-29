@@ -1258,7 +1258,7 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
             bs.Read(&str[0], len);
             str[len] = 0;
 
-            CAudioStreamPool::PlayIndividualStream(&str[0], 1);
+            CAudioStreamPool::PlayIndividualStream(&str[0], true);
             break;
         }
         case RPC_STREAM_DESTROY: {
@@ -1566,7 +1566,7 @@ void CNetGame::Packet_ConnectionSucceeded(Packet *pkt) {
     bsSend.Write(SAMP_VERSION, byteClientverLen);
 
     // voice
-    Voice::Network::OnRaknetRpc(RPC_ClientJoin, bsSend);
+    // Voice::Network::OnRaknetRpc(RPC_ClientJoin, bsSend);
 
     m_pRakClient->RPC(&RPC_ClientJoin, &bsSend, HIGH_PRIORITY, RELIABLE, 0, false, UNASSIGNED_NETWORK_ID, nullptr);
     Log("Packet_ConnectionSucceeded");

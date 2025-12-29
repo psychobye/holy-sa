@@ -57,6 +57,10 @@ public:
         return x * lhs.x + y * lhs.y;
     }
 
+    static CVector2D Diff(const CVector2D& a, const CVector2D& b) {
+        return { a.x - b.x, a.y - b.y };
+    }
+
 
     CVector2D(const CVector& vec3d);
 };

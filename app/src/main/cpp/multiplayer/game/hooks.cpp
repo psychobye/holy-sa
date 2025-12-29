@@ -97,7 +97,7 @@ stFile* NvFOpen(const char* r0, const char* r1, int r2, int r3)
 #endif
 	st->isFileExist = false;
 
-	Log("%s", path);
+	// Log("%s", path);
 	FILE *f  = fopen(path, "rb");
 
 	if(f)
@@ -1745,7 +1745,6 @@ void InstallHooks()
 	CHook::InlineHook("_ZN4CPed22ProcessEntityCollisionEP7CEntityP9CColPoint", &CPed__ProcessEntityCollision_hook, &CPed__ProcessEntityCollision);
 
 	CHook::InlineHook("_ZN16CTaskSimpleGetUp10ProcessPedEP4CPed", &CTaskSimpleGetUp__ProcessPed_hook, &CTaskSimpleGetUp__ProcessPed); // CTaskSimpleGetUp::ProcessPed
-
 
 	CHook::InlineHook("_Z23RwResourcesFreeResEntryP10RwResEntry", &RwResourcesFreeResEntry_hook, &RwResourcesFreeResEntry);
 

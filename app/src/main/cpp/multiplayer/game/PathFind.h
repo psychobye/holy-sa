@@ -164,6 +164,11 @@ public:
         return { m_wAreaId, m_wNodeId };
     }
 
+    CVector2D GetPosition2D() const {
+        const CVector pos = UncompressLargeVector(m_vPos);
+        return { pos.x, pos.y };
+    }
+
     friend bool operator==(const CPathNode& lhs, const CPathNode& rhs) { return lhs.GetAddress() == rhs.GetAddress(); }
     friend bool operator!=(const CPathNode& lhs, const CPathNode& rhs) { return !(lhs == rhs); }
 

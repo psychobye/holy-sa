@@ -94,7 +94,7 @@ void InitInMenu()
 #include <sys/mman.h>
 #include <cassert> // assert()
 #include <dlfcn.h> // dlopen
-
+#include "voice/Playback.h"
 
 void InitInGame()
 {
@@ -105,9 +105,11 @@ void InitInGame()
 		CGame::InitInGame();
 		CGame::SetMaxStats();
 
+        Voice::Playback::Init(); // bass init
+
         // TODO: VoiceChat
 		/*Voice::CVoicePlugin::OnPluginLoad();
-		Voice::CVoicePlugin::OnSampLoad();*/
+		Voice::CVoicePlugin::OnSampLoad();
 
 		// voice
 		Log("[dbg:samp:load] : module loading...");
@@ -120,15 +122,14 @@ void InitInGame()
 
 		Samp::loadStatus = true;
 
-        // TODO: VoiceChat
 		// voice
-		/*for (const auto& deviceInitCallback : CVoiceRender::deviceInitCallbacks) {
+		for (const auto& deviceInitCallback : CVoiceRender::deviceInitCallbacks) {
 			if (deviceInitCallback != nullptr) {
 				deviceInitCallback();
 			}
-		}*/
+		}
 
-		Log("[dbg:samp:load] : module loaded");
+		Log("[dbg:samp:load] : module loaded");*/
 
 		g_pJavaWrapper->hideLoadingScreen();
 
@@ -143,7 +144,7 @@ void InitInGame()
 		// TODO: obfuscate ip & port
         pNetGame = new CNetGame(
                 "185.189.255.97",
-                1642,
+                2630,
                 CSettings::Get().szNickName,
                 CSettings::Get().szPassword
         );

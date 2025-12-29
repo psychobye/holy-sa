@@ -7,7 +7,7 @@
 
 CVehicleModelInfo* CModelInfo::AddVehicleModel(int index)
 {
-    DLOG("AddVehicleModel %d", index);
+    // DLOG("AddVehicleModel %d", index);
     auto& pInfo = CModelInfo::ms_vehicleModelInfoStore.AddItem();
 
     ((void(*)(CVehicleModelInfo*))(g_libGTASA + (VER_x32 ? 0x386E98 + 1 : 0x45DF50)))(&pInfo); // CBaseModelInfo::CBaseModelInfo();
@@ -22,7 +22,7 @@ CVehicleModelInfo* CModelInfo::AddVehicleModel(int index)
 
 CPedModelInfo* CModelInfo::AddPedModel(int index)
 {
-    DLOG("CModelInfo_AddPedModel_hook %d", index);
+    // DLOG("CModelInfo_AddPedModel_hook %d", index);
 
     auto& pInfo = CModelInfo::ms_pedModelInfoStore.AddItem();
 
@@ -37,13 +37,13 @@ CPedModelInfo* CModelInfo::AddPedModel(int index)
 
 CDamageAtomicModelInfo* CModelInfo::AddDamageAtomicModel(int32 index)
 {
-    DLOG("AddDamageAtomicModel %d", index);
+    // DLOG("AddDamageAtomicModel %d", index);
     return CHook::CallFunction<CDamageAtomicModelInfo*>(g_libGTASA + (VER_x32 ? 0x00385F94 + 1 : 0x49BAE8), index);
 }
 
 CAtomicModelInfo* CModelInfo::AddAtomicModel(int index)
 {
-    DLOG("AddAtomicModel %d", index);
+    // DLOG("AddAtomicModel %d", index);
     auto& pInfo = ms_atomicModelInfoStore.AddItem();
 
     ((void(*)(CAtomicModelInfo*))(g_libGTASA + (VER_x32 ? 0x00384FD8 + 1 : 0x45B3BC)))(&pInfo);
@@ -57,7 +57,7 @@ CAtomicModelInfo* CModelInfo::AddAtomicModel(int index)
 
 CClumpModelInfo* CModelInfo::AddClumpModel(int32 index)
 {
-    DLOG("AddClumpModel %d", index);
+    // DLOG("AddClumpModel %d", index);
     auto& pInfo = ms_clumpModelInfoStore.AddItem();
 
     ((void(*)(CClumpModelInfo*))(g_libGTASA + (VER_x32 ? 0x00384FD8 + 1 : 0x45B3BC)))(&pInfo);
