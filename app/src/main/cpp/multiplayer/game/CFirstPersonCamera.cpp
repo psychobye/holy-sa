@@ -161,7 +161,7 @@ void CFirstPersonCamera::ResetPedAnims()
     for (AnimationId id : IDs) {
         auto a = (CAnimBlendAssociation*)RpAnimBlendClumpGetAssociation(clump, id);
         if (a) {
-            a->SetBlendDelta(-8.0f); // Быстрое затухание
+            a->SetBlendDelta(-8.0f);
         }
     }
     pPed->UpdateRpHAnim();
