@@ -7,13 +7,8 @@
         <shape>
             <corners
                 android:radius="12.0dip" />
-            <gradient
-                android:startColor="#99000000"
-                android:endColor="@color/gradient2"
-                android:angle="45.0"
-                android:type="linear"
-                android:centerX="70.99999%"
-                android:centerColor="#bb000000" />
+            <solid android:color="@color/gray_1F" />
+            <stroke android:color="@color/gray_37" android:width="@dimen/_1sdp" />
         </shape>
     </item>
 </layer-list>

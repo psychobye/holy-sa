@@ -10,7 +10,6 @@
 #include "util/patch.h"
 
 void CTaskSimpleUseGun::SetMoveAnim(CPed* ped) {
-   // DLOG("CTaskSimpleUseGun::SetMoveAn");
     const auto
             animGunStand   = RpAnimBlendClumpGetAssociation(ped->m_pRwClump, ANIM_ID_GUN_STAND),
             animGunMoveFwd = RpAnimBlendClumpGetAssociation(ped->m_pRwClump, ANIM_ID_GUNMOVE_FWD),
@@ -147,6 +146,31 @@ void CTaskSimpleUseGun::SetMoveAnim(CPed* ped) {
     m_HasMoveControl = false;
 }
 
+bool CTaskSimpleUseGun::ControlGunMove(const CVector2D& moveSpeed) {
+    float factor = CTimer::GetTimeStep() * 0.35f;
+
+    float deltaY = moveSpeed.y - m_MoveCmd.y;
+    if(deltaY > factor) {
+        m_MoveCmd.y += factor;
+    } else if (deltaY < -factor) {
+        m_MoveCmd.y -= factor;
+    } else {
+        m_MoveCmd.y = moveSpeed.y;
+    }
+
+    float deltaX = moveSpeed.x - m_MoveCmd.x;
+    if(deltaX > factor) {
+        m_MoveCmd.x += factor;
+    } else if (deltaX < -factor) {
+        m_MoveCmd.x -= factor;
+    } else {
+        m_MoveCmd.x = moveSpeed.x;
+    }
+
+    m_HasMoveControl = true;
+    return true;
+}
+
 void CTaskSimpleUseGun::FinishGunAnimCB(CAnimBlendAssociation *anim, void *data) {
 
 }
@@ -156,6 +180,12 @@ void CTaskSimpleUseGun__SetMoveAnim_hook(CTaskSimpleUseGun *thiz, CPed *pPed)
     thiz->SetMoveAnim(pPed);
 }
 
+void CTaskSimpleUseGun__ControlGunMove_hook(CTaskSimpleUseGun *thiz, const CVector2D& moveSpeed)
+{
+    thiz->ControlGunMove(moveSpeed);
+}
+
 void CTaskSimpleUseGun::InjectHooks() {
     CHook::Redirect("_ZN17CTaskSimpleUseGun11SetMoveAnimEP4CPed", &CTaskSimpleUseGun__SetMoveAnim_hook);
+    CHook::Redirect("_ZN17CTaskSimpleUseGun14ControlGunMoveEP9CVector2D", &CTaskSimpleUseGun__ControlGunMove_hook);
 }

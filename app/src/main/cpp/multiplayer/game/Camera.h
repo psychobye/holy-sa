@@ -446,6 +446,6 @@ public:
     static bool gCamPosCachedInit;
 
     static bool ConeCastCollisionResolve(CCamera *cam, CVector *pPos, CVector *pLookAt, CVector *pDest, float rad, float minDist, float *pDist);
-    static bool CameraColDetect(CCamera *cam, CVector *camPos, CVector *targetPos);;
+    static bool CameraColDetect(CCamera *cam, CVector *camPos, CVector *targetPos);
 };
 VALIDATE_SIZE(CCamera, (VER_x32 ? 0xD00 : 0xDB0));

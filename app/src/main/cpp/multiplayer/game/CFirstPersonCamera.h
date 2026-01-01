@@ -8,6 +8,8 @@ class CFirstPersonCamera
     static bool m_bEnabled;
 public:
     static void MakePlayerFaceCameraDirection(CCam* pCam, CPedSamp* player);
+    static void UpdateFirstPersonMoveAnims(CCam *pCam, CPedSamp *pPed);
+    static void ResetPedAnims();
     static void ProcessCameraOnFoot(CCam* pCam, CPedSamp* pPed);
     static void ProcessCameraInVeh(CCam* pCam, CPedSamp* pPed, CVehicleSamp* pVeh);
 

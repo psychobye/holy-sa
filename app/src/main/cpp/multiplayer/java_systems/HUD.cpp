@@ -75,7 +75,7 @@ void CHUD::toggleAll(bool toggle, bool chat, bool onlyVisual)
     bIsOnlyVisualOff = onlyVisual;
    // CGame::ToggleHUDElement(HUD_ELEMENT_BUTTONS, toggle);
 
-   // pNetGame->GetPlayerPool()->GetLocalPlayer()->GetPlayerPed()->TogglePlayerControllable(toggle, true);
+    CLocalPlayer::GetPlayerPed()->TogglePlayerControllable(toggle, true);
     CGame::ToggleHUDElement(HUD_ELEMENT_FPS, toggle);
 
     JNIEnv *env = g_pJavaWrapper->GetEnv();

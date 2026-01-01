@@ -1178,14 +1178,11 @@ void CCam__Process_hook(CCam* thiz)
     {
         if (pNetGame)
         {
-            auto gtaPed = CLocalPlayer::GetPlayerPed()->m_pPed;
             if (auto pPed = CLocalPlayer::GetPlayerPed())
             {
                 CCamera::Get().m_uiTransitionDuration = 0xFFFFFFFF;
                 CCamera::Get().m_uiTransitionDurationTargetCoors = 0xFFFFFFFF;
                 CCamera::Get().m_bJust_Switched = false;
-
-                gtaPed->m_fAimingRotation = gtaPed->m_fCurrentRotation = atan2(CCamera::Get().m_aCams[0].Front.y, CCamera::Get().m_aCams[0].Front.x) - M_PI_2;
 
                 CFirstPersonCamera::ProcessCameraOnFoot(thiz, pPed);
             }

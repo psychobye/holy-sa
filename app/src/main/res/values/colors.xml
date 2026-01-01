@@ -47,6 +47,7 @@
     <color name="white6">#14ffffff</color>
     <color name="black20">#33000000</color>
     <color name="black50">#80000000</color>
+    <color name="black80">#CC000000</color>
     <color name="color_0F0F0F">#ff0f0f0f</color>
     <color name="color_056AA3">#ff056AA3</color>
     <color name="menuTextDisable">#ffffffff</color>
@@ -58,6 +59,11 @@
     <color name="gray_dark_80">#CC252525</color>
     <color name="gray80">#CC252525</color>
     <color name="gray_light">#C8C8CC</color>
+    <color name="gray_2E">#2E2E2E</color>
+    <color name="gray_1F">#1F2021</color>
+    <color name="gray_69">#69696A</color>
+    <color name="gray_37">#373B3C</color>
+    <color name="gray_BF">#BFBFBF</color>
     <color name="orange">#FFA44A</color>
     <color name="colorAccent">#ffed4319</color>
     <color name="colorPrimary">#ff000000</color>

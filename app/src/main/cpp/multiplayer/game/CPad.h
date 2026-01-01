@@ -73,6 +73,10 @@ public:
     float m_fAccelZ;                          // 0x154
 
     static CPad Pads[2];
+
+    static int16_t GetPedWalkLeftRight(CPad *thiz);
+
+    static int16_t GetPedWalkUpDown(CPad *thiz);
 };
 
 #endif // RUSSIA_CPAD_H

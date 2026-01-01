@@ -1228,24 +1228,6 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
             }
             break;
         }
-        // FOR OMP OR CUSTOM PACKET
-        /*case RPC_STREAM_INDIVIDUAL: {
-            std::string link;
-            uint8_t repeat;
-
-            bs.Read(link);
-
-            // TODO: FIX CRASH
-            if(link.size() <= 3) {
-                DLOG("StopIndividualStream");
-                CAudioStreamPool::StopIndividualStream();
-                return;
-            }
-
-            DLOG("PlayIndividualStream");
-            CAudioStreamPool::PlayIndividualStream(link, 0);
-            break;
-        }*/
         case RPC_STREAM_INDIVIDUAL:
         {
             char str[255];
@@ -1255,12 +1237,19 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
             bs.Read(&str[0], len);
             str[len] = 0;
 
+            if(strlen(str) <= 3) {
+                DLOG("StopIndividualStream");
+                CAudioStreamPool::StopIndividualStream();
+                break;
+            }
+
             CAudioStreamPool::PlayIndividualStream(&str[0], true);
             break;
         }
         case RPC_STREAM_DESTROY: {
             uint32_t id;
             bs.Read(id);
+
             CAudioStreamPool::DeleteStreamByID(id);
             break;
         }

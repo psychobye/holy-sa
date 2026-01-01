@@ -7,5 +7,13 @@ void CPad::Initialise() {
     CHook::CallFunction<void>("_ZN4CPad10InitialiseEv");
 }
 
+int16_t CPad::GetPedWalkLeftRight(CPad *thiz) {
+    return CHook::CallFunction<int16_t>("_ZN4CPad19GetPedWalkLeftRightEv", thiz);
+}
+
+int16_t CPad::GetPedWalkUpDown(CPad *thiz) {
+    return CHook::CallFunction<int16_t>("_ZN4CPad16GetPedWalkUpDownEv", thiz);
+}
+
 void CPad::InjectHooks() {
 }
