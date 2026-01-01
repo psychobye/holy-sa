@@ -257,8 +257,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/sd_button_positive"
-                    android:layout_width="95dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:background="@drawable/dialog_first_btn_bg"
                     android:foreground="?android:attr/selectableItemBackgroundBorderless"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -290,8 +290,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/sd_button_negative"
-                    android:layout_width="95dp"
-                    android:layout_height="35dp"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_20sdp"
                     android:layout_marginStart="@dimen/_4sdp"
                     android:background="@drawable/dialog_second_btn_bg"
                     android:visibility="visible"
