@@ -49,7 +49,7 @@ android {
 
         namespace 'com.lit.game'
         applicationId 'com.lit.game'
-        versionName "5.0"
+        versionName "5.5"
         versionCode 5
 
         multiDexEnabled = true

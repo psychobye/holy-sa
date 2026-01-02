@@ -219,7 +219,7 @@ void CGUI::Render()
     GPS::DoPathDraw();
 
     // TODO: Speedometer
-	/*if(CGame::FindPlayerPed()->m_pPed->IsInVehicle() && !CGame::FindPlayerPed()->m_pPed->IsAPassenger()
+	if(CGame::FindPlayerPed()->m_pPed->IsInVehicle() && !CGame::FindPlayerPed()->m_pPed->IsAPassenger()
 	&& !CKeyBoard::IsOpen() && !CDialog::bIsShow && CHUD::bIsShow && !CTimer::m_UserPause)
 	{
 		if(CSpeedometr::thiz == nullptr)
@@ -233,7 +233,7 @@ void CGUI::Render()
 		{
 			CSpeedometr::Destroy();
 		}
-	}*/
+	}
 
 	CKeyBoard::Render();
     CActionsPed::drawProgress(); // TODO: func

@@ -139,8 +139,6 @@ void CNetGame::Process() {
         return;
     }
 
-    CSpeedometr::UpdateSpeed();
-
     if (GetGameState() == eNetworkState::CONNECTED) {
         // pool process
         CPlayerPool::Process();

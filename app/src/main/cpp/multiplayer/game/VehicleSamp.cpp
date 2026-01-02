@@ -17,6 +17,7 @@
 #include "util/TextRasterizer/TextRasterizer.h"
 #include "CHandlingDataMgr.h"
 #include "Entity/Vehicle/Bike.h"
+#include "Coronas.h"
 
 CVehicleSamp::CVehicleSamp(int iType, float fPosX, float fPosY, float fPosZ, float fRotation, bool bSiren)
 {
@@ -212,97 +213,78 @@ CVehicleSamp::~CVehicleSamp()
 	CStreaming::RemoveModelIfNoRefs(modelId);
 }
 
-void CVehicleSamp::toggleRightTurnLight(bool toggle)
+void CVehicleSamp::RenderTurnLights()
 {
-    m_bIsOnRightTurnLight = toggle;
+    static bool blinkState = false;
+    static uint32_t lastBlinkTime = 0;
 
+    uint32_t now = CTimer::m_snTimeInMilliseconds;
+    if (now - lastBlinkTime >= 501) {
+        blinkState = !blinkState;
+        lastBlinkTime = now;
+    }
 
-	auto pModelInfoStart = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
+    if (!blinkState) return;
 
-	CVector* m_avDummyPos = pModelInfoStart->m_pVehicleStruct->m_avDummyPos;
-
-	CVector vecFront;
-	// 0 - front light
-	vecFront.x = m_avDummyPos[0].x + 0.1;
-	vecFront.y = m_avDummyPos[0].y;
-	vecFront.z = m_avDummyPos[0].z;
-
-	CVector vecRear;
-	vecRear.x = m_avDummyPos[1].x + 0.1;
-	vecRear.y = m_avDummyPos[1].y;
-	vecRear.z = m_avDummyPos[1].z;
-
-	CVector vec;
-	vec.x = vec.y = vec.z = 0;
-
-	if(m_pRightFrontTurnLighter != nullptr)
-	{
-		delete m_pRightFrontTurnLighter;
-		m_pRightFrontTurnLighter = nullptr;
-	}
-	if(m_pRightRearTurnLighter != nullptr)
-	{
-		delete m_pRightRearTurnLighter;
-		m_pRightRearTurnLighter = nullptr;
-	}
-
-	if(!toggle) return;
-
-    // TODO: CoronaRegister
-	/*m_pRightFrontTurnLighter = CGame::NewObject(19294, 0.0, 0.0, 0.0, vec, 300.0);
-    m_pRightFrontTurnLighter->AttachToVehicle(getSampId(), &vecFront, &vecFront);
-
-	m_pRightRearTurnLighter = CGame::NewObject(19294, 0.0, 0.0, 0.0, vec, 300.0);
-	m_pRightRearTurnLighter->AttachToVehicle(getSampId(), &vecRear, &vecRear);
-
-	m_pRightFrontTurnLighter->ProcessAttachToVehicle(this);
-	m_pRightRearTurnLighter->ProcessAttachToVehicle(this);*/
+    switch (m_iTurnState) {
+        case TURN_OFF: break;
+        case TURN_LEFT:
+            DrawTurnlight(false);
+            break;
+        case TURN_RIGHT:
+            DrawTurnlight(true);
+            break;
+        case TURN_ALL:
+            DrawTurnlight(true);
+            DrawTurnlight(false);
+            break;
+    }
 }
 
-void CVehicleSamp::toggleLeftTurnLight(bool toggle)
+bool CVehicleSamp::DrawTurnlight(int isRight)
 {
-    m_bIsOnLeftTurnLight = toggle;
+    auto modelInfo = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
+    if (!modelInfo || !modelInfo->m_pVehicleStruct)
+        return false;
 
-	auto pModelInfoStart = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
+    CVector* dummies = modelInfo->m_pVehicleStruct->m_avDummyPos;
+    if (!dummies)
+        return false;
 
-	CVector* m_avDummyPos = pModelInfoStart->m_pVehicleStruct->m_avDummyPos;
+    const int indices[2] = { 0, 1 };
 
-	CVector vecFront;
-    // 0 - front light
-    vecFront.x = -(m_avDummyPos[0].x + 0.1f);
-    vecFront.y = m_avDummyPos[0].y;
-    vecFront.z = m_avDummyPos[0].z;
+    const uint32_t baseId = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(m_pVehicle));
 
-	CVector vecRear;
-    vecRear.x = -(m_avDummyPos[1].x + 0.1f);
-    vecRear.y = m_avDummyPos[1].y;
-    vecRear.z = m_avDummyPos[1].z;
+    for (int i = 0; i < 2; ++i) {
+        CVector v = dummies[indices[i]];
+        if (!isRight)
+            v.x = -v.x;
 
-	CVector vec;
-    vec.x = vec.y = vec.z = 0;
+        uint32_t coronaId = baseId + (isRight ? 1u : 0u) + (i ? 2u : 0u);
 
-    if(m_pLeftFrontTurnLighter != nullptr)
-    {
-        delete m_pLeftFrontTurnLighter;
-        m_pLeftFrontTurnLighter = nullptr;
+        CCoronas::RegisterCorona(
+                coronaId,
+                m_pVehicle,
+                255, 160, 0, 255,
+                &v,
+                0.5f,
+                50.f,
+                eCoronaType::CORONATYPE_HEADLIGHT,
+                eCoronaFlareType::FLARETYPE_NONE,
+                false,
+                false,
+                0,
+                0.0f,
+                false,
+                0,
+                0,
+                15.0f,
+                false,
+                false
+        );
     }
-    if(m_pLeftRearTurnLighter != nullptr)
-    {
-        delete m_pLeftRearTurnLighter;
-        m_pLeftRearTurnLighter = nullptr;
-    }
 
-    if(!toggle) return;
-
-    // TODO: CoronaRegister
-    /*m_pLeftFrontTurnLighter = CGame::NewObject(19294, 0.0, 0.0, 0.0, vec, 300.0);
-    m_pLeftFrontTurnLighter->AttachToVehicle(getSampId(), &vecFront, &vecFront);
-
-    m_pLeftRearTurnLighter = CGame::NewObject(19294, 0.0, 0.0, 0.0, vec, 300.0);
-    m_pLeftRearTurnLighter->AttachToVehicle(getSampId(), &vecRear, &vecRear);
-
-    m_pLeftFrontTurnLighter->ProcessAttachToVehicle(this);
-    m_pLeftRearTurnLighter->ProcessAttachToVehicle(this);*/
+    return true;
 }
 
 VEHICLEID CVehicleSamp::getSampId()

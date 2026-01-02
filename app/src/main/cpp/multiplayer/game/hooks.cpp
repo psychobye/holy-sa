@@ -1109,6 +1109,7 @@ void CAutomobile__PreRender_hook(CVehicle* thiz)
     if (pVeh) {
         pVeh->ProcessWheelsOffset();
         g_pLastProcessedVehicleMatrix = pVeh;
+        pVeh->RenderTurnLights();
 
         if (pVeh->neon.IsSet()) {
 			pVeh->neon.Render(pVeh->m_pVehicle);

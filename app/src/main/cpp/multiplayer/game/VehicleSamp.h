@@ -254,4 +254,8 @@ public:
     void SetStrob(eStobsStatus type);
 
     void ChangeDummyColor(const char *dummy, RwRGBA color);
+
+    bool DrawTurnlight(int isRight);
+
+    void RenderTurnLights();
 };
