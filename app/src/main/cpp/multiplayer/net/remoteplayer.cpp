@@ -487,8 +487,6 @@ void calculateAimVector(CVector* vec1, CVector* vec2)
 
 void CRemotePlayer::UpdateAimFromSyncData(AIM_SYNC_DATA * pAimSync)
 {
-    m_bKeyboardOpened = pAimSync->m_bKeyboardOpened;
-
     if(!m_pPlayerPed) return;
     m_pPlayerPed->SetCameraMode(pAimSync->byteCamMode);
 

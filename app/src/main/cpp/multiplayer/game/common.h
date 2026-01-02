@@ -283,12 +283,9 @@ struct AIM_SYNC_DATA
     uint8_t	byteCamExtZoom : 6;	// 0-63 normalized
     uint8_t	byteWeaponState : 2;		// see eWeaponState
     uint8_t	aspect_ratio;
-#if VER_LR
-    uint8 		m_bKeyboardOpened;
-#endif
 };
 #pragma pack(pop)
-VALIDATE_SIZE(AIM_SYNC_DATA, 32);
+VALIDATE_SIZE(AIM_SYNC_DATA, 31);
 
 #pragma pack(push, 1)
 struct BULLET_SYNC

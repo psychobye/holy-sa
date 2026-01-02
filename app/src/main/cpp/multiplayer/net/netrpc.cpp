@@ -574,7 +574,8 @@ void ConnectionRejected(RPCParameters *rpcParams)
         CChatWindow::AddMessage("{D35D5D}Возможно, этот ID уже используется — попробуйте подключиться позже.");
     }
 
-    pNetGame->GetRakClient()->Disconnect(500);
+    pNetGame->SetGameState(eNetworkState::WAIT_CONNECT);
+    // pNetGame->GetRakClient()->Disconnect(500);
 }
 
 void Pickup(RPCParameters *rpcParams)

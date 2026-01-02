@@ -793,11 +793,7 @@ void CLocalPlayer::SendAimSyncData()
             ),
 
             .byteWeaponState = weaponState,
-            .aspect_ratio = 255,
-
-#if VER_LR
-            .m_bKeyboardOpened = CKeyBoard::m_bEnable
-#endif
+            .aspect_ratio = 255
     };
 
     RakNet::BitStream bsAimSync;

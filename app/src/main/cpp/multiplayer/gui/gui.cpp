@@ -236,7 +236,7 @@ void CGUI::Render()
 	}*/
 
 	CKeyBoard::Render();
-	// CActionsPed::drawProgress(); // TODO: func
+    CActionsPed::drawProgress(); // TODO: func
 
 	m_bAnyItemHovered = ImGui::IsAnyItemHovered();
 

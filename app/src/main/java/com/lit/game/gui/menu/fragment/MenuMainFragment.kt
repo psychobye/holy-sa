@@ -5,11 +5,16 @@ import android.graphics.Color
 import android.os.Bundle
 import android.transition.TransitionManager
 import android.view.View
+import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.lit.data.skins.Skins
+import com.lit.game.EntitySnaps
 import com.lit.game.R
+import com.lit.game.SnapShot
 import com.lit.game.databinding.FragmentMenuMainBinding
+import com.lit.game.gui.PlayerInfo
 import com.lit.game.gui.menu.MenuController
 import com.lit.game.gui.menu.MenuViewModel
 import com.lit.game.gui.quest.QuestStatus
@@ -27,6 +32,8 @@ class MenuMainFragment : Fragment(R.layout.fragment_menu_main) {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding = FragmentMenuMainBinding.bind(view)
+
+        loadSnapSmooth(Skins.getSnap(PlayerInfo.modelId), binding.skin)
 
         binding.quest.visibility = View.GONE
         binding.btnQuest.visibility = View.GONE
@@ -102,6 +109,12 @@ class MenuMainFragment : Fragment(R.layout.fragment_menu_main) {
             nativeSendMenuButt(6)
             controller?.destroyMenu()
         }
+    }
+
+    fun loadSnapSmooth(pedSnap: SnapShot, imageView: ImageView) {
+        imageView.alpha = 0f
+        EntitySnaps.loadEntitySnapToImageView(pedSnap, imageView)
+        imageView.animate().alpha(1f).setDuration(300).start()
     }
 
     @SuppressLint("SetTextI18n")
