@@ -89,7 +89,7 @@ void CShadows::RenderStaticShadows(bool renderAdditive) {
                     for (auto i{0}; i < poly->m_wNumVerts; i++, vtxIt++) {
                         const auto &pos = poly->m_avecPosn[i];
                         RwIm3DVertexSetPos(vtxIt, pos.x, pos.y, pos.z + 0.06f);
-                        RwIm3DVertexSetRGBA(vtxIt, r, g, b, a);
+                        RwIm3DVertexSetRGBA(vtxIt, b, g, r, a);
                                 RwIm3DVertexSetU(vtxIt, (float) poly->m_aU[i] / 200.f);
                                 RwIm3DVertexSetV(vtxIt, (float) poly->m_aV[i] / 200.f);
                     }
