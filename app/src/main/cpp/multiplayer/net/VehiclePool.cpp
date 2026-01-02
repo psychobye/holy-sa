@@ -21,7 +21,7 @@ void CVehiclePool::Free()
     }
 }
 
-CVehicleSamp* CVehiclePool::GetVehicleFromTrailer(CVehicleSamp *pTrailer) {
+CVehicleMP* CVehiclePool::GetVehicleFromTrailer(CVehicleMP *pTrailer) {
 
     if (!pTrailer) return nullptr;
 
@@ -77,9 +77,9 @@ bool CVehiclePool::New(NewVehiclePacket *pNewVehicle) {
         Delete(vehicleId);
     }
 
-	CVehicleSamp* pVeh;
+	CVehicleMP* pVeh;
     try {
-        pVeh = new CVehicleSamp(pNewVehicle->iVehicleType,
+        pVeh = new CVehicleMP(pNewVehicle->iVehicleType,
 							pNewVehicle->vecPos.x,
 							pNewVehicle->vecPos.y,
 							pNewVehicle->vecPos.z,
@@ -138,7 +138,7 @@ VEHICLEID CVehiclePool::FindIDFromGtaPtr(CEntity *pGtaVehicle)
     return GetEntity(pGtaVehicle);
 }
 
-CVehicleSamp *CVehiclePool::FindVehicle(CVehicle *pGtaVehicle)
+CVehicleMP *CVehiclePool::FindVehicle(CVehicle *pGtaVehicle)
 {
     if (!pGtaVehicle) return nullptr;
 
@@ -186,7 +186,7 @@ int CVehiclePool::FindNearestToLocalPlayerPed()
 
 void CVehiclePool::AssignSpecialParamsToVehicle(VEHICLEID VehicleID, uint8_t byteObjective, uint8_t byteDoorsLocked)
 {
-	CVehicleSamp *pVehicle = list[VehicleID];
+	CVehicleMP *pVehicle = list[VehicleID];
 
 	if(pVehicle)
 	{

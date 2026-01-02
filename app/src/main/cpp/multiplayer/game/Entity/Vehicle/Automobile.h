@@ -42,7 +42,7 @@ public:
             float m_fHeliWheelSpeed4;
         };
     };
-    std::array<float, 4> m_fWheelBurnoutSpeed; // 0x858 - Passed to CVehicleSamp::ProcessWheel as last 3rd parameter, but it's not used
+    std::array<float, 4> m_fWheelBurnoutSpeed; // 0x858 - Passed to CVehicleMP::ProcessWheel as last 3rd parameter, but it's not used
     struct {
         bool bTaxiLight : 1 { true }; // AKA `bTaxiLightOn`
         bool bShouldNotChangeColour : 1 {}; // AKA `ucNPCFlagPad2`

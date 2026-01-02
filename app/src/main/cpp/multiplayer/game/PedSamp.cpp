@@ -394,7 +394,7 @@ VEHICLEID CPedSamp::GetCurrentSampVehicleID()
 	return CVehiclePool::FindIDFromGtaPtr((CVehicle *)m_pPed->pVehicle);
 }
 
-CVehicleSamp* CPedSamp::GetCurrentVehicle()
+CVehicleMP* CPedSamp::GetCurrentVehicle()
 {
 	if(!m_pPed || !m_pPed->IsInVehicle())
         return nullptr;

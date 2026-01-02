@@ -349,7 +349,7 @@ void CRemotePlayer::StoreTrailerFullSyncData(TRAILER_SYNC_DATA* trSync)
 	VEHICLEID TrailerID = trSync->trailerID;
 	if (!TrailerID) return;
 
-	CVehicleSamp* pVehicle = CVehiclePool::GetAt(TrailerID);
+	CVehicleMP* pVehicle = CVehiclePool::GetAt(TrailerID);
 
 	if (pVehicle)
 	{
@@ -448,7 +448,7 @@ void CRemotePlayer::StoreBulletSyncData(BULLET_SYNC* pBulletSync)
         }
     }
     if(pBulletSync->byteHitType == BULLET_HIT_TYPE_VEHICLE) {
-        CVehicleSamp *pVehicle = CVehiclePool::GetAt(pBulletSync->hitId);
+        CVehicleMP *pVehicle = CVehiclePool::GetAt(pBulletSync->hitId);
         if(pVehicle)
         {
             btData->pEntity = pVehicle->m_pVehicle;
@@ -573,7 +573,7 @@ void CRemotePlayer::StoreInCarFullSyncData(INCAR_SYNC_DATA *picSync)
 		}
 	}
 	else {
-		CVehicleSamp *pTrailer = CVehiclePool::GetAt(m_icSync.TrailerID);
+		CVehicleMP *pTrailer = CVehiclePool::GetAt(m_icSync.TrailerID);
 		if(pTrailer) {
 			if (m_pCurrentVehicle->m_pTrailer) {
 				if ((CVehicle*)(m_pCurrentVehicle->m_pVehicle->m_pTrailer) != pTrailer->m_pVehicle) {

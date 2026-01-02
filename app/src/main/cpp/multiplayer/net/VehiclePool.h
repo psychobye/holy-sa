@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../game/common.h"
-#include "../game/VehicleSamp.h"
+#include "../game/VehicleMP.h"
 #include "../game/PedSamp.h"
 #include "NetPool.h"
 
@@ -28,7 +28,7 @@ struct NewVehiclePacket
 };
 #pragma pack(pop)
 
-class CVehiclePool : public CNetPool<CVehicleSamp*>
+class CVehiclePool : public CNetPool<CVehicleMP*>
 {
 public:
 	static void Init();
@@ -42,12 +42,12 @@ public:
 	static VEHICLEID FindIDFromGtaPtr(CEntity * pGtaVehicle);
 	static VEHICLEID FindIDFromRwObject(RwObject* pRWObject);
 	static int FindGtaIDFromID(VEHICLEID ID);
-	static CVehicleSamp *FindSampPointerFromRwObject(RwObject *pRWObject);
+	static CVehicleMP *FindSampPointerFromRwObject(RwObject *pRWObject);
 
 	static void AssignSpecialParamsToVehicle(VEHICLEID VehicleID, uint8_t byteObjective, uint8_t byteDoorsLocked);
 
 	static int FindNearestToLocalPlayerPed();
 
-	static CVehicleSamp *GetVehicleFromTrailer(CVehicleSamp *pTrailer);
-	static CVehicleSamp *FindVehicle(CVehicle *pGtaVehicle);
+	static CVehicleMP *GetVehicleFromTrailer(CVehicleMP *pTrailer);
+	static CVehicleMP *FindVehicle(CVehicle *pGtaVehicle);
 };

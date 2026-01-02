@@ -557,7 +557,7 @@ void ScrPutPlayerInVehicle(RPCParameters *rpcParams)
 	if(pPed->m_pPed->IsInVehicle()) {
 		pPed->m_pPed->RemoveFromVehicle();
 	}
-	CVehicleSamp *pVehicle = CVehiclePool::GetAt(vehicleid);
+	CVehicleMP *pVehicle = CVehiclePool::GetAt(vehicleid);
 	if(!pVehicle)return;
  //   DLOG("seatid = %d", vehicleid);
 	if(seatid == 0) {
@@ -749,7 +749,7 @@ void ScrSetVehicleVelocity(RPCParameters *rpcParams)
 
 	if(pPlayerPed)
 	{
-		CVehicleSamp *pVehicle = CVehiclePool::GetAt( CVehiclePool::FindIDFromGtaPtr(pPlayerPed->GetGtaVehicle()) );
+		CVehicleMP *pVehicle = CVehiclePool::GetAt( CVehiclePool::FindIDFromGtaPtr(pPlayerPed->GetGtaVehicle()) );
 		if(pVehicle)
 			pVehicle->m_pVehicle->SetVelocity(vecMoveSpeed);
 	}
@@ -1556,7 +1556,7 @@ void ScrSetVehicleZAngle(RPCParameters* rpcParams)
 	bsData.Read(VehicleId);
 	bsData.Read(fZAngle);
 
-	CVehicleSamp* pVeh = CVehiclePool::GetAt(VehicleId);
+	CVehicleMP* pVeh = CVehiclePool::GetAt(VehicleId);
 	if (!pVeh) return;
 	if (GamePool_Vehicle_GetAt(pVeh->m_dwGTAId))
 	{
@@ -1575,8 +1575,8 @@ void ScrAttachTrailerToVehicle(RPCParameters* rpcParams)
 	RakNet::BitStream bsData(Data, (iBitLength / 8) + 1, false);
 	bsData.Read(TrailerID);
 	bsData.Read(VehicleID);
-	CVehicleSamp* pTrailer = CVehiclePool::GetAt(TrailerID);
-	CVehicleSamp* pVehicle = CVehiclePool::GetAt(VehicleID);
+	CVehicleMP* pTrailer = CVehiclePool::GetAt(TrailerID);
+	CVehicleMP* pVehicle = CVehiclePool::GetAt(VehicleID);
 	if (!pVehicle) return;
 	if (!pTrailer) return;
 	pVehicle->SetTrailer(pTrailer);
@@ -1595,7 +1595,7 @@ void ScrDetachTrailerFromVehicle(RPCParameters* rpcParams)
 	VEHICLEID VehicleID;
 	RakNet::BitStream bsData(Data, (iBitLength / 8) + 1, false);
 	bsData.Read(VehicleID);
-	CVehicleSamp* pVehicle = CVehiclePool::GetAt(VehicleID);
+	CVehicleMP* pVehicle = CVehiclePool::GetAt(VehicleID);
 	if (!pVehicle) return;
 	pVehicle->DetachTrailer();
 	pVehicle->SetTrailer(NULL);

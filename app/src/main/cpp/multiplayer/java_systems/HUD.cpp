@@ -115,7 +115,7 @@ bool CHUD::NeededRenderPassengerButton() {
     if (nearestId == INVALID_VEHICLE_ID)
         return false;
 
-    CVehicleSamp* pVeh = CVehiclePool::GetAt(nearestId);
+    CVehicleMP* pVeh = CVehiclePool::GetAt(nearestId);
     if (!pVeh || !pVeh->m_pVehicle)
         return false;
 

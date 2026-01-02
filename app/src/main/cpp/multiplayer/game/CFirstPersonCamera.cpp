@@ -193,7 +193,7 @@ void CFirstPersonCamera::ProcessCameraOnFoot(CCam* pCam, CPedSamp* pPed)
     RwCameraSetNearClipPlane(Scene.m_pRwCamera, 0.2f);
 }
 
-void CFirstPersonCamera::ProcessCameraInVeh(CCam* pCam, CPedSamp* pPed, CVehicleSamp* pVeh)
+void CFirstPersonCamera::ProcessCameraInVeh(CCam* pCam, CPedSamp* pPed, CVehicleMP* pVeh)
 {
     if (!m_bEnabled || !pPed->GetGtaVehicle())
     {

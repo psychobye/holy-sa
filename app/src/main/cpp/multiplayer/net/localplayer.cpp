@@ -258,7 +258,7 @@ bool CLocalPlayer::Process()
         if ((dwThisTick - m_dwLastUpdateHudButtons) > 100) {
             m_dwLastUpdateHudButtons = GetTickCount();
 
-            CVehicleSamp* m_pNearestVehicle = nullptr;
+            CVehicleMP* m_pNearestVehicle = nullptr;
             auto nearestId = CVehiclePool::FindNearestToLocalPlayerPed();
             if (nearestId != INVALID_VEHICLE_ID) {
                 auto veh = CVehiclePool::GetAt(nearestId);
@@ -327,7 +327,7 @@ void CLocalPlayer::GoEnterVehicle(bool passenger)
 	VEHICLEID ClosetVehicleID = CVehiclePool::FindNearestToLocalPlayerPed();
 	if (ClosetVehicleID != INVALID_VEHICLE_ID)
 	{
-		CVehicleSamp* pVehicle = CVehiclePool::GetAt(ClosetVehicleID);
+		CVehicleMP* pVehicle = CVehiclePool::GetAt(ClosetVehicleID);
 
 		if (pVehicle != nullptr && pVehicle->m_pVehicle->GetDistanceFromLocalPlayerPed() < 4.0f)
 		{
@@ -616,7 +616,7 @@ void CLocalPlayer::SendInCarFullSyncData()
     if (passed < GetOptimumInCarSendRate())
         return;
 
-    CVehicleSamp* pVehicle = m_pPlayerPed->GetCurrentVehicle();
+    CVehicleMP* pVehicle = m_pPlayerPed->GetCurrentVehicle();
     if (!pVehicle || !pVehicle->m_pVehicle) {
         return;
     }

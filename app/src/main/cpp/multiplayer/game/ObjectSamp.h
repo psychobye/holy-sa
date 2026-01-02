@@ -48,7 +48,7 @@ public:
 	void MoveTo(float x, float y, float z, float speed, float rX, float rY, float rZ);
 
 	void AttachToVehicle(uint16_t usVehID, CVector* pVecOffset, CVector* pVecRot);
-	void ProcessAttachToVehicle(CVehicleSamp* pVehicle);
+	void ProcessAttachToVehicle(CVehicleMP* pVehicle);
 
 	void InstantRotate(float x, float y, float z);
 	void StopMoving();

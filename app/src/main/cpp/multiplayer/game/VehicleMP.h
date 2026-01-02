@@ -85,11 +85,11 @@ enum eTurnState
 void* GetSuspensionLinesFromModel(int nModelIndex, int& numWheels);
 CCollisionData* GetCollisionDataFromModel(int nModelIndex);
 
-class CVehicleSamp
+class CVehicleMP
 {
 public:
-	CVehicleSamp(int iType, float fPosX, float fPosY, float fPosZ, float fRotation = 0.0f, bool bSiren = false);
-	~CVehicleSamp();
+	CVehicleMP(int iType, float fPosX, float fPosY, float fPosZ, float fRotation = 0.0f, bool bSiren = false);
+	~CVehicleMP();
 
 	void SetHealth(float fHealth);
 	float GetHealth();
@@ -112,7 +112,7 @@ public:
 
 	void AttachTrailer();
 	void DetachTrailer();
-	void SetTrailer(CVehicleSamp* pTrailer);
+	void SetTrailer(CVehicleMP* pTrailer);
 
 	unsigned int GetVehicleSubtype() const;
 
@@ -172,7 +172,7 @@ public:
     bool            m_bDoorsState[eDoors::MAX_DOORS] {};
 	float 			m_fDefaultWheelSize = 0.0f;
 
-	CVehicleSamp* 		m_pTrailer = nullptr;
+	CVehicleMP* 		m_pTrailer = nullptr;
     uintptr		    m_dwMarkerID = 0;
 	bool 			m_bIsInvulnerable = false;
 	uint8_t			m_byteObjectiveVehicle = 0; // Is this a special objective vehicle? 0/1

@@ -11,7 +11,7 @@ public:
     static void UpdateFirstPersonMoveAnims(CCam *pCam, CPedSamp *pPed);
     static void ResetPedAnims();
     static void ProcessCameraOnFoot(CCam* pCam, CPedSamp* pPed);
-    static void ProcessCameraInVeh(CCam* pCam, CPedSamp* pPed, CVehicleSamp* pVeh);
+    static void ProcessCameraInVeh(CCam* pCam, CPedSamp* pPed, CVehicleMP* pVeh);
 
     static void SetEnabled(bool bEnabled);
     static void Toggle();

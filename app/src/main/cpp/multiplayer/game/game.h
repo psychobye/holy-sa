@@ -6,7 +6,7 @@
 #include "pad.h"
 #include "Quaternion.h"
 #include "PedSamp.h"
-#include "VehicleSamp.h"
+#include "VehicleMP.h"
 #include "ObjectSamp.h"
 #include "font.h"
 #include "scripting.h"

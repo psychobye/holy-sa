@@ -680,7 +680,7 @@ void ProcessIncommingEvent(BYTE bytePlayerID, int iEventType, uint32_t dwParam1,
 	int iPaintJob;
 	int iComponent;
 	int iWait;
-	CVehicleSamp* pVehicle;
+	CVehicleMP* pVehicle;
 	CRemotePlayer* pRemote;
 
 	switch (iEventType) 
@@ -808,7 +808,7 @@ void VehicleDamage(RPCParameters* rpcParams)
 		bsData.Read(byteLightStatus);
 		bsData.Read(byteTireStatus);
 
-		CVehicleSamp* pVehicle = CVehiclePool::GetAt(vehId);
+		CVehicleMP* pVehicle = CVehiclePool::GetAt(vehId);
 		if (pVehicle)
 			pVehicle->UpdateDamageStatus(dwPanelStatus, dwDoorStatus, byteLightStatus, byteTireStatus);
 	}

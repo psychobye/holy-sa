@@ -21,7 +21,7 @@ float subAngle(float a1, float a2)
 CObjectSamp::CObjectSamp(int iModel, float fPosX, float fPosY, float fPosZ, CVector vecRot, float fDrawDistance)
 {
 	if(!CModelInfo::GetModelInfo(iModel))
-		iModel = 18631; // вопросик
+		iModel = 18631; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
 	m_pEntity 			= 0;
 	m_dwGTAId 			= 0;
@@ -67,7 +67,7 @@ void CObjectSamp::Process(float fElapsedTime)
 {
 	if (m_bAttachedType == eObjectAttachType::TO_VEHICLE)
 	{
-		CVehicleSamp* pVehicle = CVehiclePool::GetAt(m_usAttachedVehicle);
+		CVehicleMP* pVehicle = CVehiclePool::GetAt(m_usAttachedVehicle);
 		if (pVehicle)
 		{
 			if (pVehicle->m_pVehicle->IsAdded())
@@ -296,7 +296,7 @@ void CObjectSamp::AttachToVehicle(uint16_t usVehID, CVector* pVecOffset, CVector
 	m_vecAttachedRotation.z = pVecRot->z;
 }
 
-void CObjectSamp::ProcessAttachToVehicle(CVehicleSamp* pVehicle)
+void CObjectSamp::ProcessAttachToVehicle(CVehicleMP* pVehicle)
 {
 	if (GamePool_Object_GetAt(m_dwGTAId))
 	{

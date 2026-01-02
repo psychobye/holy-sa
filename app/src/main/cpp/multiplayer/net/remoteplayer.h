@@ -3,7 +3,7 @@
 #include "../vendor/raknet/rijndael.h"
 
 #include "../game/common.h"
-#include "../game/VehicleSamp.h"
+#include "../game/VehicleMP.h"
 #include "../game/PedSamp.h"
 #include "gui/gui.h"
 
@@ -63,7 +63,7 @@ public:
 
 private:
     CPedSamp			*m_pPlayerPed;
-    CVehicleSamp			*m_pCurrentVehicle;
+    CVehicleMP			*m_pCurrentVehicle;
 
     PLAYERID			m_PlayerID;
 

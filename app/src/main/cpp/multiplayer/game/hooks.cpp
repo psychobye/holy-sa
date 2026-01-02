@@ -862,8 +862,8 @@ int RwFrameAddChild_hook(int a1, int a2)
 	return RwFrameAddChild(a1, a2);
 }
 
-int(*CUpsideDownCarCheck__IsCarUpsideDown)(uintptr* thiz, const CVehicleSamp* pVehicleToCheck);
-int CUpsideDownCarCheck__IsCarUpsideDown_hook(uintptr* thiz, const CVehicleSamp* pVehicleToCheck)
+int(*CUpsideDownCarCheck__IsCarUpsideDown)(uintptr* thiz, const CVehicleMP* pVehicleToCheck);
+int CUpsideDownCarCheck__IsCarUpsideDown_hook(uintptr* thiz, const CVehicleMP* pVehicleToCheck)
 {
     /* Passengers leave the vehicle out of fear if it overturns */
 
@@ -886,8 +886,8 @@ RwFrame* CClumpModelInfo_GetFrameFromId_Post(RwFrame* pFrameResult, RpClump* clu
     uintptr_t calledFrom = 0;
     GET_LR(calledFrom);
 
-    if (calledFrom == (VER_x32 ? 0x0058C61C : 0x6AFEE4)                // CVehicleSamp::SetWindowOpenFlag
-        || calledFrom == (VER_x32 ? 0x0058C644 : 0x6AFF18)             // CVehicleSamp::ClearWindowOpenFlag
+    if (calledFrom == (VER_x32 ? 0x0058C61C : 0x6AFEE4)                // CVehicleMP::SetWindowOpenFlag
+        || calledFrom == (VER_x32 ? 0x0058C644 : 0x6AFF18)             // CVehicleMP::ClearWindowOpenFlag
         || calledFrom == (VER_x32 ? 0x003885EC : 0x45FC40)             // CVehicleModelInfo::GetOriginalCompPosition
         || calledFrom == (VER_x32 ? 0x00387A28 : 0x45ECD0))            // CVehicleModelInfo::CreateInstance
         return nullptr;
@@ -954,7 +954,7 @@ int32 CAutomobile__ProcessEntityCollision_hook(CVehicle* thiz, CEntity* ent, CCo
 	if (pNetGame)
 	{
 		uint16_t vehId = CVehiclePool::FindIDFromGtaPtr(thiz);
-		CVehicleSamp* pVeh = CVehiclePool::GetAt(vehId);
+		CVehicleMP* pVeh = CVehiclePool::GetAt(vehId);
 		if (pVeh) {
 			if (pVeh->bHasSuspensionLines && pVeh->GetVehicleSubtype() == VEHICLE_SUBTYPE_CAR) {
 				pColData = CModelInfo::GetModelInfo(thiz->m_nModelIndex)->AsVehicleModelInfoPtr()->m_pColModel->m_pColData;
@@ -1023,7 +1023,7 @@ void MainMenuScreen__OnExit_hook()
 	//return CGame__Shutdown();
 }
 
-static CVehicleSamp* g_pLastProcessedVehicleMatrix = nullptr;
+static CVehicleMP* g_pLastProcessedVehicleMatrix = nullptr;
 static int g_iLastProcessedWheelVehicle = -1;
 
 void (*CMatrix__Rotate)(CMatrix* thiz, float a1, float a2, float a3);
@@ -1151,7 +1151,7 @@ void CCam__Process_hook(CCam* thiz)
         return;
     }
     CVector vecSpeed;
-    CVehicleSamp* veh = nullptr;
+    CVehicleMP* veh = nullptr;
 
     float& CAR_FOV_START_SPEED = *(float*)(g_libGTASA + (VER_x32 ? 0x006A9FD0 : 0x8855D4));
     float old = CAR_FOV_START_SPEED;

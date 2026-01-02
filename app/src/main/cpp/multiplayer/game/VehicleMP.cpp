@@ -11,7 +11,7 @@
 #include "util/patch.h"
 #include "game/Enums/eCarNodes.h"
 #include "DamageManager.h"
-#include "VehicleSamp.h"
+#include "VehicleMP.h"
 #include "game/Shadow/Shadows.h"
 #include "Entity/Vehicle/Automobile.h"
 #include "util/TextRasterizer/TextRasterizer.h"
@@ -19,7 +19,7 @@
 #include "Entity/Vehicle/Bike.h"
 #include "Coronas.h"
 
-CVehicleSamp::CVehicleSamp(int iType, float fPosX, float fPosY, float fPosZ, float fRotation, bool bSiren)
+CVehicleMP::CVehicleMP(int iType, float fPosX, float fPosY, float fPosZ, float fRotation, bool bSiren)
 {
     fPosZ += 0.25f;
 
@@ -110,7 +110,7 @@ CVehicleSamp::CVehicleSamp(int iType, float fPosX, float fPosY, float fPosZ, flo
     SetHandlingData();
 }
 
-void CVehicleSamp::ChangeDummyColor(const char* dummy, RwRGBA color) {
+void CVehicleMP::ChangeDummyColor(const char* dummy, RwRGBA color) {
     auto flashFrame = CClumpModelInfo::GetFrameFromName(m_pVehicle->m_pRwClump, dummy);
     if (!flashFrame)
         return;
@@ -124,7 +124,7 @@ void CVehicleSamp::ChangeDummyColor(const char* dummy, RwRGBA color) {
 }
 
 
-CVehicleSamp::~CVehicleSamp()
+CVehicleMP::~CVehicleMP()
 {
 	if(!m_dwGTAId)return;
 
@@ -135,7 +135,7 @@ CVehicleSamp::~CVehicleSamp()
 	auto modelId = m_pVehicle->m_nModelIndex;
 
 	if(m_pVehicle->IsTrailer()){
-		CVehicleSamp *tmpVeh = CVehiclePool::GetVehicleFromTrailer(this);
+		CVehicleMP *tmpVeh = CVehiclePool::GetVehicleFromTrailer(this);
 		if(tmpVeh)
 		{
 			ScriptCommand(&detach_trailer_from_cab, m_dwGTAId, tmpVeh->m_dwGTAId);
@@ -213,7 +213,7 @@ CVehicleSamp::~CVehicleSamp()
 	CStreaming::RemoveModelIfNoRefs(modelId);
 }
 
-void CVehicleSamp::RenderTurnLights()
+void CVehicleMP::RenderTurnLights()
 {
     static bool blinkState = false;
     static uint32_t lastBlinkTime = 0;
@@ -241,7 +241,7 @@ void CVehicleSamp::RenderTurnLights()
     }
 }
 
-bool CVehicleSamp::DrawTurnlight(int isRight)
+bool CVehicleMP::DrawTurnlight(int isRight)
 {
     auto modelInfo = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
     if (!modelInfo || !modelInfo->m_pVehicleStruct)
@@ -287,12 +287,12 @@ bool CVehicleSamp::DrawTurnlight(int isRight)
     return true;
 }
 
-VEHICLEID CVehicleSamp::getSampId()
+VEHICLEID CVehicleMP::getSampId()
 {
 	return CVehiclePool::FindIDFromGtaPtr(m_pVehicle);
 }
 
-void CVehicleSamp::AttachTrailer()
+void CVehicleMP::AttachTrailer()
 {
 	if (m_pTrailer && GamePool_Vehicle_GetAt(m_pTrailer->m_dwGTAId) )
 	{
@@ -302,7 +302,7 @@ void CVehicleSamp::AttachTrailer()
 
 //-----------------------------------------------------------
 
-void CVehicleSamp::DetachTrailer()
+void CVehicleMP::DetachTrailer()
 {
 	if (m_pTrailer && GamePool_Vehicle_GetAt(m_pTrailer->m_dwGTAId))
 	{
@@ -313,14 +313,14 @@ void CVehicleSamp::DetachTrailer()
 
 //-----------------------------------------------------------
 
-void CVehicleSamp::SetTrailer(CVehicleSamp* pTrailer)
+void CVehicleMP::SetTrailer(CVehicleMP* pTrailer)
 {
 	m_pTrailer = pTrailer;
 }
 
 //-----------------------------------------------------------
 
-void CVehicleSamp::SetHealth(float fHealth)
+void CVehicleMP::SetHealth(float fHealth)
 {
 	if (m_pVehicle)
 	{
@@ -328,14 +328,14 @@ void CVehicleSamp::SetHealth(float fHealth)
 	}
 }
 
-float CVehicleSamp::GetHealth()
+float CVehicleMP::GetHealth()
 {
 	if (m_pVehicle) return m_pVehicle->fHealth;
 	else return 0.0f;
 }
 
 // 0.3.7
-void CVehicleSamp::SetInvulnerable(bool bInv)
+void CVehicleMP::SetInvulnerable(bool bInv)
 {
 	if (!m_pVehicle) return;
 	if (!GamePool_Vehicle_GetAt(m_dwGTAId)) return;
@@ -356,7 +356,7 @@ void CVehicleSamp::SetInvulnerable(bool bInv)
 }
 
 // 0.3.7
-bool CVehicleSamp::IsDriverLocalPlayer()
+bool CVehicleMP::IsDriverLocalPlayer()
 {
 	if (m_pVehicle)
 	{
@@ -369,7 +369,7 @@ bool CVehicleSamp::IsDriverLocalPlayer()
 
 bool IsValidGamePed(CPed* pPed);
 
-void CVehicleSamp::RemoveEveryoneFromVehicle()
+void CVehicleMP::RemoveEveryoneFromVehicle()
 {
 	DLOG("RemoveEveryoneFromVehicle");
 	if (!m_pVehicle) return;
@@ -391,7 +391,7 @@ void CVehicleSamp::RemoveEveryoneFromVehicle()
 }
 
 // 0.3.7
-bool CVehicleSamp::IsOccupied()
+bool CVehicleMP::IsOccupied()
 {
 	if (m_pVehicle)
 	{
@@ -408,7 +408,7 @@ bool CVehicleSamp::IsOccupied()
 	return false;
 }
 
-void CVehicleSamp::ProcessMarkers()
+void CVehicleMP::ProcessMarkers()
 {
 	if (!m_pVehicle) return;
 
@@ -462,7 +462,7 @@ void CVehicleSamp::ProcessMarkers()
 	}
 }
 
-void CVehicleSamp::SetDoorState(int iState) const
+void CVehicleMP::SetDoorState(int iState) const
 {
 	if (!m_pVehicle) return;
 	if (iState)
@@ -475,7 +475,7 @@ void CVehicleSamp::SetDoorState(int iState) const
 	}
 }
 
-void CVehicleSamp::addComponent(uint16_t compId)  {
+void CVehicleMP::addComponent(uint16_t compId)  {
 	if (!CStreaming::TryLoadModel(compId))
 		return;
 
@@ -491,7 +491,7 @@ void CVehicleSamp::addComponent(uint16_t compId)  {
 
 }
 
-void CVehicleSamp::RemoveComponent(uint16_t uiComponent) const
+void CVehicleMP::RemoveComponent(uint16_t uiComponent) const
 {
 
 	int component = (uint16_t)uiComponent;
@@ -507,7 +507,7 @@ void CVehicleSamp::RemoveComponent(uint16_t uiComponent) const
 	}
 }
 
-void CVehicleSamp::SetComponentVisible(uint8_t group, uint16_t components)
+void CVehicleMP::SetComponentVisible(uint8_t group, uint16_t components)
 {
 
 	if (group == E_CUSTOM_COMPONENTS::ccExtra)
@@ -561,7 +561,7 @@ CCollisionData* GetCollisionDataFromModel(int nModelIndex)
     return modelInfo->m_pColModel->m_pColData;
 }
 
-void CVehicleSamp::SetBikeHandlingData() {
+void CVehicleMP::SetBikeHandlingData() {
     const auto& mi = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
     if (!mi) {
         return;
@@ -584,7 +584,7 @@ void CVehicleSamp::SetBikeHandlingData() {
     CHook::CallFunction<void>("_ZN5CBike20SetupSuspensionLinesEv", reinterpret_cast<CBike*>(m_pVehicle));
 }
 
-void CVehicleSamp::SetHeliHandlingData() {
+void CVehicleMP::SetHeliHandlingData() {
     const auto& mi = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
     if (!mi) {
         return;
@@ -603,7 +603,7 @@ void CVehicleSamp::SetHeliHandlingData() {
     ((void (*)(CVehicle*))(g_libGTASA + (VER_x32 ? 0x0055F430 + 1 : 0x68036C)))(m_pVehicle);
 }
 
-void CVehicleSamp::SetVehicleHandlingData() {
+void CVehicleMP::SetVehicleHandlingData() {
     const auto& mi = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
     if (!mi) {
         return;
@@ -715,7 +715,7 @@ void CVehicleSamp::SetVehicleHandlingData() {
     ((void (*)(CVehicle*))(g_libGTASA + (VER_x32 ? 0x0055F430 + 1 : 0x68036C)))(m_pVehicle);
 }
 
-void CVehicleSamp::SetHandlingData() {
+void CVehicleMP::SetHandlingData() {
     switch (GetVehicleSubtype()) {
         case VEHICLE_SUBTYPE_CAR:
             SetVehicleHandlingData();
@@ -733,7 +733,7 @@ void CVehicleSamp::SetHandlingData() {
     }
 }
 
-void CVehicleSamp::setPlate(ePlateType type, std::string& szNumber, std::string& szRegion)
+void CVehicleMP::setPlate(ePlateType type, std::string& szNumber, std::string& szRegion)
 {
 	if(pPlateTexture) {
 		RwTextureDestroy(pPlateTexture);
@@ -757,7 +757,7 @@ void GetAllAtomicObjects(RwFrame* frame, std::vector<RwObject*>& result)
 	((uintptr_t(*)(RwFrame*, void*, uintptr_t))(g_libGTASA + (VER_x32 ? 0x001D8858 + 1 : 0x2703BC)))(frame, (void*)GetAllAtomicObjectCB, (uintptr_t)& result);
 }
 
-void CVehicleSamp::ProcessHeadlightsColor(uint8_t& r, uint8_t& g, uint8_t& b)
+void CVehicleMP::ProcessHeadlightsColor(uint8_t& r, uint8_t& g, uint8_t& b)
 {
 	if (GetVehicleSubtype() != VEHICLE_SUBTYPE_CAR)
 	{
@@ -775,7 +775,7 @@ void CVehicleSamp::ProcessHeadlightsColor(uint8_t& r, uint8_t& g, uint8_t& b)
 	b = lightColor.b;
 }
 
-void CVehicleSamp::SetWheelAngle(bool isFront, float angle)
+void CVehicleMP::SetWheelAngle(bool isFront, float angle)
 {
 	if (!m_pVehicle || !m_dwGTAId)
 	{
@@ -797,7 +797,7 @@ void CVehicleSamp::SetWheelAngle(bool isFront, float angle)
 	}
 }
 
-void CVehicleSamp::SetWheelOffset(bool isFront, float offset)
+void CVehicleMP::SetWheelOffset(bool isFront, float offset)
 {
 	if (GetVehicleSubtype() != VEHICLE_SUBTYPE_CAR)
 	{
@@ -818,12 +818,12 @@ void CVehicleSamp::SetWheelOffset(bool isFront, float offset)
 	m_uiLastProcessedWheelOffset = GetTickCount();
 }
 
-void CVehicleSamp::SetWheelWidth(float fValue)
+void CVehicleMP::SetWheelWidth(float fValue)
 {
 	m_fWheelWidth = fValue / 100.f;
 }
 
-void CVehicleSamp::ProcessWheelsOffset()
+void CVehicleMP::ProcessWheelsOffset()
 {
 	if (GetTickCount() - m_uiLastProcessedWheelOffset <= 30)
 	{
@@ -863,7 +863,7 @@ void CVehicleSamp::ProcessWheelsOffset()
 	}
 }
 
-void CVehicleSamp::ProcessWheelOffset(RwFrame* pFrame, bool bLeft, float fValue, int iID)
+void CVehicleMP::ProcessWheelOffset(RwFrame* pFrame, bool bLeft, float fValue, int iID)
 {
 	CVector vecOffset;
 	vecOffset.x = 0.0f - fValue;
@@ -880,7 +880,7 @@ void CVehicleSamp::ProcessWheelOffset(RwFrame* pFrame, bool bLeft, float fValue,
 	pFrame->modelling.pos = vecOut;
 }
 
-void CVehicleSamp::OpenDoor(eCarNodes index, eDoors doorId, bool state) {
+void CVehicleMP::OpenDoor(eCarNodes index, eDoors doorId, bool state) {
     if(!m_pVehicle)
         return;
 
@@ -896,7 +896,7 @@ void CVehicleSamp::OpenDoor(eCarNodes index, eDoors doorId, bool state) {
 }
 
 
-void CVehicleSamp::SetComponentVisibleInternal(const char* szComponent, bool bVisible) const
+void CVehicleMP::SetComponentVisibleInternal(const char* szComponent, bool bVisible) const
 {
     if (!m_pVehicle || !m_dwGTAId)
     {
@@ -969,7 +969,7 @@ void CVehicleSamp::SetComponentVisibleInternal(const char* szComponent, bool bVi
 }
 
 
-std::string CVehicleSamp::GetComponentNameByIDs(uint8_t group, int subgroup)
+std::string CVehicleMP::GetComponentNameByIDs(uint8_t group, int subgroup)
 {
 
 	if (group == E_CUSTOM_COMPONENTS::ccExtra && subgroup >= EXTRA_COMPONENT_BOOT)
@@ -1041,7 +1041,7 @@ std::string CVehicleSamp::GetComponentNameByIDs(uint8_t group, int subgroup)
 	return retn;
 }
 
-void CVehicleSamp::CopyGlobalSuspensionLinesToPrivate()
+void CVehicleMP::CopyGlobalSuspensionLinesToPrivate()
 {
 	if (GetVehicleSubtype() != VEHICLE_SUBTYPE_CAR)
 	{
@@ -1069,7 +1069,7 @@ void CVehicleSamp::CopyGlobalSuspensionLinesToPrivate()
 	}
 }
 
-void CVehicleSamp::SetEngineState(bool bEnable) {
+void CVehicleMP::SetEngineState(bool bEnable) {
 	if(!m_dwGTAId)return;
 	if(!m_pVehicle)return;
 	if (!GamePool_Vehicle_GetAt(m_dwGTAId)) {
@@ -1079,14 +1079,14 @@ void CVehicleSamp::SetEngineState(bool bEnable) {
 	m_bIsEngineOn = bEnable;
 }
 
-bool CVehicleSamp::HasDamageModel() const
+bool CVehicleMP::HasDamageModel() const
 {
 	if (GetVehicleSubtype() == VEHICLE_SUBTYPE_CAR)
 		return true;
 	return false;
 }
 
-void CVehicleSamp::SetPanelStatus(ePanels bPanel, ePanelDamageState bPanelStatus) const
+void CVehicleMP::SetPanelStatus(ePanels bPanel, ePanelDamageState bPanelStatus) const
 {
     if (m_pDamageManager->GetPanelStatus(bPanel) != bPanelStatus)
     {
@@ -1109,14 +1109,14 @@ void CVehicleSamp::SetPanelStatus(ePanels bPanel, ePanelDamageState bPanelStatus
     }
 }
 
-uint8_t CVehicleSamp::GetDoorStatus(eDoors bDoor) {
+uint8_t CVehicleMP::GetDoorStatus(eDoors bDoor) {
     if (m_pVehicle && bDoor < MAX_DOORS) {
         return m_pDamageManager->m_aDoorsStatus[bDoor];
     }
     return 0;
 }
 
-void CVehicleSamp::SetDoorStatus(eDoors bDoor, eDoorStatus bDoorStatus, bool spawnFlyingComponen)
+void CVehicleMP::SetDoorStatus(eDoors bDoor, eDoorStatus bDoorStatus, bool spawnFlyingComponen)
 {
     if (GetDoorStatus(bDoor) != bDoorStatus)
     {
@@ -1136,7 +1136,7 @@ void CVehicleSamp::SetDoorStatus(eDoors bDoor, eDoorStatus bDoorStatus, bool spa
     }
 }
 
-void CVehicleSamp::SetDoorStatus(uint32_t dwDoorStatus, bool spawnFlyingComponen) {
+void CVehicleMP::SetDoorStatus(uint32_t dwDoorStatus, bool spawnFlyingComponen) {
     if (m_pVehicle) {
         for (uint8_t uiIndex = 0; uiIndex < MAX_DOORS; uiIndex++) {
             SetDoorStatus(static_cast<eDoors>(uiIndex), static_cast<eDoorStatus>(dwDoorStatus), spawnFlyingComponen);
@@ -1145,7 +1145,7 @@ void CVehicleSamp::SetDoorStatus(uint32_t dwDoorStatus, bool spawnFlyingComponen
     }
 }
 
-void CVehicleSamp::SetPanelStatus(ePanelDamageState ulPanelStatus) const {
+void CVehicleMP::SetPanelStatus(ePanelDamageState ulPanelStatus) const {
     if (m_pVehicle) {
         for (uint8_t uiIndex = 0; uiIndex < MAX_PANELS; uiIndex++) {
             SetPanelStatus((ePanels)uiIndex, ulPanelStatus);
@@ -1154,21 +1154,21 @@ void CVehicleSamp::SetPanelStatus(ePanelDamageState ulPanelStatus) const {
     }
 }
 
-uint8_t CVehicleSamp::GetLightStatus(eLights bLight) const {
+uint8_t CVehicleMP::GetLightStatus(eLights bLight) const {
     if (m_pVehicle && bLight < MAX_LIGHTS) {
         return m_pDamageManager->GetLightStatus(bLight);
     }
     return 0;
 }
 
-uint8_t CVehicleSamp::GetWheelStatus(eCarWheel bWheel) const {
+uint8_t CVehicleMP::GetWheelStatus(eCarWheel bWheel) const {
     if (m_pVehicle && bWheel < MAX_CARWHEELS) {
         return m_pDamageManager->GetWheelStatus(bWheel);
     }
     return 0;
 }
 
-uint8_t CVehicleSamp::GetBikeWheelStatus(uint8_t bWheel) const {
+uint8_t CVehicleMP::GetBikeWheelStatus(uint8_t bWheel) const {
     if (m_pVehicle && bWheel < 2) {
         if (bWheel == 0) {
             return m_pDamageManager->m_anWheelsStatus[CAR_WHEEL_FRONT_LEFT];
@@ -1180,7 +1180,7 @@ uint8_t CVehicleSamp::GetBikeWheelStatus(uint8_t bWheel) const {
     return 0;
 }
 
-void CVehicleSamp::UpdateDamageStatus(uint32_t dwPanelDamage, uint32_t dwDoorDamage, uint8_t byteLightDamage, uint8_t byteTireDamage) {
+void CVehicleMP::UpdateDamageStatus(uint32_t dwPanelDamage, uint32_t dwDoorDamage, uint8_t byteLightDamage, uint8_t byteTireDamage) {
     if (HasDamageModel()) {
         SetPanelStatus((ePanelDamageState) dwPanelDamage);
         SetDoorStatus(dwDoorDamage, false);
@@ -1204,7 +1204,7 @@ void CVehicleSamp::UpdateDamageStatus(uint32_t dwPanelDamage, uint32_t dwDoorDam
     }
 }
 
-unsigned int CVehicleSamp::GetVehicleSubtype() const
+unsigned int CVehicleMP::GetVehicleSubtype() const
 {
     if (m_pVehicle)
     {
@@ -1241,7 +1241,7 @@ unsigned int CVehicleSamp::GetVehicleSubtype() const
     return 0;
 }
 
-void CVehicleSamp::GetDamageStatusEncoded(uint8_t* byteTyreFlags, uint8_t* byteLightFlags, uint32_t* dwDoorFlags, uint32_t* dwPanelFlags)
+void CVehicleMP::GetDamageStatusEncoded(uint8_t* byteTyreFlags, uint8_t* byteLightFlags, uint32_t* dwDoorFlags, uint32_t* dwPanelFlags)
 {
     if (byteTyreFlags) *byteTyreFlags = GetWheelStatus(eCarWheel::CAR_WHEEL_REAR_RIGHT) |
                                         (GetWheelStatus(eCarWheel::CAR_WHEEL_FRONT_RIGHT) << 1) |
@@ -1268,7 +1268,7 @@ void CVehicleSamp::GetDamageStatusEncoded(uint8_t* byteTyreFlags, uint8_t* byteL
                                      m_pDamageManager->GetPanelStatus(REAR_BUMPER) << 24;
 }
 
-void CVehicleSamp::ProcessDamage() {
+void CVehicleMP::ProcessDamage() {
     VEHICLEID vehId = CVehiclePool::FindIDFromGtaPtr(m_pVehicle);
     if (vehId != INVALID_VEHICLE_ID) {
         if (HasDamageModel()) {
@@ -1314,7 +1314,7 @@ void CVehicleSamp::ProcessDamage() {
     }
 }
 
-void CVehicleSamp::SetStrob(eStobsStatus type) {
+void CVehicleMP::SetStrob(eStobsStatus type) {
 	if (!m_pVehicle || GetVehicleSubtype() != VEHICLE_SUBTYPE_CAR) {
 		return;
 	}
@@ -1331,7 +1331,7 @@ void CVehicleSamp::SetStrob(eStobsStatus type) {
 
 }
 
-void CVehicleSamp::ProcessStrobs() {
+void CVehicleMP::ProcessStrobs() {
 	if (!m_pVehicle || GetVehicleSubtype() != VEHICLE_SUBTYPE_CAR) {
 		return;
 	}
@@ -1551,13 +1551,13 @@ void CVehicleSamp::ProcessStrobs() {
 	}
 }
 
-void CVehicleSamp::SetLightState(int iLight, eLightsDamageState state) const
+void CVehicleMP::SetLightState(int iLight, eLightsDamageState state) const
 {
     CHook::CallFunction<void>(g_libGTASA + (VER_x32 ? 0x0056E748 + 1 : 0x690948), (uintptr_t)m_pVehicle + sizeof(CVehicle), iLight, state);
 }
 
 
-void CVehicleSamp::ChangeVinylTo(int vinylIdx) {
+void CVehicleMP::ChangeVinylTo(int vinylIdx) {
     if(m_pVinylTex) {
         RwTextureDestroy(m_pVinylTex);
         m_pVinylTex = nullptr;
@@ -1573,7 +1573,7 @@ void CVehicleSamp::ChangeVinylTo(int vinylIdx) {
 	m_pVinylTex = CUtil::LoadTextureFromDB("cars", name);
 }
 
-/*void CVehicleSamp::SetRGBATexture(CRGBA crgba, CRGBA crgba2) {
+/*void CVehicleMP::SetRGBATexture(CRGBA crgba, CRGBA crgba2) {
     static constexpr int TEXTURE_WIDTH = 256;
     static constexpr int TEXTURE_HEIGHT = 128;
     static constexpr int PIXEL_SIZE = 4;
@@ -1635,7 +1635,7 @@ void CVehicleSamp::ChangeVinylTo(int vinylIdx) {
     }
 }*/
 
-void CVehicleSamp::SetRGBATexture(CRGBA crgba, CRGBA crgba2) {
+void CVehicleMP::SetRGBATexture(CRGBA crgba, CRGBA crgba2) {
     static constexpr int TEXTURE_WIDTH = 256;
     static constexpr int TEXTURE_HEIGHT = 128;
     static constexpr int PIXEL_SIZE = 4;

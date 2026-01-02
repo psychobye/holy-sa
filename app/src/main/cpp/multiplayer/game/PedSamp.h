@@ -1,6 +1,6 @@
 #pragma once
 #include "aimstuff.h"
-#include "VehicleSamp.h"
+#include "VehicleMP.h"
 #include "Weapon.h"
 #include "game/Enums/ePedState.h"
 
@@ -136,7 +136,7 @@ public:
     void SetWeaponAmmo(int iWeaponID, int iAmmo);
 
 	CVector *GetCurrentWeaponFireOffset();
-	CVehicleSamp *GetCurrentVehicle();
+	CVehicleMP *GetCurrentVehicle();
 	CVehicle *GetCurrentGtaVehicle();
 	uint32_t GetCurrentGTAVehicleID();
 	VEHICLEID GetCurrentSampVehicleID();
