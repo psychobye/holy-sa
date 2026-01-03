@@ -10,7 +10,6 @@
     android:clipToPadding="false"
     android:elevation="@dimen/_10sdp">
 
-    <!-- ShadowLayout без background: тень рисуется вокруг dialog_bg_frame -->
     <net.orandja.shadowlayout.ShadowLayout
         android:id="@+id/dialog_shadow"
         android:layout_width="wrap_content"

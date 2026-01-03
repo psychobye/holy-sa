@@ -1,96 +1,118 @@
 package com.lit.game.gui
 
-import android.content.res.ColorStateList
-import android.graphics.Color
-import android.view.View
+import com.lit.data.vehicles.Vehicles
+import com.lit.game.R
 import com.lit.game.core.Samp
 import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.CircularCarMenuBinding
-import com.rommansabbir.animationx.Fade
-import com.rommansabbir.animationx.animationXFade
+import com.lit.game.gui.flexMenu.PopAction
+import com.lit.game.gui.flexMenu.PopItem
+import com.lit.game.gui.flexMenu.FlexMenu
+import com.lit.game.gui.flexMenu.FlexMenuItem
+import java.lang.ref.WeakReference
 
-class RadialMenu : NativeGui<CircularCarMenuBinding>(CircularCarMenuBinding::class){
+object RadialMenu {
+    private var menuRef: WeakReference<FlexMenu>? = null
+    private val stateCache = HashMap<Int, Boolean>()
+    private var lastVehicleId: Int = 0
+    private var lastTitle: String = ""
+
     private external fun nativeOnClose()
+    private external fun nativeRequestUpdate()
 
-    init {
-        activity.runOnUiThread {
-            binding.buttonMusic.setOnClickListener{
-                Samp.sendCommand("/music")
-                destroy()
-            }
-            binding.radialStrob.setOnClickListener {
-                Samp.sendCommand("/strobes")
-            }
-            binding.radialNeon.setOnClickListener {
-                Samp.sendCommand("/neon")
-            }
-            binding.radialLock.setOnClickListener {
-                Samp.sendCommand("/lock")
-            }
-            binding.radialEngine.setOnClickListener {
-                Samp.sendCommand("/e")
-            }
-            binding.radialLight.setOnClickListener {
-                Samp.sendCommand("/light")
-            }
-            binding.radialNightLights.setOnClickListener {
-                Samp.sendCommand("/far")
-            }
-            binding.radialBonnet.setOnClickListener {
-                Samp.sendCommand("/bonnet")
-            }
-            binding.radialBoot.setOnClickListener {
-                Samp.sendCommand("/boot")
-            }
-            binding.radialCloseButt.setOnClickListener {
-                it.startAnimation(Samp.clickAnim)
-                destroy()
-            }
+    @JvmStatic
+    fun show() {
+        menuRef?.get()?.destroy()
+        menuRef = null
 
-            toggleLightCategory(false)
+        val newMenu = FlexMenu()
+        menuRef = WeakReference(newMenu)
 
-            binding.radialLightsCategoty.setOnClickListener {
-                if(binding.radialLightsCategotyBg.visibility == View.VISIBLE)
-                    toggleLightCategory(false)
-                else
-                    toggleLightCategory(true)
+        if (lastTitle.isNotEmpty()) newMenu.setTitle(lastTitle)
+
+        newMenu.onPopItemClicked = { pop ->
+            when (pop.action) {
+                PopAction.TOGGLE -> {
+                    when (pop.id) {
+                        101 -> Samp.sendCommand("/light")
+                        102 -> Samp.sendCommand("/farlight")
+                        103 -> Samp.sendCommand("/strobes")
+                        104 -> Samp.sendCommand("/neon")
+                        201 -> Samp.sendCommand("/e")
+                        301 -> Samp.sendCommand("/lock")
+                    }
+                }
+                PopAction.APPLY -> {
+                    when (pop.id) {
+                        401 -> Samp.sendCommand("/music")
+                    }
+                }
+                PopAction.CLOSE -> menuRef?.get()?.hidePopup()
+                PopAction.CUSTOM -> TODO()
+                null -> TODO()
             }
-
-            binding.radialMainLayout.animationXFade(Fade.FADE_IN, 100)
+            nativeRequestUpdate()
         }
-    }
 
-    override fun destroy() {
-        super.destroy()
-        nativeOnClose()
-    }
-
-    override fun receivePacket(actionId: Int, data: String) {
-        TODO("Not yet implemented")
-    }
-
-    fun update(lock: Boolean, engine: Boolean, light: Boolean, nightLight: Boolean, strob: Boolean, neon: Boolean, bonnet: Boolean, boot: Boolean) {
-        activity.runOnUiThread {
-            binding.radialEngine.imageTintList = if (engine) ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
-            binding.radialLock.imageTintList = if (lock) ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
-            binding.radialLight.imageTintList = if (light)      ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
-            binding.radialNightLights.imageTintList = if (nightLight) ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
-            binding.radialNeon.imageTintList = if (neon) ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
-            binding.radialStrob.imageTintList = if (strob) ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
-            binding.radialBonnet.imageTintList = if (bonnet) ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
-            binding.radialBoot.imageTintList = if (boot) ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
+        newMenu.onMenuClose = {
+            stateCache.clear()
+            nativeOnClose()
+            menuRef = null
         }
+
+        setupMenu(newMenu)
+        newMenu.show(FlexMenu.Type.SCROLL_CONTENT_ITEM.id, lastTitle)
+        nativeRequestUpdate()
     }
 
-    private fun toggleLightCategory(toggle: Boolean) {
-        activity.runOnUiThread {
-            binding.radialLightsCategoty.imageTintList = if (toggle) ColorStateList.valueOf(Color.parseColor("#FF8BC34A")) else null
+    @JvmStatic
+    fun update(
+        modelId: Int,
+        lock: Boolean, engine: Boolean, light: Boolean,
+        nightLight: Boolean, strob: Boolean, neon: Boolean,
+        bonnet: Boolean, boot: Boolean
+    ) {
+        val currentMenu = menuRef?.get() ?: return
 
-            binding.radialLightsCategotyBg.visibility = if(toggle) View.VISIBLE else View.GONE
-            binding.radialNeon.visibility = if(toggle) View.VISIBLE else View.GONE
-            binding.radialNightLights.visibility = if(toggle) View.VISIBLE else View.GONE
-            binding.radialLight.visibility = if(toggle) View.VISIBLE else View.GONE
-            binding.radialStrob.visibility = if(toggle) View.VISIBLE else View.GONE
+        if (lastVehicleId != modelId) {
+            lastVehicleId = modelId
+            val name = Vehicles.getName(modelId)
+            lastTitle = name
+
+            activity.runOnUiThread {
+                currentMenu.setTitle(name)
+            }
         }
+
+        fun sync(parentId: Int, id: Int, state: Boolean) {
+            if (stateCache[id] != state) {
+                stateCache[id] = state
+                currentMenu.updatePopState(parentId, id, state)
+            }
+        }
+
+        sync(1, 101, light)
+        sync(1, 102, nightLight)
+        sync(1, 103, strob)
+        sync(1, 104, neon)
+        sync(2, 201, engine)
+        sync(3, 301, lock)
+    }
+
+    private fun setupMenu(m: FlexMenu) {
+        m.addItem(FlexMenuItem(1, "Lights", R.drawable.ic_lamp, true, true), listOf(
+            PopItem(101, "Light", R.drawable.ic_light, null, PopAction.TOGGLE, false),
+            PopItem(102, "NightLights", R.drawable.ic_farlight, null, PopAction.TOGGLE, false),
+            PopItem(103, "Strob", R.drawable.ic_strobe, null, PopAction.TOGGLE, false),
+            PopItem(104, "Neon", R.drawable.ic_neon, null, PopAction.TOGGLE, false)
+        ))
+        m.addItem(FlexMenuItem(2, "Engine", R.drawable.ic_engine, false, true), listOf(
+            PopItem(201, "Engine", R.drawable.ic_key, null, PopAction.TOGGLE, false),
+        ))
+        m.addItem(FlexMenuItem(3, "Doors", R.drawable.ic_car_door, false, true), listOf(
+            PopItem(301, "Lock", R.drawable.ic_lock, null, PopAction.TOGGLE, false),
+        ))
+        m.addItem(FlexMenuItem(4, "Music", R.drawable.ic_boombox, false, true), listOf(
+            PopItem(401, "Radio", R.drawable.ic_live, null, PopAction.APPLY, false)
+        ))
     }
 }

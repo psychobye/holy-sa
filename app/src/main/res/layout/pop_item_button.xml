@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/_4sdp">
+
+    <FrameLayout
+        android:layout_width="@dimen/_150sdp"
+        android:layout_height="@dimen/_50sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" >
+
+        <ImageView
+            android:id="@+id/btn_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/btn_pop_off"
+            android:scaleType="centerCrop" />
+
+        <ImageView
+            android:id="@+id/btn_icon"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:scaleType="centerInside" />
+
+        <TextView
+            android:id="@+id/btn_icon_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            android:text="A"
+            android:textStyle="bold"
+            android:fontFamily="@font/montsserat_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:textColor="@color/white"/>
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

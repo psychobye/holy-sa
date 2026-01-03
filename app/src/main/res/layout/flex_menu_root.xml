@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <net.orandja.shadowlayout.ShadowLayout
+        android:id="@+id/shadow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:shadow_radius="10"
+        app:shadow_color="#000000">
+
+        <LinearLayout
+            android:id="@+id/bg_frame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/dialog_bg"
+            android:paddingStart="@dimen/_13sdp"
+            android:paddingEnd="@dimen/_13sdp"
+            android:paddingTop="@dimen/_13sdp"
+            android:paddingBottom="@dimen/_13sdp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/sd_dialog_body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_30sdp">
+
+                <ImageView
+                    android:id="@+id/menu_icon"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:src="@drawable/ic_car"
+                    android:scaleType="centerInside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/menu_title"
+                    app:layout_constraintBottom_toBottomOf="@id/menu_title"/>
+
+                <TextView
+                    android:id="@+id/menu_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="BMW M5 F90"
+                    android:textColor="@color/gray_BF"
+                    android:textSize="@dimen/_15sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/menu_icon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/content_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="@dimen/_8sdp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/btns_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:scrollbars="vertical"
+                    android:scrollbarStyle="insideInset"
+                    android:fadeScrollbars="false"
+                    android:scrollbarThumbVertical="@drawable/quest_scrollbar_vertical_thumb"
+                    android:scrollbarTrackVertical="@drawable/quest_scrollbar_vertical_track" />
+
+                <LinearLayout
+                    android:id="@+id/popup_bg_frame"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_1sdp"
+                    android:background="@drawable/dialog_bg"
+                    android:orientation="vertical"
+                    android:padding="@dimen/_10sdp"
+                    android:visibility="gone">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/pop_list"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:fadeScrollbars="false"
+                        android:scrollbarThumbVertical="@color/transparent"
+                        android:scrollbarTrackVertical="@color/transparent"
+                        android:scrollbars="vertical" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/exitButt"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_gravity="end">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/_12sdp"
+                android:src="@drawable/ic_close"
+                app:tint="@color/gray_51" />
+        </FrameLayout>
+
+    </net.orandja.shadowlayout.ShadowLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

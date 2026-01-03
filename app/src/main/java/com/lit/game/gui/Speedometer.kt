@@ -20,6 +20,8 @@ class Speedometer : NativeGui<SpeedometrBinding>(SpeedometrBinding::class) {
     private val turnlight_tick_sound_1 = Samp.soundPool.load(activity, R.raw.turnlight_tick_1, 0)
     private val turnlight_tick_sound_2 = Samp.soundPool.load(activity, R.raw.turnlight_tick_2, 0)
 
+    private val timestep: Long = 501 // ms
+
     external fun ClickSpedometr(turnID: Int, toggle: Boolean)
     external fun sendClick(clickId: Int)
 
@@ -48,13 +50,22 @@ class Speedometer : NativeGui<SpeedometrBinding>(SpeedometrBinding::class) {
     }
 
     private fun deleteThreads() {
+        timer_turnlight_left?.interrupt()
+        timer_turnlight_right?.interrupt()
+        timer_turnlight_all?.interrupt()
+
+        timer_turnlight_left = null
+        timer_turnlight_right = null
+        timer_turnlight_all = null
+
+        turnlight_left_state = false
+        turnlight_right_state = false
+        turnlight_all_state = false
+
         activity.runOnUiThread {
-            timer_turnlight_left?.interrupt()
-            timer_turnlight_left = null
-            timer_turnlight_right?.interrupt()
-            timer_turnlight_right = null
-            timer_turnlight_all?.interrupt()
-            timer_turnlight_all = null
+            binding.turnLeftIcon.setImageResource(R.drawable.speedometr_turn_off)
+            binding.turnRightIcon.setImageResource(R.drawable.speedometr_turn_off)
+            binding.blinkerIcon.imageTintList = null
         }
     }
 
@@ -149,17 +160,17 @@ class Speedometer : NativeGui<SpeedometrBinding>(SpeedometrBinding::class) {
                     binding.turnRightIcon.setImageResource(R.drawable.speedometr_turn_off)
                     turnlight_all_state = false
 
-                    Samp.soundPool.play(turnlight_tick_sound_1, 0.2f, 0.1f, 1, 0, 1.0f)
+                    Samp.soundPool.play(turnlight_tick_sound_1, 1.0f, 1.0f, 1, 0, 1.0f)
                 } else {
                     binding.blinkerIcon.imageTintList = ColorStateList.valueOf(Color.parseColor("#f44336"))
                     binding.turnLeftIcon.setImageResource(R.drawable.speedometr_turn_on)
                     binding.turnRightIcon.setImageResource(R.drawable.speedometr_turn_on)
-                    Samp.soundPool.play(turnlight_tick_sound_2, 0.2f, 0.1f, 1, 0, 1.0f)
+                    Samp.soundPool.play(turnlight_tick_sound_2, 1.0f, 1.0f, 1, 0, 1.0f)
                     turnlight_all_state = true
                 }
             }
             try {
-                Thread.sleep(400)
+                Thread.sleep(timestep)
             } catch (e: InterruptedException) {
                 break
             }
@@ -170,16 +181,16 @@ class Speedometer : NativeGui<SpeedometrBinding>(SpeedometrBinding::class) {
             activity.runOnUiThread {
                 turnlight_left_state = if (turnlight_left_state) {
                     binding.turnLeftIcon.setImageResource(R.drawable.speedometr_turn_off)
-                    Samp.soundPool.play(turnlight_tick_sound_1, 0.2f, 0.1f, 1, 0, 1.0f)
+                    Samp.soundPool.play(turnlight_tick_sound_1, 1.0f, 1.0f, 1, 0, 1.0f)
                     false
                 } else {
                     binding.turnLeftIcon.setImageResource(R.drawable.speedometr_turn_on)
-                    Samp.soundPool.play(turnlight_tick_sound_2, 0.2f, 0.1f, 1, 0, 1.0f)
+                    Samp.soundPool.play(turnlight_tick_sound_2, 1.0f, 1.0f, 1, 0, 1.0f)
                     true
                 }
             }
             try {
-                Thread.sleep(400)
+                Thread.sleep(timestep)
             } catch (e: InterruptedException) {
                 break
             }
@@ -190,16 +201,16 @@ class Speedometer : NativeGui<SpeedometrBinding>(SpeedometrBinding::class) {
             activity.runOnUiThread {
                 turnlight_right_state = if (turnlight_right_state) {
                     binding.turnRightIcon.setImageResource(R.drawable.speedometr_turn_off)
-                    Samp.soundPool.play(turnlight_tick_sound_1, 0.1f, 0.2f, 1, 0, 1.0f)
+                    Samp.soundPool.play(turnlight_tick_sound_1, 1.0f, 1.0f, 1, 0, 1.0f)
                     false
                 } else {
                     binding.turnRightIcon.setImageResource(R.drawable.speedometr_turn_on)
-                    Samp.soundPool.play(turnlight_tick_sound_2, 0.1f, 0.2f, 1, 0, 1.0f)
+                    Samp.soundPool.play(turnlight_tick_sound_2, 1.0f, 1.0f, 1, 0, 1.0f)
                     true
                 }
             }
             try {
-                Thread.sleep(400)
+                Thread.sleep(timestep)
             } catch (e: InterruptedException) {
                 break
             }
