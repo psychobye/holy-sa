@@ -328,6 +328,7 @@ void CNetGame::Packet_TrailerSync(Packet *p)
 #include "game/World.h"
 #include "BusStation.h"
 #include "Widgets/TouchInterface.h"
+#include "CEF.h"
 
 
 void CNetGame::Packet_AuthRPC(Packet *p) {
@@ -663,6 +664,26 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
         }
         case RPC_QUEST: {
             packetQuest(p);
+            break;
+        }
+        case RPC_INIT_CEF: {
+            CCEF::pktInit(p);
+            break;
+        }
+        case RPC_SHOW_CEF: {
+            CCEF::pktShow(p);
+            break;
+        }
+        case RPC_HIDE_CEF: {
+            CCEF::pktHide(p);
+            break;
+        }
+        case RPC_SET_SIZE_CEF: {
+            CCEF::pktSetSize(p);
+            break;
+        }
+        case RPC_SET_CEF_URL: {
+            CCEF::pktSetUrl(p);
             break;
         }
         case RPC_SHOW_DONATE: {
