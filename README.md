@@ -5,11 +5,10 @@
 ## TO-DO List
 
 ### Create
-- `DonateActivity.kt`
 - `QuestActivity.kt`
-- `MobileMenuActivity.kt`
 
 ### Rework
 - `Launcher`
-- `RadialCarMenu`
 - `Tab`
+- `Speedometer`
+- `DonateActivity.kt`
