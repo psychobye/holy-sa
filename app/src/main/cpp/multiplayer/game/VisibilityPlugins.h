@@ -56,5 +56,7 @@ public:
     static void SetupVehicleVariables(RpClump* clump);
     static void RenderFadingEntities();
     static void RenderWeaponPedsForPC();
+
+    static void InitAlphaEntityList();
 };
 

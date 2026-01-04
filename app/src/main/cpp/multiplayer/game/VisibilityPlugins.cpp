@@ -71,4 +71,6 @@ void CVisibilityPlugins::RenderWeaponPedsForPC() {
     CHook::CallFunction<void>("_ZN18CVisibilityPlugins21RenderWeaponPedsForPCEv");
 }
 
-
+void CVisibilityPlugins::InitAlphaEntityList() {
+    CHook::CallFunction<void>("_ZN18CVisibilityPlugins19InitAlphaEntityListEv");
+}

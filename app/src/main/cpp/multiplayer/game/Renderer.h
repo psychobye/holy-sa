@@ -20,13 +20,23 @@ public:
     static inline CEntity* ms_aVisibleEntityPtrs[MAX_VISIBLE_ENTITY_PTRS];
     static inline int32 ms_nNoOfVisibleEntities;
 
+    enum class VisibilityState : uint8_t {
+        ENTITY_NOT_VISIBLE = 0,
+        ENTITY_VISIBLE = 1,
+        ENTITY_STREAM_MODEL = 2,
+    };
+
 public:
     static void InjectHooks();
 
+    static void ScanWorld();
     static void RenderFadingInEntities();
     static void RenderFadingInUnderwaterEntities();
     static void RenderRoads();
     static void RenderEverythingBarRoads();
+
+    static void ScanSectorList(int32 BlockX, int32 BlockY);
+    static void ScanBigBuildingList(int32 BlockX, int32 BlockY);
 };
 
 
