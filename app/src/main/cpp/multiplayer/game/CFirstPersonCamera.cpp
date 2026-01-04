@@ -147,12 +147,6 @@ void CFirstPersonCamera::ResetPedAnims()
 
     RpClump* clump = pPed->m_pRwClump;
 
-    pPed->SetMoveState(PEDMOVE_NONE);
-    pPed->m_fMoveAnim = 0.0f;
-    pPed->m_vecAnimMovingShiftLocal = CVector2D(0.0f, 0.0f);
-
-    CAnimManager::BlendAnimation(clump, ANIM_GROUP_DEFAULT, ANIM_ID_IDLE, 4.0f);
-
     AnimationId IDs[] = {
             ANIM_ID_WALK, ANIM_ID_RUN, ANIM_ID_FIGHTSH_BWD,
             ANIM_ID_FIGHTSH_LEFT, ANIM_ID_FIGHTSH_RIGHT
