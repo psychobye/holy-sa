@@ -117,5 +117,5 @@ void CRenderer::InjectHooks() {
     CHook::Write(g_libGTASA + (VER_x32 ? 0x6778EC : 0x84D210), &ms_aVisibleEntityPtrs);
     CHook::Write(g_libGTASA + (VER_x32 ? 0x6771F0 : 0x84C428), &ms_nNoOfVisibleEntities);
 
-    CHook::Redirect("_ZN9CRenderer9ScanWorldEv", &ScanWorld);
+    // CHook::Redirect("_ZN9CRenderer9ScanWorldEv", &ScanWorld); // WARNING: FPS drop
 }
