@@ -1656,6 +1656,66 @@ void jcopy_sample_rows_hook(uint8_t **input_array, int source_row, uint8_t **out
     Log("jpeg_samplecopy: dest_row (i) = %d, num_rows (height) = %d, num_cols (width) = %d", source_row, dest_row, num_cols);
 }
 
+void (*LoadSceneForPathNodes)(CPathFind *thiz, CVector CenterCoors);
+void LoadSceneForPathNodes_hook(CPathFind *thiz, CVector CenterCoors)
+{
+    static auto* ToBeStreamed = (uint8_t*)(g_libGTASA + (VER_x32 ? 0x007AED74 : 0x99053C));
+    memset(ToBeStreamed, 0, 64);
+
+    CPlayerPed* player = FindPlayerPed(-1);
+
+    if(player) {
+        thiz->MarkRegionsForCoors(CenterCoors, 4300.0f);
+        thiz->MarkRegionsForCoors(player->GetPosition(), 4300.0f);
+    } else {
+        thiz->MarkRegionsForCoors(CenterCoors, 4300.0f);
+    }
+
+    for(int i = 0; i < 64; ++i) {
+        if(ToBeStreamed[i] != 0)
+            CStreaming::RequestModel(DATToModelId(i), 0);
+    }
+}
+
+void (*UpdateStreaming)(CPathFind* thiz, bool forceLoad);
+void UpdateStreaming_hook(CPathFind* thiz, bool forceLoad)
+{
+    static auto* ExtraPathsNeeded = (uint8_t*)(g_libGTASA + (VER_x32 ? 0x007AEE04 : 0x9905C8));
+    static auto* ExtraPathPos = (CVector*)(g_libGTASA + (VER_x32 ? 0x007AEDF8 : 0x9905BC));
+    if(!forceLoad && !*ExtraPathsNeeded && (CTimer::m_snTimeInMilliseconds ^ CTimer::m_snPreviousTimeInMilliseconds) < 512)
+        return;
+
+    static auto* ToBeStreamed = (uint8_t*)(g_libGTASA + (VER_x32 ? 0x007AED74 : 0x99053C));
+    memset(ToBeStreamed, 0, 64);
+
+    static CVector corners[4] = {
+            { -3000.0f, -3000.0f, 20.0f },
+            { -3000.0f,  3000.0f, 20.0f },
+            {  3000.0f, -3000.0f, 20.0f },
+            {  3000.0f,  3000.0f, 20.0f }
+    };
+
+    for(const auto & corner : corners)
+        thiz->MarkRegionsForCoors(corner, 4300.0f);
+
+    CPlayerPed* player = FindPlayerPed(-1);
+    if(player) thiz->MarkRegionsForCoors(player->GetPosition(), 4300.0f);
+
+    if(*ExtraPathsNeeded) {
+        thiz->MarkRegionsForCoors(ExtraPathPos, 4300.0f);
+        *ExtraPathsNeeded = false;
+    }
+
+    for(int i = 0; i < 64; ++i) {
+        if(ToBeStreamed[i] != 0) {
+            if(thiz->pTNodes[i] == nullptr)
+                CStreaming::RequestModel(DATToModelId(i), STREAMING_KEEP_IN_MEMORY);
+        } else if(thiz->pTNodes[i] != nullptr) {
+            CStreaming::RemoveModel(DATToModelId(i));
+        }
+    }
+}
+
 void InstallHooks()
 {
     CHook::InstallPLT(g_libGTASA + (VER_x32 ? 0x66F91C : 0x83F8A0), &CFireManager__ExtinguishPointWithWater_hook, &CFireManager__ExtinguishPointWithWater);
@@ -1666,6 +1726,9 @@ void InstallHooks()
 	CHook::Redirect("_Z13RenderEffectsv", &RenderEffects);
 
     // CHook::InlineHook("_ZN6CRadar12SetCoordBlipE9eBlipType7CVectorj12eBlipDisplayPc", &CRadar__SetCoordBlip_hook, &CRadar__SetCoordBlip);
+
+    CHook::InlineHook("_ZN9CPathFind21LoadSceneForPathNodesE7CVector", &LoadSceneForPathNodes_hook, &LoadSceneForPathNodes);
+    CHook::InlineHook("_ZN9CPathFind15UpdateStreamingEb", &UpdateStreaming_hook, &UpdateStreaming);
 
     // ---------- JPATCH ----------
     // CHook::InlineHook("_Z10HashStringPKc", &HashString_hook, &HashString);

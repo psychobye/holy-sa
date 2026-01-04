@@ -41,7 +41,6 @@ class Samp : GTASA() {
     private external fun initSAMP(maxFps: Float, directory: String)
 
     override fun onCreate(bundle: Bundle?) {
-
         activity = this
 
         val display = Companion.windowManager.defaultDisplay

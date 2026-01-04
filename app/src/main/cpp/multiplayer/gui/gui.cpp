@@ -216,7 +216,6 @@ void CGUI::Render()
   
 	CPlayerTags::Render();
 	CText3DLabelsPool::Draw();
-    GPS::DoPathDraw();
 
     // TODO: Speedometer
 	if(CGame::FindPlayerPed()->m_pPed->IsInVehicle() && !CGame::FindPlayerPed()->m_pPed->IsAPassenger()

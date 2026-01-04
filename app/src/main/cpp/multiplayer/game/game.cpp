@@ -39,6 +39,7 @@
 #include "WaterCannons.h"
 #include "Animation/AnimManager.h"
 #include "World.h"
+#include "PathFind.h"
 
 void ApplyPatches();
 void ApplyInGamePatches();
@@ -679,6 +680,7 @@ void CGame::Process() {
 	    // CCollision::Update()
 
         // CPathFind::UpdateStreaming
+        ((void(*)(CPathFind, bool))(g_libGTASA + (VER_x32 ? 0x0032AED8 + 1 : 0x3E0208)))(CPathFind::Get(), false);
 
         // CTrain::UpdateTrains();
         // CHeli::UpdateHelis();

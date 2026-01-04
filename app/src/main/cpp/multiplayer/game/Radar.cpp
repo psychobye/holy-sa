@@ -271,6 +271,7 @@ bool bFullMap = false;
 void CRadar::DrawRadarGangOverlay(bool inMenu) {
     bFullMap = inMenu;
     CGangZonePool::Draw();
+    GPS::DoPathDraw();
 }
 
 uint32 CRadar::GetRadarTraceColour(uint32 color, bool bright, bool friendly) {

@@ -270,3 +270,17 @@ void CPathFind::AddNodeToList(CPathNode* node, int32 distFromOrigin) {
 
     m_totalNumNodesInPathFindHashTable++;
 }
+
+void CPathFind::MakeRequestForNodesToBeLoaded(float minX, float maxX, float minY, float maxY) {
+    return CHook::CallFunction<void>("_ZN9CPathFind29MakeRequestForNodesToBeLoadedEffff",
+                                             this,
+                                             minX,
+                                             maxX,
+                                             minY,
+                                             maxY
+                                             );
+}
+
+void CPathFind::MarkRegionsForCoors(CVector Coors, float Range) {
+    CHook::CallFunction<void>("_ZN9CPathFind19MarkRegionsForCoorsE7CVectorf", this, Coors, Range);
+}
