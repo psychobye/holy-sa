@@ -250,9 +250,11 @@ void CFirstPersonCamera::ProcessCameraInVeh(CCam* pCam, CPedSamp* pPed, CVehicle
 
 void CFirstPersonCamera::Update()
 {
-    // toner alpha lerp
+    auto pPed = CLocalPlayer::GetPlayerPed();
+
+    // TODO: refactor!
     const float target = m_bEnabled ? 0.5f : 1.0f;
-    if (m_bEnabled) {
+    if (m_bEnabled && pPed->GetCurrentVehicle()) {
         const float speed = 0.02f;
         g_fTonerLerp -= speed;
         if (g_fTonerLerp < target)
