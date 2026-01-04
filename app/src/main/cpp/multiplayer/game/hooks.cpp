@@ -1662,11 +1662,11 @@ void LoadSceneForPathNodes_hook(CPathFind *thiz, CVector CenterCoors)
     static auto* ToBeStreamed = (uint8_t*)(g_libGTASA + (VER_x32 ? 0x007AED74 : 0x99053C));
     memset(ToBeStreamed, 0, 64);
 
-    CPlayerPed* player = FindPlayerPed(-1);
+    auto* player = CLocalPlayer::GetPlayerPed();
 
     if(player) {
         thiz->MarkRegionsForCoors(CenterCoors, 4300.0f);
-        thiz->MarkRegionsForCoors(player->GetPosition(), 4300.0f);
+        thiz->MarkRegionsForCoors(player->m_pPed->GetPosition(), 4300.0f);
     } else {
         thiz->MarkRegionsForCoors(CenterCoors, 4300.0f);
     }
@@ -1698,8 +1698,8 @@ void UpdateStreaming_hook(CPathFind* thiz, bool forceLoad)
     for(const auto & corner : corners)
         thiz->MarkRegionsForCoors(corner, 4300.0f);
 
-    CPlayerPed* player = FindPlayerPed(-1);
-    if(player) thiz->MarkRegionsForCoors(player->GetPosition(), 4300.0f);
+    auto* player = CLocalPlayer::GetPlayerPed();
+    if(player) thiz->MarkRegionsForCoors(player->m_pPed->GetPosition(), 4300.0f);
 
     if(*ExtraPathsNeeded) {
         thiz->MarkRegionsForCoors(ExtraPathPos, 4300.0f);
