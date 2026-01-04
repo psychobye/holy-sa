@@ -678,6 +678,10 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
             CCEF::pktHide(p);
             break;
         }
+        case RPC_CLIENT_CEF_EVENT: {
+            CCEF::OnServerEvent(p);
+            break;
+        }
         case RPC_SET_SIZE_CEF: {
             CCEF::pktSetSize(p);
             break;

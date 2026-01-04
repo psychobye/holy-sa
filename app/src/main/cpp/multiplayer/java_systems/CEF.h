@@ -7,8 +7,6 @@
 
 class CCEF : public CGuiWrapper<CCEF> {
 public:
-    enum class ePacketType : uint8_t { EXIT, SHOW };
-
     static void Init(const std::string& url);
 
     static void Show();
@@ -18,9 +16,8 @@ public:
     static void SetUrl(const std::string& url);
 
     static void SendEvent(const std::string& event, const std::string& json);
-    static void RegisterCallback(const std::string& event, std::function<void(const std::string&)> cb);
-
-    static void OnJsEvent(const std::string& event, const std::string& data);
+    static void OnServerEvent(Packet *p);
+    static void GetEvent(const std::string &event, const std::string &json);
 
     // pkt
     static void pktInit(Packet *p);
@@ -28,6 +25,7 @@ public:
     static void pktHide(Packet *p);
     static void pktSetSize(Packet *p);
     static void pktSetUrl(Packet *p);
+    static void pktSendClientEvent(Packet *p);
 
 private:
     static std::unordered_map<std::string, std::function<void(const std::string&)>> callbacks;

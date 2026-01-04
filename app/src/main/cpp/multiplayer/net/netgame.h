@@ -140,6 +140,7 @@ enum class eNetworkState {
 #define RPC_HIDE_CEF        109
 #define RPC_SET_SIZE_CEF       110
 #define RPC_SET_CEF_URL     111
+#define RPC_CLIENT_CEF_EVENT 112
 
 #define RPC_PLAYER_TAG 				300
 #define RPC_ACTOR_GOTO				301

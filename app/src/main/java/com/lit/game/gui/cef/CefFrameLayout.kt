@@ -6,6 +6,8 @@ import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.widget.FrameLayout
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class CefFrameLayout @JvmOverloads constructor(
     context: Context,
@@ -14,24 +16,25 @@ class CefFrameLayout @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private val interactiveRects = mutableListOf<RectF>()
-
     private val density = context.resources.displayMetrics.density
+    private val gson = Gson()
 
+    /**
+     * Updates the list of interactive rectangles from JSON.
+     * Expected format: [[x, y, width, height], ...]
+     */
     fun updateInteractiveRects(rectsJson: String) {
-        // TODO: Gson
         interactiveRects.clear()
         try {
-            val clean = rectsJson.replace("[", "").replace("]", "")
-            if (clean.isBlank()) return
+            val type = object : TypeToken<List<List<Float>>>() {}.type
+            val rects: List<List<Float>> = gson.fromJson(rectsJson, type)
 
-            val numbers = clean.split(",").map { it.trim().toFloatOrNull() ?: 0f }
-
-            for (i in numbers.indices step 4) {
-                if (i + 3 < numbers.size) {
-                    val x = numbers[i] * density
-                    val y = numbers[i+1] * density
-                    val w = numbers[i+2] * density
-                    val h = numbers[i+3] * density
+            for (r in rects) {
+                if (r.size >= 4) {
+                    val x = r[0] * density
+                    val y = r[1] * density
+                    val w = r[2] * density
+                    val h = r[3] * density
                     interactiveRects.add(RectF(x, y, x + w, y + h))
                 }
             }
@@ -43,19 +46,12 @@ class CefFrameLayout @JvmOverloads constructor(
     override fun onInterceptTouchEvent(ev: MotionEvent?): Boolean {
         if (ev == null) return false
 
-        var isHitWebView = false
         for (rect in interactiveRects) {
-            if (rect.contains(ev.x, ev.y)) {
-                isHitWebView = true
-                break
-            }
+            if (rect.contains(ev.x, ev.y)) return false
         }
-
-        return !isHitWebView
+        return true
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    override fun onTouchEvent(event: MotionEvent?): Boolean {
-        return false
-    }
+    override fun onTouchEvent(event: MotionEvent?): Boolean = false
 }

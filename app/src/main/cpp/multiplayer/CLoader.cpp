@@ -145,5 +145,5 @@ void CLoader::initJavaClasses(JavaVM* pjvm) {
     CActionsPed::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/ActionsPed"));
     CMenu::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/menu/Menu"));
     CQuest::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/quest/Quest"));
-    CCEF::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/cef/CEFManager"));
+    CCEF::clazz = LinkJavaClass(env->FindClass("com/lit/game/gui/cef/CefManager"));
 }
