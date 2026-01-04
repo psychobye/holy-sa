@@ -45,6 +45,9 @@ class CefManager : NativeGui<LayoutCefRootBinding>(LayoutCefRootBinding::class) 
         nativeSendEvent(event, json)
     }
 
+    /** LogCat Tag */
+    private val TAG = "CEF"
+
     /** Init WebView with optional URL */
     fun initBrowser(url: String) {
         activity.runOnUiThread {
@@ -52,8 +55,6 @@ class CefManager : NativeGui<LayoutCefRootBinding>(LayoutCefRootBinding::class) 
             try { binding.webView.loadUrl(url) } catch (_: Throwable) { pendingUrl = url }
         }
     }
-
-    private val TAG = "CEF"
 
     /** WebView setup with JS bridge */
     @SuppressLint("SetJavaScriptEnabled")

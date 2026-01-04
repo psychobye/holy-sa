@@ -1,5 +1,6 @@
 package com.lit.game.core
 
+import android.annotation.SuppressLint
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Intent
@@ -17,6 +18,7 @@ import android.view.ViewParent
 import android.view.ViewStub
 import android.view.WindowManager
 import android.view.animation.AnimationUtils
+import android.webkit.WebView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -88,20 +90,25 @@ class Samp : GTASA() {
 
     fun init() {
         HudManager()
+        preloadCef()
+    }
 
-//        new Thread(() -> {
-//            while (true) {
-//        FrameLayout ui_layout = activity.findViewById(R.id.ui_layout);
-//                int totalChildren = countAllChildren(ui_layout);
-//                Log.d("df", "Total children count: " + totalChildren);
-//
-//                try {
-//                    Thread.sleep(1000);
-//                } catch (InterruptedException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }).start();
+    @SuppressLint("SetJavaScriptEnabled")
+    private fun preloadCef() {
+        val webView = WebView(activity).apply {
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+            settings.allowFileAccess = true
+
+            setBackgroundColor(android.graphics.Color.TRANSPARENT)
+            setLayerType(View.LAYER_TYPE_HARDWARE, null)
+        }
+
+        webView.loadUrl("about:blank")
+
+        webView.postDelayed({
+            webView.destroy()
+        }, 500)
     }
 
     fun countAllChildren(viewParent: ViewParent?): Int {
