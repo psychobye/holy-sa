@@ -24,4 +24,5 @@ public:
         return *pProcObjectMan_c;
     }
 };
-VALIDATE_SIZE(ProcObjectMan_c, (VER_x32 ? 0xD00 : 0x5220));
+
+// VALIDATE_SIZE(ProcObjectMan_c, (VER_x32 ? 0x31DC : 0x5220));

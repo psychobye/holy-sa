@@ -469,6 +469,9 @@ int CTextureDatabaseRuntime__GetEntry_hook(TextureDatabaseRuntime *a1, const cha
 #include "Mobile/MobileMenu/MobileMenu.h"
 #include "BulletTraces.h"
 #include "ProcObjectMan_c.h"
+#include "CModelInfoAccelerator.h"
+
+class InjectHooks;
 
 void InjectHooks()
 {
@@ -489,6 +492,7 @@ void InjectHooks()
     CMobileSettings::InjectHooks();
     // CPad::InjectHooks();
     // ProcObjectMan_c::InjectHooks();
+    // CModelInfoAccelerator::InjectHooks(); // its not working..
 
     CWeapon::InjectHooks();
     CWeaponInfo::InjectHooks();
@@ -845,7 +849,6 @@ void CPedDamageResponseCalculator__ComputeDamageResponse_hook(stPedDamageRespons
 	}
 //	CPedDamageResponseCalculator__ComputeDamageResponse(thiz, pEntity, pDamageResponse, bSpeak);
 }
-
 
 RpMaterialList* (*_rpMaterialListDeinitialize)(RpMaterialList* matList);
 RpMaterialList* _rpMaterialListDeinitialize_hook(RpMaterialList* matList)

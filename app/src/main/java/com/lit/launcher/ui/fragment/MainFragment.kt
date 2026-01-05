@@ -186,7 +186,7 @@ class MainFragment : Fragment() {
         log.delete()
 
         val cinfo = File(Config.GAME_PATH, "CINFO.BIN")
-        cinfo.delete()
+        // cinfo.delete()
 
         val minfo = File(File(Config.GAME_PATH, "models"), "MINFO.BIN")
         minfo.delete()

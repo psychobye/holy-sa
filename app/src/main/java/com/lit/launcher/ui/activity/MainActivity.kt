@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
 
         // FIXME
         val aaaaaaaaaa = File(getExternalFilesDir(null).toString() + "/CINFO.BIN")
-        aaaaaaaaaa.delete()
+        // aaaaaaaaaa.delete()
 
         val bbbbbbbb = File(getExternalFilesDir(null).toString() + "/models/MINFO.BIN")
         bbbbbbbb.delete()

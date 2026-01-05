@@ -696,7 +696,8 @@ void CGame::Process() {
 	    // CCollision::Update()
 
         // CPathFind::UpdateStreaming
-        ((void(*)(CPathFind, bool))(g_libGTASA + (VER_x32 ? 0x0032AED8 + 1 : 0x3E0208)))(CPathFind::Get(), false);
+        auto ThePaths = (uintptr_t *) (g_libGTASA + (VER_x32 ? 0x7A61F0 : 0x9869C0));
+        CHook::CallFunction<void>("_ZN9CPathFind15UpdateStreamingEb", ThePaths, false);
 
         // CTrain::UpdateTrains();
         // CHeli::UpdateHelis();
