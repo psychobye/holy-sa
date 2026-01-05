@@ -394,6 +394,7 @@ public:
 public:
     static void InjectHooks();
 
+    void Process();
     void Init();
 
     void Restore();

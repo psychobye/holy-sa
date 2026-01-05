@@ -40,6 +40,10 @@
 #include "Animation/AnimManager.h"
 #include "World.h"
 #include "PathFind.h"
+#include "ColAccel.h"
+#include "FileLoader.h"
+#include "CTheScripts.h"
+#include "ProcObjectMan_c.h"
 
 void ApplyPatches();
 void ApplyInGamePatches();
@@ -446,50 +450,64 @@ void CGame::DrawGangZone(const CRect* rect, uint32_t dwColor)
     CHook::CallFunction<void>(g_libGTASA + (VER_x32 ? 0x00443C60 + 1 : 0x528EC4), rect, &dwColor, bFullMap);
 }
 
-void CGame::InitialiseOnceBeforeRW() {
-    CMemoryMgr::Init();
-    CHook::CallFunction<void>("_ZN14MobileSettings10InitializeEv"); // впадлу реверсить т.к. меню надо вообще удалить
-    CLocalisation::Initialise();
-    CFileMgr::Initialise();
-    CdStreamInit(TOTAL_IMG_ARCHIVES); // mb use TOTAL_IMG_ARCHIVES?
-    CPad::Initialise();
+// TODO: need to move
+void CGame::LoadingScreen(const char* pMsg, const char* pMsg2, const char* pSplashName) {
+    return CHook::CallFunction<void>("_Z13LoadingScreenPKcS0_S0_", pMsg, pMsg2, pSplashName);
 }
 
-int CGame::Init2()
-{
-    // CWaterLevel::WaterLevelInitialise();
-    CDraw::SetFOV(120.0f, false);
-    // CDraw::ms_fLODDistance = 1140457472;
-    // CHook::CallFunction<bool>("_ZN18CCustomCarPlateMgr10InitialiseEv");
-    //CStreaming::LoadInitialPeds(v6);
-    // AllRequestedModels = CStreaming::LoadAllRequestedModels(0);
-    // AnimFiles = (CStreaming *)CAnimManager::LoadAnimFiles(AllRequestedModels);
-    // CStreaming::LoadInitialWeapons(AnimFiles);
-    CStreaming::LoadAllRequestedModels(0);
-    /*CPed::Initialise(v12);
-    CRadar::Initialise(v13);
-    CRadar::LoadTextures(v14);
-    CWeapon::InitialiseWeapons(Textures);*/
-    // CWorld::PlayerInFocus = 0;
-    // CCoronas::Init();
-    // CShadows::Init();
-    // CWeaponEffects::Init();
-    // CSkidmarks::Init();
-    // CGlass::Init();
-    CHook::CallFunction<void>("_ZN11CTheScripts4InitEv");
-    // CClock::Initialise((CClock *)(unsigned int)&stru_3E8);
-    // CMovingThings::Init();
-    CHook::CallFunction<void>("_ZN6CStats4InitEv");
-    // CClouds::Init();
-    // CSpecialFX::Init();
-    // CWaterCannons::Init();
+bool CGame::Initialise(const uint8_t* pDatFile) {
+    CGame::Init1(pDatFile);
+    CColAccel::startCache();
+    CFileLoader::LoadLevel("DATA\\DEFAULT.DAT");
+    CFileLoader::LoadLevel(reinterpret_cast<const char *>(pDatFile));
+    // CColAccel::endCache();
+    CGame::Init2(pDatFile);
+    LoadingScreen("Loading the Game", "Start script", nullptr);
+    CTheScripts::StartTestScript();
+    CTheScripts::Process();
+    ((void (*)(CCamera*)) (g_libGTASA + (VER_x32 ? 0x003DC7D0 + 1 : 0x4BAB78)))(&CCamera::Get());
+    CGame::Init3(pDatFile);
+    return true;
+}
+
+bool CGame::Init1(const uint8_t* pDatFile) {
+    return CHook::CallFunction<bool>("_ZN5CGame5Init1EPKc", pDatFile);
+}
+
+bool CGame::Init2(const uint8_t* pDatFile) {
+    return CHook::CallFunction<bool>("_ZN5CGame5Init2EPKc", pDatFile);
+}
+
+bool CGame::Init3(const uint8_t* pDatFile) {
+    LoadingScreen("Loading the Game", "Load scene", nullptr);
+
+    CPad::Clear(CPad::GetPad(0), true, true);
+    CPad::Clear(CPad::GetPad(1), true, true);
+
+    LoadingScreen("Loading the Game", "Procedural Interiors", nullptr);
+
+    // InteriorManager_c::Init(&g_interiorMan); // interior init for single mode
+    // ProcObjectMan_c::Init(&ProcObjectMan_c::Get()); // maybe its important, cause it load procobj.dat
+    // WaterCreatureManager_c::Init(&g_waterCreatureMan); // sharks, fish and more..
+    // CRealTimeShadowManager::Init(&g_realTimeShadowMan); // need to off?
+
+    return true;
+}
+
+void CGame::InitialiseOnceBeforeRW() {
+    CMemoryMgr::Init();
+    CHook::CallFunction<void>("_ZN14MobileSettings10InitializeEv"); // TODO: need to reverse
+    CLocalisation::Initialise();
+    CFileMgr::Initialise();
+    CdStreamInit(TOTAL_IMG_ARCHIVES);
+    CPad::Initialise();
 }
 
 void CGame::InjectHooks() {
     CHook::Redirect("_ZN5CGame27InitialiseEssentialsAfterRWEv", &CGame::InitialiseEssentialsAfterRW);
     CHook::Redirect("_ZN5CGame22InitialiseOnceBeforeRWEv", &CGame::InitialiseOnceBeforeRW);
 	CHook::Redirect("_ZN5CGame7ProcessEv", &CGame::Process);
-    // CHook::Redirect("_ZN5CGame5Init2EPKc", &CGame::Init2);
+    CHook::Redirect("_ZN5CGame10InitialiseEPKc", &CGame::Initialise);
 
 	CHook::Write(g_libGTASA + (VER_x32 ? 0x00678C38 : 0x84F8A0), &CGame::currArea);
 
@@ -499,8 +517,6 @@ void CGame::InjectHooks() {
 
 bool CGame::InitialiseRenderWare() {
 	DLOG("InitialiseRenderWare ..");
-
-	
 
 	CTxdStore::Initialise();
 	CVisibilityPlugins::Initialise();

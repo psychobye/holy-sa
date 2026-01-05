@@ -1,6 +1,3 @@
-//
-// Created by Traw-GG on 10.08.2024.
-//
 #include "Occlusion.h"
 #include "util/patch.h"
 

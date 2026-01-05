@@ -84,6 +84,8 @@ public:
 public:
     static void InjectHooks();
 
+    static void LoadLevel(const char* pDatFile);
+
     static char* LoadLine(FILE* file);
     static char* LoadLine(char*& outLine, int32& outSize);
 

@@ -1,11 +1,4 @@
-//
-// CPad.h
-//
-
-#ifndef RUSSIA_CPAD_H
-#define RUSSIA_CPAD_H
-
-#include <stdint.h>
+#include <cstdint>
 
 struct CControllerState {
     uint8_t data[0x60];
@@ -13,8 +6,15 @@ struct CControllerState {
 
 class CPad {
 public:
+    static CPad Pads[2];
+
     static void InjectHooks();
     static void Initialise();
+
+    static int16_t GetPedWalkLeftRight(CPad *thiz);
+    static int16_t GetPedWalkUpDown(CPad *thiz);
+
+    static void Clear(CPad *thiz, bool bOkToClearTheDisableFlag, bool bReinit);
 
     static CPad* GetPad(int index) { return &Pads[index]; }
 
@@ -72,11 +72,5 @@ public:
     float m_fAccelY;                          // 0x150
     float m_fAccelZ;                          // 0x154
 
-    static CPad Pads[2];
 
-    static int16_t GetPedWalkLeftRight(CPad *thiz);
-
-    static int16_t GetPedWalkUpDown(CPad *thiz);
 };
-
-#endif // RUSSIA_CPAD_H

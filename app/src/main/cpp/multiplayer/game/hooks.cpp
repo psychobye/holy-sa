@@ -97,7 +97,7 @@ stFile* NvFOpen(const char* r0, const char* r1, int r2, int r3)
 #endif
 	st->isFileExist = false;
 
-	// Log("%s", path);
+    Log("%s", path);
 	FILE *f  = fopen(path, "rb");
 
 	if(f)
@@ -468,6 +468,7 @@ int CTextureDatabaseRuntime__GetEntry_hook(TextureDatabaseRuntime *a1, const cha
 #include "CPad.h"
 #include "Mobile/MobileMenu/MobileMenu.h"
 #include "BulletTraces.h"
+#include "ProcObjectMan_c.h"
 
 void InjectHooks()
 {
@@ -487,6 +488,7 @@ void InjectHooks()
     CMobileMenu::InjectHooks();
     CMobileSettings::InjectHooks();
     // CPad::InjectHooks();
+    // ProcObjectMan_c::InjectHooks();
 
     CWeapon::InjectHooks();
     CWeaponInfo::InjectHooks();
@@ -543,7 +545,7 @@ void InjectHooks()
 	CVehicleModelInfo::InjectHooks();
 	//CPathFind::InjectHooks();
 	CSprite2d::InjectHooks();
-	//CFileLoader::InjectHooks();
+	// CFileLoader::InjectHooks();
 	CShadows::InjectHooks();
     //CPickups::InjectHooks();
 	CRenderer::InjectHooks();

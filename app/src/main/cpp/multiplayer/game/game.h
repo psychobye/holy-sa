@@ -26,9 +26,17 @@
 class CGame
 {
 public:
+    static bool Initialise(const uint8_t* pDatFile);
     static bool InitialiseEssentialsAfterRW();
     static void InitialiseOnceBeforeRW();
 	static bool InitialiseRenderWare();
+
+    static void LoadingScreen(const char *pMsg, const char *pMsg2, const char *pSplashName);
+
+    static void Process();
+    static bool Init1(const uint8_t* pDatFile);
+    static bool Init2(const uint8_t* pDatFile);
+    static bool Init3(const uint8_t* pDatFile);
 
 public:
 	static void InjectHooks();
@@ -40,9 +48,6 @@ public:
 
 	static void InitInMenu();
 	static void InitInGame();
-
-	static void Process();
-    static int Init2();
 
     static void HandleChangedHUDStatus();
     static bool IsToggledHUDElement(int iID);

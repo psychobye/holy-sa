@@ -25,6 +25,10 @@ CCam& CCamera::GetActiveCamera() {
     return CCamera::Get().m_aCams[CCamera::Get().m_nActiveCam];
 }
 
+void CCamera::Process() {
+    CHook::CallFunction<void>("_ZN7CCamera7ProcessEv", this);
+}
+
 void CCamera::Init() {
     CHook::CallFunction<void>(g_libGTASA + (VER_x32 ? 0x0046F8C0 + 1 : 0x55BA30), this);
 }

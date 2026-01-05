@@ -11,6 +11,11 @@
 #include "game/Models/AtomicModelInfo.h"
 #include "Streaming.h"
 #include "cHandlingDataMgr.h"
+#include "SearchLights.h"
+
+void CFileLoader::LoadLevel(const char* pDatFile) {
+    return CHook::CallFunction<void>("_ZN11CFileLoader9LoadLevelEPKc", pDatFile);
+}
 
 // Load line into static buffer (`ms_line`)
 char* CFileLoader::LoadLine(FILE* file) {
@@ -71,10 +76,8 @@ void CFileLoader::LoadVehicleObject() {
 
     const auto pFile = CFileMgr::OpenFile("SAMP/vehicles.ide", "rb");
     while (CFileLoader::LoadLine(pFile)) {
-        if (strlen(CFileLoader::ms_line) == 0 || CFileLoader::ms_line[0] == ';' || CFileLoader::ms_line[0] == '#' || CFileLoader::ms_line[0] == '\r') {
-            // Пропустить комментарии и пустые строки
+        if (strlen(CFileLoader::ms_line) == 0 || CFileLoader::ms_line[0] == ';' || CFileLoader::ms_line[0] == '#' || CFileLoader::ms_line[0] == '\r')
             continue;
-        }
 
         std::istringstream iss(CFileLoader::ms_line);
 
@@ -152,7 +155,10 @@ int32 CFileLoader::LoadObject(const char* line) {
 CEntity* CFileLoader::LoadObjectInstance1(const char* line) {
     char modelName[24];
     CFileObjectInstance instance;
-    VERIFY(sscanf(
+
+    Log("LoadObjectInstance1: Parsing line: %s", line);
+
+    int scanned = sscanf(
             line,
             "%d %s %d %f %f %f %f %f %f %f %d",
             &instance.m_nModelId,
@@ -166,12 +172,45 @@ CEntity* CFileLoader::LoadObjectInstance1(const char* line) {
             &instance.m_qRotation.z,
             &instance.m_qRotation.w,
             &instance.m_nLodInstanceIndex
-    ) == 11);
-    return LoadObjectInstance(&instance, modelName);
+    );
+
+    if (scanned != 11) {
+        Log("LoadObjectInstance1: Failed to parse line, scanned %d fields", scanned);
+        return nullptr;
+    }
+
+    Log("LoadObjectInstance1: ModelId=%d, ModelName=%s, Type=%d, Pos=(%.2f, %.2f, %.2f), LODIndex=%d",
+        instance.m_nModelId,
+        modelName,
+        instance.m_nInstanceType,
+        instance.m_vecPosition.x,
+        instance.m_vecPosition.y,
+        instance.m_vecPosition.z,
+        instance.m_nLodInstanceIndex
+    );
+
+    CEntity* ent = LoadObjectInstance(&instance, modelName);
+
+    if (!ent) {
+        Log("LoadObjectInstance1: Failed to create entity for model %s", modelName);
+        return nullptr;
+    }
+
+    Log("LoadObjectInstance1: Entity created at %p", ent);
+
+    if (CSearchLights::bCatchLamppostsNow &&
+        ent->m_nIplIndex == 0 &&
+        CSearchLights::IsModelALamppost(ent->IsInCurrentArea()))
+    {
+        CSearchLights::RegisterLamppost(ent);
+        Log("LoadObjectInstance1: Lamppost registered for entity %p", ent);
+    }
+
+    return ent;
 }
 
 void CFileLoader::InjectHooks() {
-    CHook::Redirect("_ZN11CFileLoader10LoadObjectEPKc", &CFileLoader::LoadObject);
+    // CHook::Redirect("_ZN11CFileLoader10LoadObjectEPKc", &CFileLoader::LoadObject); // crash
     CHook::Redirect("_ZN11CFileLoader18LoadObjectInstanceEPKc", &CFileLoader::LoadObjectInstance1);
 }
 

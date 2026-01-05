@@ -15,5 +15,8 @@ int16_t CPad::GetPedWalkUpDown(CPad *thiz) {
     return CHook::CallFunction<int16_t>("_ZN4CPad16GetPedWalkUpDownEv", thiz);
 }
 
-void CPad::InjectHooks() {
+void CPad::Clear(CPad *thiz, bool bOkToClearTheDisableFlag, bool bReinit) {
+    return CHook::CallFunction<void>("_ZN4CPad5ClearEbb", thiz, bOkToClearTheDisableFlag, bReinit);
 }
+
+void CPad::InjectHooks() { }
