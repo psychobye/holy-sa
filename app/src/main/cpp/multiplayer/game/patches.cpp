@@ -133,6 +133,8 @@ void ApplyPatches()
 
     CHook::NOP(g_libGTASA + 0x43EBF6, 2); // CRadar::DrawRadarSprite(4, ..); (North Icon)
 
+    CHook::RET("_ZN18CAEFireAudioEntity14PlayFireSoundsEiR7CVector"); // fix crash x32
+
     // ---------- JPATCH ----------
     // 4:3
     // CHook::WriteMemory(g_libGTASA + 0x3F58A1, (uintptr_t)"\x0C\x00\x00\x14", 4);

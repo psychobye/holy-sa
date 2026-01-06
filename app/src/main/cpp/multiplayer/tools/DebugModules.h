@@ -29,7 +29,6 @@ public:
             auto& module = m_Modules.emplace_back(std::make_unique<T>());
             module->OnImGuiInitialised(m_ImCtx);
         } else {
-            // Обработка ошибки или предупреждение, если T не является производным от DebugModule
         }
     }
 

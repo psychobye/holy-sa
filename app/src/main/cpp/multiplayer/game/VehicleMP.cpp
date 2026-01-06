@@ -18,6 +18,7 @@
 #include "CHandlingDataMgr.h"
 #include "Entity/Vehicle/Bike.h"
 #include "Coronas.h"
+#include "tools/ModelsDebugModule.h"
 
 CVehicleMP::CVehicleMP(int iType, float fPosX, float fPosY, float fPosZ, float fRotation, bool bSiren)
 {
@@ -188,7 +189,7 @@ CVehicleMP::~CVehicleMP()
 		bHasSuspensionLines = false;
 	}
 
-	//
+	// TODO: delete
 	if(m_pLeftFrontTurnLighter != nullptr)
 	{
 		delete m_pLeftFrontTurnLighter;
@@ -241,8 +242,7 @@ void CVehicleMP::RenderTurnLights()
     }
 }
 
-bool CVehicleMP::DrawTurnlight(int isRight)
-{
+bool CVehicleMP::DrawTurnlight(int isRight) {
     auto modelInfo = CModelInfo::GetVehicleModelInfo(m_pVehicle->m_nModelIndex);
     if (!modelInfo || !modelInfo->m_pVehicleStruct)
         return false;
@@ -253,23 +253,24 @@ bool CVehicleMP::DrawTurnlight(int isRight)
 
     const int indices[2] = { 0, 1 };
 
-    const uint32_t baseId = static_cast<uint32_t>(reinterpret_cast<uintptr_t>(m_pVehicle));
+    uintptr_t ptrBase = reinterpret_cast<uintptr_t>(m_pVehicle);
+    uint32_t uniqueBase = static_cast<uint32_t>((ptrBase & 0xFFFFFFFF) ^ 0xA5A5A5A5);
 
     for (int i = 0; i < 2; ++i) {
         CVector v = dummies[indices[i]];
         if (!isRight)
             v.x = -v.x;
 
-        uint32_t coronaId = baseId + (isRight ? 1u : 0u) + (i ? 2u : 0u);
+        uint32_t coronaId = uniqueBase + (isRight ? 0x100 : 0x200) + (i * 0x10);
 
         CCoronas::RegisterCorona(
                 coronaId,
                 m_pVehicle,
                 255, 160, 0, 255,
                 &v,
-                0.5f,
-                50.f,
-                eCoronaType::CORONATYPE_HEADLIGHT,
+                0.65f,
+                70.f,
+                eCoronaType::CORONATYPE_SHINYSTAR,
                 eCoronaFlareType::FLARETYPE_NONE,
                 false,
                 false,

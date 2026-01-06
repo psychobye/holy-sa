@@ -140,6 +140,5 @@ public:
 public:
     bool IsUsed() const { return m_nIsUsed; }
     bool WasServiced() const { return m_bWasServiced; }
-
 };
 VALIDATE_SIZE(CAESound, (VER_x32 ? 0x74 : 0x80));

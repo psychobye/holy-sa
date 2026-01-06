@@ -23,3 +23,7 @@ void CAESound::RegisterWithPhysicalEntity(CEntity* entity) {
         entity->RegisterReference(&m_pPhysicalEntity);
     }
 }
+
+void CAESound::StopSoundAndForget() {
+    CHook::CallFunction<void>("_ZN8CAESound18StopSoundAndForgetEv", this);
+}

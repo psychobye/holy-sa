@@ -11,12 +11,15 @@ public:
     static void InjectHooks();
     static void Initialise();
 
+    static CPad* GetPad(int index) { return &Pads[index]; }
+
     static int16_t GetPedWalkLeftRight(CPad *thiz);
     static int16_t GetPedWalkUpDown(CPad *thiz);
 
     static void Clear(CPad *thiz, bool bOkToClearTheDisableFlag, bool bReinit);
 
-    static CPad* GetPad(int index) { return &Pads[index]; }
+    static bool HornJustDown(CPad *thiz);
+    static bool GetHorn(CPad *thiz, bool bEnableTouch);
 
     CControllerState NewState;               // 0x00
     CControllerState OldState;               // 0x30
@@ -71,6 +74,4 @@ public:
     float m_fAccelX;                          // 0x14C
     float m_fAccelY;                          // 0x150
     float m_fAccelZ;                          // 0x154
-
-
 };

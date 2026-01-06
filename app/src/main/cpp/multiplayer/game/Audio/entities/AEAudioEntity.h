@@ -10,8 +10,8 @@ class CEntity;
 
 class CAEAudioEntity {
 public:
-    CEntity* m_pEntity;
-    CAESound m_tempSound;
+    CEntity* m_pEntity{};
+    CAESound m_tempSound{};
 
 private:
     static inline int8* m_pAudioEventVolumes;

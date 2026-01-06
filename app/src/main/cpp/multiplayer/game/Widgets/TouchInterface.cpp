@@ -48,3 +48,7 @@ void CTouchInterface::InjectHooks() {
 void CTouchInterface::LoadTouchControls() {
     CHook::CallFunction<void>("_ZN15CTouchInterface17LoadTouchControlsEv");
 }
+
+bool CTouchInterface::IsReleased(WidgetIDs WidgetID, CVector2D *pVecOut, int nFrameCount) {
+    CHook::CallFunction<bool>("_ZN15CTouchInterface10IsReleasedENS_9WidgetIDsEP9CVector2Di", WidgetID, pVecOut, nFrameCount);
+}

@@ -359,4 +359,6 @@ public:
     static void LoadFromFile(const char *pszFilename, bool bFullLoad);
     static void LoadTouchControls();
     static void InjectHooks();
+
+    static bool IsReleased(WidgetIDs WidgetID, CVector2D *pVecOut, int nFrameCount);
 };

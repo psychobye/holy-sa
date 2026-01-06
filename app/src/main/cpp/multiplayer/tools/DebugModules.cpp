@@ -14,12 +14,12 @@ void DebugModules::PreRenderUpdate() {
 }
 
 void DebugModules::Render2D() {
-    ImGui::BeginMainMenuBar();
+    static bool isOpen = true;
+    const notsa::ui::ScopedWindow window{ "Debug Menu", {600.f, 400.f}, isOpen, true };
+
     for (auto& module : m_Modules) {
         module->RenderMenuEntry();
     }
-   // RenderMenuBarInfo();
-    ImGui::EndMainMenuBar();
 
     for (auto& module : m_Modules) {
         module->RenderWindow();

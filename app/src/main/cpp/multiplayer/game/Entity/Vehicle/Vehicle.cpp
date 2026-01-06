@@ -9,6 +9,11 @@
 #include "game/Coronas.h"
 #include "Camera.h"
 #include "net/netgame.h"
+#include "widget.h"
+#include "Widgets/TouchInterface.h"
+#include "CPad.h"
+#include "Shadow/Shadows.h"
+#include "tools/ModelsDebugModule.h"
 
 void CVehicle::RenderDriverAndPassengers() {
     if(IsRCVehicleModelID())
@@ -156,9 +161,6 @@ void CVehicle__DoVehicleLights_hook(CVehicle* thiz, CMatrix *matVehicle, uint32 
 }
 
 bool CVehicle::DoTailLightEffect(int32_t lightId, CMatrix* matVehicle, int isRight, int forcedOff, uint32_t nLightFlags, int lightsOn) {
-
-    constexpr int REVERSE_LIGHT_OFFSET = 5;
-
     auto pModelInfoStart = CModelInfo::GetVehicleModelInfo(m_nModelIndex);
 
     CVector* m_avDummyPos = pModelInfoStart->m_pVehicleStruct->m_avDummyPos;
@@ -178,7 +180,7 @@ bool CVehicle::DoTailLightEffect(int32_t lightId, CMatrix* matVehicle, int isRig
                 0.65f,
                 /*CCamera::Get().LODDistMultiplier*/ 70.f,
                 eCoronaType::CORONATYPE_HEADLIGHT,
-                eCoronaFlareType::FLARETYPE_NONE,
+                eCoronaFlareType::FLARETYPE_HEADLIGHTS,
                 false,
                 false,
                 0,
@@ -201,8 +203,6 @@ void CVehicle::DoHeadLightBeam(eVehicleDummy dummyId, CMatrix* matrix, bool isRi
     if (pVehicle)
         pVehicle->ProcessHeadlightsColor(r, g, b);
 
-
-
     auto mi = CModelInfo::GetVehicleModelInfo(m_nModelIndex);
     CVector pointModelSpace = mi->GetModelDummyPosition(static_cast<eVehicleDummy>(2 * dummyId));
     if (dummyId == DUMMY_LIGHT_REAR_MAIN && pointModelSpace.IsZero())
@@ -215,7 +215,7 @@ void CVehicle::DoHeadLightBeam(eVehicleDummy dummyId, CMatrix* matrix, bool isRi
     const CVector pointToCamDir = Normalized(CCamera::Get().GetPosition() - point);
     const auto    alpha = (uint8)((1.0f - std::fabs(DotProduct(pointToCamDir, matrix->GetForward()))) * 45.0f);
 
-    bool isHighBeam = pVehicle ? pVehicle->m_bIsLightOn == eLightsState::HIGH : false;
+    bool isHighBeam = pVehicle != nullptr && pVehicle->m_bIsLightOn == eLightsState::HIGH;
     const uint8 finalAlpha = isHighBeam ? std::min(255, alpha + 80) : alpha;
 
     RwRenderStateSet(rwRENDERSTATEZWRITEENABLE,         RWRSTATE(FALSE));
@@ -271,6 +271,147 @@ void CVehicle::DoHeadLightBeam(eVehicleDummy dummyId, CMatrix* matrix, bool isRi
     RwRenderStateSet(rwRENDERSTATECULLMODE,              RWRSTATE(rwCULLMODECULLNONE));
 }
 
+void CVehicle::DoHeadLightReflectionTwin(CMatrix* matVehicle)
+{
+    auto* mi = CModelInfo::GetVehicleModelInfo(m_nModelIndex);
+    if (!mi)
+        return;
+
+    CVector dummy = mi->GetModelDummyPosition(DUMMY_LIGHT_FRONT_MAIN);
+    if (dummy.IsZero())
+        return;
+
+    CVector pos = matVehicle->GetPosition() + matVehicle->TransformVector(dummy);
+    pos.z += 2.0f;
+
+    CVector forward = matVehicle->GetForward();
+    float xy = forward.x;
+    float yy = forward.y;
+
+    float len = xy * xy + yy * yy;
+    if (len != 0.0f) len = 1.0f / sqrtf(len);
+
+    float nx = xy * len;
+    float ny = yy * len;
+
+    float w = mi->GetColModel()->m_boundBox.m_vecMax.x * 2.0f;
+    float offset = mi->GetColModel()->m_boundBox.m_vecMax.y + (w + w) - 2.0f;
+
+    pos.x += offset * nx;
+    pos.y += offset * ny;
+
+    float leftOffset = 0.65f;
+    pos.x += leftOffset * (-ny);
+    pos.y += leftOffset * nx;
+
+    auto* pVeh = CVehiclePool::FindVehicle(this);
+
+    uint8 red = 0x2D, green = 0x2D, blue = 0x2D;
+
+    if (pVeh) {
+        pVeh->ProcessHeadlightsColor(red, green, blue);
+        red     /= 4;
+        green   /= 4;
+        blue    /= 4;
+    }
+
+    auto* needTex = CShadows::gpShadowHeadLightsTex;
+    if (pVeh && pVeh->m_bIsLightOn == eLightsState::HIGH)
+        needTex = CShadows::gpShadowHeadLightsTexLong;
+
+    CShadows::StoreCarLightShadow(
+            this,
+            reinterpret_cast<uintptr>(this) + 22,
+            needTex,
+            &pos,
+            (w + w) * nx,
+            (w + w) * ny,
+            w * ny,
+            -w * nx,
+            red,
+            green,
+            blue,
+            7.0f
+    );
+}
+
+void CVehicle::DoSirenEffect(int32_t lightId, bool isRight) {
+    if(!m_nVehicleFlags.bSirenOrAlarm) return;
+
+    float v50, v213, zy, v1;
+
+    switch (m_nModelIndex) {
+        case 596:
+        case 597:
+        case 598:
+            v50 = -0.7f; v213 = 0.7f; zy = -0.4f; v1 = 1.0f;
+            break;
+        case 407:
+            v50 = -0.9f; v213 = 0.9f; zy = 3.2f; v1 = 1.3f;
+            break;
+        case 416:
+            v50 = -0.6f; v213 = 0.6f; zy = 0.9f; v1 = 1.2f;
+            break;
+        case 427:
+            v50 = -0.55f; v213 = 0.55f; zy = 1.1f; v1 = 1.4f;
+            break;
+        default:
+            v50 = -0.7f; v213 = 0.7f; zy = -0.4f; v1 = 1.0f;
+            break;
+    }
+
+    for (int i = 0; i < 4; ++i) {
+        float v111 = 3.0f - float(i);
+        int v112 = static_cast<int>(((i * 64u + CTimer::m_snTimeInMilliseconds) >> 8) & 3u);
+
+        CVector SirenCoors;
+        SirenCoors.x = ((v50 * v111) + (v213 * float(i))) * 0.33333f;
+        SirenCoors.y = ((zy * v111) + (zy * float(i))) * 0.33333f;
+        SirenCoors.z = ((v1 * v111) + (v1 * float(i))) * 0.33333f;
+
+        if (v112 == 2) {
+            CCoronas::RegisterCorona(
+                    (uintptr)&m_placement.m_vPosn.y + 5 * lightId + isRight,
+                    this,
+                    255, 0, 0, 255,
+                    &SirenCoors,
+                    0.6f,
+                    70.f,
+                    eCoronaType::CORONATYPE_HEADLIGHT,
+                    eCoronaFlareType::FLARETYPE_HEADLIGHTS,
+                    false, false, 0, 0.0f, false, 0, 0, 15.0f, false, false
+            );
+        } else if (v112 == 0) {
+            CCoronas::RegisterCorona(
+                    (uintptr)&m_placement.m_vPosn.y + 5 * lightId + isRight,
+                    this,
+                    0, 0, 255, 255,
+                    &SirenCoors,
+                    0.6f,
+                    70.f,
+                    eCoronaType::CORONATYPE_HEADLIGHT,
+                    eCoronaFlareType::FLARETYPE_HEADLIGHTS,
+                    false, false, 0, 0.0f, false, 0, 0, 15.0f, false, false
+            );
+        }
+    }
+}
+
+void CVehicle::ProcessSirenAndHorn(bool bHornAvailable)
+{
+    auto Pads = CPad::GetPad(0);
+    auto sirenWidget = CTouchInterface::m_pWidgets[WIDGET_HORN];
+
+    if (IsLawEnforcementVehicle() && sirenWidget) {
+        if (CPad::HornJustDown(Pads) && sirenWidget->m_fTapHoldTime <= 0.2f) {
+            m_nVehicleFlags.bSirenOrAlarm = !m_nVehicleFlags.bSirenOrAlarm;
+        }
+    }
+    else if (bHornAvailable) {
+        m_cHorn = CPad::GetHorn(Pads, true);
+    }
+}
+
 bool DoTailLightEffect_hooked(CVehicle* vehicle, int32_t lightId, CMatrix* matVehicle, int isRight, int forcedOff, uint32_t nLightFlags, int lightsOn) {
     return vehicle->DoTailLightEffect(lightId, matVehicle, isRight, forcedOff, nLightFlags, lightsOn);
 }
@@ -279,14 +420,26 @@ void DoHeadLightBeam_hooked(CVehicle* vehicle, eVehicleDummy dummyId, CMatrix* m
     vehicle->DoHeadLightBeam(dummyId, matrix, isRight);
 }
 
+void DoHeadLightReflectionTwin_hooked(CVehicle* vehicle, CMatrix* matVehicle) {
+    return vehicle->DoHeadLightReflectionTwin(matVehicle);
+}
+
+void ProcessSirenAndHorn_hooked(CVehicle* vehicle, bool bHornAvailable) {
+    return vehicle->ProcessSirenAndHorn(bHornAvailable);
+}
+
 void CVehicle::InjectHooks() {
-    // var
     CHook::Write(g_libGTASA + (VER_x32 ? 0x675F10 : 0x849EA8), &m_aSpecialColModel);
 
     CHook::Redirect("_ZN8CVehicle25RenderDriverAndPassengersEv", &RenderDriverAndPassengers_hook);
     CHook::Redirect("_ZN8CVehicle9SetDriverEP4CPed", &SetDriver_hook);
 
     CHook::Redirect("_ZN8CVehicle17DoTailLightEffectEiR7CMatrixhhjh", &DoTailLightEffect_hooked);
+
+    CHook::Redirect("_ZN8CVehicle25DoHeadLightReflectionTwinER7CMatrix", &DoHeadLightReflectionTwin_hooked);
+
+    CHook::Redirect("_ZN8CVehicle19ProcessSirenAndHornEb", &ProcessSirenAndHorn_hooked);
+
     CHook::InlineHook("_ZN8CVehicle15DoVehicleLightsER7CMatrixj", &CVehicle__DoVehicleLights_hook, &CVehicle__DoVehicleLights);
     CHook::Redirect("_ZN8CVehicle22GetVehicleLightsStatusEv", &CVehicle__GetVehicleLightsStatus_hook);
     CHook::Redirect("_ZN8CVehicle15DoHeadLightBeamEiR7CMatrixh", &DoHeadLightBeam_hooked);

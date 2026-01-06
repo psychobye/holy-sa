@@ -466,19 +466,6 @@ void CShadows::StoreCarLightShadow(CVehicle* vehicle, int32 id, RwTexture* textu
     // Maximum distance (from camera to `posn`) after which shadows aren't stored (and rendered)
     constexpr auto MAX_CAM_TO_LIGHT_DIST = 35.f;
 
-    // FIXME: move code to DoHeadLightReflectionTwin ( need reverse )
-
-    auto pVeh = CVehiclePool::FindVehicle(vehicle);
-    if (pVeh) {
-        pVeh->ProcessHeadlightsColor(red, green, blue);
-        red     /= 4;
-        green   /= 4;
-        blue    /= 4;
-
-        if (pVeh->m_bIsLightOn == eLightsState::HIGH)
-            needTex = gpShadowHeadLightsTexLong;
-    }
-
     if ([] { // Maybe ignore camera distance?
         switch (CCamera::GetActiveCamera().m_nMode) {
             case MODE_TOPDOWN:
@@ -559,8 +546,8 @@ void CShadows::StoreShadowToBeRendered(uint8 type, RwTexture* texture, CVector* 
 }
 
 void CShadows::Init() {
-    CHook::CallFunction<void>("_ZN8CShadows4InitEv");
-    /*CTxdStore::PushCurrentTxd();
+    // CHook::CallFunction<void>("_ZN8CShadows4InitEv");
+    CTxdStore::PushCurrentTxd();
     CTxdStore::SetCurrentTxd(CTxdStore::FindTxdSlot("particle"));
 
     gpShadowCarTex              = RwTextureRead("shad_car",     nullptr);
@@ -588,7 +575,7 @@ void CShadows::Init() {
     }
     aPolyBunches.back().m_pNext = nullptr;
 
-    std::ranges::for_each(aPermanentShadows, [&](auto& shadow) { shadow.Init(); });*/
+    std::ranges::for_each(aPermanentShadows, [&](auto& shadow) { shadow.Init(); });
 }
 
 void CShadows::StoreShadowToBeRendered(eShadowType type, RwTexture* tex, const CVector& posn, CVector2D top, CVector2D right, int16 intensity, uint8 red, uint8 green, uint8 blue, float zDistance, bool drawOnWater, float scale, CRealTimeShadow* realTimeShadow, bool drawOnBuildings) {

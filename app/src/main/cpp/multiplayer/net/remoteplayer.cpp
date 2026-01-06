@@ -600,6 +600,8 @@ void CRemotePlayer::StoreInCarFullSyncData(INCAR_SYNC_DATA *picSync)
 
 	m_pCurrentVehicle->m_iTurnState = static_cast<eTurnState>(picSync->HydraThrustAngle);
 
+    m_pCurrentVehicle->m_pVehicle->m_nVehicleFlags.bSirenOrAlarm = picSync->byteSirenOn; // siren sync
+
 	SetState(PLAYER_STATE_DRIVER);
 
     RwMatrix matVehicle;

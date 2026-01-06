@@ -356,6 +356,12 @@ public:
 
     bool DoTailLightEffect(int32_t lightId, CMatrix* matVehicle, int isRight, int forcedOff, uint32_t nLightFlags, int lightsOn);
     void DoHeadLightBeam(eVehicleDummy dummyId, CMatrix* matrix, bool isRight);
+
+    void DoSirenEffect(int32_t lightId, bool isRight);
+
+    void ProcessSirenAndHorn(bool bHornAvailable);
+
+    void DoHeadLightReflectionTwin(CMatrix *matVehicle);
 };
 //#pragma pack(pop)
 
