@@ -31,4 +31,8 @@ bool CPad::GetHorn(CPad *thiz, bool bEnableTouch) {
     return CHook::CallFunction<bool>("_ZN4CPad7GetHornEb", thiz, bEnableTouch);
 }
 
+bool CPad::GetSprint(CPad *thiz, int nSprintType) {
+    return CHook::CallFunction<bool>("_ZN4CPad9GetSprintEi", thiz, nSprintType);
+}
+
 void CPad::InjectHooks() { }

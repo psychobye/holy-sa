@@ -476,3 +476,15 @@ static Letter g_letters[] = {
 		{0xBE, 0x0455}, // CYRILLIC SMALL LETTER DZE
 		{0xBF, 0x0457} // CYRILLIC SMALL LETTER YI
 };
+
+void CUtil::ConvertARGBtoRGBA(const uint32_t* src, uint8_t* dst, size_t count) {
+    for (size_t i = 0; i < count; ++i) {
+        CRGBA col;
+        col.FromARGB(src[i]);
+        size_t off = i * 4;
+        dst[off + 0] = col.r;
+        dst[off + 1] = col.g;
+        dst[off + 2] = col.b;
+        dst[off + 3] = col.a;
+    }
+}

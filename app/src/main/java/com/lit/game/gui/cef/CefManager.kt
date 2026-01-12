@@ -20,6 +20,11 @@ class CefManager : NativeGui<LayoutCefRootBinding>(LayoutCefRootBinding::class) 
 
     /** Native function to send events to the server */
     private external fun nativeSendEvent(event: String, json: String)
+    /** Native function to send bitmap bytes to rwtexture */
+    private external fun nativeUploadBytes(id: Int, texName: String, buffer: java.nio.ByteBuffer, width: Int, height: Int)
+
+    private val inflightTargets = mutableMapOf<String, com.bumptech.glide.request.target.CustomTarget<android.graphics.Bitmap>>()
+    private val loadingLock = java.util.concurrent.ConcurrentHashMap<String, java.util.concurrent.atomic.AtomicBoolean>()
 
     /** JS callbacks map */
     internal val jsCallbacks = mutableMapOf<String, (String) -> Unit>()
@@ -132,4 +137,63 @@ class CefManager : NativeGui<LayoutCefRootBinding>(LayoutCefRootBinding::class) 
 
     /** Helper data class for wrapping JS events */
     data class JsEvent(val event: String, val data: Any)
+
+    /** CEF3D */
+    @SuppressLint("CheckResult")
+    fun fetchTexture(id: Int, url: String, texName: String) {
+        val lockKey = "${id}_$texName"
+
+        val flag = loadingLock.getOrPut(lockKey) { java.util.concurrent.atomic.AtomicBoolean(false) }
+        if (!flag.compareAndSet(false, true)) return
+
+        activity.runOnUiThread {
+            val target = object : com.bumptech.glide.request.target.CustomTarget<android.graphics.Bitmap>() {
+                override fun onResourceReady(
+                    resource: android.graphics.Bitmap,
+                    transition: com.bumptech.glide.request.transition.Transition<in android.graphics.Bitmap>?
+                ) {
+                    try {
+                        val safeBmp = resource.copy(android.graphics.Bitmap.Config.ARGB_8888, false)
+                        val w = safeBmp.width
+                        val h = safeBmp.height
+
+                        val buf = java.nio.ByteBuffer.allocateDirect(w * h * 4)
+                        buf.order(java.nio.ByteOrder.nativeOrder())
+                        safeBmp.copyPixelsToBuffer(buf)
+                        buf.rewind()
+
+                        nativeUploadBytes(id, texName, buf, w, h)
+
+                        safeBmp.recycle()
+                        Log.d(TAG, "fetchTexture: sent ID:$id Name:$texName to native")
+                    } catch (t: Throwable) {
+                        Log.e(TAG, "fetchTexture error: ${t.message}")
+                    } finally {
+                        flag.set(false)
+                        inflightTargets.remove(lockKey)
+                    }
+                }
+
+                override fun onLoadCleared(placeholder: android.graphics.drawable.Drawable?) {
+                    flag.set(false)
+                    inflightTargets.remove(lockKey)
+                }
+
+                override fun onLoadFailed(errorDrawable: android.graphics.drawable.Drawable?) {
+                    flag.set(false)
+                    inflightTargets.remove(lockKey)
+                    Log.e(TAG, "fetchTexture: Glide failed for $url")
+                }
+            }
+
+            inflightTargets[lockKey] = target
+
+            com.bumptech.glide.Glide.with(activity)
+                .asBitmap()
+                .load(url)
+                .centerCrop()
+                .override(1024, 1024)
+                .into(target)
+        }
+    }
 }

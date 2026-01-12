@@ -328,7 +328,8 @@ void CNetGame::Packet_TrailerSync(Packet *p)
 #include "game/World.h"
 #include "BusStation.h"
 #include "Widgets/TouchInterface.h"
-#include "CEF.h"
+#include "java_systems/cef/CEF.h"
+#include "cef/CEF3D.h"
 
 
 void CNetGame::Packet_AuthRPC(Packet *p) {
@@ -688,6 +689,14 @@ void CNetGame::Packet_CustomRPC(Packet *p) {
         }
         case RPC_SET_CEF_URL: {
             CCEF::pktSetUrl(p);
+            break;
+        }
+        case RPC_CEF3D_CREATE: {
+            CCEF3D::pktCreateObject(p);
+            break;
+        }
+        case RPC_CEF3D_SET_TEX: {
+            CCEF3D::pktSetTexture(p);
             break;
         }
         case RPC_SHOW_DONATE: {

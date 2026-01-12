@@ -1310,13 +1310,13 @@ int CTaskSimpleGetUp__ProcessPed_hook(uintptr_t* thiz, CPed* ped)
 	return res;
 }
 
-int (*RwResourcesFreeResEntry)(int);
+int (*RwResourcesFreeResEntry_orig)(int);
 int RwResourcesFreeResEntry_hook(int a1)
 {
 	int result; // r0
 
 	if (a1)
-		result = RwResourcesFreeResEntry(a1);
+		result = RwResourcesFreeResEntry_orig(a1);
 	else
 		result = 0;
 	return result;
@@ -1813,7 +1813,7 @@ void InstallHooks()
 
 	CHook::InlineHook("_ZN16CTaskSimpleGetUp10ProcessPedEP4CPed", &CTaskSimpleGetUp__ProcessPed_hook, &CTaskSimpleGetUp__ProcessPed); // CTaskSimpleGetUp::ProcessPed
 
-	CHook::InlineHook("_Z23RwResourcesFreeResEntryP10RwResEntry", &RwResourcesFreeResEntry_hook, &RwResourcesFreeResEntry);
+	CHook::InlineHook("_Z23RwResourcesFreeResEntryP10RwResEntry", &RwResourcesFreeResEntry_hook, &RwResourcesFreeResEntry_orig);
 
     auto* RQCaps = (RQCapabilities*)(g_libGTASA + (VER_x32 ? 0x6B8B9C : 0x896130));
     if (RQCaps->hasTextureCompressionPVRTCCap) {

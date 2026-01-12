@@ -470,6 +470,14 @@ struct RwResEntry
     RwResEntryDestroyNotify destroyNotify; /* This is called right before destruction */
 };
 
+struct RpMorphTarget
+{
+    struct RpGeometry* parentGeom;
+    RwSphere            boundingSphere;
+    RwV3d* verts;
+    RwV3d* normals;
+};
+
 struct RpGeometry
 {
     RwObject            object;     /* Generic type */

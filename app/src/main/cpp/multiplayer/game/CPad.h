@@ -20,6 +20,7 @@ public:
 
     static bool HornJustDown(CPad *thiz);
     static bool GetHorn(CPad *thiz, bool bEnableTouch);
+    static bool GetSprint(CPad *thiz, int nSprintType);
 
     CControllerState NewState;               // 0x00
     CControllerState OldState;               // 0x30

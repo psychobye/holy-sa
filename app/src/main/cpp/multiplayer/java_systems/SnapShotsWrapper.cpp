@@ -9,6 +9,7 @@
 #include "util/patch.h"
 #include "game/SnapShots.h"
 #include "net/VehiclePool.h"
+#include "util/TextureUploadManager.h"
 #include <jni.h>
 #include <GLES3/gl32.h>
 
@@ -190,7 +191,7 @@ jbyteArray SnapShotsWrapper::ConvertTexToBitMapBytes(RwTexture* tex, bool needCr
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_EntitySnaps_nativeEntitySnapAddToQueue(JNIEnv *env, jobject thiz, jobject imageview, jint type, jint model_id, jfloat rot_x, jfloat rot_y, jfloat rot_z, jfloat x_offset, jfloat y_offset, jfloat z_offset, jlong color) {
+Java_com_lit_game_EntitySnaps_nativeEntitySnapAddToQueue(JNIEnv *env, jobject thiz, jobject imageview, jint type, jint model_id, jfloat rot_x, jfloat rot_y, jfloat rot_z, jfloat x_offset, jfloat y_offset, jfloat z_offset) {
     std::lock_guard<std::mutex> lock(SnapShotsWrapper::queueMutex);
 
     SnapShotsWrapper::queue.push({

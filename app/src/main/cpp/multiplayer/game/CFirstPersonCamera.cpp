@@ -44,7 +44,7 @@ void CFirstPersonCamera::MakePlayerFaceCameraDirection(CCam* pCam, CPedSamp* pla
 void CFirstPersonCamera::UpdateFirstPersonMoveAnims(CCam* pCam, CPedSamp* pPedSamp)
 {
     if (!pCam || !pPedSamp) return;
-    CPed* pPed = pPedSamp->m_pPed;
+    auto* pPed = CLocalPlayer::GetPlayerPed()->m_pPed;
     if (!pPed) return;
     RpClump* clump = pPed->m_pRwClump;
     if (!clump) return;
@@ -84,6 +84,7 @@ void CFirstPersonCamera::UpdateFirstPersonMoveAnims(CCam* pCam, CPedSamp* pPedSa
     const float runThreshold = 0.6f;
 
     pPed->m_fCurrentRotation = pCam->m_fHorizontalAngle + 1.5707f;
+    pPed->m_pPlayerData->m_bPlayerSprintDisabled = true;
 
     auto animWalk = (CAnimBlendAssociation*)RpAnimBlendClumpGetAssociation(clump, ANIM_ID_WALK);
     auto animRun  = (CAnimBlendAssociation*)RpAnimBlendClumpGetAssociation(clump, ANIM_ID_RUN);
@@ -105,7 +106,7 @@ void CFirstPersonCamera::UpdateFirstPersonMoveAnims(CCam* pCam, CPedSamp* pPedSa
         if (!animRun) animRun = CAnimManager::BlendAnimation(clump, ANIM_GROUP_DEFAULT, ANIM_ID_RUN, 8.0f);
         if (animRun) {
             animRun->SetBlendAmount(runWeight * fwdMag);
-            animRun->SetSpeed(globalSpeed * 1.2f);
+            animRun->SetSpeed(globalSpeed);
         }
         if (animBwd) animBwd->SetBlendAmount(0.0f);
     }
@@ -146,6 +147,7 @@ void CFirstPersonCamera::ResetPedAnims()
     if (!pPed || !pPed->m_pRwClump) return;
 
     RpClump* clump = pPed->m_pRwClump;
+    pPed->m_pPlayerData->m_bPlayerSprintDisabled = false;
 
     AnimationId IDs[] = {
             ANIM_ID_WALK, ANIM_ID_RUN, ANIM_ID_FIGHTSH_BWD,

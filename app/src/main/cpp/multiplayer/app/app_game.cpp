@@ -28,6 +28,7 @@
 #include "Mobile/MobileSettings/MobileSettings.h"
 #include "Weather.h"
 #include "Renderer.h"
+#include "cef/CEF3D.h"
 
 void RenderScene()
 {
@@ -158,6 +159,7 @@ void RenderEffects() {
     CPostEffects::MobileRender();
 
     DebugModules::Render3D();
+    CCEF3D::ApplyPendingTexture();
 }
 
 void Render2dStuff()

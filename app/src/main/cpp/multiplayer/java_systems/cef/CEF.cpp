@@ -1,5 +1,5 @@
 #include "CEF.h"
-#include "../game/game.h"
+#include "game/game.h"
 #include "net/netgame.h"
 #include "util/CJavaWrapper.h"
 
@@ -190,10 +190,6 @@ void CCEF::OnServerEvent(Packet *p) {
         CCEF::GetEvent(event, jsonStr);
     }
 }
-
-// ======================
-// JNI bridge (Java → C++)
-// ======================
 
 /**
  * Called from Java when JS sends event to native layer

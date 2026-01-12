@@ -47,7 +47,7 @@
 #include "java_systems/Milk.h"
 #include "java_systems/Menu.h"
 #include "java_systems/Quest.h"
-#include "java_systems/CEF.h"
+#include "java_systems/cef/CEF.h"
 #include "GuiWrapper.h"
 #include "MagicStore.h"
 #include "SnapShotsWrapper.h"
