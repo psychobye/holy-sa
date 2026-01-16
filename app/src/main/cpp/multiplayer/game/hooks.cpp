@@ -1115,7 +1115,7 @@ void CAutomobile__PreRender_hook(CVehicle* thiz)
         pVeh->ProcessWheelsOffset();
         g_pLastProcessedVehicleMatrix = pVeh;
         pVeh->RenderTurnLights();
-        pVeh->m_pVehicle->DoSirenEffect(1, false);
+        // pVeh->m_pVehicle->DoSirenEffect(1, false);
 
         if (pVeh->neon.IsSet()) {
 			pVeh->neon.Render(pVeh->m_pVehicle);

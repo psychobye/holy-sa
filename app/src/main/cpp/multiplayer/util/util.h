@@ -47,6 +47,8 @@ public:
     static uintptr_t FindLib(const char *libname);
 
     static void ConvertARGBtoRGBA(const uint32_t *src, uint8_t *dst, size_t pixelCount);
+
+    static int NextPow2(int v);
 };
 
 std::string cp1251_to_utf8(const std::string& in);

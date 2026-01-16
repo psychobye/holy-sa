@@ -170,9 +170,7 @@ void CCEF3D::ApplyPendingTexture()
     std::lock_guard<std::mutex> lock(m_pendingMutex);
     if (!m_pendingReady || !m_pendingBuffer) return;
 
-    RwTexture* newTex = TextureUploadManager::CreateRwTextureFromRGBA(
-            m_pendingTexName.c_str(), m_pendingBuffer, m_pendingWidth, m_pendingHeight
-    );
+    RwTexture* newTex = TextureUploadManager::CreateRwTextureFromBytes(m_pendingBuffer, m_pendingWidth, m_pendingHeight, false);
 
     delete[] m_pendingBuffer;
     m_pendingBuffer = nullptr;
@@ -192,14 +190,20 @@ void CCEF3D::ApplyPendingTexture()
 }
 
 void CCEF3D::EnqueuePendingTexture(int id, uint8_t* buffer, size_t pxCount, int width, int height, const std::string& texName) {
-    if (!buffer) return;
+    if (!buffer || pxCount == 0 || width <= 0 || height <= 0) return;
 
     std::lock_guard<std::mutex> lock(m_pendingMutex);
 
-    if (m_pendingBuffer) delete[] m_pendingBuffer;
+    if (m_pendingBuffer) {
+        delete[] m_pendingBuffer;
+        m_pendingBuffer = nullptr;
+    }
+
+    size_t bytes = pxCount * 4;
+    m_pendingBuffer = new uint8_t[bytes];
+    memcpy(m_pendingBuffer, buffer, bytes);
 
     m_pendingId = id;
-    m_pendingBuffer = buffer;
     m_pendingPxCount = pxCount;
     m_pendingWidth = width;
     m_pendingHeight = height;
@@ -209,22 +213,46 @@ void CCEF3D::EnqueuePendingTexture(int id, uint8_t* buffer, size_t pxCount, int 
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_cef_CefManager_nativeUploadBytes(JNIEnv* env, jobject thiz,
-                                                              jint id, jstring jTexName, jobject byteBuffer,
-                                                              jint width, jint height) {
-    if (!jTexName || !byteBuffer) return;
+Java_com_lit_game_gui_cef_CefManager_nativeUploadBytes(
+        JNIEnv* env, jobject /*thiz*/,
+        jint id, jstring jTexName, jobject buffer,
+        jint width, jint height
+) {
+    if (!buffer || !jTexName || width <= 0 || height <= 0)
+        return;
 
-    const char* texName = env->GetStringUTFChars(jTexName, nullptr);
-    void* directPtr = env->GetDirectBufferAddress(byteBuffer);
+    jobject gBuffer = env->NewGlobalRef(buffer);
+    if (!gBuffer) return;
 
-    if (directPtr) {
-        size_t pxCount = static_cast<size_t>(width) * height;
-        auto* buffer = new uint8_t[pxCount * 4];
+    const char* texNameCStr = env->GetStringUTFChars(jTexName, nullptr);
+    if (!texNameCStr) {
+        env->DeleteGlobalRef(gBuffer);
+        return;
+    }
+    std::string texNameStr(texNameCStr);
+    env->ReleaseStringUTFChars(jTexName, texNameCStr);
 
-        CUtil::ConvertARGBtoRGBA(reinterpret_cast<uint32_t*>(directPtr), buffer, pxCount);
-
-        CCEF3D::EnqueuePendingTexture(id, buffer, pxCount, width, height, std::string(texName));
+    void* ptr = env->GetDirectBufferAddress(gBuffer);
+    if (!ptr) {
+        env->DeleteGlobalRef(gBuffer);
+        return;
     }
 
-    env->ReleaseStringUTFChars(jTexName, texName);
+    size_t pxCount = static_cast<size_t>(width) * static_cast<size_t>(height);
+
+    CGame::PostToMainThread([gBuffer, ptr, id, pxCount, width, height, texNameStr]() {
+        CCEF3D::EnqueuePendingTexture(
+                id,
+                static_cast<uint8_t*>(ptr),
+                pxCount,
+                width,
+                height,
+                texNameStr
+        );
+
+        JNIEnv* env = CJavaWrapper::GetEnv();
+        if (env && gBuffer) {
+            env->DeleteGlobalRef(gBuffer);
+        }
+    });
 }

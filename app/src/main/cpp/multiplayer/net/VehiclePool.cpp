@@ -55,7 +55,7 @@ void CVehiclePool::Process()
 		pVehicle->neon.Process();
 
         CSpeedometr::UpdateSpeed();
-        CSpeedometr::UpdateInfo();
+        // CSpeedometr::UpdateInfo(); // leak here
 
 		if (pVehicle->IsDriverLocalPlayer())
 			pVehicle->SetInvulnerable(false);

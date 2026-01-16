@@ -210,7 +210,8 @@ void CGUI::Render()
 	CDebugInfo::Draw();
 	RenderMechanicHook();
 	RenderPassengerButton();
-	RenderBackgroundHud();
+	// RenderBackgroundHud();
+    CHUD::RenderBackgroundRadar();
 //	CVehiclePipeMenu::Render();
   //  CGiftNotify::Render();
   

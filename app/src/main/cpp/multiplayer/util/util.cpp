@@ -488,3 +488,9 @@ void CUtil::ConvertARGBtoRGBA(const uint32_t* src, uint8_t* dst, size_t count) {
         dst[off + 3] = col.a;
     }
 }
+
+int CUtil::NextPow2(int v) {
+    int r = 1;
+    while (r < v) r <<= 1;
+    return r;
+}

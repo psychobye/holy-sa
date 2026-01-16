@@ -7,5 +7,5 @@
 
 class TextureUploadManager {
 public:
-    static RwTexture* CreateRwTextureFromRGBA(const char* name, uint8_t* rgba, int width, int height);
+    static RwTexture* CreateRwTextureFromBytes(uint8_t* src, int width, int height, bool srcIsRGBA);
 };

@@ -283,7 +283,7 @@ bool CLocalPlayer::Process()
 	bool needDrawableHud = true;
 	bool needDrawableChat = true;
 
-	if(CDialog::bIsShow || CDice::bIsShow || CTab::bIsShow || CAutoShop::bIsShow || CRadialMenu::bIsShow
+    if(CDialog::bIsShow || CDice::bIsShow || CTab::bIsShow || CAutoShop::bIsShow || CRadialMenu::bIsShow
 	   || CLuckyWheel::bIsShow || !m_pPlayerPed || CSkinShop::bIsShow ||
 	   CMedic::bIsShow || CInventory::bIsShow || !m_pPlayerPed->m_bIsSpawned || CObjectEditor::bIsToggle || CChip::bIsShow
 	   || CAucContainer::bIsShow || CAdminRecon::bIsShow || CHUD::bIsCamEditGui || CDailyReward::bIsShow ||
@@ -296,7 +296,7 @@ bool CLocalPlayer::Process()
 		needDrawableChat = false;
 	}
 
-	CHUD::toggleAll(needDrawableHud, needDrawableChat);
+	CHUD::toggleAll(needDrawableHud, needDrawableChat, true);
 
     if (m_pPlayerPed->GetActionTrigger() != ACTION_WASTED &&
         m_pPlayerPed->GetActionTrigger() != ACTION_DEATH &&

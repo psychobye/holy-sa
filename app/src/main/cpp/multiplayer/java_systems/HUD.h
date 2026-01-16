@@ -73,5 +73,7 @@ public:
     static void updateBars();
 
     static bool NeededRenderPassengerButton();
+
+    static void RenderBackgroundRadar();
 };
 

@@ -436,9 +436,10 @@ void CVehicle::InjectHooks() {
 
     CHook::Redirect("_ZN8CVehicle17DoTailLightEffectEiR7CMatrixhhjh", &DoTailLightEffect_hooked);
 
+    // !TODO: reverse DoHeadLightReflectionSingle and DoHeadLightReflection
     CHook::Redirect("_ZN8CVehicle25DoHeadLightReflectionTwinER7CMatrix", &DoHeadLightReflectionTwin_hooked);
 
-    CHook::Redirect("_ZN8CVehicle19ProcessSirenAndHornEb", &ProcessSirenAndHorn_hooked);
+    // CHook::Redirect("_ZN8CVehicle19ProcessSirenAndHornEb", &ProcessSirenAndHorn_hooked);
 
     CHook::InlineHook("_ZN8CVehicle15DoVehicleLightsER7CMatrixj", &CVehicle__DoVehicleLights_hook, &CVehicle__DoVehicleLights);
     CHook::Redirect("_ZN8CVehicle22GetVehicleLightsStatusEv", &CVehicle__GetVehicleLightsStatus_hook);

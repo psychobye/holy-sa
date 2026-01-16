@@ -17,9 +17,14 @@
 #include "util/patch.h"
 #include "../game/Entity/Ped/Ped.h"
 #include "game/Widgets/TouchInterface.h"
+#include "util/TextureUploadManager.h"
 
 extern CJavaWrapper *g_pJavaWrapper;
 extern CGUI* pGUI;
+
+RwTexture* radarBgTex = nullptr;
+int radarBgContentW = 0;
+int radarBgContentH = 0;
 
 bool        CHUD::bIsOnlyVisualOff = true;
 bool        CHUD::bIsShow = false;
@@ -75,7 +80,7 @@ void CHUD::toggleAll(bool toggle, bool chat, bool onlyVisual)
     bIsOnlyVisualOff = onlyVisual;
    // CGame::ToggleHUDElement(HUD_ELEMENT_BUTTONS, toggle);
 
-    CLocalPlayer::GetPlayerPed()->TogglePlayerControllable(toggle, true);
+    CLocalPlayer::GetPlayerPed()->TogglePlayerControllable(onlyVisual, true);
     CGame::ToggleHUDElement(HUD_ELEMENT_FPS, toggle);
 
     JNIEnv *env = g_pJavaWrapper->GetEnv();
@@ -531,7 +536,39 @@ void CNetGame::packetTorpedoButt(Packet* p)
     jmethodID method = env->GetMethodID(clazz, "toggleTorpedoButt", "(Z)V");
 
     env->CallVoidMethod(CHUD::thiz, method, value);
+}
 
+void CHUD::RenderBackgroundRadar()
+{
+    if (CHUD::bIsShow)
+    {
+        if (radarBgTex)
+        {
+            if (radarBgContentW <= 0 || radarBgContentH <= 0) {
+                ImGui::GetBackgroundDrawList()->AddImage(
+                        (ImTextureID)radarBgTex->raster,
+                        ImVec2(CHUD::radarBgPos1.x, CHUD::radarBgPos1.y),
+                        ImVec2(CHUD::radarBgPos2.x, CHUD::radarBgPos2.y)
+                );
+            } else {
+                int rwW = CUtil::NextPow2(radarBgContentW);
+                int rwH = CUtil::NextPow2(radarBgContentH);
+
+                float u = (float)radarBgContentW / (float)rwW;
+                float v = (float)radarBgContentH / (float)rwH;
+
+                float scale = 8.0f;
+
+                ImGui::GetBackgroundDrawList()->AddImage(
+                        (ImTextureID)radarBgTex->raster,
+                        ImVec2(CHUD::radarBgPos1.x - scale, CHUD::radarBgPos1.y - scale),
+                        ImVec2(CHUD::radarBgPos2.x + scale, CHUD::radarBgPos2.y + scale),
+                        ImVec2(0.0f, 0.0f),
+                        ImVec2(u, v)
+                );
+            }
+        }
+    }
 }
 
 extern "C"
@@ -556,4 +593,33 @@ Java_com_lit_game_gui_hud_HudManager_nativeSetRadarPos(JNIEnv *env, jobject thiz
     CHUD::radarPos.y = y1;
     CHUD::radarSize.x = width;
     CHUD::radarSize.y = height;
+}
+extern "C"
+JNIEXPORT void JNICALL
+Java_com_lit_game_gui_hud_HudManager_nativeSetRadarBg(
+        JNIEnv *env, jobject /*thiz*/, jobject buffer,
+        jint width, jint height
+) {
+    if (!buffer || width <= 0 || height <= 0) return;
+
+    jobject gBuffer = env->NewGlobalRef(buffer);
+    if (!gBuffer) return;
+
+    void* ptr = env->GetDirectBufferAddress(gBuffer);
+    if (!ptr) {
+        env->DeleteGlobalRef(gBuffer);
+        return;
+    }
+
+    CGame::PostToMainThread([gBuffer, ptr, width, height]() {
+        radarBgTex = TextureUploadManager::CreateRwTextureFromBytes(
+                (uint8_t*)ptr, width, height, false
+        );
+
+        radarBgContentW = width;
+        radarBgContentH = height;
+
+        JNIEnv* env = CJavaWrapper::GetEnv();
+        env->DeleteGlobalRef(gBuffer);
+    });
 }
