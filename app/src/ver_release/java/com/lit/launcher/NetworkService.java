@@ -1,6 +1,6 @@
 package com.lit.launcher;
 
-import static com.lit.launcher.config.Config.FILE_INFO_URL;
+import static com.holy.launcher.config.Config.FILE_INFO_URL;
 
 import com.lit.launcher.async.dto.response.GameFileInfoDto;
 import com.lit.launcher.async.dto.response.LatestVersionInfoDto;

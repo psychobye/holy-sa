@@ -52,7 +52,7 @@
 
     </LinearLayout>
 
-    <com.lit.launcher.ui.domain.ExpandableHeightGridView
+    <com.holy.launcher.ui.domain.ExpandableHeightGridView
         android:id="@+id/levelsView"
         android:layout_width="400dp"
         android:layout_height="wrap_content"

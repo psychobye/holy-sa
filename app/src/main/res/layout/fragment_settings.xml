@@ -59,7 +59,7 @@
         app:layout_constraintStart_toEndOf="@+id/gradStroke"
         app:layout_constraintTop_toTopOf="@+id/gradStroke" />
 
-    <com.lit.game.gui.util.FadingEdgeLayout
+    <com.holy.game.gui.util.FadingEdgeLayout
         android:id="@+id/chat_fade_box"
         android:layout_width="match_parent"
         android:layout_height="@dimen/_180sdp"
@@ -84,7 +84,7 @@
             android:paddingTop="@dimen/_10sdp"
             android:clipToPadding="false"/>
 
-    </com.lit.game.gui.util.FadingEdgeLayout>
+    </com.holy.game.gui.util.FadingEdgeLayout>
 
     <FrameLayout
         android:layout_width="match_parent"

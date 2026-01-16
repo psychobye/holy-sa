@@ -48,7 +48,7 @@ android {
         targetSdkVersion 36
 
         namespace 'com.lit.game'
-        applicationId 'com.lit.game'
+        applicationId 'com.holy.game'
         versionName "5.5"
         versionCode 5
 

@@ -94,7 +94,7 @@
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name="com.lit.launcher.ui.activity.PolicyActivity"
+            android:name="com.holy.launcher.ui.activity.PolicyActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/AppTheme.NoActionBar"/>

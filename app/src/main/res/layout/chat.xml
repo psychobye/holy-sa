@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.lit.game.gui.util.FadingEdgeLayout
+        <com.holy.game.gui.util.FadingEdgeLayout
             android:id="@+id/chat_fade_box"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_80sdp"
@@ -40,7 +40,7 @@
                 app:stackFromEnd="true">
 
             </androidx.recyclerview.widget.RecyclerView>
-        </com.lit.game.gui.util.FadingEdgeLayout>
+        </com.holy.game.gui.util.FadingEdgeLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/chat_input_layout"
