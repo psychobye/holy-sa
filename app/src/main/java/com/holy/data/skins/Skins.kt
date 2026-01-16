@@ -1,11 +1,11 @@
 package com.holy.data.skins
 
-import com.lit.game.EntitySnaps.TYPE_PED
-import com.lit.game.SnapShot
-import com.lit.game.gui.donate.Donate
-import com.lit.game.gui.donate.DonateItem
-import com.lit.game.gui.treasure.TreasureItem
-import com.lit.data.Rare
+import com.holy.game.EntitySnaps.TYPE_PED
+import com.holy.game.SnapShot
+import com.holy.game.gui.donate.Donate
+import com.holy.game.gui.donate.DonateItem
+import com.holy.game.gui.treasure.TreasureItem
+import com.holy.data.Rare
 
 object Skins {
     val list = arrayOf(

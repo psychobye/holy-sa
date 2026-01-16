@@ -14,7 +14,7 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.widget.FrameLayout;
 
-import com.lit.game.R;
+import com.holy.game.R;
 
 public class FadingEdgeLayout extends FrameLayout {
 

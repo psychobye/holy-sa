@@ -1,8 +1,8 @@
 package com.holy.game.gui.hud
 
 import android.widget.TextView
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
 import kotlin.math.abs
 import kotlin.math.ceil
 

@@ -1,8 +1,8 @@
 package com.holy.game.gui
 
 import android.view.View
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.AdminReconBinding
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.AdminReconBinding
 
 class AdminRecon : NativeGui<AdminReconBinding>(AdminReconBinding::class) {
 

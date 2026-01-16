@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.lit.game.R;
+import com.holy.game.R;
 
 import java.util.List;
 

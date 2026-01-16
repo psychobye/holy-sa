@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.viewbinding.ViewBinding
-import com.lit.game.NewUiList
-import com.lit.game.R
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.NewUiList
+import com.holy.game.R
+import com.holy.game.core.Samp.Companion.activity
 import kotlin.reflect.KClass
 
 

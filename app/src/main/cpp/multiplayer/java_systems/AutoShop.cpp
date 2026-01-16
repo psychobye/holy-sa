@@ -69,7 +69,7 @@ void CAutoShop::Packet_UpdateAutoShop(Packet *p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_AutoShop_native_1SendAutoShopButton(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_AutoShop_native_1SendAutoShopButton(JNIEnv *env, jobject thiz,
                                                                jint button_id) {
     uint8_t packet = ID_CUSTOM_RPC;
     uint8_t RPC = RPC_CLICK_AUTOSHOP;

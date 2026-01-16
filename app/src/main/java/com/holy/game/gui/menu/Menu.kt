@@ -10,16 +10,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.transition.MaterialSharedAxis
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.MenuActionDialogBinding
-import com.lit.game.gui.NativeGui
-import com.lit.game.gui.menu.fragment.MenuMainFragment
-import com.lit.game.gui.menu.fragment.MenuShopFragment
-import com.lit.game.gui.menu.fragment.MenuQuestFragment
-import com.lit.game.gui.quest.QuestViewModel
-import com.lit.game.gui.util.Utils.addPressScaleAnimation
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.MenuActionDialogBinding
+import com.holy.game.gui.NativeGui
+import com.holy.game.gui.menu.fragment.MenuMainFragment
+import com.holy.game.gui.menu.fragment.MenuShopFragment
+import com.holy.game.gui.menu.fragment.MenuQuestFragment
+import com.holy.game.gui.quest.QuestViewModel
+import com.holy.game.gui.util.Utils.addPressScaleAnimation
 
 // TODO: Google Avatar
 class Menu : NativeGui<MenuActionDialogBinding>(MenuActionDialogBinding::class) {

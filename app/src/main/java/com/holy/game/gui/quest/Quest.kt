@@ -2,7 +2,7 @@ package com.holy.game.gui.quest
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.core.Samp.Companion.activity
 
 class Quest {
 

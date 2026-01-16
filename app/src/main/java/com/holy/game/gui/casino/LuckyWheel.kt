@@ -1,10 +1,10 @@
 package com.holy.game.gui.casino
 
 import android.content.res.ColorStateList
-import com.lit.game.R
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.CasinoLuckyWheelBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.R
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.CasinoLuckyWheelBinding
+import com.holy.game.gui.NativeGui
 import java.text.SimpleDateFormat
 import java.util.Date
 

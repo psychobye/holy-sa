@@ -1,6 +1,6 @@
 package com.holy.game.gui.donate
 
-import com.lit.game.SnapShot
+import com.holy.game.SnapShot
 
 data class DonateItem(
     var name: String,

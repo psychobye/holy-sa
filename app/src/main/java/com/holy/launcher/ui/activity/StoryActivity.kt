@@ -9,7 +9,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
-import com.lit.game.R
+import com.holy.game.R
 
 class StoryActivity : AppCompatActivity() {
     private var progressStory: RoundCornerProgressBar? = null

@@ -2,9 +2,9 @@ package com.holy.launcher.async.task
 
 import android.app.Activity
 import android.content.Context
-import com.lit.launcher.async.dto.response.FileInfo
-import com.lit.launcher.async.dto.response.GameFileInfoDto
-import com.lit.launcher.utils.MainUtils
+import com.holy.launcher.async.dto.response.FileInfo
+import com.holy.launcher.async.dto.response.GameFileInfoDto
+import com.holy.launcher.utils.MainUtils
 import java.io.File
 import java.io.FileInputStream
 import java.io.ObjectInputStream

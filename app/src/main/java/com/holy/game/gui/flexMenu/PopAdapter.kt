@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.R
-import com.lit.game.databinding.PopItemButtonBinding
+import com.holy.game.R
+import com.holy.game.databinding.PopItemButtonBinding
 
 class PopAdapter(
     private val onClick: (PopItem) -> Unit

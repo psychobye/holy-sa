@@ -3,11 +3,11 @@ package com.holy.game.gui.magicStore
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.MagicStoreBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.MagicStoreBinding
+import com.holy.game.gui.NativeGui
 
 class MagicStore : NativeGui<MagicStoreBinding>(MagicStoreBinding::class), MagicStoreListener {
     val CLICK_BUY       = 0

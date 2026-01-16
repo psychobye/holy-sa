@@ -1,12 +1,12 @@
 package com.holy.game.gui
 
 import android.view.View
-import com.lit.game.EntitySnaps
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.core.TypewriterAnimation
-import com.lit.game.core.TypewriterAnimationListener
-import com.lit.game.databinding.MonologBinding
-import com.lit.data.skins.Skins
+import com.holy.game.EntitySnaps
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.core.TypewriterAnimation
+import com.holy.game.core.TypewriterAnimationListener
+import com.holy.game.databinding.MonologBinding
+import com.holy.data.skins.Skins
 
 class Monologue : NativeGui<MonologBinding>(MonologBinding::class) {
     private lateinit var typewriterAnimation: TypewriterAnimation

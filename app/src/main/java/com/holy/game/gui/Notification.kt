@@ -14,9 +14,9 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
 import com.rommansabbir.animationx.Bounce
 import com.rommansabbir.animationx.animationXBounce
 import kotlin.math.abs

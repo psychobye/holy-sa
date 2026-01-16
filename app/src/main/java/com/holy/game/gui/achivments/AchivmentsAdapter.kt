@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
-import com.lit.game.R
+import com.holy.game.R
 import com.skydoves.progressview.ProgressView
 
 interface AchivmentsListener {

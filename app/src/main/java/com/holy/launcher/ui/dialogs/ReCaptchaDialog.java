@@ -11,7 +11,7 @@ import android.webkit.WebViewClient;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.lit.game.R;
+import com.holy.game.R;
 import com.holy.launcher.config.Config;
 import com.holy.launcher.ui.dialogs.listener.OnDialogCloseListener;
 import com.holy.launcher.web.ReCaptchaWebInterface;

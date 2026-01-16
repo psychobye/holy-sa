@@ -52,9 +52,9 @@ import android.widget.FrameLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.lit.game.R;
-import com.lit.game.gui.DuelsHud;
-import com.lit.game.gui.Notification;
+import com.holy.game.R;
+import com.holy.game.gui.DuelsHud;
+import com.holy.game.gui.Notification;
 import com.holy.game.gui.dialogs.Dialog;
 
 import java.io.FileInputStream;

@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.R
-import com.lit.game.databinding.BattlepassMainItemBinding
-import com.lit.game.gui.util.Utils
-import com.lit.data.ItemHelper
+import com.holy.game.R
+import com.holy.game.databinding.BattlepassMainItemBinding
+import com.holy.game.gui.util.Utils
+import com.holy.data.ItemHelper
 
 interface BattlePassMainAdapterListener {
     fun BattlePassMainAdapter_OnClickGive(pos: Int)

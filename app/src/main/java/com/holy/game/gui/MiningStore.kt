@@ -1,8 +1,8 @@
 package com.holy.game.gui
 
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.MiningStoreBinding
-import com.lit.game.gui.util.Utils
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.MiningStoreBinding
+import com.holy.game.gui.util.Utils
 
 class MiningStore : NativeGui<MiningStoreBinding>(MiningStoreBinding::class) {
 

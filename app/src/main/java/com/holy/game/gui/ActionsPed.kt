@@ -1,8 +1,8 @@
 package com.holy.game.gui
 
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.EntityActionBinding
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.EntityActionBinding
 
 class ActionsPed : NativeGui<EntityActionBinding> (EntityActionBinding::class){
 

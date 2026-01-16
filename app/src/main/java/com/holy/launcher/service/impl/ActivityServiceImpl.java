@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lit.game.R;
+import com.holy.game.R;
 import com.holy.launcher.service.ActivityService;
 
 import java.io.File;

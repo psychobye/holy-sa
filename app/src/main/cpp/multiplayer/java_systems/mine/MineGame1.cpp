@@ -18,7 +18,7 @@ void CMineGame1::Show() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_MineGame1_nativeExit(JNIEnv *env, jobject thiz, jint exittype) {
+Java_com_holy_game_gui_MineGame1_nativeExit(JNIEnv *env, jobject thiz, jint exittype) {
     CMineGame1::DeleteCppObject();
 
     RakNet::BitStream bsSend;

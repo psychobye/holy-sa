@@ -8,9 +8,9 @@ import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.button.MaterialButton
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
 
 class FuelStation(type: Int, price1: Int, price2: Int, price3: Int, price4: Int, price5: Int, maxCount: Int) {
     private lateinit var fuelstation_1: ConstraintLayout

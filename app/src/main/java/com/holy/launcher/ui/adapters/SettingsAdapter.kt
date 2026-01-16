@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import android.widget.Switch
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.R
-import com.lit.launcher.domain.data.SettingsItem
+import com.holy.game.R
+import com.holy.launcher.domain.data.SettingsItem
 import com.holy.launcher.storage.NativeStorage
 
 class SettingsAdapter(

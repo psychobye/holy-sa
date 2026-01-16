@@ -1,10 +1,10 @@
 package com.holy.game.gui
 
-import com.lit.game.EntitySnaps
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.TechnicalInspectionBinding
-import com.lit.data.vehicles.Vehicles
+import com.holy.game.EntitySnaps
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.TechnicalInspectionBinding
+import com.holy.data.vehicles.Vehicles
 
 class TechIspect : NativeGui<TechnicalInspectionBinding>(TechnicalInspectionBinding::class) {
     private external fun sendClick()

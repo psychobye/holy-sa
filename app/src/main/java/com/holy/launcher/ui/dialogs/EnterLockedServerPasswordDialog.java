@@ -12,7 +12,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AlertDialog;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.lit.game.R;
+import com.holy.game.R;
 import com.holy.launcher.ui.dialogs.listener.OnDialogCloseListener;
 
 import org.apache.commons.lang3.StringUtils;

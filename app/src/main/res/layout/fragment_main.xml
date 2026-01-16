@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/main_bg">
 
-    <com.lit.game.gui.util.GradientStrokeTextView
+    <com.holy.game.gui.util.GradientStrokeTextView
         android:id="@+id/play"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

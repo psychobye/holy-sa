@@ -10,7 +10,7 @@ import android.view.WindowManager;
 
 import androidx.fragment.app.DialogFragment;
 
-import com.lit.game.R;
+import com.holy.game.R;
 
 public class DialogProgress extends DialogFragment {
 

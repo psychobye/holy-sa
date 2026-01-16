@@ -3,12 +3,12 @@ package com.holy.game.gui.inventory
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.GridLayoutManager
-import com.lit.game.EntitySnaps
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.InventoryBinding
-import com.lit.game.gui.NativeGui
-import com.lit.data.Rare
-import com.lit.data.skins.Skins
+import com.holy.game.EntitySnaps
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.InventoryBinding
+import com.holy.game.gui.NativeGui
+import com.holy.data.Rare
+import com.holy.data.skins.Skins
 
 class Inventory : InventoryListener, NativeGui<InventoryBinding>(InventoryBinding::class) {
     private val MATRIX_NONE         = 0

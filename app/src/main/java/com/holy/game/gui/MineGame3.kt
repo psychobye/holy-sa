@@ -8,10 +8,10 @@ import android.view.ViewStub
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.gui.FurnitureFactory.Companion.getLocationView
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.gui.FurnitureFactory.Companion.getLocationView
 import com.skydoves.progressview.ProgressView
 import java.util.Random
 import java.util.Timer

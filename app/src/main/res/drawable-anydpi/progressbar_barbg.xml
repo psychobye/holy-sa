@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:aapt="http://schemas.android.com/aapt">
+    xmlns:android="http://schemas.android.com/apk/res/android" >
     <item>
         <shape>
-            <corners
-                android:radius="12.0dip" />
-            <gradient
-                android:startColor="#90000000"
-                android:centerColor="#90000000"
-                android:endColor="#90000000"
-                android:type="linear"/>
+            <corners android:radius="@dimen/_12sdp" />
+            <solid android:color="@color/gray_69" />
+            <stroke android:color="@color/black" android:width="@dimen/_2sdp" />
         </shape>
     </item>
 </layer-list>

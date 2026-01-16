@@ -13,7 +13,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.lit.game.R
+import com.holy.game.R
 
 class LauncherNotification(private val rootView: View, private val activity: Activity) {
     private val constraintLayout: ConstraintLayout =

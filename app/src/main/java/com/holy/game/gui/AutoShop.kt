@@ -5,9 +5,9 @@ import android.view.View
 import android.view.ViewStub
 import android.widget.Button
 import android.widget.TextView
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
 
 class AutoShop {
     private val AUTOSHOP_BUTTON_COLOR_LEFT = 1

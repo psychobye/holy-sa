@@ -192,7 +192,7 @@ extern "C"
 {
 
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_ChatFontSizeChanged(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_ChatFontSizeChanged(JNIEnv *env,
 																				   jobject thiz,
 																				   jint size) {
 	CSettings::m_Settings.iChatFontSize = size;
@@ -201,13 +201,13 @@ Java_com_lit_game_core_DialogClientSettingsCommonFragment_ChatFontSizeChanged(JN
 }
 
 JNIEXPORT jboolean JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_getNativeDamageInformer(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_getNativeDamageInformer(JNIEnv *env,
 																					   jobject thiz) {
 	return CSettings::m_Settings.iIsEnableDamageInformer;
 }
 
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeDamageInformer(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_setNativeDamageInformer(JNIEnv *env,
 																					   jobject thiz,
 																					   jboolean state) {
 	CSettings::m_Settings.iIsEnableDamageInformer = state;
@@ -216,7 +216,7 @@ Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeDamageInforme
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeShow3dText(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_setNativeShow3dText(JNIEnv *env,
                                                                                    jobject thiz,
                                                                                    jboolean state) {
 	CSettings::m_Settings.iIsEnable3dTextInVehicle = state;
@@ -224,13 +224,13 @@ Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeShow3dText(JN
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_getNativeShow3dText(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_getNativeShow3dText(JNIEnv *env,
 																				   jobject thiz) {
 	return CSettings::m_Settings.iIsEnable3dTextInVehicle;
 }
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_getNativeFpsLimit(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_getNativeFpsLimit(JNIEnv *env,
                                                                                  jobject thiz) {
 	return CSettings::m_Settings.iFPS;
 }
@@ -239,7 +239,7 @@ extern void ApplyFPSPatch(uint8_t fps);
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeFpsCount(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_setNativeFpsCount(JNIEnv *env,
 																				 jobject thiz,
 																				 jint fps) {
 	CSettings::m_Settings.iFPS = fps;
@@ -248,7 +248,7 @@ Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeFpsCount(JNIE
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeFpsCounterSettings(
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_setNativeFpsCounterSettings(
         JNIEnv *env, jobject thiz, jboolean b) {
 	CSettings::m_Settings.szDebug = b;
 
@@ -256,7 +256,7 @@ Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeFpsCounterSet
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeOutfitGunsSettings(
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_setNativeOutfitGunsSettings(
 		JNIEnv *env, jobject thiz, jboolean b) {
 	CSettings::m_Settings.iOutfitGuns = b;
 
@@ -264,18 +264,18 @@ Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeOutfitGunsSet
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettings_onSettingsWindowDefaults(JNIEnv *env, jobject thiz,
+Java_com_holy_game_core_DialogClientSettings_onSettingsWindowDefaults(JNIEnv *env, jobject thiz,
 																		  jint category) {
 	CSettings::toDefaults(category);
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettings_onSettingsWindowSave(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_core_DialogClientSettings_onSettingsWindowSave(JNIEnv *env, jobject thiz) {
 	CSettings::save();
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeHpArmourText(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_setNativeHpArmourText(JNIEnv *env,
 																					 jobject thiz,
 																					 jboolean b) {
 	CSettings::m_Settings.iHPArmourText = b;
@@ -284,33 +284,33 @@ Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeHpArmourText(
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_getNativeFpsCounterSettings(
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_getNativeFpsCounterSettings(
 		JNIEnv *env, jobject thiz) {
 	return CSettings::m_Settings.szDebug;
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_getNativeOutfitGunsSettings(
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_getNativeOutfitGunsSettings(
 		JNIEnv *env, jobject thiz) {
 	return CSettings::m_Settings.iOutfitGuns;
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_getNativeHpArmourText(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_getNativeHpArmourText(JNIEnv *env,
 																					 jobject thiz) {
 	return CSettings::m_Settings.iHPArmourText;
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_setNativeTexts(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_setNativeTexts(JNIEnv *env,
                                                                               jobject thiz,
                                                                               jboolean b) {
 	CSettings::m_Settings.i3dTextsDisable = b;
 }
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_lit_game_core_DialogClientSettingsCommonFragment_getNativeTexts(JNIEnv *env,
+Java_com_holy_game_core_DialogClientSettingsCommonFragment_getNativeTexts(JNIEnv *env,
 																			  jobject thiz) {
 	return CSettings::m_Settings.i3dTextsDisable;
 }

@@ -15,8 +15,8 @@ import android.widget.TextView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lit.game.R;
-import com.lit.game.gui.util.Utils;
+import com.holy.game.R;
+import com.holy.game.gui.util.Utils;
 
 import java.util.ArrayList;
 

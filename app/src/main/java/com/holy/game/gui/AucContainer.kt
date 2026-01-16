@@ -1,11 +1,11 @@
 package com.holy.game.gui
 
-import com.lit.game.EntitySnaps
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.AucContainerBinding
-import com.lit.data.skins.Skins
-import com.lit.data.vehicles.Vehicles
+import com.holy.game.EntitySnaps
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.AucContainerBinding
+import com.holy.data.skins.Skins
+import com.holy.data.vehicles.Vehicles
 
 class AucContainer : NativeGui<AucContainerBinding>(AucContainerBinding::class){
 

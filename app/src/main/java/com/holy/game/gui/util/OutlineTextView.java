@@ -5,7 +5,7 @@ import android.graphics.Canvas;
 
 import androidx.annotation.NonNull;
 
-import com.lit.game.R;
+import com.holy.game.R;
 
 public class OutlineTextView extends androidx.appcompat.widget.AppCompatTextView {
     public OutlineTextView(@NonNull Context context) {

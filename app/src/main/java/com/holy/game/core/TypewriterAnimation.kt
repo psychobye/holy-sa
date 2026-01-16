@@ -3,7 +3,7 @@ package com.holy.game.core
 import android.os.Handler
 import android.os.Looper
 import android.widget.TextView
-import com.lit.game.gui.util.Utils
+import com.holy.game.gui.util.Utils
 import kotlin.random.Random
 
 interface TypewriterAnimationListener {

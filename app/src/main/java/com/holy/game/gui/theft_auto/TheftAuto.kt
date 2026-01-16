@@ -4,11 +4,11 @@ import android.os.CountDownTimer
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.TheftAutoBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.TheftAutoBinding
+import com.holy.game.gui.NativeGui
 import com.holy.game.gui.adapters.TheftAutoLevelsAdapter
 
 class TheftAuto : NativeGui<TheftAutoBinding>(TheftAutoBinding::class){

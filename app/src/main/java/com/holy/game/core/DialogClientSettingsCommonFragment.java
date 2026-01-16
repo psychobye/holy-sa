@@ -18,7 +18,7 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
-import com.lit.game.R;
+import com.holy.game.R;
 import com.holy.game.gui.util.FadingEdgeLayout;
 import com.holy.launcher.storage.Storage;
 import com.nvidia.devtech.NvEventQueueActivity;

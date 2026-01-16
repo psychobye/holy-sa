@@ -1,8 +1,8 @@
 package com.holy.game.gui.battle_pass
 
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.BattlepassBuyBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.BattlepassBuyBinding
+import com.holy.game.gui.NativeGui
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale

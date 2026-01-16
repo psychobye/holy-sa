@@ -16,140 +16,184 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/hud_bg"
-                android:layout_width="@dimen/_85sdp"
-                android:layout_height="@dimen/_85sdp"
-                android:layout_marginEnd="@dimen/_14sdp"
-                android:alpha="1"
-                android:src="@drawable/hud_bg"
-                app:layout_constraintBottom_toBottomOf="@+id/hud_down_layout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/hud_down_layout" />
+             <androidx.constraintlayout.widget.ConstraintLayout
+                 android:id="@+id/hud_hp_layout"
+                 android:layout_width="@dimen/_95sdp"
+                 android:layout_height="@dimen/_15sdp"
+                 android:layout_marginEnd="@dimen/_120sdp"
+                 android:background="@drawable/progressbar_barbg"
+                 app:layout_constraintBottom_toBottomOf="@+id/frameLayout3"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toTopOf="@+id/frameLayout3">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/hud_up_layout"
-                android:layout_width="@dimen/_125sdp"
-                android:layout_height="@dimen/_15sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@drawable/hud_up"
-                app:layout_constraintStart_toStartOf="@+id/hud_down_layout"
-                app:layout_constraintTop_toTopOf="parent">
+                 <ProgressBar
+                     android:id="@+id/healthProgress"
+                     style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                     android:layout_width="0dp"
+                     android:layout_height="0dp"
+                     android:layout_margin="@dimen/_2sdp"
+                     android:indeterminate="false"
+                     android:progress="50"
+                     android:progressDrawable="@drawable/progressbar_healthbar"
+                     android:progressTint="@color/red_d3"
+                     app:layout_constraintBottom_toBottomOf="parent"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintHorizontal_bias="0.0"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/hud_icon_ruble"
-                    android:layout_width="@dimen/_6sdp"
-                    android:layout_height="@dimen/_7sdp"
-                    android:layout_marginStart="@dimen/_10sdp"
-                    android:src="@drawable/icon_ruble"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                 <TextView
+                     android:id="@+id/healthText"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginBottom="@dimen/_2sdp"
+                     android:fontFamily="@font/visby_round_cf_extra_bold"
+                     android:text="99"
+                     android:textColor="@color/white"
+                     android:textSize="@dimen/_6sdp"
+                     android:visibility="gone"
+                     app:layout_constraintBottom_toBottomOf="parent"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toTopOf="parent"
+                     app:layout_constraintVertical_bias="0.0" />
+             </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/hud_money_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/montserrat_bold"
-                    android:includeFontPadding="false"
-                    android:text="0"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/hud_icon_ruble"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/hud_icon_ruble" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+             <ImageView
+                 android:id="@+id/hud_bg"
+                 android:layout_width="@dimen/_85sdp"
+                 android:layout_height="@dimen/_85sdp"
+                 android:layout_marginEnd="@dimen/_10sdp"
+                 android:layout_marginTop="@dimen/_10sdp"
+                 android:alpha="1"
+                 android:src="@drawable/hud_bg"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/hud_down_layout"
-                android:layout_width="@dimen/_105sdp"
-                android:layout_height="@dimen/_80sdp"
-                android:layout_marginTop="@dimen/_1sdp"
-                android:layout_marginEnd="@dimen/_77sdp"
-                android:background="@drawable/hud_down"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hud_up_layout">
+             <androidx.constraintlayout.widget.ConstraintLayout
+                 android:id="@+id/hud_up_layout"
+                 android:layout_width="@dimen/_125sdp"
+                 android:layout_height="@dimen/_15sdp"
+                 android:background="@drawable/hud_up"
+                 android:visibility="invisible"
+                 app:layout_constraintStart_toStartOf="@+id/hud_down_layout"
+                 app:layout_constraintTop_toTopOf="parent">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/hud_satiety_layout"
-                    android:layout_width="@dimen/_22sdp"
-                    android:layout_height="@dimen/_10sdp"
-                    android:layout_marginStart="@dimen/_2sdp"
-                    android:layout_marginBottom="@dimen/_3sdp"
-                    android:background="@drawable/progressbar_barbg"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toTopOf="@+id/hud_weapon"
-                    app:layout_constraintEnd_toEndOf="@+id/hud_weapon"
-                    app:layout_constraintStart_toStartOf="@+id/hud_weapon">
+                 <ImageView
+                     android:id="@+id/hud_icon_ruble"
+                     android:layout_width="@dimen/_6sdp"
+                     android:layout_height="@dimen/_7sdp"
+                     android:layout_marginStart="@dimen/_10sdp"
+                     android:src="@drawable/icon_ruble"
+                     app:layout_constraintBottom_toBottomOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toTopOf="parent" />
 
-                    <ProgressBar
-                        android:id="@+id/satietyProgress"
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_margin="@dimen/_1sdp"
-                        android:indeterminate="false"
-                        android:progress="50"
-                        android:progressDrawable="@drawable/progressbar_armorbar"
-                        android:progressTint="#D7983F"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                 <TextView
+                     android:id="@+id/hud_money_textview"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:fontFamily="@font/montserrat_bold"
+                     android:includeFontPadding="false"
+                     android:text="0"
+                     android:textColor="@color/white"
+                     android:textSize="@dimen/_8sdp"
+                     app:layout_constraintBottom_toBottomOf="@+id/hud_icon_ruble"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintStart_toStartOf="parent"
+                     app:layout_constraintTop_toTopOf="@+id/hud_icon_ruble" />
+             </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <TextView
-                        android:id="@+id/satietyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/visby_round_cf_extra_bold"
-                        android:text="99"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.476"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.666" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+             <androidx.constraintlayout.widget.ConstraintLayout
+                 android:id="@+id/hud_down_layout"
+                 android:layout_width="@dimen/_105sdp"
+                 android:layout_height="@dimen/_80sdp"
+                 android:layout_marginTop="@dimen/_1sdp"
+                 android:layout_marginEnd="@dimen/_77sdp"
+                 android:background="@drawable/hud_down"
+                 android:visibility="invisible"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintTop_toBottomOf="@+id/hud_up_layout">
 
-                <ImageView
-                    android:id="@+id/menuButton"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_30sdp"
-                    android:layout_marginTop="@dimen/_27sdp"
-                    android:layout_marginEnd="@dimen/_50sdp"
-                    android:src="@drawable/hud_menu"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                 <androidx.constraintlayout.widget.ConstraintLayout
+                     android:id="@+id/hud_satiety_layout"
+                     android:layout_width="@dimen/_22sdp"
+                     android:layout_height="@dimen/_10sdp"
+                     android:layout_marginStart="@dimen/_2sdp"
+                     android:layout_marginBottom="@dimen/_3sdp"
+                     android:background="@drawable/progressbar_barbg"
+                     android:visibility="visible"
+                     app:layout_constraintBottom_toTopOf="@+id/hud_weapon"
+                     app:layout_constraintEnd_toEndOf="@+id/hud_weapon"
+                     app:layout_constraintStart_toStartOf="@+id/hud_weapon">
 
-                <ImageView
-                    android:id="@+id/hud_weapon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginEnd="@dimen/_24sdp"
-                    android:layout_marginBottom="@dimen/_7sdp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/weapon_0"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                     <ProgressBar
+                         android:id="@+id/satietyProgress"
+                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                         android:layout_width="0dp"
+                         android:layout_height="0dp"
+                         android:layout_margin="@dimen/_1sdp"
+                         android:indeterminate="false"
+                         android:progress="50"
+                         android:progressDrawable="@drawable/progressbar_armorbar"
+                         android:progressTint="#D7983F"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/hud_ammo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_30sdp"
-                    android:layout_marginBottom="@dimen/_2sdp"
-                    android:fontFamily="@font/din_pro_bold"
-                    android:text="0/0"
-                    android:textColor="#FFFFFF"
-                    android:textSize="8sp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                     <TextView
+                         android:id="@+id/satietyText"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:fontFamily="@font/visby_round_cf_extra_bold"
+                         android:text="99"
+                         android:textColor="@color/white"
+                         android:textSize="@dimen/_6sdp"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintHorizontal_bias="0.476"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent"
+                         app:layout_constraintVertical_bias="0.666" />
+                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                 <ImageView
+                     android:id="@+id/menuButton1"
+                     android:layout_width="@dimen/_50sdp"
+                     android:layout_height="@dimen/_30sdp"
+                     android:layout_marginTop="@dimen/_27sdp"
+                     android:layout_marginEnd="@dimen/_50sdp"
+                     android:src="@drawable/hud_menu"
+                     app:layout_constraintEnd_toEndOf="parent"
+                     app:layout_constraintTop_toTopOf="parent" />
+
+                 <ImageView
+                     android:id="@+id/hud_weapon"
+                     android:layout_width="wrap_content"
+                     android:layout_height="@dimen/_28sdp"
+                     android:layout_marginEnd="@dimen/_24sdp"
+                     android:layout_marginBottom="@dimen/_7sdp"
+                     android:adjustViewBounds="true"
+                     android:src="@drawable/weapon_0"
+                     app:layout_constraintBottom_toBottomOf="parent"
+                     app:layout_constraintEnd_toEndOf="parent" />
+
+                 <TextView
+                     android:id="@+id/hud_ammo"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_marginEnd="@dimen/_30sdp"
+                     android:layout_marginBottom="@dimen/_2sdp"
+                     android:fontFamily="@font/din_pro_bold"
+                     android:text="0/0"
+                     android:textColor="#FFFFFF"
+                     android:textSize="8sp"
+                     android:visibility="visible"
+                     app:layout_constraintBottom_toBottomOf="parent"
+                     app:layout_constraintEnd_toEndOf="parent" />
+
+             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/hud_stars"
@@ -234,24 +278,26 @@
                 app:layout_constraintStart_toEndOf="@+id/hud_money_textview"
                 app:layout_constraintTop_toTopOf="@+id/hud_money_textview" />
 
-            <ImageView
-                android:id="@+id/hud_gpsactive"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="5dp"
-                android:src="@drawable/gps_active"
-                app:layout_constraintStart_toStartOf="@+id/hud_greenzone"
-                app:layout_constraintTop_toBottomOf="@+id/hud_greenzone" />
+             <ImageView
+                 android:id="@+id/hud_gpsactive"
+                 android:layout_width="100dp"
+                 android:layout_height="30dp"
+                 android:layout_marginTop="5dp"
+                 android:src="@drawable/gps_active"
+                 android:visibility="invisible"
+                 app:layout_constraintStart_toStartOf="@+id/hud_greenzone"
+                 app:layout_constraintTop_toBottomOf="@+id/hud_greenzone" />
 
-            <ImageView
-                android:id="@+id/hud_greenzone"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginBottom="150dp"
-                android:src="@drawable/greenzone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+             <ImageView
+                 android:id="@+id/hud_greenzone"
+                 android:layout_width="100dp"
+                 android:layout_height="30dp"
+                 android:layout_marginStart="5dp"
+                 android:layout_marginBottom="150dp"
+                 android:src="@drawable/greenzone"
+                 android:visibility="invisible"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintStart_toStartOf="parent" />
 
             <View
                 android:id="@+id/view2"
@@ -278,101 +324,58 @@
                 app:layout_constraintStart_toStartOf="@+id/view2"
                 app:layout_constraintTop_toTopOf="@+id/view2" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/hud_center_bg"
-                android:layout_width="@dimen/_75sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_3sdp"
-                android:layout_marginEnd="@dimen/_14sdp"
-                app:layout_constraintEnd_toEndOf="@+id/hud_down_layout"
-                app:layout_constraintStart_toStartOf="@+id/hud_down_layout"
-                app:layout_constraintTop_toTopOf="@+id/hud_down_layout">
+             <androidx.constraintlayout.widget.ConstraintLayout
+                 android:id="@+id/hud_center_bg"
+                 android:layout_width="@dimen/_75sdp"
+                 android:layout_height="@dimen/_25sdp"
+                 android:layout_marginTop="@dimen/_3sdp"
+                 android:layout_marginEnd="@dimen/_14sdp"
+                 android:visibility="invisible"
+                 app:layout_constraintEnd_toEndOf="@+id/hud_down_layout"
+                 app:layout_constraintStart_toStartOf="@+id/hud_down_layout"
+                 app:layout_constraintTop_toTopOf="@+id/hud_down_layout">
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/hud_armor_layout"
-                    android:layout_width="@dimen/_65sdp"
-                    android:layout_height="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_3sdp"
-                    android:background="@drawable/progressbar_barbg"
-                    app:layout_constraintEnd_toEndOf="@+id/hud_hp_layout"
-                    app:layout_constraintStart_toStartOf="@+id/hud_hp_layout"
-                    app:layout_constraintTop_toBottomOf="@+id/hud_hp_layout">
+                 <androidx.constraintlayout.widget.ConstraintLayout
+                     android:id="@+id/hud_armor_layout"
+                     android:layout_width="@dimen/_65sdp"
+                     android:layout_height="@dimen/_8sdp"
+                     android:background="@drawable/progressbar_barbg"
+                     tools:layout_editor_absoluteX="6dp"
+                     tools:layout_editor_absoluteY="17dp">
 
-                    <ProgressBar
-                        android:id="@+id/armorProgress"
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_margin="@dimen/_1sdp"
-                        android:indeterminate="false"
-                        android:progress="50"
-                        android:progressDrawable="@drawable/progressbar_armorbar"
-                        android:progressTint="#5DA6D3"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                     <ProgressBar
+                         android:id="@+id/armorProgress"
+                         style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                         android:layout_width="0dp"
+                         android:layout_height="0dp"
+                         android:layout_margin="@dimen/_1sdp"
+                         android:indeterminate="false"
+                         android:progress="50"
+                         android:progressDrawable="@drawable/progressbar_armorbar"
+                         android:progressTint="#5DA6D3"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/armorText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_2sdp"
-                        android:fontFamily="@font/visby_round_cf_extra_bold"
-                        android:text="99"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.493"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
+                     <TextView
+                         android:id="@+id/armorText"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:layout_marginBottom="@dimen/_2sdp"
+                         android:fontFamily="@font/visby_round_cf_extra_bold"
+                         android:text="99"
+                         android:textColor="@color/white"
+                         android:textSize="@dimen/_6sdp"
+                         app:layout_constraintBottom_toBottomOf="parent"
+                         app:layout_constraintEnd_toEndOf="parent"
+                         app:layout_constraintHorizontal_bias="0.493"
+                         app:layout_constraintStart_toStartOf="parent"
+                         app:layout_constraintTop_toTopOf="parent"
+                         app:layout_constraintVertical_bias="0.0" />
+                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/hud_hp_layout"
-                    android:layout_width="@dimen/_75sdp"
-                    android:layout_height="@dimen/_8sdp"
-                    android:layout_marginTop="@dimen/_2sdp"
-                    android:background="@drawable/progressbar_barbg"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <ProgressBar
-                        android:id="@+id/healthProgress"
-                        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_margin="@dimen/_1sdp"
-                        android:indeterminate="false"
-                        android:progress="50"
-                        android:progressDrawable="@drawable/progressbar_healthbar"
-                        android:progressTint="#D35D5D"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/healthText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/_2sdp"
-                        android:fontFamily="@font/visby_round_cf_extra_bold"
-                        android:text="99"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/_6sdp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -583,7 +586,7 @@
                 android:id="@+id/camera_mode_butt"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_25sdp"
-                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginTop="@dimen/_100sdp"
                 android:layout_marginEnd="@dimen/_10sdp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackgroundBorderless"
@@ -678,7 +681,69 @@
                 app:layout_constraintTop_toBottomOf="@+id/target_notify_exit" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+             <FrameLayout
+                 android:id="@+id/frameLayout2"
+                 android:layout_width="@dimen/_35sdp"
+                 android:layout_height="@dimen/_35sdp"
+                 android:layout_marginStart="@dimen/_25sdp"
+                 android:layout_marginTop="@dimen/_10sdp"
+                 android:background="@drawable/rb_circle"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent">
+
+                 <ImageView
+                     android:id="@+id/menuButton"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center"
+                     android:padding="@dimen/_10sdp"
+                     android:src="@drawable/ic_star_3" />
+
+             </FrameLayout>
+
+             <FrameLayout
+                 android:id="@+id/frameLayout3"
+                 android:layout_width="@dimen/_70sdp"
+                 android:layout_height="@dimen/_35sdp"
+                 android:layout_marginStart="@dimen/_5sdp"
+                 android:background="@drawable/rb_semicircle"
+                 app:layout_constraintStart_toEndOf="@+id/frameLayout2"
+                 app:layout_constraintTop_toTopOf="@+id/frameLayout2">
+
+                 <LinearLayout
+                     android:layout_width="match_parent"
+                     android:layout_height="match_parent"
+                     android:gravity="center_vertical"
+                     android:orientation="horizontal"
+                     android:padding="@dimen/_9sdp"
+                     android:paddingStart="@dimen/_5sdp"
+                     android:paddingEnd="@dimen/_5sdp"
+                     android:weightSum="2">
+
+                     <ImageView
+                         android:layout_width="wrap_content"
+                         android:layout_height="match_parent"
+                         android:layout_weight="1"
+                         android:scaleType="centerInside"
+                         android:src="@drawable/ic_menu" />
+
+                     <View
+                         android:layout_width="@dimen/_13sdp"
+                         android:layout_height="0dp" />
+
+                     <ImageView
+                         android:id="@+id/btn_chat"
+                         android:layout_width="wrap_content"
+                         android:layout_height="match_parent"
+                         android:layout_weight="1"
+                         android:scaleType="centerInside"
+                         android:src="@drawable/ic_chat" />
+
+                 </LinearLayout>
+
+             </FrameLayout>
+
+         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

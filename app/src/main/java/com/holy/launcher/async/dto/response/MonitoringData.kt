@@ -2,7 +2,7 @@ package com.holy.launcher.async.dto.response
 
 import android.app.Activity
 import android.content.Context
-import com.lit.launcher.NetworkService
+import com.holy.launcher.NetworkService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

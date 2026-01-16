@@ -1,9 +1,9 @@
 package com.holy.game.gui
 
 import android.view.View
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.GiftNotifyBinding
-import com.lit.data.Rare
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.GiftNotifyBinding
+import com.holy.data.Rare
 import nl.dionsegijn.konfetti.core.Party
 import nl.dionsegijn.konfetti.core.Position
 import nl.dionsegijn.konfetti.core.emitter.Emitter

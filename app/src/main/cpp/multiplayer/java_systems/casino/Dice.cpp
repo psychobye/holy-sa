@@ -74,7 +74,7 @@ void CNetGame::packetDice(Packet *p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_casino_Dice_nativeSendButton(JNIEnv *env, jobject thiz, jint butt_id) {
+Java_com_holy_game_gui_casino_Dice_nativeSendButton(JNIEnv *env, jobject thiz, jint butt_id) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8)    ID_CUSTOM_RPC);
     bsSend.Write((uint8)    RPC_SHOW_DICE_TABLE);

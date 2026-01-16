@@ -18,6 +18,6 @@ void CBattlePassBuy::Show(jlong endDate) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_battle_1pass_BattlePassBuy_nativeOnClosed(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_battle_1pass_BattlePassBuy_nativeOnClosed(JNIEnv *env, jobject thiz) {
     CBattlePassBuy::DeleteCppObject();
 }

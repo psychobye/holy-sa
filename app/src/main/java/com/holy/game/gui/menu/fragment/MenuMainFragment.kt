@@ -9,17 +9,17 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.lit.data.skins.Skins
-import com.lit.game.EntitySnaps
-import com.lit.game.R
-import com.lit.game.SnapShot
-import com.lit.game.databinding.FragmentMenuMainBinding
-import com.lit.game.gui.PlayerInfo
-import com.lit.game.gui.menu.MenuController
-import com.lit.game.gui.menu.MenuViewModel
-import com.lit.game.gui.quest.QuestStatus
-import com.lit.game.gui.quest.QuestViewModel
-import com.lit.game.gui.util.Utils.addPressScaleAnimation
+import com.holy.data.skins.Skins
+import com.holy.game.EntitySnaps
+import com.holy.game.R
+import com.holy.game.SnapShot
+import com.holy.game.databinding.FragmentMenuMainBinding
+import com.holy.game.gui.PlayerInfo
+import com.holy.game.gui.menu.MenuController
+import com.holy.game.gui.menu.MenuViewModel
+import com.holy.game.gui.quest.QuestStatus
+import com.holy.game.gui.quest.QuestViewModel
+import com.holy.game.gui.util.Utils.addPressScaleAnimation
 import com.mikhaellopez.circularprogressbar.CircularProgressBar
 
 class MenuMainFragment : Fragment(R.layout.fragment_menu_main) {

@@ -1,7 +1,7 @@
 package com.holy.game.gui
 
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.RaceBinding
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.RaceBinding
 
 class Race : NativeGui<RaceBinding>(RaceBinding::class) {
 

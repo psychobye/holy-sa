@@ -1,6 +1,6 @@
 package com.holy.data.acs
 
-import com.lit.data.Rare
+import com.holy.data.Rare
 
 class Accesory(
     var name: String,

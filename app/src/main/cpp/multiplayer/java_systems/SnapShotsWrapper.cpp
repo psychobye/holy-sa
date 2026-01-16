@@ -191,7 +191,7 @@ jbyteArray SnapShotsWrapper::ConvertTexToBitMapBytes(RwTexture* tex, bool needCr
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_EntitySnaps_nativeEntitySnapAddToQueue(JNIEnv *env, jobject thiz, jobject imageview, jint type, jint model_id, jfloat rot_x, jfloat rot_y, jfloat rot_z, jfloat x_offset, jfloat y_offset, jfloat z_offset) {
+Java_com_holy_game_EntitySnaps_nativeEntitySnapAddToQueue(JNIEnv *env, jobject thiz, jobject imageview, jint type, jint model_id, jfloat rot_x, jfloat rot_y, jfloat rot_z, jfloat x_offset, jfloat y_offset, jfloat z_offset) {
     std::lock_guard<std::mutex> lock(SnapShotsWrapper::queueMutex);
 
     SnapShotsWrapper::queue.push({
@@ -214,7 +214,7 @@ void SnapShotsWrapper::SetToImageView(jbyteArray bytes, int width, int height, j
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_EntitySnaps_nativePlateSnapAddToQueue(JNIEnv *env, jobject thiz, jobject image_view, jint type, jstring jnumber, jstring jregion) {
+Java_com_holy_game_EntitySnaps_nativePlateSnapAddToQueue(JNIEnv *env, jobject thiz, jobject image_view, jint type, jstring jnumber, jstring jregion) {
 
     auto item = SnapShotsWrapper::QueueItem(env->NewGlobalRef(image_view), SnapShotsWrapper::Types::PLATE, static_cast<ePlateType>(type));
 

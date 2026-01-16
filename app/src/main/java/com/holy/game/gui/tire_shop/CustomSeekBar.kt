@@ -1,8 +1,8 @@
 package com.holy.game.gui.tire_shop
 
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.CustomSliderBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.CustomSliderBinding
+import com.holy.game.gui.NativeGui
 import kotlin.math.roundToInt
 
 interface CustomSeekListener {

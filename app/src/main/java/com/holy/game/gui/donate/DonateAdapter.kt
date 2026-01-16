@@ -9,10 +9,10 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
-import com.lit.game.EntitySnaps
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.EntitySnaps
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
 
 class DonateAdapter internal constructor(var donate: Donate) : RecyclerView.Adapter<DonateAdapter.ViewHolder>() {
     var selected_item = -1

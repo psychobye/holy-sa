@@ -4,8 +4,8 @@ import android.view.View
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.button.MaterialButton
-import com.lit.game.R
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.R
+import com.holy.game.core.Samp.Companion.activity
 
 interface SelectArrowClickListener {
     fun selectArrowClickTo(clickType: SelectArrow.ClickType)

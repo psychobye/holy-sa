@@ -8,9 +8,9 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.launcher.async.dto.response.FileInfo
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.launcher.async.dto.response.FileInfo
 import com.holy.launcher.config.Config.DONATE_URL
 import com.holy.launcher.domain.enums.DownloadType
 import com.holy.launcher.domain.enums.StorageElements
@@ -18,8 +18,8 @@ import com.holy.launcher.service.impl.ActivityServiceImpl
 import com.holy.launcher.storage.NativeStorage
 import com.holy.launcher.storage.Storage
 import com.holy.launcher.ui.dialogs.EnterLockedServerPasswordDialog
-import com.lit.launcher.ui.fragment.MainFragment
-import com.lit.launcher.utils.MainUtils
+import com.holy.launcher.ui.fragment.MainFragment
+import com.holy.launcher.utils.MainUtils
 import org.apache.commons.lang3.StringUtils
 import java.io.File
 

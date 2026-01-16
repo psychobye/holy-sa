@@ -8,57 +8,55 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/chat_box"
-        android:layout_width="@dimen/_300sdp"
+        android:layout_width="@dimen/_230sdp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_50sdp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.holy.game.gui.util.FadingEdgeLayout
-            android:id="@+id/chat_fade_box"
+        <View
+            android:id="@+id/chat_bg_overlay"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_80sdp"
-            android:minHeight="@dimen/_73sdp"
-            app:fel_edge="top"
-            app:fel_size_top="40dp"
+            android:layout_height="@dimen/_60sdp"
+            android:background="@drawable/chat_bg"
+            android:visibility="visible"
+            android:paddingStart="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_5sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"/>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/chat"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbarSize="@dimen/_6sdp"
-                android:scrollbarStyle="insideInset"
-                android:scrollbarThumbVertical="@drawable/chat_scroll_front"
-                android:scrollbarTrackVertical="@drawable/chat_scroll_back"
-                android:scrollbars="none"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:recyclerview_fling_animation_size="0.1"
-                app:recyclerview_overscroll_animation_size="0.1"
-                app:stackFromEnd="true">
-
-            </androidx.recyclerview.widget.RecyclerView>
-        </com.holy.game.gui.util.FadingEdgeLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/chat"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:scrollbarSize="@dimen/_6sdp"
+            android:scrollbarStyle="insideInset"
+            android:scrollbarThumbVertical="@drawable/chat_scroll_front"
+            android:scrollbarTrackVertical="@drawable/chat_scroll_back"
+            android:scrollbars="none"
+            app:stackFromEnd="true"
+            android:padding="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/chat_input_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_3sdp"
-            app:layout_constraintEnd_toEndOf="@+id/chat_fade_box"
-            app:layout_constraintStart_toStartOf="@+id/chat_fade_box"
-            app:layout_constraintTop_toBottomOf="@+id/chat_fade_box">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chat">
 
             <EditText
                 android:id="@+id/chat_input"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_24sdp"
-                android:layout_marginEnd="@dimen/_135sdp"
                 android:autofillHints="no"
                 android:background="@drawable/chat_input"
-                android:completionThreshold="2"
                 android:textSize="@dimen/_11sdp"
                 android:hint="сообщение..."
                 android:textColorHint="#43FFFFFF"

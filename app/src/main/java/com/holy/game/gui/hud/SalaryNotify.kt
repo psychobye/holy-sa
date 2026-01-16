@@ -4,9 +4,9 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
 import com.skydoves.progressview.ProgressView
 import java.util.Timer
 import java.util.TimerTask

@@ -6,9 +6,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.widget.CompoundButton
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.AuthorizationBinding
-import com.lit.game.gui.util.Utils
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.AuthorizationBinding
+import com.holy.game.gui.util.Utils
 
 class Authorization : NativeGui<AuthorizationBinding>(AuthorizationBinding::class) {
     private external fun nativeToggleAutoLogin(toggle: Boolean)

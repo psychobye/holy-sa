@@ -12,7 +12,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
-import com.lit.game.R;
+import com.holy.game.R;
 import com.holy.launcher.ui.dialogs.listener.OnDialogCloseListener;
 
 public class ConfirmDialog extends MaterialAlertDialogBuilder implements View.OnClickListener {

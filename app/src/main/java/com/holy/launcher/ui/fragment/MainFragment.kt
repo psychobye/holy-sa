@@ -16,10 +16,10 @@ import android.widget.EditText
 import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.gui.util.GradientStrokeTextView
-import com.lit.game.gui.util.Utils.addPressScaleAnimation
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.gui.util.GradientStrokeTextView
+import com.holy.game.gui.util.Utils.addPressScaleAnimation
 import com.holy.launcher.config.Config
 import com.holy.launcher.service.impl.ActivityServiceImpl
 import com.holy.launcher.storage.NativeStorage

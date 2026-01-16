@@ -7,9 +7,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.EntitySnaps
-import com.lit.game.R
-import com.lit.data.Rare
+import com.holy.game.EntitySnaps
+import com.holy.game.R
+import com.holy.data.Rare
 
 class PrizesListAdapter (private val list: List<TreasureItem>) : RecyclerView.Adapter<PrizesListAdapter.ViewHolder>() {
 

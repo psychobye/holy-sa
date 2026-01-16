@@ -55,43 +55,43 @@ double CPlayerInfo::GetZ() {
 
 extern "C" {
     JNIEXPORT jint JNICALL
-    Java_com_lit_game_gui_PlayerInfo_nativeGetId(JNIEnv* /*env*/, jclass /*cls*/) {
+    Java_com_holy_game_gui_PlayerInfo_nativeGetId(JNIEnv* /*env*/, jclass /*cls*/) {
         return (jint)CPlayerInfo::GetId();
     }
 
     JNIEXPORT jstring JNICALL
-    Java_com_lit_game_gui_PlayerInfo_nativeGetName(JNIEnv* env, jclass /*cls*/) {
+    Java_com_holy_game_gui_PlayerInfo_nativeGetName(JNIEnv* env, jclass /*cls*/) {
         std::string s = CPlayerInfo::GetName();
         return env->NewStringUTF(s.c_str());
     }
 
     JNIEXPORT jint JNICALL
-    Java_com_lit_game_gui_PlayerInfo_nativeGetModelId(JNIEnv* /*env*/, jclass /*cls*/) {
+    Java_com_holy_game_gui_PlayerInfo_nativeGetModelId(JNIEnv* /*env*/, jclass /*cls*/) {
         return (jint)CPlayerInfo::GetModelId();
     }
 
     JNIEXPORT jfloat JNICALL
-    Java_com_lit_game_gui_PlayerInfo_nativeGetHealth(JNIEnv* /*env*/, jclass /*cls*/) {
+    Java_com_holy_game_gui_PlayerInfo_nativeGetHealth(JNIEnv* /*env*/, jclass /*cls*/) {
         return (jfloat)CPlayerInfo::GetHealth();
     }
 
     JNIEXPORT jfloat JNICALL
-    Java_com_lit_game_gui_PlayerInfo_nativeGetArmour(JNIEnv* /*env*/, jclass /*cls*/) {
+    Java_com_holy_game_gui_PlayerInfo_nativeGetArmour(JNIEnv* /*env*/, jclass /*cls*/) {
         return (jfloat)CPlayerInfo::GetArmour();
     }
 
     JNIEXPORT jdouble JNICALL
-    Java_com_lit_game_gui_PlayerInfo_nativeGetX(JNIEnv* /*env*/, jclass /*cls*/) {
+    Java_com_holy_game_gui_PlayerInfo_nativeGetX(JNIEnv* /*env*/, jclass /*cls*/) {
         return (jdouble)CPlayerInfo::GetX();
     }
 
     JNIEXPORT jdouble JNICALL
-    Java_com_lit_game_gui_PlayerInfo_nativeGetY(JNIEnv* /*env*/, jclass /*cls*/) {
+    Java_com_holy_game_gui_PlayerInfo_nativeGetY(JNIEnv* /*env*/, jclass /*cls*/) {
         return (jdouble)CPlayerInfo::GetY();
     }
 
     JNIEXPORT jdouble JNICALL
-    Java_com_lit_game_gui_PlayerInfo_nativeGetZ(JNIEnv* /*env*/, jclass /*cls*/) {
+    Java_com_holy_game_gui_PlayerInfo_nativeGetZ(JNIEnv* /*env*/, jclass /*cls*/) {
         return (jdouble)CPlayerInfo::GetZ();
     }
 }

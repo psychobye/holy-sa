@@ -410,7 +410,7 @@ uint32_t GetTickCount()
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_Samp_initSAMP(JNIEnv *env, jobject thiz, jfloat maxFps, jstring directory) {
+Java_com_holy_game_core_Samp_initSAMP(JNIEnv *env, jobject thiz, jfloat maxFps, jstring directory) {
     Log("Initializing SAMP..");
 
     const char *dirChars = env->GetStringUTFChars(directory, nullptr);
@@ -429,7 +429,7 @@ extern bool ProcessLocalCommands(const char str[]);
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_Samp_00024Companion_sendCommand(JNIEnv *env, jobject clazz, jstring command) {
+Java_com_holy_game_core_Samp_00024Companion_sendCommand(JNIEnv *env, jobject clazz, jstring command) {
 	const char *_command = env->GetStringUTFChars(command, nullptr);
 
 	if(!ProcessLocalCommands(_command))

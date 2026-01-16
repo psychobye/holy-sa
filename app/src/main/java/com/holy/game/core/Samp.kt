@@ -23,9 +23,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.lit.game.R
-import com.lit.game.gui.hud.HudManager
-import com.lit.launcher.async.task.CacheChecker.isGameCacheValid
+import com.holy.game.R
+import com.holy.game.gui.hud.HudManager
+import com.holy.launcher.async.task.CacheChecker.isGameCacheValid
 import java.io.File
 import java.io.IOException
 import java.security.MessageDigest

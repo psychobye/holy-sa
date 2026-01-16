@@ -8,7 +8,7 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_FuelStation_nativeSendClick(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_FuelStation_nativeSendClick(JNIEnv *env, jobject thiz,
                                                        jint fueltype, jint fuelliters) {
     pNetGame->SendCustomPacketFuelData(251, 39, fueltype, fuelliters);
 

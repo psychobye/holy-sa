@@ -6,14 +6,14 @@ import android.util.Log
 import android.view.View
 import android.webkit.WebViewClient
 import com.google.gson.Gson
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.LayoutCefRootBinding
-import com.lit.game.gui.NativeGui
-import com.lit.game.gui.util.Utils
-import com.lit.game.gui.util.Utils.bitmapToByteBuffer
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.LayoutCefRootBinding
+import com.holy.game.gui.NativeGui
+import com.holy.game.gui.util.Utils
+import com.holy.game.gui.util.Utils.bitmapToByteBuffer
 
 /**
- * Manager for CEF-like WebView with Gson-based JS ↔ Kotlin communication.
+ * Manager for CEF-like WebView with Gson-based JS <-> Kotlin communication.
  */
 class CefManager : NativeGui<LayoutCefRootBinding>(LayoutCefRootBinding::class) {
 

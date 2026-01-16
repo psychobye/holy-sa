@@ -34,7 +34,7 @@ void CLuckyWheel::packetShow(Packet *p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_casino_LuckyWheel_nativeSendClick(JNIEnv *env, jobject thiz, jint button_id) {
+Java_com_holy_game_gui_casino_LuckyWheel_nativeSendClick(JNIEnv *env, jobject thiz, jint button_id) {
     CLuckyWheel::Destroy();
 
     if (button_id == 228) {// ������

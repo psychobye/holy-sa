@@ -117,7 +117,7 @@ void CNetGame::packetMedGame(Packet* p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_PreDeath_medicMiniGameExit(JNIEnv *env, jobject thiz, jint type_id) {
+Java_com_holy_game_gui_PreDeath_medicMiniGameExit(JNIEnv *env, jobject thiz, jint type_id) {
     CMedic::hide();
 
     uint8_t packet = ID_CUSTOM_RPC;
@@ -132,7 +132,7 @@ Java_com_lit_game_gui_PreDeath_medicMiniGameExit(JNIEnv *env, jobject thiz, jint
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_PreDeath_medicPreDeathExit(JNIEnv *env, jobject thiz, jint button_id) {
+Java_com_holy_game_gui_PreDeath_medicPreDeathExit(JNIEnv *env, jobject thiz, jint button_id) {
     CMedic::hide();
 
     uint8_t packet = ID_CUSTOM_RPC;

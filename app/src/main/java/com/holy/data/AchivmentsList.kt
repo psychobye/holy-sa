@@ -1,6 +1,6 @@
 package com.holy.data
 
-import com.lit.game.gui.achivments.Achivment
+import com.holy.game.gui.achivments.Achivment
 
 object AchivmentsList {
     val list = listOf(

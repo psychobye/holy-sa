@@ -1,7 +1,7 @@
 package com.holy.launcher.utils
 
-import com.lit.launcher.async.dto.response.FileInfo
-import com.lit.launcher.async.dto.response.LatestVersionInfoDto
+import com.holy.launcher.async.dto.response.FileInfo
+import com.holy.launcher.async.dto.response.LatestVersionInfoDto
 import com.holy.launcher.domain.enums.DownloadType
 
 class MainUtils {

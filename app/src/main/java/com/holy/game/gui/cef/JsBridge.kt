@@ -2,7 +2,7 @@ package com.holy.game.gui.cef
 
 import android.util.Log
 import android.webkit.JavascriptInterface
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.core.Samp.Companion.activity
 
 /**
  * Bridge for JavaScript to call Kotlin functions.

@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.databinding.BattlepassTaskItemBinding
-import com.lit.game.gui.util.Utils
+import com.holy.game.databinding.BattlepassTaskItemBinding
+import com.holy.game.gui.util.Utils
 
 interface BattlePassTasksAdapterListener {
     fun BattlePassTasksAdapter_OnClickRefresh(pos: Int)

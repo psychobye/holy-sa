@@ -67,7 +67,11 @@
     <color name="gray_BF">#BFBFBF</color>
     <color name="gray_51">#515151</color>
     <color name="gray_CE">#CECED0</color>
+    <color name="gray_15">#151515</color>
+    <color name="gray_15_90">#E6151515</color>
+    <color name="gray_15_75">#BF151515</color>
     <color name="orange">#FFA44A</color>
+    <color name="red_d3">#D35D5D</color>
     <color name="colorAccent">#ffed4319</color>
     <color name="colorPrimary">#ff000000</color>
     <color name="colorPrimaryDark">#ff000000</color>

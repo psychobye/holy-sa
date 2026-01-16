@@ -6,7 +6,7 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.TypedValue
 import androidx.appcompat.widget.AppCompatTextView
-import com.lit.game.R
+import com.holy.game.R
 import kotlin.math.ceil
 import kotlin.math.max
 

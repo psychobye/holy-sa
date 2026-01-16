@@ -105,7 +105,7 @@ void CNetGame::packetStylingCenter(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_styling_Styling_nativeOnExit(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_styling_Styling_nativeOnExit(JNIEnv *env, jobject thiz) {
     CStyling::DeleteCppObject();
 
     RakNet::BitStream bsSend;
@@ -118,7 +118,7 @@ Java_com_lit_game_gui_styling_Styling_nativeOnExit(JNIEnv *env, jobject thiz) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_styling_Styling_nativeSendBuy(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_styling_Styling_nativeSendBuy(JNIEnv *env, jobject thiz) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)  RPC_STYLING_CENTER);
@@ -129,7 +129,7 @@ Java_com_lit_game_gui_styling_Styling_nativeSendBuy(JNIEnv *env, jobject thiz) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_styling_Styling_nativeToggleCam(JNIEnv *env, jobject thiz, jboolean cam) {
+Java_com_holy_game_gui_styling_Styling_nativeToggleCam(JNIEnv *env, jobject thiz, jboolean cam) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t) ID_CUSTOM_RPC);
     bsSend.Write((uint8_t) RPC_STYLING_CENTER);
@@ -141,7 +141,7 @@ Java_com_lit_game_gui_styling_Styling_nativeToggleCam(JNIEnv *env, jobject thiz,
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_lit_game_gui_styling_Styling_nativeIsAvailable(JNIEnv *env, jobject thiz, jint type) {
+Java_com_holy_game_gui_styling_Styling_nativeIsAvailable(JNIEnv *env, jobject thiz, jint type) {
     auto valueType = (CStyling::eValueType)(type);
 
     auto pPed = CGame::FindPlayerPed();
@@ -187,7 +187,7 @@ Java_com_lit_game_gui_styling_Styling_nativeIsAvailable(JNIEnv *env, jobject thi
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_styling_Styling_nativeSendChangeValue(JNIEnv *env, jobject thiz, jint value_type) {
+Java_com_holy_game_gui_styling_Styling_nativeSendChangeValue(JNIEnv *env, jobject thiz, jint value_type) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)  RPC_STYLING_CENTER);
@@ -200,7 +200,7 @@ Java_com_lit_game_gui_styling_Styling_nativeSendChangeValue(JNIEnv *env, jobject
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_styling_Styling_nativeResetTuning(JNIEnv *env, jobject thiz, jint type) {
+Java_com_holy_game_gui_styling_Styling_nativeResetTuning(JNIEnv *env, jobject thiz, jint type) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)  RPC_STYLING_CENTER);
@@ -212,7 +212,7 @@ Java_com_lit_game_gui_styling_Styling_nativeResetTuning(JNIEnv *env, jobject thi
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_styling_Styling_nativeChangeValue(JNIEnv *env, jobject thiz, jint type, jint value) {
+Java_com_holy_game_gui_styling_Styling_nativeChangeValue(JNIEnv *env, jobject thiz, jint type, jint value) {
     auto pPed = CGame::FindPlayerPed();
     if(!pPed->m_pPed->IsInVehicle()) return;
     auto pVehicle = pPed->GetCurrentVehicle();
@@ -268,6 +268,6 @@ Java_com_lit_game_gui_styling_Styling_nativeChangeValue(JNIEnv *env, jobject thi
 }
 extern "C"
 JNIEXPORT jint JNICALL
-Java_com_lit_game_gui_styling_Styling_nativeGetCurrentValue(JNIEnv *env, jobject thiz, jint type) {
+Java_com_holy_game_gui_styling_Styling_nativeGetCurrentValue(JNIEnv *env, jobject thiz, jint type) {
     return CStyling::GetValueFromType(static_cast<CStyling::eValueType>(type));
 }

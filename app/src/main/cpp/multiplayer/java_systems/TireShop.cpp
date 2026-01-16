@@ -94,13 +94,13 @@ float CTireShop::GetCurrentValue(int valueType) {
 
 extern "C"
 JNIEXPORT jfloat JNICALL
-Java_com_lit_game_gui_tire_1shop_TireShop_native_1getCurrentValue(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_tire_1shop_TireShop_native_1getCurrentValue(JNIEnv *env, jobject thiz,
                                                                        jint type) {
     return CTireShop::GetCurrentValue(type);
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobject thiz,
                                                                 jint type, jfloat value) {
 
     auto pPed = CGame::FindPlayerPed();
@@ -185,7 +185,7 @@ Java_com_lit_game_gui_tire_1shop_TireShop_native_1onChange(JNIEnv *env, jobject 
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_tire_1shop_TireShop_nativeSendClick(JNIEnv *env, jobject thiz, jint type) {
+Java_com_holy_game_gui_tire_1shop_TireShop_nativeSendClick(JNIEnv *env, jobject thiz, jint type) {
 
     if(type == 7) {// exit
         CTireShop::DeleteCppObject();

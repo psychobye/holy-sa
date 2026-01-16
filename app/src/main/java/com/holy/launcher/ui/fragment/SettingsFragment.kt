@@ -13,10 +13,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.R
+import com.holy.game.R
 import com.holy.launcher.config.Config
-import com.lit.launcher.domain.data.SettingsItem
-import com.lit.launcher.ui.adapters.SettingsAdapter
+import com.holy.launcher.domain.data.SettingsItem
+import com.holy.launcher.ui.adapters.SettingsAdapter
 import java.io.File
 
 class SettingsFragment : Fragment() {

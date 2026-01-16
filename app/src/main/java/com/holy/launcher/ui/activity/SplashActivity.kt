@@ -14,7 +14,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.google.firebase.crashlytics.FirebaseCrashlytics
-import com.lit.game.databinding.ActivitySplashBinding
+import com.holy.game.databinding.ActivitySplashBinding
 
 // TODO: GoogleSign
 class SplashActivity : AppCompatActivity() {

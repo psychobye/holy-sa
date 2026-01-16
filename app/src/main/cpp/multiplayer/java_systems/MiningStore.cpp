@@ -55,7 +55,7 @@ void CMiningStore::ReceivePacket(Packet *p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_MiningStore_nativeSendClick(JNIEnv *env, jobject thiz, jint button_id) {
+Java_com_holy_game_gui_MiningStore_nativeSendClick(JNIEnv *env, jobject thiz, jint button_id) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)  RPC_MINING_STORE);

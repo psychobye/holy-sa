@@ -4,11 +4,11 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lit.game.R
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.FlexMenuRootBinding
-import com.lit.game.gui.NativeGui
-import com.lit.game.gui.util.VerticalSpaceItemDecoration
+import com.holy.game.R
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.FlexMenuRootBinding
+import com.holy.game.gui.NativeGui
+import com.holy.game.gui.util.VerticalSpaceItemDecoration
 
 class FlexMenu : NativeGui<FlexMenuRootBinding>(FlexMenuRootBinding::class) {
     var onItemClicked: ((FlexMenuItem) -> Unit)? = null

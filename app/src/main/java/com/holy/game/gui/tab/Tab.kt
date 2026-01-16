@@ -5,9 +5,9 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.TabBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.TabBinding
+import com.holy.game.gui.NativeGui
 import com.holy.game.gui.util.LinearLayoutManagerWrapper
 
 class Tab : NativeGui<TabBinding>(TabBinding::class) {

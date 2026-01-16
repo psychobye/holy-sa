@@ -1,6 +1,6 @@
 package com.holy.launcher.config;
 
-import com.lit.launcher.NetworkService;
+import com.holy.launcher.NetworkService;
 
 public class Config {
     public static final String APK_FILE_NAME = "russia.apk";

@@ -1,11 +1,11 @@
-package com.lit.launcher;
+package com.holy.launcher;
 
-import static com.lit.launcher.config.Config.FILE_INFO_URL;
+import static com.holy.launcher.config.Config.FILE_INFO_URL;
 
-import com.lit.launcher.async.dto.response.GameFileInfoDto;
-import com.lit.launcher.async.dto.response.LatestVersionInfoDto;
-import com.lit.launcher.async.dto.response.LoaderSliderInfoResponseDto;
-import com.lit.launcher.async.dto.response.MonitoringData;
+import com.holy.launcher.async.dto.response.GameFileInfoDto;
+import com.holy.launcher.async.dto.response.LatestVersionInfoDto;
+import com.holy.launcher.async.dto.response.LoaderSliderInfoResponseDto;
+import com.holy.launcher.async.dto.response.MonitoringData;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

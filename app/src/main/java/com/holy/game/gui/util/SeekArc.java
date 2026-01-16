@@ -35,7 +35,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
-import com.lit.game.R;
+import com.holy.game.R;
 
 /**
  *

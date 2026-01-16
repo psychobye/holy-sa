@@ -129,7 +129,7 @@ void CNetGame::packetCasinoBaccarat(Packet* p) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_CasinoBaccarat_sendAddBet(JNIEnv *env, jobject thiz, jint sum,
+Java_com_holy_game_gui_CasinoBaccarat_sendAddBet(JNIEnv *env, jobject thiz, jint sum,
                                                      jint bettype) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)ID_CUSTOM_RPC);
@@ -145,7 +145,7 @@ Java_com_lit_game_gui_CasinoBaccarat_sendAddBet(JNIEnv *env, jobject thiz, jint 
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_CasinoBaccarat_exit(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_CasinoBaccarat_exit(JNIEnv *env, jobject thiz) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)RPC_UPDATE_BACCARAT);

@@ -1,9 +1,9 @@
 package com.holy.game.gui.styling
 
 import android.view.View
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.ColorpickerBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.ColorpickerBinding
+import com.holy.game.gui.NativeGui
 import ir.kotlin.kavehcolorpicker.KavehColorPicker
 
 interface ColorPickerListener {

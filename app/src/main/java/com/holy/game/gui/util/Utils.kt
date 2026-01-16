@@ -16,7 +16,7 @@ import android.view.WindowManager
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.OvershootInterpolator
 import android.widget.ImageView
-import com.lit.game.core.Samp
+import com.holy.game.core.Samp
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.regex.Pattern

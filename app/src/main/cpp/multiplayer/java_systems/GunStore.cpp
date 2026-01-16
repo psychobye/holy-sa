@@ -18,7 +18,7 @@ void CGunStore::Show() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_GunShop_nativeSendButt(JNIEnv *env, jobject thiz, jint butt_id) {
+Java_com_holy_game_gui_GunShop_nativeSendButt(JNIEnv *env, jobject thiz, jint butt_id) {
     if(butt_id == 0) { // exit
         env->DeleteGlobalRef(CGunStore::thiz);
         CGunStore::thiz = nullptr;

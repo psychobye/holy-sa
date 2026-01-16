@@ -1,6 +1,6 @@
 package com.holy.game.gui.magicStore
 
-import com.lit.game.SnapShot
+import com.holy.game.SnapShot
 
 class MagicStoreItem(val name: String, val category: Int, val price: Int, val priceType: Int, val res: Int, val snap: SnapShot?) {
 

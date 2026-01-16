@@ -1,8 +1,8 @@
 package com.holy.game.gui.fillingGames
 
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.OilfactoryBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.OilfactoryBinding
+import com.holy.game.gui.NativeGui
 
 class OilFactory
     : NativeGui<OilfactoryBinding>(OilfactoryBinding::class)

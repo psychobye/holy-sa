@@ -1,8 +1,8 @@
 package com.holy.game.gui.tuning
 
-import com.lit.game.core.Samp
-import com.lit.game.databinding.TuningArrowsBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.core.Samp
+import com.holy.game.databinding.TuningArrowsBinding
+import com.holy.game.gui.NativeGui
 
 
 interface TuningSelectMenuListener {

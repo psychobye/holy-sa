@@ -16,6 +16,6 @@ void CSkinShop::Update(int type, int price) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_SkinAndAcsShop_nativeSendClick(JNIEnv *env, jobject thiz, jint click_id) {
+Java_com_holy_game_gui_SkinAndAcsShop_nativeSendClick(JNIEnv *env, jobject thiz, jint click_id) {
     pNetGame->SendCustomPacket(251, 42, click_id);
 }

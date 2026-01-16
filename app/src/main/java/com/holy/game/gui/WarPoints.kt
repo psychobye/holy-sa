@@ -1,7 +1,7 @@
 package com.holy.game.gui
 
-import com.lit.game.core.Samp
-import com.lit.game.databinding.WarPointsBinding
+import com.holy.game.core.Samp
+import com.holy.game.databinding.WarPointsBinding
 
 class WarPoints : NativeGui<WarPointsBinding>(WarPointsBinding::class) {
 

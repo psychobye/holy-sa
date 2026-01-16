@@ -196,7 +196,7 @@ void CCEF::OnServerEvent(Packet *p) {
  */
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_cef_CefManager_nativeSendEvent(
+Java_com_holy_game_gui_cef_CefManager_nativeSendEvent(
         JNIEnv *env,
         jobject /*thiz*/,
         jstring jevent,

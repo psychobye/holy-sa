@@ -100,13 +100,13 @@ void CDialog::hide() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_dialogs_Dialog_init(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_dialogs_Dialog_init(JNIEnv *env, jobject thiz) {
     CDialog::thiz = env->NewGlobalRef(thiz);
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_dialogs_Dialog_sendResponse(JNIEnv *env, jobject thiz, jint button, jint id, jint item, jbyteArray str)
+Java_com_holy_game_gui_dialogs_Dialog_sendResponse(JNIEnv *env, jobject thiz, jint button, jint id, jint item, jbyteArray str)
 {
     jbyte* pMsg = env->GetByteArrayElements(str, nullptr);
     jsize length = env->GetArrayLength(str);

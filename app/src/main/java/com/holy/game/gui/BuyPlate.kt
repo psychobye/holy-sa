@@ -6,10 +6,10 @@ import android.text.Editable
 import android.text.Html
 import android.text.TextWatcher
 import android.view.View
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.BuyPlateBinding
-import com.lit.data.ItemHelper
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.BuyPlateBinding
+import com.holy.data.ItemHelper
 import com.rommansabbir.animationx.Attention.ATTENTION_BOUNCE
 import com.rommansabbir.animationx.animationXAttention
 

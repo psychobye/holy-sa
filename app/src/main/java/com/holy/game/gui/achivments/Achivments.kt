@@ -1,11 +1,11 @@
 package com.holy.game.gui.achivments
 
 import androidx.recyclerview.widget.GridLayoutManager
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.AchivmentsBinding
-import com.lit.game.gui.NativeGui
-import com.lit.data.AchivmentsList
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.AchivmentsBinding
+import com.holy.game.gui.NativeGui
+import com.holy.data.AchivmentsList
 
 
 class Achivments : AchivmentsListener, NativeGui<AchivmentsBinding>(AchivmentsBinding::class) {

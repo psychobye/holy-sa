@@ -279,7 +279,7 @@ CJavaWrapper *g_pJavaWrapper = nullptr;
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_core_Samp_00024Companion_playUrlSound(JNIEnv *env, jobject clazz, jstring jurl) {
+Java_com_holy_game_core_Samp_00024Companion_playUrlSound(JNIEnv *env, jobject clazz, jstring jurl) {
     auto url = env->GetStringUTFChars(jurl, nullptr);
 
     char temp[888];

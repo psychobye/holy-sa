@@ -12,10 +12,10 @@ import android.view.animation.AnimationUtils;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import com.lit.game.R;
-import com.lit.launcher.NetworkService;
-import com.lit.launcher.utils.MainUtils;
-import com.lit.launcher.async.dto.response.LatestVersionInfoDto;
+import com.holy.game.R;
+import com.holy.launcher.NetworkService;
+import com.holy.launcher.utils.MainUtils;
+import com.holy.launcher.async.dto.response.LatestVersionInfoDto;
 import com.holy.launcher.domain.enums.DownloadType;
 
 import retrofit2.Call;

@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.lit.game.R;
+import com.holy.game.R;
 import com.holy.launcher.domain.messages.ErrorMessage;
-import com.lit.launcher.async.dto.response.Servers;
+import com.holy.launcher.async.dto.response.Servers;
 
 import org.apache.commons.lang3.StringUtils;
 

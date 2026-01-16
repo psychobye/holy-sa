@@ -3,13 +3,13 @@ package com.holy.data
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.widget.ImageView
-import com.lit.game.EntitySnaps
-import com.lit.game.PlateSnapShot
-import com.lit.game.SnapShot
-import com.lit.game.core.Samp
-import com.lit.data.acs.Accessories
-import com.lit.data.skins.Skins
-import com.lit.data.vehicles.Vehicles
+import com.holy.game.EntitySnaps
+import com.holy.game.PlateSnapShot
+import com.holy.game.SnapShot
+import com.holy.game.core.Samp
+import com.holy.data.acs.Accessories
+import com.holy.data.skins.Skins
+import com.holy.data.vehicles.Vehicles
 import java.lang.Exception
 
 object ItemHelper {

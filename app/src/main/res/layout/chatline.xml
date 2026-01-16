@@ -1,13 +1,11 @@
-<com.lit.game.gui.util.StrokedTextView
+<com.holy.game.gui.util.StrokedTextView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/chat_line_text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:paddingBottom="0.1dp"
-    android:layout_marginEnd="@dimen/_1sdp"
-    android:layout_marginStart="@dimen/_1sdp"
-    android:textSize="@dimen/_7sdp"
+    android:paddingBottom="@dimen/_1sdp"
+    android:textSize="@dimen/_15sdp"
     android:textColor="#538EC8"
     android:includeFontPadding="false"
-    android:fontFamily="@font/montserrat_bold"
-    android:text="@string/grizun_vibe_boje"/>
+    android:fontFamily="@font/manrope_bold"
+    android:text="@string/chat_line"/>

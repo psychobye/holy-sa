@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.R
-import com.lit.game.databinding.FlexTabItemBinding
+import com.holy.game.R
+import com.holy.game.databinding.FlexTabItemBinding
 
 class FlexMenuAdapter(
     private val onClick: (FlexMenuItem) -> Unit

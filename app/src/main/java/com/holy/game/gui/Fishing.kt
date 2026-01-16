@@ -3,9 +3,9 @@ package com.holy.game.gui
 import android.os.CountDownTimer
 import android.view.View
 import com.google.gson.Gson
-import com.lit.game.EasyAnimation.setOnClickListenerWithAnim
-import com.lit.game.R
-import com.lit.game.databinding.FishingBinding
+import com.holy.game.EasyAnimation.setOnClickListenerWithAnim
+import com.holy.game.R
+import com.holy.game.databinding.FishingBinding
 
 class Fishing : NativeGui<FishingBinding>(FishingBinding::class) {
     enum class eFishingStates {

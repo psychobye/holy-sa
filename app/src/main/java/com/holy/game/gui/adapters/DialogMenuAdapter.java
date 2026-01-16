@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
-import com.lit.game.R;
+import com.holy.game.R;
 import com.holy.game.gui.models.DataDialogMenu;
 import java.util.List;
 

@@ -94,7 +94,7 @@ void CNetGame::packetShowDonat(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_donate_Donate_sendAction(JNIEnv *env, jobject thiz, jint action_id) {
+Java_com_holy_game_gui_donate_Donate_sendAction(JNIEnv *env, jobject thiz, jint action_id) {
     uint8_t packet = ID_CUSTOM_RPC;
     uint8_t RPC = RPC_SHOW_DONATE;
 
@@ -107,7 +107,7 @@ Java_com_lit_game_gui_donate_Donate_sendAction(JNIEnv *env, jobject thiz, jint a
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_donate_Donate_sendClickItem(JNIEnv *env, jobject thiz, jint action_type,
+Java_com_holy_game_gui_donate_Donate_sendClickItem(JNIEnv *env, jobject thiz, jint action_type,
                                                        jint button_id, jint item_type,
                                                        jint item_id) {
     uint8_t packet = ID_CUSTOM_RPC;
@@ -126,7 +126,7 @@ Java_com_lit_game_gui_donate_Donate_sendClickItem(JNIEnv *env, jobject thiz, jin
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_donate_Donate_native_1clickStashItem(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_donate_Donate_native_1clickStashItem(JNIEnv *env, jobject thiz,
                                                                 jint click_id, jint sql_id) {
 
     if(click_id == CDonate::CLICK_ID_TREASURE) {
@@ -143,7 +143,7 @@ Java_com_lit_game_gui_donate_Donate_native_1clickStashItem(JNIEnv *env, jobject 
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_donate_Donate_native_1loadStash(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_donate_Donate_native_1loadStash(JNIEnv *env, jobject thiz) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)      ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)      RPC_DONATE_STASH);
@@ -153,6 +153,6 @@ Java_com_lit_game_gui_donate_Donate_native_1loadStash(JNIEnv *env, jobject thiz)
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_donate_Donate_nativeOnExit(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_donate_Donate_nativeOnExit(JNIEnv *env, jobject thiz) {
     CDonate::DeleteCppObject();
 }

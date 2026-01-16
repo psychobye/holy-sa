@@ -39,7 +39,7 @@ void CAchivments::updateItem(int index, int progress, int step) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_achivments_Achivments_nativeSendGive(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_achivments_Achivments_nativeSendGive(JNIEnv *env, jobject thiz,
                                                                 jint index) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)  ID_CUSTOM_RPC);
@@ -50,6 +50,6 @@ Java_com_lit_game_gui_achivments_Achivments_nativeSendGive(JNIEnv *env, jobject 
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_achivments_Achivments_nativeExit(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_achivments_Achivments_nativeExit(JNIEnv *env, jobject thiz) {
     CAchivments::DeleteCppObject();
 }

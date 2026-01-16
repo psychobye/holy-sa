@@ -37,7 +37,7 @@ void CNetGame::packetTheftAuto(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_theft_1auto_TheftAuto_finishRendering(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_theft_1auto_TheftAuto_finishRendering(JNIEnv *env, jobject thiz,
                                                                  jint status) {
     if (status == 1) {
         uint8_t packet = ID_CUSTOM_RPC;

@@ -15,7 +15,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.holy.game.gui.util.FadingEdgeLayout;
 import com.holy.launcher.storage.Storage;
 import com.nvidia.devtech.NvEventQueueActivity;
-import com.lit.game.R;
+import com.holy.game.R;
 
 
 public class DialogClientSettings extends DialogFragment {

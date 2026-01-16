@@ -1,8 +1,8 @@
 package com.holy.game.gui.fillingGames
 
-import com.lit.game.core.Samp
-import com.lit.game.databinding.MilkBinding
-import com.lit.game.gui.NativeGui
+import com.holy.game.core.Samp
+import com.holy.game.databinding.MilkBinding
+import com.holy.game.gui.NativeGui
 
 class Milk : NativeGui<MilkBinding>(MilkBinding::class) {
 

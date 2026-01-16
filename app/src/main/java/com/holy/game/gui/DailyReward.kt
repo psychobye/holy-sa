@@ -7,8 +7,8 @@ import android.os.Looper
 import android.text.format.DateUtils
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.DailyrewardBinding
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.DailyrewardBinding
 import com.rommansabbir.animationx.Zoom
 import com.rommansabbir.animationx.animationXZoom
 

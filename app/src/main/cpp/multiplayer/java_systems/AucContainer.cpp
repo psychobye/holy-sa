@@ -45,7 +45,7 @@ void CAucContainer::Show(int id, int type, int price){
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_AucContainer_nativeSendClick(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_AucContainer_nativeSendClick(JNIEnv *env, jobject thiz,
                                                           jint button_id) {
     CAucContainer::DeleteCppObject();
 

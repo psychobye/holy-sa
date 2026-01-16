@@ -12,10 +12,10 @@ import android.view.ViewStub
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.google.android.material.button.MaterialButton
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.gui.util.Utils
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.gui.util.Utils
 import java.util.Random
 import kotlin.math.abs
 

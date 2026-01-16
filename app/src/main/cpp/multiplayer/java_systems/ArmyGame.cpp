@@ -18,7 +18,7 @@ void CArmyGame::Show() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_ArmyGame_native_1onClose(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_ArmyGame_native_1onClose(JNIEnv *env, jobject thiz) {
     pNetGame->SendCustomPacket(251, 45, 1);
 
     env->DeleteGlobalRef(CArmyGame::thiz);

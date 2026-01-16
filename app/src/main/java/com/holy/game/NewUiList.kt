@@ -1,9 +1,9 @@
 package com.holy.game
 
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.gui.AdminRecon
-import com.lit.game.gui.ArmyGame
-import com.lit.game.gui.NativeGui
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.gui.AdminRecon
+import com.holy.game.gui.ArmyGame
+import com.holy.game.gui.NativeGui
 import kotlin.reflect.KClass
 
 

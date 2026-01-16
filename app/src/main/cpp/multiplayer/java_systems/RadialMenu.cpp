@@ -41,13 +41,13 @@ void CRadialMenu::Update() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_RadialMenu_nativeOnClose(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_RadialMenu_nativeOnClose(JNIEnv *env, jobject thiz) {
     CRadialMenu::bIsShow = false;
 }
 
 extern "C"
 JNIEXPORT jboolean JNICALL
-Java_com_lit_game_gui_hud_HudManager_nativeClickMenu(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_hud_HudManager_nativeClickMenu(JNIEnv *env, jobject thiz) {
     auto pPed = CLocalPlayer::GetPlayerPed();
     if (!pPed || !pPed->m_pPed->IsInVehicle()) return false;
 
@@ -57,6 +57,6 @@ Java_com_lit_game_gui_hud_HudManager_nativeClickMenu(JNIEnv *env, jobject thiz) 
 }
 
 extern "C" JNIEXPORT void JNICALL
-Java_com_lit_game_gui_RadialMenu_nativeRequestUpdate(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_RadialMenu_nativeRequestUpdate(JNIEnv *env, jobject thiz) {
     CRadialMenu::Update();
 }

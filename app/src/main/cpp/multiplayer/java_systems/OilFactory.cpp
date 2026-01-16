@@ -10,7 +10,7 @@
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_fillingGames_OilFactory_nativeSendExit(JNIEnv *env, jobject thiz,
+Java_com_holy_game_gui_fillingGames_OilFactory_nativeSendExit(JNIEnv *env, jobject thiz,
                                                      jboolean ok) {
 
     RakNet::BitStream bsSend;

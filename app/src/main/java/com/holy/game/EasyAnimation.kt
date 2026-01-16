@@ -2,7 +2,7 @@ package com.holy.game
 
 import android.view.View
 import android.view.animation.Animation
-import com.lit.game.core.Samp
+import com.holy.game.core.Samp
 
 object EasyAnimation {
 

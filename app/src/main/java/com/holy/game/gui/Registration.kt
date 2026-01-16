@@ -10,11 +10,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.button.MaterialButton
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.RegistrationBinding
-import com.lit.game.gui.util.Utils
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.RegistrationBinding
+import com.holy.game.gui.util.Utils
 
 class Registration : NativeGui<RegistrationBinding>(RegistrationBinding::class) {
     private var reg_right1: ConstraintLayout? = null

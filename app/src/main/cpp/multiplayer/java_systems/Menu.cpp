@@ -93,7 +93,7 @@ void CNetGame::packetShowMenu(Packet* p)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_menu_fragment_MenuMainFragment_nativeSendMenuButt(JNIEnv *env, jobject thiz, jint butt_id) {
+Java_com_holy_game_gui_menu_fragment_MenuMainFragment_nativeSendMenuButt(JNIEnv *env, jobject thiz, jint butt_id) {
     switch (butt_id) {
         case 1:
             pNetGame->SendChatCommand("/car");
@@ -117,7 +117,7 @@ Java_com_lit_game_gui_menu_fragment_MenuMainFragment_nativeSendMenuButt(JNIEnv *
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_nativeShowMenu(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_hud_HudManager_nativeShowMenu(JNIEnv *env, jobject thiz) {
     RakNet::BitStream bsSend;
     bsSend.Write((uint8_t)ID_CUSTOM_RPC);
     bsSend.Write((uint8_t)RPC_SHOW_MENU);
@@ -128,7 +128,7 @@ Java_com_lit_game_gui_hud_HudManager_nativeShowMenu(JNIEnv *env, jobject thiz) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_menu_Menu_nativeOnExit(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_menu_Menu_nativeOnExit(JNIEnv *env, jobject thiz) {
     CMenu::DeleteCppObject();
 
     RakNet::BitStream bsSend;

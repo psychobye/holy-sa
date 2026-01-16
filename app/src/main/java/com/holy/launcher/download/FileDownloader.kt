@@ -1,10 +1,10 @@
 package com.holy.launcher.download
 
-import com.lit.launcher.NetworkService
-import com.lit.launcher.async.dto.response.FileInfo
+import com.holy.launcher.NetworkService
+import com.holy.launcher.async.dto.response.FileInfo
 import com.holy.launcher.config.Config.APK_FILE_NAME
 import com.holy.launcher.config.Config.ZIP_FILES_BASE_ADR
-import com.lit.launcher.ui.activity.LoaderActivity
+import com.holy.launcher.ui.activity.LoaderActivity
 import com.holy.launcher.utils.BytesTo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

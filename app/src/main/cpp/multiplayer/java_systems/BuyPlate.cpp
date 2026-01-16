@@ -39,7 +39,7 @@ void CBuyPlate::Show(std::string& sprite, int randomPrice, std::string& buyPrice
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_BuyPlate_nativeSendClick(JNIEnv *env, jobject thiz, jint click_id, jbyteArray text) {
+Java_com_holy_game_gui_BuyPlate_nativeSendClick(JNIEnv *env, jobject thiz, jint click_id, jbyteArray text) {
     jbyte* pMsg = env->GetByteArrayElements(text, nullptr);
     jsize length = env->GetArrayLength(text);
 
@@ -57,6 +57,6 @@ Java_com_lit_game_gui_BuyPlate_nativeSendClick(JNIEnv *env, jobject thiz, jint c
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_BuyPlate_nativeOnExit(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_BuyPlate_nativeOnExit(JNIEnv *env, jobject thiz) {
     CBuyPlate::DeleteCppObject();
 }

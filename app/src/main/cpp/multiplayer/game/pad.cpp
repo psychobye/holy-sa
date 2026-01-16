@@ -992,7 +992,7 @@ void HookCPad()
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_changeWeapon(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_hud_HudManager_changeWeapon(JNIEnv *env, jobject thiz) {
 	if(!CGame::FindPlayerPed()) return;
 
 	if(!bWeaponClicked) {

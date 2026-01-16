@@ -59,7 +59,7 @@ void CHUD::ChangeChatTextSize(int size) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_HudInit(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_hud_HudManager_HudInit(JNIEnv *env, jobject thiz) {
 
     CHUD::thiz = env->NewGlobalRef(thiz);
     jUpdateHudInfo = env->GetMethodID(env->GetObjectClass(thiz), "updateAmmo", "(III)V");
@@ -284,13 +284,13 @@ void CHUD::UpdateMoney()
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_ClickLockVehicleButton(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_hud_HudManager_ClickLockVehicleButton(JNIEnv *env, jobject thiz) {
     pNetGame->SendChatCommand("/lock");
 }
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_Speedometer_ClickSpedometr(JNIEnv *env, jobject thiz, jint turn_id,
+Java_com_holy_game_gui_Speedometer_ClickSpedometr(JNIEnv *env, jobject thiz, jint turn_id,
                                                       jboolean toggle) {
     uint8_t packet = ID_CUSTOM_RPC;
     uint8_t RPC = RPC_TURN_SIGNAL;
@@ -441,7 +441,7 @@ void CHUD::ToggleChat(bool toggle){
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_SetRadarBgPos(JNIEnv *env, jobject thiz, jfloat x1, jfloat y1,
+Java_com_holy_game_gui_hud_HudManager_SetRadarBgPos(JNIEnv *env, jobject thiz, jfloat x1, jfloat y1,
                                                     jfloat x2, jfloat y2) {
     CHUD::radarBgPos1.x = x1;
     CHUD::radarBgPos1.y = y1;
@@ -463,7 +463,7 @@ void CHUD::ToggleChatInput(bool toggle)
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_Chat_SendChatMessage(JNIEnv *env, jobject thiz, jbyteArray str) {
+Java_com_holy_game_gui_hud_Chat_SendChatMessage(JNIEnv *env, jobject thiz, jbyteArray str) {
     jbyte* pMsg = env->GetByteArrayElements(str, nullptr);
     jsize length = env->GetArrayLength(str);
 
@@ -484,7 +484,7 @@ Java_com_lit_game_gui_hud_Chat_SendChatMessage(JNIEnv *env, jobject thiz, jbyteA
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_clickCameraMode(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_hud_HudManager_clickCameraMode(JNIEnv *env, jobject thiz) {
     CPedSamp *pPed = CLocalPlayer::GetPlayerPed();
     if(!pPed) return;
 
@@ -500,7 +500,7 @@ Java_com_lit_game_gui_hud_HudManager_clickCameraMode(JNIEnv *env, jobject thiz) 
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_clickMultText(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_hud_HudManager_clickMultText(JNIEnv *env, jobject thiz) {
     pNetGame->SendChatCommand("/action");
 }
 
@@ -573,7 +573,7 @@ void CHUD::RenderBackgroundRadar()
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_sendTorpedo(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_hud_HudManager_sendTorpedo(JNIEnv *env, jobject thiz) {
     uint8_t packet = ID_CUSTOM_RPC;
     uint8_t RPC = 80;
 
@@ -586,7 +586,7 @@ Java_com_lit_game_gui_hud_HudManager_sendTorpedo(JNIEnv *env, jobject thiz) {
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_nativeSetRadarPos(JNIEnv *env, jobject thiz, jfloat x1,
+Java_com_holy_game_gui_hud_HudManager_nativeSetRadarPos(JNIEnv *env, jobject thiz, jfloat x1,
                                                             jfloat y1, jfloat width,
                                                             jfloat height) {
     CHUD::radarPos.x = x1;
@@ -596,7 +596,7 @@ Java_com_lit_game_gui_hud_HudManager_nativeSetRadarPos(JNIEnv *env, jobject thiz
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_hud_HudManager_nativeSetRadarBg(
+Java_com_holy_game_gui_hud_HudManager_nativeSetRadarBg(
         JNIEnv *env, jobject /*thiz*/, jobject buffer,
         jint width, jint height
 ) {

@@ -2,17 +2,17 @@ package com.holy.game.gui.tire_shop
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.StylingCenterBinding
-import com.lit.game.gui.NativeGui
-import com.lit.game.gui.tuning.TuningAdapter
-import com.lit.game.gui.tuning.TuningAdapterListener
-import com.lit.game.gui.tuning.TuningItem
-import com.lit.game.gui.tuning.TuningSelectMenu
-import com.lit.game.gui.tuning.TuningSelectMenuItem
-import com.lit.game.gui.tuning.TuningSelectMenuListener
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.StylingCenterBinding
+import com.holy.game.gui.NativeGui
+import com.holy.game.gui.tuning.TuningAdapter
+import com.holy.game.gui.tuning.TuningAdapterListener
+import com.holy.game.gui.tuning.TuningItem
+import com.holy.game.gui.tuning.TuningSelectMenu
+import com.holy.game.gui.tuning.TuningSelectMenuItem
+import com.holy.game.gui.tuning.TuningSelectMenuListener
 
 class TireShop : NativeGui<StylingCenterBinding>(StylingCenterBinding::class), CustomSeekListener, TuningAdapterListener, TuningSelectMenuListener {
 

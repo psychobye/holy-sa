@@ -1,6 +1,6 @@
 package com.holy.game.gui.treasure
 
-import com.lit.game.SnapShot
+import com.holy.game.SnapShot
 
 class TreasureItem(val imgResource: Int, val name: String, val rare: Int, val snap: SnapShot? = null) {
 

@@ -5,10 +5,10 @@ import android.graphics.Color
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.CasinoBcBinding
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.CasinoBcBinding
 import com.rommansabbir.animationx.Slide
 import com.rommansabbir.animationx.animationXSlide
 import java.util.Random

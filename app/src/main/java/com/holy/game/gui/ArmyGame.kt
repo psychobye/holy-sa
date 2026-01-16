@@ -5,9 +5,9 @@ import android.view.ViewStub
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
 
 class ArmyGame {
     private lateinit var army_water_progress: ProgressBar

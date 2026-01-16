@@ -11,8 +11,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.R
-import com.lit.launcher.async.dto.response.Servers
+import com.holy.game.R
+import com.holy.launcher.async.dto.response.Servers
 import com.holy.launcher.domain.enums.StorageElements
 import com.holy.launcher.service.ActivityService
 import com.holy.launcher.service.impl.ActivityServiceImpl

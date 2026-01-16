@@ -16,8 +16,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.annotation.NonNull;
 
-import com.lit.game.R;
-import com.lit.launcher.ui.activity.StoryActivity;
+import com.holy.game.R;
+import com.holy.launcher.ui.activity.StoryActivity;
 import com.holy.launcher.async.dto.response.News;
 
 import java.util.List;

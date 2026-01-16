@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.EntitySnaps
-import com.lit.game.R
+import com.holy.game.EntitySnaps
+import com.holy.game.R
 
 class SpinnerAdapter (private val items: List<TreasureItem>) :
     RecyclerView.Adapter<SpinnerAdapter.ViewHolder>() {

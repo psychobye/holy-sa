@@ -3,10 +3,10 @@ package com.holy.game.gui.battle_pass.rate
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.databinding.BattlepassRateItemBinding
-import com.lit.game.gui.util.Utils
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.databinding.BattlepassRateItemBinding
+import com.holy.game.gui.util.Utils
 
 
 class BattlePassRateAdapter : RecyclerView.Adapter<BattlePassRateAdapter.ViewHolder>() {

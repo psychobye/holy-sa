@@ -1,8 +1,8 @@
 package com.holy.game.gui.magicStore
 
-import com.lit.game.core.Samp
-import com.lit.data.acs.Accessories
-import com.lit.data.skins.Skins
+import com.holy.game.core.Samp
+import com.holy.data.acs.Accessories
+import com.holy.data.skins.Skins
 
 object MagicStoreItems {
     const val PRICE_BRONZE = 0

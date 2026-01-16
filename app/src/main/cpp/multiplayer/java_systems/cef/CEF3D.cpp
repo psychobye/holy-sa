@@ -213,7 +213,7 @@ void CCEF3D::EnqueuePendingTexture(int id, uint8_t* buffer, size_t pxCount, int 
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_cef_CefManager_nativeUploadBytes(
+Java_com_holy_game_gui_cef_CefManager_nativeUploadBytes(
         JNIEnv* env, jobject /*thiz*/,
         jint id, jstring jTexName, jobject buffer,
         jint width, jint height

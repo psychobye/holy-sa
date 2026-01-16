@@ -4,10 +4,10 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.view.View
-import com.lit.game.R
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.SpeedometrBinding
+import com.holy.game.R
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.SpeedometrBinding
 
 class Speedometer : NativeGui<SpeedometrBinding>(SpeedometrBinding::class) {
     var timer_turnlight_left: Thread? = null

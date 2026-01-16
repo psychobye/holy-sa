@@ -77,7 +77,7 @@ void CObjectEditor::showGui() {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_AttachEdit_Exit(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_AttachEdit_Exit(JNIEnv *env, jobject thiz) {
     CGame::PostToMainThread([=] {
         CPedSamp *pPlayer = CLocalPlayer::GetPlayerPed();
 
@@ -152,7 +152,7 @@ void CObjectEditor::SendOnEditAttach(int response, int index, int modelid, int b
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_AttachEdit_AttachClick(JNIEnv *env, jobject thiz, jint button_type,
+Java_com_holy_game_gui_AttachEdit_AttachClick(JNIEnv *env, jobject thiz, jint button_type,
                                                   jboolean button_id) {
     CGame::PostToMainThread([=] {
 
@@ -289,7 +289,7 @@ Java_com_lit_game_gui_AttachEdit_AttachClick(JNIEnv *env, jobject thiz, jint but
 }
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_AttachEdit_Save(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_AttachEdit_Save(JNIEnv *env, jobject thiz) {
     CPedSamp* pPlayer = CLocalPlayer::GetPlayerPed();
     int slot = CObjectEditor::iEditedId;
 

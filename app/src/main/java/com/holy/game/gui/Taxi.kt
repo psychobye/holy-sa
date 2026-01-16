@@ -2,9 +2,9 @@ package com.holy.game.gui
 
 import android.os.CountDownTimer
 import android.view.View
-import com.lit.game.core.Samp
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.TaxiBinding
+import com.holy.game.core.Samp
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.TaxiBinding
 import com.rommansabbir.animationx.Attention
 import com.rommansabbir.animationx.animationXAttention
 

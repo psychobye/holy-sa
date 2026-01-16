@@ -71,7 +71,7 @@ void CTaxi::UpdateInfo(int fare, int orderCounts, int salary) {
 
 extern "C"
 JNIEXPORT void JNICALL
-Java_com_lit_game_gui_Taxi_nativeAcceptOrder(JNIEnv *env, jobject thiz) {
+Java_com_holy_game_gui_Taxi_nativeAcceptOrder(JNIEnv *env, jobject thiz) {
     RakNet::BitStream bs;
     bs.Write((uint8_t)  ID_CUSTOM_RPC);
     bs.Write((uint8_t)  RPC_TAXI);

@@ -4,9 +4,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.R
-import com.lit.game.databinding.InventoryItemBinding
-import com.lit.data.ItemHelper
+import com.holy.game.R
+import com.holy.game.databinding.InventoryItemBinding
+import com.holy.data.ItemHelper
 
 interface InventoryListener {
     fun onSelectedItem(matrixId: Int, itemId: Int)

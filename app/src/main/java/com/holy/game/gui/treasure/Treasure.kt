@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
-import com.lit.game.core.Samp.Companion.activity
-import com.lit.game.databinding.TreasureBinding
-import com.lit.game.gui.NativeGui
-import com.lit.data.TreasuresList
+import com.holy.game.core.Samp.Companion.activity
+import com.holy.game.databinding.TreasureBinding
+import com.holy.game.gui.NativeGui
+import com.holy.data.TreasuresList
 
 
 class Treasure : NativeGui<TreasureBinding>(TreasureBinding::class) {

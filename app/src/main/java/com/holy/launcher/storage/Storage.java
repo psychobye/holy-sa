@@ -1,6 +1,6 @@
 package com.holy.launcher.storage;
 
-import static com.lit.game.core.Samp.activity;
+import static com.holy.game.core.Samp.activity;
 
 import android.content.Context;
 import android.content.SharedPreferences;

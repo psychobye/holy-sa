@@ -1,6 +1,6 @@
 package com.holy.game.gui.hud;
 
-import static com.lit.game.core.Samp.activity;
+import static com.holy.game.core.Samp.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -25,8 +25,8 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.lit.game.R;
-import com.lit.game.gui.util.Utils;
+import com.holy.game.R;
+import com.holy.game.gui.util.Utils;
 import com.holy.launcher.storage.Storage;
 
 import org.jetbrains.annotations.NotNull;

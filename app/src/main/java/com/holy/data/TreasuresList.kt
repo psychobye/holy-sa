@@ -1,12 +1,12 @@
 package com.holy.data
 
-import com.lit.game.R
-import com.lit.game.gui.donate.Donate
-import com.lit.game.gui.donate.DonateItem
-import com.lit.game.gui.treasure.TreasureItem
-import com.lit.data.acs.Accessories
-import com.lit.data.skins.Skins
-import com.lit.data.vehicles.Vehicles
+import com.holy.game.R
+import com.holy.game.gui.donate.Donate
+import com.holy.game.gui.donate.DonateItem
+import com.holy.game.gui.treasure.TreasureItem
+import com.holy.data.acs.Accessories
+import com.holy.data.skins.Skins
+import com.holy.data.vehicles.Vehicles
 
 object TreasuresList
 {
